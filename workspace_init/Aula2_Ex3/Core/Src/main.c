@@ -1,5 +1,14 @@
-
 /* USER CODE BEGIN Header */
+//*******************************************************************************//
+// School of Mechanics Engineering - State University of Camipinas (FEM/Unicamp) //
+// File name: main.c                                                             //
+// File description: This main file is based in a code generated in STMCubeMX,   //
+//                   toggling the built-in LED (LD2) in the falling border of    //
+//                   B1, detected from the external interruption EXTI2 in PE2.   //
+// Author name:        Gabriel Toffanetto França da Rocha                        //
+// Creation date:      Aug 14, 2024                                              //
+// Revision date:      Aug 14, 2024                                              //
+//*******************************************************************************//
 /**
   ******************************************************************************
   * @file           : main.c
@@ -170,6 +179,14 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+  // Definition of HAL_GPIO_EXTI_Callback function
+  void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+  {
+	  if(GPIO_Pin == PE2EXTIFalling_Pin)
+	  {
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  }
+  }
 /* USER CODE END 4 */
 
 /**
