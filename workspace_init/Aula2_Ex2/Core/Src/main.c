@@ -4,8 +4,8 @@
 // File name: main.c                                                             //
 // File description: This main file is based in a code generated in STMCubeMX,   //
 //                   for show the state of a NUCLEO built-in button (B1) in a    //
-//                   built-in LED (LD2), reading B1 with PC2 pin connected by    //
-//                   jumper and writing PC2 state in LD2.                        //
+//                   built-in LED (LD2), reading B1 (PC13) with PC2 pin          //
+//                   connected by jumper and writing PC2 state in LD2.           //
 // Author name:        Gabriel Toffanetto França da Rocha                        //
 // Creation date:      Aug 14, 2024                                              //
 // Revision date:      Aug 14, 2024                                              //
@@ -59,7 +59,7 @@
 /* USER CODE BEGIN PV */
 
   //PE2 input state
-  unsigned char ucPE2State;
+  unsigned char ucB1State;
 
 /* USER CODE END PV */
 
@@ -115,10 +115,10 @@ int main(void)
   while (1)
   {
     // Reading PE2
-	ucPE2State = HAL_GPIO_ReadPin(PE2Input_GPIO_Port, PE2Input_Pin);
+	ucB1State = HAL_GPIO_ReadPin(B1_PE2_DIN_GPIO_Port, B1_PE2_DIN_Pin);
 
 	// Writing PE2 state on L2
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, ucPE2State);
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, ucB1State);
 
 	// Anti-debounce delay
 	HAL_Delay(50);

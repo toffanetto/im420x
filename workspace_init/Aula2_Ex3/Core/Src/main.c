@@ -179,10 +179,10 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-  // Definition of HAL_GPIO_EXTI_Callback function
+  // Definition of HAL_GPIO_EXTI_Callback function. Prototype available in stm32h7xx_hal_gpio.h
   void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   {
-	  if(GPIO_Pin == PE2EXTIFalling_Pin)
+	  if(GPIO_Pin == B1_PE2_EXTIF_Pin)
 	  {
 		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 	  }
