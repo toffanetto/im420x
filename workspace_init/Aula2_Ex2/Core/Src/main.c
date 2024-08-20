@@ -120,7 +120,7 @@ int main(void)
 	// Writing PE2 state on L2
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, ucB1State);
 
-	// Anti-debounce delay
+	// Debounce delay
 	HAL_Delay(50);
 
     /* USER CODE END WHILE */
