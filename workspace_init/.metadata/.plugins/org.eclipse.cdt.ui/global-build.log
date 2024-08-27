@@ -1,21 +1,14 @@
-16:36:47 **** Incremental Build of configuration Debug for project Aula2_1 ****
+17:04:57 **** Incremental Build of configuration Debug for project nucleo-H753ZI_Aula3_Ex2 ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32H753xx -c -I../Core/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Aula2_1.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Drive Unicamp\00_Mestrado\Disciplinas\IM420X - Projeto de Sistemas Embarcados de Tempo Real\im420x\workspace_init\Aula2_1\STM32H753ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Aula2_1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Aula2_1.elf
+arm-none-eabi-gcc -o "nucleo-H753ZI_Aula3_Ex2.elf" @"objects.list"   -mcpu=cortex-m7 -T"/home/toffanetto/unicamp/im420x/workspace_init/nucleo-H753ZI_Aula3_Ex2/STM32H753ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo-H753ZI_Aula3_Ex2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: nucleo-H753ZI_Aula3_Ex2.elf
  
-arm-none-eabi-size  Aula2_1.elf 
-arm-none-eabi-objdump -h -S Aula2_1.elf  > "Aula2_1.list"
+arm-none-eabi-size  nucleo-H753ZI_Aula3_Ex2.elf 
+arm-none-eabi-objdump -h -S nucleo-H753ZI_Aula3_Ex2.elf  > "nucleo-H753ZI_Aula3_Ex2.list"
    text	   data	    bss	    dec	    hex	filename
-  26336	    208	   3208	  29752	   7438	Aula2_1.elf
+  35952	    208	   3208	  39368	   99c8	nucleo-H753ZI_Aula3_Ex2.elf
 Finished building: default.size.stdout
  
-Finished building: Aula2_1.list
- 
-16:36:51 **** Incremental Build of configuration Debug for project Aula2_1 ****
-make -j12 all 
-arm-none-eabi-size  Aula2_1.elf 
-   text	   data	    bss	    dec	    hex	filename
-  26336	    208	   3208	  29752	   7438	Aula2_1.elf
-Finished building: default.size.stdout
+Finished building: nucleo-H753ZI_Aula3_Ex2.list
  
