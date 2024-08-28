@@ -1,4 +1,15 @@
 /* USER CODE BEGIN Header */
+//*******************************************************************************//
+// School of Mechanics Engineering - State University of Camipinas (FEM/Unicamp) //
+// File name: main.c                                                             //
+// File description: This main file is based in a code generated in STMCubeMX,   //
+//                   for show the implement a echo UART application using        //
+//                   interruptions. For check non-blocking communication, LD2    //
+//                   is blinking in 1 Hz.                                        //
+// Author name:        Gabriel Toffanetto França da Rocha                        //
+// Creation date:      Aug 21, 2024                                              //
+// Revision date:      Aug 28, 2024                                              //
+//*******************************************************************************//
 /**
   ******************************************************************************
   * @file           : main.c
