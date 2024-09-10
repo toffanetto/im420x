@@ -1,0 +1,3 @@
+../Core/Src/freertos.c:95:6:MX_FREERTOS_Init	1
+../Core/Src/freertos.c:151:6:FncTask1	1
+../Core/Src/freertos.c:194:6:FncTask2	1
