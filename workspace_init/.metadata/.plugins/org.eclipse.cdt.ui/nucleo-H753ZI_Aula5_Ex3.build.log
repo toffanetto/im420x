@@ -1,0 +1,10 @@
+12:21:00 **** Incremental Build of configuration Debug for project nucleo-H753ZI_Aula5_Ex3 ****
+make -j12 all 
+arm-none-eabi-size  nucleo-H753ZI_Aula5_Ex3.elf 
+   text	   data	    bss	    dec	    hex	filename
+  43404	    292	  22540	  66236	  102bc	nucleo-H753ZI_Aula5_Ex3.elf
+Finished building: default.size.stdout
+ 
+
+12:21:01 Build Finished. 0 errors, 0 warnings. (took 684ms)
+
