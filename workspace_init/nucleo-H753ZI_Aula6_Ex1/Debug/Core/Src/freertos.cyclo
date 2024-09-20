@@ -1,0 +1,4 @@
+../Core/Src/freertos.c:104:6:MX_FREERTOS_Init	1
+../Core/Src/freertos.c:156:6:StartTask1	1
+../Core/Src/freertos.c:182:6:StartTask2	1
+../Core/Src/freertos.c:207:6:StartTaskGateKeeper	1
