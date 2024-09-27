@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="cubemx_transport_open"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="cubemx_transport_open"/>
+			<item value="hdma_usart3_rx"/>
+			<item value="uros"/>
+			<item value="printf_"/>
+			<item value="printf"/>
+			<item value="RxAr"/>
+			<item value="RxA"/>
+			<item value="lwip"/>
 			<item value="hook"/>
 			<item value="HOOK"/>
 			<item value="HAL_UART_Transmit"/>
@@ -15,8 +23,6 @@
 			<item value="GPIO_EXTI_Callback"/>
 			<item value="Call"/>
 			<item value="GPIO"/>
-			<item value="exti"/>
-			<item value="nvic"/>
 		</list>
 		<list key="replacehistory">
 		</list>

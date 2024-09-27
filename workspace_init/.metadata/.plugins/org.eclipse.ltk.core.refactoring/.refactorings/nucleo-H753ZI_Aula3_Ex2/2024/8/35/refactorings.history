@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;nucleo-H753ZI_Aula3_Ex2/nucleo-H753ZI_Template.ioc&apos; to &apos;nucleo-H753ZI_Aula3_Ex2.ioc&apos;" description="Rename resource &apos;nucleo-H753ZI_Template.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="nucleo-H753ZI_Template.ioc" name="nucleo-H753ZI_Aula3_Ex2.ioc" stamp="1724787810487" updateReferences="true"/>
-</session>
