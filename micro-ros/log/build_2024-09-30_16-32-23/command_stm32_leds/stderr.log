@@ -1,0 +1,40 @@
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:35:50:[m[K [01;31m[Kerror: [m[K‘[01m[KUInt8MultiArray[m[K’ is not a member of ‘[01m[Kstd_msgs::msg[m[K’; did you mean ‘[01m[KUInt32MultiArray[m[K’?
+   35 |                 rclcpp::Publisher<std_msgs::msg::[01;31m[KUInt8MultiArray[m[K>::SharedPtr led_pub;
+      |                                                  [01;31m[K^~~~~~~~~~~~~~~[m[K
+      |                                                  [32m[KUInt32MultiArray[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:35:65:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   35 |                 rclcpp::Publisher<std_msgs::msg::UInt8MultiArray[01;31m[K>[m[K::SharedPtr led_pub;
+      |                                                                 [01;31m[K^[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:35:68:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ at end of member declaration
+   35 |                 rclcpp::Publisher<std_msgs::msg::UInt8MultiArray>::[01;31m[KSharedPtr[m[K led_pub;
+      |                                                                    [01;31m[K^~~~~~~~~[m[K
+      |                                                                             [32m[K;[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:35:78:[m[K [01;31m[Kerror: [m[K‘[01m[Kled_pub[m[K’ does not name a type
+   35 |             rclcpp::Publisher<std_msgs::msg::UInt8MultiArray>::SharedPtr [01;31m[Kled_pub[m[K;
+      |                                                                          [01;31m[K^~~~~~~[m[K
+
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:36:32:[m[K [01;31m[Kerror: [m[K‘[01m[KUInt8MultiArray[m[K’ in namespace ‘[01m[Kstd_msgs::msg[m[K’ does not name a type; did you mean ‘[01m[KUInt32MultiArray[m[K’?
+   36 |                 std_msgs::msg::[01;31m[KUInt8MultiArray[m[K::SharedPtr led_commands;
+      |                                [01;31m[K^~~~~~~~~~~~~~~[m[K
+      |                                [32m[KUInt32MultiArray[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:[m[K In constructor ‘[01m[KCommandLed::CommandLed()[m[K’:
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:15:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kled_pub[m[K’ was not declared in this scope
+   15 |                         [01;31m[Kled_pub[m[K = this->create_publisher<std_msgs::msg::UInt8MultiArray>;
+      |                         [01;31m[K^~~~~~~[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:15:73:[m[K [01;31m[Kerror: [m[K‘[01m[KUInt8MultiArray[m[K’ is not a member of ‘[01m[Kstd_msgs::msg[m[K’; did you mean ‘[01m[KUInt32MultiArray[m[K’?
+   15 |                       led_pub = this->create_publisher<std_msgs::msg::[01;31m[KUInt8MultiArray[m[K>;
+      |                                                                       [01;31m[K^~~~~~~~~~~~~~~[m[K
+      |                                                                       [32m[KUInt32MultiArray[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:17:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kled_commands[m[K’ was not declared in this scope
+   17 |                         [01;31m[Kled_commands[m[K.data.reserve(4);
+      |                         [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:[m[K In member function ‘[01m[Kvoid CommandLed::ledSendCommand()[m[K’:
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:26:41:[m[K [01;31m[Kerror: [m[K‘[01m[Kled_commands[m[K’ was not declared in this scope
+   26 |                                         [01;31m[Kled_commands[m[K->data.data[k] = state;
+      |                                         [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:27:41:[m[K [01;31m[Kerror: [m[K‘[01m[Kled_pub[m[K’ was not declared in this scope
+   27 |                                         [01;31m[Kled_pub[m[K->publish(led_commands);
+      |                                         [01;31m[K^~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/command_stm32_leds_node.dir/build.make:76: CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/command_stm32_leds_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

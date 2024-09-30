@@ -1,0 +1,11 @@
+[0.020s] Invoking command in '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds -- -j48 -l48
+[0.102s] [35m[1mConsolidate compiler generated dependencies of target command_stm32_leds_node[0m
+[0.137s] [ 50%] [32mBuilding CXX object CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o[0m
+[3.047s] [01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:[m[K In member function ‘[01m[Kvoid CommandLed::ledSendCommand()[m[K’:
+[3.047s] [01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:26:63:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+[3.047s]    26 |                                         led_commands.data.data[01;31m[K[[m[Kk] = state;
+[3.048s]       |                                                               [01;31m[K^[m[K
+[3.920s] gmake[2]: *** [CMakeFiles/command_stm32_leds_node.dir/build.make:76: CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o] Error 1
+[3.921s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/command_stm32_leds_node.dir/all] Error 2
+[3.921s] gmake: *** [Makefile:146: all] Error 2
+[3.926s] Invoked command in '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds -- -j48 -l48

@@ -1,0 +1,9 @@
+[35m[1mConsolidate compiler generated dependencies of target command_stm32_leds_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o[0m
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:[m[K In member function ‘[01m[Kvoid CommandLed::ledSendCommand()[m[K’:
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:26:63:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+   26 |                                         led_commands.data.data[01;31m[K[[m[Kk] = state;
+      |                                                               [01;31m[K^[m[K
+gmake[2]: *** [CMakeFiles/command_stm32_leds_node.dir/build.make:76: CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/command_stm32_leds_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

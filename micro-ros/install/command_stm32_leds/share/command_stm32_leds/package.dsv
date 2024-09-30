@@ -1,0 +1,8 @@
+source;share/command_stm32_leds/hook/cmake_prefix_path.ps1
+source;share/command_stm32_leds/hook/cmake_prefix_path.dsv
+source;share/command_stm32_leds/hook/cmake_prefix_path.sh
+source;share/command_stm32_leds/local_setup.bash
+source;share/command_stm32_leds/local_setup.dsv
+source;share/command_stm32_leds/local_setup.ps1
+source;share/command_stm32_leds/local_setup.sh
+source;share/command_stm32_leds/local_setup.zsh

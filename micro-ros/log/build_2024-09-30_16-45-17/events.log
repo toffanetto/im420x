@@ -1,0 +1,91 @@
+[0.000000] (-) TimerEvent: {}
+[0.000481] (command_stm32_leds) JobQueued: {'identifier': 'command_stm32_leds', 'dependencies': OrderedDict()}
+[0.000849] (command_stm32_leds) JobStarted: {'identifier': 'command_stm32_leds'}
+[0.015742] (command_stm32_leds) JobProgress: {'identifier': 'command_stm32_leds', 'progress': 'cmake'}
+[0.016585] (command_stm32_leds) JobProgress: {'identifier': 'command_stm32_leds', 'progress': 'build'}
+[0.017595] (command_stm32_leds) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds', '--', '-j48', '-l48'], 'cwd': '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds', 'env': OrderedDict([('KDE_FULL_SESSION', 'true'), ('PROFILEHOME', ''), ('LANGUAGE', ''), ('LC_TIME', 'Default.UTF-8'), ('PAM_KWALLET5_LOGIN', '/run/user/1000/kwallet5.socket'), ('USER', 'toffanetto'), ('XDG_SEAT', 'seat0'), ('SSH_AGENT_PID', '7259'), ('XDG_SESSION_TYPE', 'x11'), ('KONSOLE_VERSION', '211203'), ('SHLVL', '1'), ('XCURSOR_SIZE', '24'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/toffanetto'), ('KDE_APPLICATIONS_AS_SCOPE', '1'), ('OLDPWD', '/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds'), ('LESS', '-R'), ('DESKTOP_SESSION', 'plasma'), ('ZSH', '/home/toffanetto/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('GTK_RC_FILES', '/etc/gtk/gtkrc:/home/toffanetto/.gtkrc:/home/toffanetto/.config/gtkrc'), ('KDE_SESSION_VERSION', '5'), ('SHELL_SESSION_ID', 'b4b2bd16005e431dbfbc420a08fc3c50'), ('XDG_SEAT_PATH', '/org/freedesktop/DisplayManager/Seat0'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('KONSOLE_DBUS_SESSION', '/Sessions/1'), ('LC_MONETARY', 'pt_BR.UTF-8'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('SYSTEMD_EXEC_PID', '7059'), ('P9K_TTY', 'old'), ('COLORTERM', 'truecolor'), ('KONSOLE_DBUS_WINDOW', '/Windows/1'), ('IM_CONFIG_PHASE', '1'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/home/toffanetto/subjects/im420x/micro-ros/install'), ('LOGNAME', 'toffanetto'), ('QT_AUTO_SCREEN_SCALE_FACTOR', '0'), ('WINDOWID', '144703495'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/6'), ('COLORFGBG', '15;0'), ('XDG_SESSION_CLASS', 'user'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '311'), ('ROS_LOCALHOST_ONLY', '0'), ('GTK2_RC_FILES', '/etc/gtk-2.0/gtkrc:/home/toffanetto/.gtkrc-2.0:/home/toffanetto/.config/gtkrc-2.0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('SESSION_MANAGER', 'local/toffanetto-Tower:@/tmp/.ICE-unix/7452,unix/toffanetto-Tower:/tmp/.ICE-unix/7452'), ('LC_ADDRESS', 'pt_BR.UTF-8'), ('XCURSOR_THEME', 'Dracula-cursors'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('XDG_SESSION_PATH', '/org/freedesktop/DisplayManager/Session1'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LC_TELEPHONE', 'pt_BR.UTF-8'), ('XDG_CURRENT_DESKTOP', 'KDE'), ('XAUTHORITY', '/home/toffanetto/.Xauthority'), ('XDG_SESSION_DESKTOP', 'KDE'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AUTH_SOCK', '/tmp/ssh-XXXXXXoyYwMn/agent.7078'), ('AMENT_PREFIX_PATH', '/home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds:/opt/ros/humble'), ('LC_NAME', 'pt_BR.UTF-8'), ('SHELL', '/usr/bin/zsh'), ('QT_ACCESSIBILITY', '1'), ('KONSOLE_DBUS_SERVICE', ':1.411'), ('LC_MEASUREMENT', 'pt_BR.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('LC_IDENTIFICATION', 'pt_BR.UTF-8'), ('P9K_SSH', '0'), ('XDG_VTNR', '1'), ('LC_ALL', 'en_US.UTF-8'), ('PWD', '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds'), ('XDG_CONFIG_DIRS', '/home/toffanetto/.config/kdedefaults:/etc/xdg/xdg-plasma:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings'), ('XDG_DATA_DIRS', '/usr/share/plasma:/usr/local/share/:/usr/share/'), ('_P9K_TTY', '/dev/pts/6'), ('LC_NUMERIC', 'pt_BR.UTF-8'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('KDE_SESSION_UID', '1000'), ('LC_PAPER', 'pt_BR.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds:/opt/ros/humble')]), 'shell': False}
+[0.094860] (command_stm32_leds) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target command_stm32_leds_node\x1b[0m\n'}
+[0.099406] (-) TimerEvent: {}
+[0.128644] (command_stm32_leds) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o\x1b[0m\n'}
+[0.199640] (-) TimerEvent: {}
+[0.300242] (-) TimerEvent: {}
+[0.400872] (-) TimerEvent: {}
+[0.501469] (-) TimerEvent: {}
+[0.602051] (-) TimerEvent: {}
+[0.702676] (-) TimerEvent: {}
+[0.803256] (-) TimerEvent: {}
+[0.903816] (-) TimerEvent: {}
+[1.004439] (-) TimerEvent: {}
+[1.105039] (-) TimerEvent: {}
+[1.205732] (-) TimerEvent: {}
+[1.306396] (-) TimerEvent: {}
+[1.406987] (-) TimerEvent: {}
+[1.507555] (-) TimerEvent: {}
+[1.608225] (-) TimerEvent: {}
+[1.708917] (-) TimerEvent: {}
+[1.809611] (-) TimerEvent: {}
+[1.910243] (-) TimerEvent: {}
+[2.010899] (-) TimerEvent: {}
+[2.111515] (-) TimerEvent: {}
+[2.211978] (-) TimerEvent: {}
+[2.312709] (-) TimerEvent: {}
+[2.413296] (-) TimerEvent: {}
+[2.513901] (-) TimerEvent: {}
+[2.614450] (-) TimerEvent: {}
+[2.715019] (-) TimerEvent: {}
+[2.815623] (-) TimerEvent: {}
+[2.916184] (-) TimerEvent: {}
+[3.016673] (-) TimerEvent: {}
+[3.117319] (-) TimerEvent: {}
+[3.217989] (-) TimerEvent: {}
+[3.318649] (-) TimerEvent: {}
+[3.419239] (-) TimerEvent: {}
+[3.519831] (-) TimerEvent: {}
+[3.620467] (-) TimerEvent: {}
+[3.720888] (-) TimerEvent: {}
+[3.821287] (-) TimerEvent: {}
+[3.921950] (-) TimerEvent: {}
+[4.022642] (-) TimerEvent: {}
+[4.123309] (-) TimerEvent: {}
+[4.223834] (-) TimerEvent: {}
+[4.324326] (-) TimerEvent: {}
+[4.425020] (-) TimerEvent: {}
+[4.525712] (-) TimerEvent: {}
+[4.626411] (-) TimerEvent: {}
+[4.727033] (-) TimerEvent: {}
+[4.827536] (-) TimerEvent: {}
+[4.928121] (-) TimerEvent: {}
+[5.028737] (-) TimerEvent: {}
+[5.129399] (-) TimerEvent: {}
+[5.230081] (-) TimerEvent: {}
+[5.330729] (-) TimerEvent: {}
+[5.341235] (command_stm32_leds) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable command_stm32_leds_node\x1b[0m\n'}
+[5.430920] (-) TimerEvent: {}
+[5.531486] (-) TimerEvent: {}
+[5.592313] (command_stm32_leds) StdoutLine: {'line': b'[100%] Built target command_stm32_leds_node\n'}
+[5.612114] (command_stm32_leds) CommandEnded: {'returncode': 0}
+[5.631703] (-) TimerEvent: {}
+[5.670923] (command_stm32_leds) JobProgress: {'identifier': 'command_stm32_leds', 'progress': 'install'}
+[5.684652] (command_stm32_leds) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds'], 'cwd': '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds', 'env': OrderedDict([('KDE_FULL_SESSION', 'true'), ('PROFILEHOME', ''), ('LANGUAGE', ''), ('LC_TIME', 'Default.UTF-8'), ('PAM_KWALLET5_LOGIN', '/run/user/1000/kwallet5.socket'), ('USER', 'toffanetto'), ('XDG_SEAT', 'seat0'), ('SSH_AGENT_PID', '7259'), ('XDG_SESSION_TYPE', 'x11'), ('KONSOLE_VERSION', '211203'), ('SHLVL', '1'), ('XCURSOR_SIZE', '24'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/toffanetto'), ('KDE_APPLICATIONS_AS_SCOPE', '1'), ('OLDPWD', '/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds'), ('LESS', '-R'), ('DESKTOP_SESSION', 'plasma'), ('ZSH', '/home/toffanetto/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('GTK_RC_FILES', '/etc/gtk/gtkrc:/home/toffanetto/.gtkrc:/home/toffanetto/.config/gtkrc'), ('KDE_SESSION_VERSION', '5'), ('SHELL_SESSION_ID', 'b4b2bd16005e431dbfbc420a08fc3c50'), ('XDG_SEAT_PATH', '/org/freedesktop/DisplayManager/Seat0'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('KONSOLE_DBUS_SESSION', '/Sessions/1'), ('LC_MONETARY', 'pt_BR.UTF-8'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('SYSTEMD_EXEC_PID', '7059'), ('P9K_TTY', 'old'), ('COLORTERM', 'truecolor'), ('KONSOLE_DBUS_WINDOW', '/Windows/1'), ('IM_CONFIG_PHASE', '1'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/home/toffanetto/subjects/im420x/micro-ros/install'), ('LOGNAME', 'toffanetto'), ('QT_AUTO_SCREEN_SCALE_FACTOR', '0'), ('WINDOWID', '144703495'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/6'), ('COLORFGBG', '15;0'), ('XDG_SESSION_CLASS', 'user'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '311'), ('ROS_LOCALHOST_ONLY', '0'), ('GTK2_RC_FILES', '/etc/gtk-2.0/gtkrc:/home/toffanetto/.gtkrc-2.0:/home/toffanetto/.config/gtkrc-2.0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('SESSION_MANAGER', 'local/toffanetto-Tower:@/tmp/.ICE-unix/7452,unix/toffanetto-Tower:/tmp/.ICE-unix/7452'), ('LC_ADDRESS', 'pt_BR.UTF-8'), ('XCURSOR_THEME', 'Dracula-cursors'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('XDG_SESSION_PATH', '/org/freedesktop/DisplayManager/Session1'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LC_TELEPHONE', 'pt_BR.UTF-8'), ('XDG_CURRENT_DESKTOP', 'KDE'), ('XAUTHORITY', '/home/toffanetto/.Xauthority'), ('XDG_SESSION_DESKTOP', 'KDE'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AUTH_SOCK', '/tmp/ssh-XXXXXXoyYwMn/agent.7078'), ('AMENT_PREFIX_PATH', '/home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds:/opt/ros/humble'), ('LC_NAME', 'pt_BR.UTF-8'), ('SHELL', '/usr/bin/zsh'), ('QT_ACCESSIBILITY', '1'), ('KONSOLE_DBUS_SERVICE', ':1.411'), ('LC_MEASUREMENT', 'pt_BR.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('LC_IDENTIFICATION', 'pt_BR.UTF-8'), ('P9K_SSH', '0'), ('XDG_VTNR', '1'), ('LC_ALL', 'en_US.UTF-8'), ('PWD', '/home/toffanetto/subjects/im420x/micro-ros/build/command_stm32_leds'), ('XDG_CONFIG_DIRS', '/home/toffanetto/.config/kdedefaults:/etc/xdg/xdg-plasma:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings'), ('XDG_DATA_DIRS', '/usr/share/plasma:/usr/local/share/:/usr/share/'), ('_P9K_TTY', '/dev/pts/6'), ('LC_NUMERIC', 'pt_BR.UTF-8'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('KDE_SESSION_UID', '1000'), ('LC_PAPER', 'pt_BR.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds:/opt/ros/humble')]), 'shell': False}
+[5.701674] (command_stm32_leds) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[5.702172] (command_stm32_leds) StdoutLine: {'line': b'-- Installing: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/lib/command_stm32_leds/command_stm32_leds_node\n'}
+[5.704807] (command_stm32_leds) StdoutLine: {'line': b'-- Set runtime path of "/home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/lib/command_stm32_leds/command_stm32_leds_node" to ""\n'}
+[5.705643] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/ament_index/resource_index/package_run_dependencies/command_stm32_leds\n'}
+[5.705942] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/ament_index/resource_index/parent_prefix_path/command_stm32_leds\n'}
+[5.706196] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/environment/ament_prefix_path.sh\n'}
+[5.706439] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/environment/ament_prefix_path.dsv\n'}
+[5.706676] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/environment/path.sh\n'}
+[5.706911] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/environment/path.dsv\n'}
+[5.707150] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/local_setup.bash\n'}
+[5.707919] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/local_setup.sh\n'}
+[5.709698] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/local_setup.zsh\n'}
+[5.710164] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/local_setup.dsv\n'}
+[5.710550] (command_stm32_leds) StdoutLine: {'line': b'-- Installing: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/package.dsv\n'}
+[5.710924] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/ament_index/resource_index/packages/command_stm32_leds\n'}
+[5.711318] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/cmake/command_stm32_ledsConfig.cmake\n'}
+[5.711679] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/cmake/command_stm32_ledsConfig-version.cmake\n'}
+[5.711823] (command_stm32_leds) StdoutLine: {'line': b'-- Up-to-date: /home/toffanetto/subjects/im420x/micro-ros/install/command_stm32_leds/share/command_stm32_leds/package.xml\n'}
+[5.711915] (command_stm32_leds) CommandEnded: {'returncode': 0}
+[5.731859] (-) TimerEvent: {}
+[5.787198] (command_stm32_leds) JobEnded: {'identifier': 'command_stm32_leds', 'rc': 0}
+[5.788862] (-) EventReactorShutdown: {}

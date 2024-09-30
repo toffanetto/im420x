@@ -1,0 +1,10 @@
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:48:9:[m[K [01;31m[Kerror: [m[K‘[01m[Ktrue_[m[K’ was not declared in this scope
+   48 |   while([01;31m[Ktrue_[m[K){
+      |         [01;31m[K^~~~~[m[K
+[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:49:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass std::shared_ptr<CommandLed>[m[K’ has no member named ‘[01m[KledSendCommand[m[K’
+   49 |         node.[01;31m[KledSendCommand[m[K();
+      |              [01;31m[K^~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/command_stm32_leds_node.dir/build.make:76: CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/command_stm32_leds_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
