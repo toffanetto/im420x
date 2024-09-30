@@ -78,7 +78,7 @@
 osThreadId_t TaskMicroROSHandle;
 const osThreadAttr_t TaskMicroROS_attributes = {
   .name = "TaskMicroROS",
-  .stack_size = 3500 * 4,
+  .stack_size = 3000 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 
@@ -184,14 +184,11 @@ void StartTaskMicroROS(void *argument)
   rclc_support_t support;
   rcl_allocator_t allocator;
   rcl_node_t node;
-  rcl_init_options_t init_options;
 
   allocator = rcl_get_default_allocator();
-  init_options = rcl_get_zero_initialized_init_options();
-  rcl_init_options_init(&init_options, allocator);
 
   //create init_options
-  rclc_support_init_with_options(&support, 0, NULL, &init_options, &allocator);
+  rclc_support_init(&support, 0, NULL, &allocator);
 
   // create node
   rclc_node_init_default(&node, "cubemx_node", "", &support);
