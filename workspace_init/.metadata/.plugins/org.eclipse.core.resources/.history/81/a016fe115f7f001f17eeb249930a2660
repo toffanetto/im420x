@@ -1,0 +1,11 @@
+
+#include "callbacks.h"
+
+void ledCallback(std_msgs__msg__UInt8MultiArray * msgin)
+  {
+    // Cast received message to used type
+    const std_msgs__msg__UInt8MultiArray * msg = (const std_msgs__msg__UInt8MultiArray *)msgin;
+
+    // Process message
+    HAL_GPIO_WritePin(, GPIO_Pin, PinState), GPIO_Pin, PinState)
+  }

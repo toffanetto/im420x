@@ -1,4 +1,4 @@
-15:15:13 **** Incremental Build of configuration Debug for project nucleo-H753ZI_TemplateMicroROS_Serial ****
+13:25:13 **** Incremental Build of configuration Debug for project nucleo-H753ZI_TemplateMicroROS_Serial ****
 make -j48 all 
 docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v "/home/toffanetto/subjects/im420x/workspace_init/nucleo-H753ZI_TemplateMicroROS_Serial":/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
 humble: Pulling from microros/micro_ros_static_library_builder
@@ -11,9 +11,9 @@ Delete micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for 
  
 arm-none-eabi-size  nucleo-H753ZI_TemplateMicroROS_Serial.elf 
    text	   data	    bss	    dec	    hex	filename
- 104188	    468	 428728	 533384	  82388	nucleo-H753ZI_TemplateMicroROS_Serial.elf
+ 104160	    468	 428728	 533356	  8236c	nucleo-H753ZI_TemplateMicroROS_Serial.elf
 Finished building: default.size.stdout
  
 
-15:15:18 Build Finished. 0 errors, 0 warnings. (took 5s.243ms)
+13:25:16 Build Finished. 0 errors, 0 warnings. (took 3s.134ms)
 

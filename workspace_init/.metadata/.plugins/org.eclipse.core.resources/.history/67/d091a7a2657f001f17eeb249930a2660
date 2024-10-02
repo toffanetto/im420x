@@ -1,0 +1,11 @@
+
+#include "callbacks.h"
+
+void ledCallback(std_msgs__msg__UInt8MultiArray * msgin)
+  {
+    const std_msgs__msg__UInt8MultiArray * msg = (const std_msgs__msg__UInt8MultiArray *)msgin;
+
+    HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, msg->data->data[1]);
+    HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, msg->data->data[2]);
+    HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, msg->data->data[3]);
+  }
