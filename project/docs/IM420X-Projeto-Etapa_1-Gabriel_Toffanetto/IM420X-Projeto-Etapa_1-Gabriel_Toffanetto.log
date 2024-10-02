@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  2 OCT 2024 16:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  2 OCT 2024 16:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1008,7 +1008,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\new@ifnextchar' on input line 12.
 
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 37
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 41
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
@@ -1018,31 +1018,27 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count366
 \l__pdf_internal_box=\box96
 )
-(./IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.aux
-
-LaTeX Warning: Label `fig:joystick' multiply defined.
-
-)
+(./IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.aux)
 \openout1 = `IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1100,7 +1096,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 37.
+Package hyperref Info: Link coloring OFF on input line 41.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1113,9 +1109,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count373
 )
-LaTeX Info: Redefining \ref on input line 37.
-LaTeX Info: Redefining \pageref on input line 37.
-LaTeX Info: Redefining \nameref on input line 37.
+LaTeX Info: Redefining \ref on input line 41.
+LaTeX Info: Redefining \pageref on input line 41.
+LaTeX Info: Redefining \nameref on input line 41.
 
 (./IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.out)
 (./IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.out)
@@ -1123,47 +1119,47 @@ LaTeX Info: Redefining \nameref on input line 37.
 \openout5 = `IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 37.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 41.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 37.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 41.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/cmr/m/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 37.
+(Font)                  OT1/cmss/m/n --> T1/cmr/m/n on input line 41.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> T1/phv/b/n on input line 37.
+(Font)                  OT1/cmr/bx/n --> T1/phv/b/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> T1/phv/b/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 37.
+(Font)                  OT1/cmr/bx/n --> T1/phv/b/n on input line 41.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/phv/m/n on input line 37.
+(Font)                  OT1/cmss/m/n --> T1/phv/m/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T1/phv/m/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 37.
+(Font)                  OT1/cmss/bx/n --> T1/phv/m/n on input line 41.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> T1/phv/m/it on input line 37.
+(Font)                  OT1/cmr/m/it --> T1/phv/m/it on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> T1/phv/m/it on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 37.
+(Font)                  OT1/cmr/bx/it --> T1/phv/m/it on input line 41.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 37.
+(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 37.
+(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 41.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/phv/m/n --> T1/phv/b/n on input line 37.
+(Font)                  T1/phv/m/n --> T1/phv/b/n on input line 41.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/phv/m/it --> T1/phv/b/it on input line 37.
+(Font)                  T1/phv/m/it --> T1/phv/b/it on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> T1/cmr/b/n on input line 37.
+(Font)                  OT1/cmss/b/n --> T1/cmr/b/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/phv/b/n --> T1/phv/b/n on input line 37.
+(Font)                  T1/phv/b/n --> T1/phv/b/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/phv/m/n --> T1/phv/b/n on input line 37.
+(Font)                  T1/phv/m/n --> T1/phv/b/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/phv/m/it --> T1/phv/b/it on input line 37.
+(Font)                  T1/phv/m/it --> T1/phv/b/it on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/pcr/m/n --> T1/pcr/b/n on input line 37.
+(Font)                  T1/pcr/m/n --> T1/pcr/b/n on input line 41.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
 -English.dict
@@ -1202,16 +1198,16 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
 (./IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.nav)
-Overfull \hbox (1.38435pt too wide) in paragraph at lines 37--37
+Overfull \hbox (1.38435pt too wide) in paragraph at lines 41--41
 [][] 
  []
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 41.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 45.
 <img/core/Logo_LMA_icon.png, id=71, 658.46pt x 658.46pt>
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 41.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 45.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1224,7 +1220,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 oc)
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 45.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 49.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1236,7 +1232,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 51.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 55.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1249,35 +1245,35 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 <img/vilma.jpeg, id=204, 2033.5975pt x 992.70876pt>
 File: img/vilma.jpeg Graphic file (type jpg)
 <use img/vilma.jpeg>
-Package pdftex.def Info: img/vilma.jpeg  used on input line 83.
+Package pdftex.def Info: img/vilma.jpeg  used on input line 87.
 (pdftex.def)             Requested size: 122.91406pt x 59.99922pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 83.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 87.
 
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 83.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 87.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 83.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 87.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 83.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 87.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <5> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 83.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 87.
 <img/diagrama_vilma.png, id=205, 768.62157pt x 535.2497pt>
 File: img/diagrama_vilma.png Graphic file (type png)
 <use img/diagrama_vilma.png>
-Package pdftex.def Info: img/diagrama_vilma.png  used on input line 83.
+Package pdftex.def Info: img/diagrama_vilma.png  used on input line 87.
 (pdftex.def)             Requested size: 184.3758pt x 128.38904pt.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 83.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 87.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 83.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 87.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1289,7 +1285,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
  <./img/vilma.jpeg> <./img/diagrama_vilma.png>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 108.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 112.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1302,11 +1298,11 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 <img/HL_architecture.png, id=274, 986.9372pt x 576.65437pt>
 File: img/HL_architecture.png Graphic file (type png)
 <use img/HL_architecture.png>
-Package pdftex.def Info: img/HL_architecture.png  used on input line 120.
+Package pdftex.def Info: img/HL_architecture.png  used on input line 124.
 (pdftex.def)             Requested size: 307.28987pt x 179.54411pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 120.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 124.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1319,11 +1315,11 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 <img/ros-equation.png, id=313, 2336.73pt x 393.47pt>
 File: img/ros-equation.png Graphic file (type png)
 <use img/ros-equation.png>
-Package pdftex.def Info: img/ros-equation.png  used on input line 150.
+Package pdftex.def Info: img/ros-equation.png  used on input line 154.
 (pdftex.def)             Requested size: 307.28987pt x 51.74127pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 150.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 154.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1335,7 +1331,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
  <./img/ros-equation.png>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 157.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 161.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1345,14 +1341,11 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 [8
 
 ]
-
-pdfTeX warning: /usr/bin/pdflatex (file ./img/architecture.pdf): PDF inclusion:
- found PDF version <1.7>, but at most version <1.5> allowed
-<img/architecture.pdf, id=394, 628.26718pt x 369.29968pt>
-File: img/architecture.pdf Graphic file (type pdf)
-<use img/architecture.pdf>
-Package pdftex.def Info: img/architecture.pdf  used on input line 187.
-(pdftex.def)             Requested size: 184.3758pt x 108.3733pt.
+<img/architecture.png, id=394, 628.0263pt x 368.577pt>
+File: img/architecture.png Graphic file (type png)
+<use img/architecture.png>
+Package pdftex.def Info: img/architecture.png  used on input line 191.
+(pdftex.def)             Requested size: 184.3758pt x 108.20622pt.
 
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/architecture_hil.pdf): PDF inclus
@@ -1360,11 +1353,11 @@ ion: found PDF version <1.7>, but at most version <1.5> allowed
 <img/architecture_HIL.pdf, id=395, 292.2117pt x 204.765pt>
 File: img/architecture_HIL.pdf Graphic file (type pdf)
 <use img/architecture_HIL.pdf>
-Package pdftex.def Info: img/architecture_HIL.pdf  used on input line 187.
+Package pdftex.def Info: img/architecture_HIL.pdf  used on input line 191.
 (pdftex.def)             Requested size: 122.91406pt x 86.1288pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 187.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 191.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1373,10 +1366,10 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 
 [9
 
- <./img/architecture.pdf> <./img/architecture_hil.pdf>]
+ <./img/architecture.png> <./img/architecture_hil.pdf>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 210.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 214.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1388,7 +1381,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 250.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 254.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1398,14 +1391,14 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 [11
 
 ]
-<img/nucleo.png, id=514, 81.6651pt x 161.6439pt>
+<img/nucleo.png, id=502, 81.6651pt x 161.6439pt>
 File: img/nucleo.png Graphic file (type png)
 <use img/nucleo.png>
-Package pdftex.def Info: img/nucleo.png  used on input line 295.
+Package pdftex.def Info: img/nucleo.png  used on input line 299.
 (pdftex.def)             Requested size: 86.03946pt x 170.30333pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 295.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 299.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1415,14 +1408,14 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 [12
 
  <./img/nucleo.png>]
-<img/servidor.png, id=547, 572.8602pt x 892.7754pt>
+<img/servidor.png, id=535, 572.8602pt x 892.7754pt>
 File: img/servidor.png Graphic file (type png)
 <use img/servidor.png>
-Package pdftex.def Info: img/servidor.png  used on input line 328.
-(pdftex.def)             Requested size: 110.6219pt x 172.39449pt.
+Package pdftex.def Info: img/servidor.png  used on input line 332.
+(pdftex.def)             Requested size: 86.03946pt x 134.08762pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 328.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 332.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1432,14 +1425,14 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 [13
 
  <./img/servidor.png>]
-<img/joystick.png, id=580, 122.6181pt x 108.405pt>
+<img/joystick.png, id=568, 122.6181pt x 108.405pt>
 File: img/joystick.png Graphic file (type png)
 <use img/joystick.png>
-Package pdftex.def Info: img/joystick.png  used on input line 361.
+Package pdftex.def Info: img/joystick.png  used on input line 365.
 (pdftex.def)             Requested size: 110.6219pt x 97.79846pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 361.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 365.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1451,7 +1444,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
  <./img/joystick.png>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 364.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 368.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1464,14 +1457,14 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/block_diagram.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<img/block_diagram.pdf, id=652, 605.3817pt x 298.23419pt>
+<img/block_diagram.pdf, id=640, 605.3817pt x 298.23419pt>
 File: img/block_diagram.pdf Graphic file (type pdf)
 <use img/block_diagram.pdf>
-Package pdftex.def Info: img/block_diagram.pdf  used on input line 378.
+Package pdftex.def Info: img/block_diagram.pdf  used on input line 382.
 (pdftex.def)             Requested size: 307.28987pt x 151.38297pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 378.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 382.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1484,14 +1477,14 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/esquematico.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<img/esquematico.pdf, id=703, 325.215pt x 167.6664pt>
+<img/esquematico.pdf, id=691, 325.215pt x 167.6664pt>
 File: img/esquematico.pdf Graphic file (type pdf)
 <use img/esquematico.pdf>
-Package pdftex.def Info: img/esquematico.pdf  used on input line 391.
+Package pdftex.def Info: img/esquematico.pdf  used on input line 395.
 (pdftex.def)             Requested size: 307.28987pt x 158.43788pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 391.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 395.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1503,7 +1496,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
  <./img/esquematico.pdf>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 395.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 399.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1513,13 +1506,13 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 [18
 
 ]
-Overfull \hbox (9.10358pt too wide) in paragraph at lines 436--436
+Overfull \hbox (9.10358pt too wide) in paragraph at lines 440--440
  [] 
  []
 
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 436.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 440.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1531,7 +1524,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 442.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 446.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1543,7 +1536,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 ] (./IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.bbl)
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 446.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 450.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
@@ -1564,18 +1557,15 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 
 
 (./IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.ou
 t' has not changed.
 (rerunfilecheck)             Checksum: D78574739063514020BCB9693A0C6A4F;821.
  ) 
 Here is how much of TeX's memory you used:
- 34533 strings out of 478287
- 702044 string characters out of 5849289
- 1046586 words of memory out of 5000000
- 51988 multiletter control sequences out of 15000+600000
+ 34531 strings out of 478287
+ 701976 string characters out of 5849289
+ 1046582 words of memory out of 5000000
+ 51986 multiletter control sequences out of 15000+600000
  508446 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  142i,20n,136p,608b,905s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1583,11 +1573,11 @@ Here is how much of TeX's memory you used:
 e/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /urw/helvetic/uhvro8a.pfb>
-Output written on IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.pdf (21 pages, 6191
-921 bytes).
+Output written on IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.pdf (21 pages, 6129
+904 bytes).
 PDF statistics:
- 935 PDF objects out of 1000 (max. 8388607)
- 792 compressed objects within 8 object streams
+ 923 PDF objects out of 1000 (max. 8388607)
+ 784 compressed objects within 8 object streams
  66 named destinations out of 1000 (max. 500000)
  335 words of extra memory for PDF output out of 10000 (max. 10000000)
 
