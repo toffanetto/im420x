@@ -12,9 +12,9 @@
 }
 
 \institute[LMA/FEM/Unicamp]{\small{Professor Dr. Rodrigo Moreira Bacurau
-  \\ \vspace{4mm}
+  \\ \vspace{2mm}
   IM420X -- Projeto de Sistemas Embarcados de Tempo Real
-  \\ \vspace{1mm}
+  \\ \vspace{4mm}
   Faculdade de Engenharia Mecânica
   \\ \vspace{1mm}
   Universidade Estadual de Campinas}
@@ -129,7 +129,7 @@
 	
 	\begin{block}{O que é?}
 		\begin{itemize}
-			\item \textit{Framework} para robótica que contempla tudo que um robô precisa;
+			\item \textit{Framework} para robótica que contempla toda estrutura que um robô precisa;
 			\begin{itemize}
 				\item Ferramentas e bibliotecas;
 				\item Protocolos de comunicação;
@@ -154,9 +154,27 @@
 \end{frame}
 
 
-\subsection*{MicroROS}
+\subsection*{micro-ROS}
 
-
+\begin{frame}{micro-ROS}
+	
+	\begin{block}{O que é?}
+		\begin{itemize}
+			\item \textit{Framework} que leva o ROS 2 à microcontroladores.
+		\end{itemize}
+	\end{block}
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{img/micro-ROS_architecture}
+		\caption{Arquitetura micro-ROS \cite{microros}.}
+		\label{fig:micro-rosarchitecture}
+	\end{figure}
+	
+	
+	
+\end{frame}
 
 \section{Proposta}
 
@@ -195,7 +213,7 @@
 	\begin{block}{Objetivos}
 		
 		\begin{itemize}
-			\item Desenvolvimento de um sistema embarcado capaz de agir como \textit{vehicle interface} para um veículo autônomo compatível com o Autoware utilizando o MicroROS;
+			\item Desenvolvimento de um sistema embarcado capaz de agir como \textit{vehicle interface} para um veículo autônomo compatível com o Autoware utilizando o micro-ROS;
 			\item Teste do sistema embarcado por meio de \textit{Hardware-In-the-Loop} com o simulador CARLA.
 			
 		\end{itemize}
@@ -275,7 +293,7 @@
 			\item Ethernet;
 			\item USB.
 		\end{itemize}
-		\item Custo: 27 dolares.
+		\item Custo: US\$ 27,00.
 	\end{itemize}
 	
 \end{block}
@@ -341,7 +359,11 @@
 			\begin{block}{Joystick}
 				
 				\begin{itemize}
-					\item Custo: 27 dolares.
+					\item Tensão de operação: 3V3 -- 5V;
+					\item Saída analógica referente ao eixo $x$;
+					\item Saída analógica referente ao eixo $y$;
+					\item Saída digital referente ao eixo $z$;
+					\item Custo: R\$ 10,00.
 				\end{itemize}
 				
 			\end{block}
@@ -411,9 +433,9 @@
 			\hline
 			Projeto de \textit{hardware} e \textit{software}  &  & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} &  &  &  &  &  &  \\
 			\hline
-			Integração do STM com o MicroROS  &  & \cellcolor{unifeiblue} &  &  &  &  &  &  &  \\
+			Integração do STM com o micro-ROS  &  & \cellcolor{unifeiblue} &  &  &  &  &  &  &  \\
 			\hline
-			Integração do MicroROS com o Autoware  &  &  & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} &  &  &  &  &  \\
+			Integração do micro-ROS com o Autoware  &  &  & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} &  &  &  &  &  \\
 			\hline
 			Implementação das tarefas do sistema embarcado  &  &  &  & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} &  &  \\
 			\hline

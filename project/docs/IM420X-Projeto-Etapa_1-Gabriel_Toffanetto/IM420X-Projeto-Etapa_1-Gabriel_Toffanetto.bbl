@@ -15,6 +15,11 @@ Tese (Doutor em {Engenharia} {Mecânica}) --- Universidade Estadual de
 Dispon{\'\i}vel em:
   \url{https://repositorio.unicamp.br/Busca/Download?codigoArquivo=471471}.}
 
+\bibitem[{micro-ROS} 2024]{microros}
+\abntrefinfo{{micro-ROS}}{{micro-ROS}}{2024}
+{{micro-ROS}. \emph{Overview: Features and Architecture}. 2024.
+Dispon{\'\i}vel em: \url{https://micro.ros.org/docs/overview/features/}.}
+
 \bibitem[{Open Robotics} 2021]{ecoros}
 \abntrefinfo{{Open Robotics}}{{Open Robotics}}{2021}
 {{Open Robotics}. \emph{The ROS Ecosystem}. 2021.

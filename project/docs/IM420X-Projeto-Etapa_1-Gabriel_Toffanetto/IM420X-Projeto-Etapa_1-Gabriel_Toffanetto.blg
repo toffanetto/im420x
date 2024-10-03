@@ -1,73 +1,72 @@
-This is BibTeX, Version 0.99d
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: IM420X-Projeto-Etapa_1-Gabriel_Toffanetto.aux
-Reallocating 'name_of_file' (item size: 1) to 16 items.
-Reallocating 'name_of_file' (item size: 1) to 17 items.
-Reallocating 'name_of_file' (item size: 1) to 12 items.
 The style file: abntex2-alf.bst
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'wiz_functions' (item size: 4) to 6000 items.
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'wiz_functions' (item size: 4) to 9000 items.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Database file #1: abntex2-options.bib
 Database file #2: bibliografia.bib
-Warning--entry type for "ecoros" isn't style-file defined
+Warning--entry type for "microros" isn't style-file defined
 --line 1 of file bibliografia.bib
-Warning--entry type for "autowareArchitecture" isn't style-file defined
+Warning--entry type for "ecoros" isn't style-file defined
 --line 13 of file bibliografia.bib
-Reallocating 'singl_function' (item size: 4) to 100 items.
-Reallocating 'glb_str_end' (item size: 4) to 20 items.
-Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
-Reallocating 'global_strs' (item size: 1) to 4000000 items.
+Warning--entry type for "autowareArchitecture" isn't style-file defined
+--line 25 of file bibliografia.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 +---------------------------------------------------------+
 | Estilo bibliográfico abntex2-alf.bst versão v-1.9.7           |
 | Em caso de dúvidas ou problemas com este estilo procure |
 | http://www.abntex.net.br/                               |
 +---------------------------------------------------------+
-You've used 4 entries,
+You've used 5 entries,
             6714 wiz_defined-function locations,
-            1216 strings with 9948 characters,
-and the built_in function-call counts, 6336 in all, are:
-= -- 910
-> -- 45
-< -- 198
-+ -- 260
-- -- 15
-* -- 341
-:= -- 832
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 21
-chr.to.int$ -- 4
-cite$ -- 3
-duplicate$ -- 671
-empty$ -- 194
-format.name$ -- 69
-if$ -- 1199
+            1221 strings with 10051 characters,
+and the built_in function-call counts, 7791 in all, are:
+= -- 1091
+> -- 60
+< -- 244
++ -- 311
+- -- 20
+* -- 422
+:= -- 1012
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 27
+chr.to.int$ -- 5
+cite$ -- 4
+duplicate$ -- 833
+empty$ -- 251
+format.name$ -- 92
+if$ -- 1479
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 58
-newline$ -- 25
-num.names$ -- 15
-pop$ -- 83
+missing$ -- 74
+newline$ -- 30
+num.names$ -- 20
+pop$ -- 104
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 15
 quote$ -- 0
-skip$ -- 765
+skip$ -- 935
 stack$ -- 1
-substring$ -- 290
-swap$ -- 228
-text.length$ -- 3
+substring$ -- 354
+swap$ -- 283
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 2
 warning$ -- 0
-while$ -- 22
+while$ -- 29
 width$ -- 0
-write$ -- 53
-(There were 2 warnings)
+write$ -- 67
+(There were 3 warnings)
