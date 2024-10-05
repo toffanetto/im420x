@@ -3,12 +3,15 @@
 % --------------------------------------------------- %
 %                  Presentation info	              %
 % --------------------------------------------------- %
-\title[Projeto -- Etapa 1]{Arquitetura HIL para teste de sistemas embarcados como \textit{vehicle interfaces} de veículos autônomos baseados no Autoware}
+\title[Projeto -- Etapa 1]{Arquitetura HIL para teste de sistemas embarcados como \textit{vehicle interface} de veículos autônomos baseados no Autoware}
 \subtitle{Projeto -- Etapa 1}
 
-\author[Gabriel Toffanetto]{Gabriel Toffanetto França da Rocha 
-	\\ \vspace{1mm} 
-	\small{\href{mailto:g289320@dac.unicamp.br}{g289320@dac.unicamp.br}}
+\author[Gabriel Toffanetto]{\texorpdfstring
+	{Gabriel Toffanetto França da Rocha 
+		\\ \vspace{1mm} 
+		\small{\href{mailto:g289320@dac.unicamp.br}{g289320@dac.unicamp.br}}
+	}
+	{Gabriel Toffanetto França da Rocha}
 }
 
 \institute[LMA/FEM/Unicamp]{\small{Professor Dr. Rodrigo Moreira Bacurau
@@ -27,13 +30,16 @@
 }
 
 
-\subject{IM420X - Projeto final etapa 1} % metadata
+\subject{IM420X - Projeto final: Etapa 1} % metadata
 
 \graphicspath{{img/}}
 
 \setbeamertemplate{caption}[numbered]
 
 \newcolumntype{b}{>{\columncolor{white}}c}
+
+
+\hypersetup{pdfpagemode=FullScreen}
 
 
 % --------------------------------------------------- %
@@ -60,16 +66,18 @@
 	
 	\begin{columns}
 		
-		\begin{column}{0.4\textwidth}
+		\begin{column}{0.45\textwidth}
 			
 		
 			\begin{figure}[H]
 				\centering
-				\includegraphics[width=\linewidth]{img/vilma}
+				\includegraphics[width=1\linewidth]{img/vilma}
 				\caption{Veículo Autônomo do LMA.}
 				\label{fig:vilma}
 			\end{figure}
 		\end{column}
+	
+	\hspace{-0.5cm}
 	
 		\begin{column}{0.6\textwidth}
 		
@@ -118,7 +126,7 @@
 	% TODO: \usepackage{graphicx} required
 	\begin{figure}
 		\centering
-		\includegraphics[width=1\linewidth]{img/HL_architecture}
+		\includegraphics[width=0.8\linewidth]{img/HL_architecture}
 		\caption{Arquitetura de alto nível \cite{autowareArchitecture}.}
 		\label{fig:hlarchitecture}
 	\end{figure}
@@ -160,33 +168,43 @@
 
 \begin{frame}{micro-ROS}
 	
-	\begin{block}{O que é?}
-		\begin{itemize}
-			\item \textit{Framework} que leva o ROS 2 à microcontroladores.
-		\end{itemize}
-	\end{block}
-	
-	% TODO: \usepackage{graphicx} required
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{img/micro-ROS_architecture}
-		\caption{Arquitetura micro-ROS \cite{microros}.}
-		\label{fig:micro-rosarchitecture}
-	\end{figure}
+	\begin{columns}
 	
 	
-	
+		\begin{column}{0.4\textwidth}
+				
+			\begin{block}{O que é?}
+			\begin{itemize}
+				\item \textit{Framework} que leva o ROS 2 à microcontroladores.
+			\end{itemize}
+		\end{block}
+				
+			\end{column}
+			
+			\begin{column}{0.6\textwidth}
+				
+			% TODO: \usepackage{graphicx} required
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/micro-ROS_architecture}
+			\caption{Arquitetura micro-ROS \cite{microros}.}
+			\label{fig:micro-rosarchitecture}
+		\end{figure}
+			
+		\end{column}
+		
+	\end{columns}
+
+
 \end{frame}
 
 \section{Proposta}
 
 \begin{frame}{Proposta}
 	
-\Wider{
-	
 	\begin{columns}
 		
-		\begin{column}{0.55\textwidth}
+		\begin{column}{0.7\textwidth}
 			
 				\begin{figure}[H]
 				\centering
@@ -197,7 +215,9 @@
 			
 		\end{column}
 		
-		\begin{column}{0.45\textwidth}
+		\hspace{-0.5cm}
+		
+		\begin{column}{0.5\textwidth}
 			
 				\begin{figure}[H]
 				\centering
@@ -210,24 +230,17 @@
 		
 	\end{columns}
 	
-}
-	
 \end{frame}
 
 \begin{frame}{\textit{Vehicle interface}}
-		
-\Wider{
 	
 	% TODO: \usepackage{graphicx} required
 	\begin{figure}
 		\centering
-		\includegraphics[width=1\linewidth]{img/vehicle_interface-topics}
+		\includegraphics[width=0.8\linewidth]{img/vehicle_interface-topics}
 		\caption{Diagrama de tópicos da \textit{vehicle interface}.}
 		\label{fig:vehicleinterface-topics}
 	\end{figure}
-	
-	
-}
 	
 \end{frame}
 
@@ -277,6 +290,8 @@
 			
 		\end{column}
 		
+		\hspace{-0.5cm}
+		
 		\begin{column}{0.5\textwidth}
 			
 			\begin{block}{Requisitos não-funcionais}
@@ -311,7 +326,7 @@
 		\item ARM Cortex-M7;
 		\item 1 MB RAM;
 		\item 2 MB Flash;
-		\item 480 MHz (max) CPU;
+		\item \textit{Clock} máximo de 480 MHz;
 		\item DMA;
 		\item Comunicação:
 		\begin{itemize}
@@ -330,7 +345,7 @@
 			
 			\begin{figure}[H]
 				\centering
-				\includegraphics[width=0.7\linewidth]{img/nucleo}
+				\includegraphics[width=0.55\linewidth]{img/nucleo}
 				\caption{NUCLEO-753ZI.}
 				\label{fig:nucleo}
 			\end{figure}
@@ -387,7 +402,7 @@
 
 	\begin{figure}
 		\centering
-		\includegraphics[width=\linewidth]{img/block_diagram.pdf}
+		\includegraphics[width=0.95\linewidth]{img/block_diagram.pdf}
 		\caption{Diagrama de blocos da arquitetura HIL.}
 		\label{fig:blockdiagram}
 	\end{figure}
@@ -401,7 +416,7 @@
 		
 	\begin{figure}
 		\centering
-		\includegraphics[width=\linewidth]{img/esquematico.pdf}
+		\includegraphics[width=0.8\linewidth]{img/esquematico.pdf}
 		\caption{Esquemático de ligações elétricas.}
 		\label{fig:esquematico}
 	\end{figure}
@@ -414,31 +429,39 @@
 
 \begin{frame}{Modelo de desenvolvimento}
 	
-	
-	\begin{block}{Modelo V}
+	\begin{columns}
 		
-		\begin{itemize}
-			\item Realização e validação de cada etapa do projeto em paralelo.
+		\begin{column}{0.4\textwidth}
 			
-		\end{itemize}
+				\begin{block}{Modelo V}
+				
+				\begin{itemize}
+					\item Realização e validação de cada etapa do projeto em paralelo.
+					
+				\end{itemize}
+				
+			\end{block}
+			
+		\end{column}
 		
-	\end{block}
-	
-	
-	% TODO: \usepackage{graphicx} required
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.8\linewidth]{img/modelo-v}
-		\caption{Modelo de execução das atividades do projeto.}
-		\label{fig:modelo-v}
-	\end{figure}
-
+		\begin{column}{0.7\textwidth}
+			
+				
+			% TODO: \usepackage{graphicx} required
+			\begin{figure}
+				\centering
+				\includegraphics[width=\linewidth]{img/modelo-v}
+				\caption{Modelo de execução das atividades do projeto.}
+				\label{fig:modelo-v}
+			\end{figure}
+			
+		\end{column}
+		
+	\end{columns}
 	
 \end{frame}
 
 \begin{frame}{Cronograma}
-	
-\Wider{
 	
 	
 \begin{table}
@@ -454,7 +477,7 @@
 			\hline
 			Integração do STM com o micro-ROS  &  & \cellcolor{unifeiblue} &  &  &  &  &  &  &  \\
 			\hline
-			Integração do micro-ROS com o Autoware  &  &  & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} &  &  &  &  &  \\
+			Integração do micro-ROS com o Autoware  &  &  & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} &  &  &  &  \\
 			\hline
 			Implementação das tarefas do sistema embarcado  &  &  &  & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} & \cellcolor{unifeiblue} &  &  \\
 			\hline
@@ -469,8 +492,6 @@
 	\caption{Cronograma de atividades.}
 	\label{tab:crono}
 \end{table}
-
-}
 	
 	\begin{itemize}
 		\small

@@ -17,7 +17,7 @@
 \ProvidesClass{if-beamer}[10/09/2018, v1.0.1]
 
 \PassOptionsToPackage{svgnames}{xcolor}
-\LoadClass[compress, 8pt]{beamer}
+\LoadClass[compress, 8pt, aspectratio=169]{beamer}
 
 % --------------------------------------------------- %
 %                       Packages  	                  %
@@ -180,6 +180,7 @@
 \useinnertheme{rectangles}
 \useoutertheme[subsection=false]{miniframes}
 \setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=16mm,text margin right=16mm} 
 
 % Text
 \setbeamercolor{titlelike}{fg=titleTextColor,bg=titleColor}
