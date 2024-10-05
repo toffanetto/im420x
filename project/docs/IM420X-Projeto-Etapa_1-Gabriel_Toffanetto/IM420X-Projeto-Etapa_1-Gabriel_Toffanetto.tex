@@ -214,6 +214,23 @@
 	
 \end{frame}
 
+\begin{frame}{\textit{Vehicle interface}}
+		
+\Wider{
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}
+		\centering
+		\includegraphics[width=1\linewidth]{img/vehicle_interface-topics}
+		\caption{Diagrama de tópicos da \textit{vehicle interface}.}
+		\label{fig:vehicleinterface-topics}
+	\end{figure}
+	
+	
+}
+	
+\end{frame}
+
 \begin{frame}{Proposta}
 	
 	\begin{block}{Objetivos}
@@ -249,7 +266,10 @@
 					\item Comunicação com o Autoware;
 					\item Controle da aceleração, frenagem e direção do veículo;
 					\item Controle dos faróis e luzes de sinalização (seta) do veículo;
-					\item Teleoperação do veículo por um \textit{joystick} em  \textit{hardware}.
+					\item Teleoperação do veículo por um \textit{joystick} em  \textit{hardware};
+					\item Troca do modo de operação por meio da \textit{switch} do \textit{joystick};
+					\item Subscrição por meio do micro-ROS em todos os tópicos necessários do Autoware;
+					\item Publicação a partir micro-ROS em todos os tópicos necessários do Autoware.
 					
 				\end{itemize}
 				
