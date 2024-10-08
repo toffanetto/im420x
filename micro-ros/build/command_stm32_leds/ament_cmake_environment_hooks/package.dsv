@@ -1,4 +1,0 @@
-source;share/command_stm32_leds/local_setup.bash
-source;share/command_stm32_leds/local_setup.dsv
-source;share/command_stm32_leds/local_setup.sh
-source;share/command_stm32_leds/local_setup.zsh

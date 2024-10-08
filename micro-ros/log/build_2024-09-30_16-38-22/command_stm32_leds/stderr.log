@@ -1,6 +1,0 @@
-[01m[K/home/toffanetto/subjects/im420x/micro-ros/command_stm32_leds/src/command_stm32_leds_node.cpp:36:17:[m[K [01;31m[Kerror: [m[Knon-static data member declared with placeholder ‘[01m[Kauto[m[K’
-   36 |                 [01;31m[Kauto[m[K led_commands = std_msgs::msg::UInt8MultiArray();
-      |                 [01;31m[K^~~~[m[K
-gmake[2]: *** [CMakeFiles/command_stm32_leds_node.dir/build.make:76: CMakeFiles/command_stm32_leds_node.dir/src/command_stm32_leds_node.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/command_stm32_leds_node.dir/all] Error 2
-gmake: *** [Makefile:146: all] Error 2
