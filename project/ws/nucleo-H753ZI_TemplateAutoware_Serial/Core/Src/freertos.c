@@ -69,12 +69,12 @@ const osThreadAttr_t TaskDefault_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for TaskMicroROS */
-osThreadId_t TaskMicroROSHandle;
-const osThreadAttr_t TaskMicroROS_attributes = {
-  .name = "TaskMicroROS",
+/* Definitions for TaskAutoware */
+osThreadId_t TaskAutowareHandle;
+const osThreadAttr_t TaskAutoware_attributes = {
+  .name = "TaskAutoware",
   .stack_size = 3000 * 4,
-  .priority = (osPriority_t) osPriorityNormal1,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -85,7 +85,7 @@ const osThreadAttr_t TaskMicroROS_attributes = {
 /* USER CODE END FunctionPrototypes */
 
 void StartTaskDefault(void *argument);
-extern void StartTaskMicroROS(void *argument);
+extern void StartMicroAutoware(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -119,8 +119,8 @@ void MX_FREERTOS_Init(void) {
   /* creation of TaskDefault */
   TaskDefaultHandle = osThreadNew(StartTaskDefault, NULL, &TaskDefault_attributes);
 
-  /* creation of TaskMicroROS */
-  TaskMicroROSHandle = osThreadNew(StartTaskMicroROS, NULL, &TaskMicroROS_attributes);
+  /* creation of TaskAutoware */
+  TaskAutowareHandle = osThreadNew(StartMicroAutoware, NULL, &TaskAutoware_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

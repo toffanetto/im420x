@@ -1,9 +1,6 @@
 #include "autoware.h"
-#include "usart.h"
-#include "dma.h"
 
-
-void StartTaskMicroROS(void *argument)
+void StartMicroAutoware(void *argument)
 {
 
   // micro-ROS configuration
@@ -144,37 +141,6 @@ void StartTaskMicroROS(void *argument)
   // running executor
   rclc_executor_spin(&executor);
 
-
-}
-
-// Subscriptors callbacks
-void control_cmd_callback(const void * msgin)
-{
-
-}
-
-void gear_cmd_callback(const void * msgin)
-{
-
-}
-
-void turn_indicators_cmd_callback(const void * msgin)
-{
-
-}
-
-void hazard_lights_cmd_callback(const void * msgin)
-{
-
-}
-
-void actuation_cmd_callback(const void * msgin)
-{
-
-}
-
-void emergency_callback(const void * msgin)
-{
 
 }
 
