@@ -1,6 +1,6 @@
 
-#ifndef AUTOWARE_H
-#define AUTOWARE_H
+#ifndef AUTOWARE_H_
+#define AUTOWARE_H_
 
   #define UART 1
   #define UDP 2
@@ -71,53 +71,6 @@
 
   // Function Prototypes -- END
 
-  // Variables -- START
 
-  // micro-ROS subscribers
-  rcl_subscription_t control_cmd_sub_;           // autoware_control_msgs/msg/control.h
-  rcl_subscription_t gear_cmd_sub_;              // autoware_vehicle_msgs/msg/gearcommand.h
-  rcl_subscription_t turn_indicators_cmd_sub_;   // autoware_vehicle_msgs/msg/turn_indicators_command.h
-  rcl_subscription_t hazard_lights_cmd_sub_;     // autoware_vehicle_msgs/msg/hazard_lights_command.h
-  rcl_subscription_t actuation_cmd_sub_;         // tier4_vehicle_msgs/msg/actuation_command_stamped.h
-  rcl_subscription_t emergency_sub_;             // tier4_vehicle_msgs/msg/vehicle_emergency_stamped.h
-
-  // micro-ROS publishers
-  rcl_publisher_t control_mode_pub_;             // autoware_vehicle_msgs/msg/control_mode_report.h
-  rcl_publisher_t vehicle_twist_pub_;            // autoware_vehicle_msgs/msg/velocity_report.h>
-  rcl_publisher_t steering_status_pub_;          // autoware_vehicle_msgs/msg/steering_report.h
-  rcl_publisher_t gear_status_pub_;              // autoware_vehicle_msgs/msg/gear_report.h
-  rcl_publisher_t turn_indicators_status_pub_;   // autoware_vehicle_msgs/msg/turn_indicators_report.h
-  rcl_publisher_t hazard_lights_status_pub_;     // autoware_vehicle_msgs/msg/hazard_lights_report.h
-  rcl_publisher_t actuation_status_pub_;         // tier4_vehicle_msgs/msg/actuation_status_stamped.h
-  rcl_publisher_t steering_wheel_status_pub_;    // tier4_vehicle_msgs/msg/steering_wheel_status_stamped.h
-
-  // micro-ROS messages
-  autoware_control_msgs__msg__Control control_cmd_msg_;
-  autoware_vehicle_msgs__msg__GearCommand gear_cmd_msg_;
-  autoware_vehicle_msgs__msg__TurnIndicatorsCommand turn_indicators_cmd_msg_;
-  autoware_vehicle_msgs__msg__HazardLightsCommand hazard_lights_cmd_msg_;
-  tier4_vehicle_msgs__msg__ActuationCommandStamped actuation_cmd_msg_;
-  tier4_vehicle_msgs__msg__VehicleEmergencyStamped emergency_msg_;
-
-  autoware_vehicle_msgs__msg__ControlModeReport control_mode_msg_;
-  autoware_vehicle_msgs__msg__VelocityReport vehicle_twist_msg_;
-  autoware_vehicle_msgs__msg__SteeringReport steering_status_msg_;
-  autoware_vehicle_msgs__msg__GearReport gear_status_msg_;
-  autoware_vehicle_msgs__msg__TurnIndicatorsReport turn_indicators_status_msg_;
-  autoware_vehicle_msgs__msg__HazardLightsReport hazard_lights_status_msg_;
-  tier4_vehicle_msgs__msg__ActuationStatusStamped  actuation_status_msg_;
-  tier4_vehicle_msgs__msg__SteeringWheelStatusStamped  steering_wheel_status_msg_;
-
-
-  // TODO understand support and allocator
-  rcl_node_t vehicleInterfaceNode;
-
-  rclc_support_t support;
-
-  rcl_allocator_t allocator;
-
-  rclc_executor_t executor;
-
-  // Variables -- END
 
 #endif /* AUTOWARE_H_ */
