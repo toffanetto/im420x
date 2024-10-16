@@ -66,7 +66,7 @@ main-build: nucleo-H753ZI_TemplateAutoware_Serial.elf secondary-outputs
 
 # Tool invocations
 nucleo-H753ZI_TemplateAutoware_Serial.elf nucleo-H753ZI_TemplateAutoware_Serial.map: $(OBJS) $(USER_OBJS) /home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial/STM32H753ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "nucleo-H753ZI_TemplateAutoware_Serial.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial/STM32H753ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo-H753ZI_TemplateAutoware_Serial.map" -Wl,--gc-sections -static -L../autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "nucleo-H753ZI_TemplateAutoware_Serial.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial/STM32H753ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo-H753ZI_TemplateAutoware_Serial.map" -Wl,--gc-sections -static -L../microautoware_vehicle_inferface_stm32/microros_static_library_ide/libmicroautoware --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -86,7 +86,7 @@ clean:
 	-@echo ' '
 
 pre-build:
-	docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v /home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial:/project --env MICROROS_LIBRARY_FOLDER=autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+	docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v /home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial:/project --env MICROROS_LIBRARY_FOLDER=microautoware_vehicle_inferface_stm32/microros_static_library_ide microros/micro_ros_static_library_builder:humble
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
