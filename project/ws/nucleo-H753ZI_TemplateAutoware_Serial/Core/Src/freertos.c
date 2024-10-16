@@ -28,9 +28,7 @@
 
 // Peripherals includes -- START
 #include "dma.h"
-#include "eth.h"
 #include "usart.h"
-#include "usb_otg.h"
 #include "gpio.h"
 
 // Peripherals includes -- END
@@ -66,15 +64,15 @@
 osThreadId_t TaskDefaultHandle;
 const osThreadAttr_t TaskDefault_attributes = {
   .name = "TaskDefault",
-  .stack_size = 128 * 4,
+  .stack_size = 200 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for TaskAutoware */
-osThreadId_t TaskAutowareHandle;
-const osThreadAttr_t TaskAutoware_attributes = {
-  .name = "TaskAutoware",
-  .stack_size = 3000 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+/* Definitions for TaskMicroAutowa */
+osThreadId_t TaskMicroAutowaHandle;
+const osThreadAttr_t TaskMicroAutowa_attributes = {
+  .name = "TaskMicroAutowa",
+  .stack_size = 3500 * 4,
+  .priority = (osPriority_t) osPriorityLow,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -119,8 +117,8 @@ void MX_FREERTOS_Init(void) {
   /* creation of TaskDefault */
   TaskDefaultHandle = osThreadNew(StartTaskDefault, NULL, &TaskDefault_attributes);
 
-  /* creation of TaskAutoware */
-  TaskAutowareHandle = osThreadNew(StartMicroAutoware, NULL, &TaskAutoware_attributes);
+  /* creation of TaskMicroAutowa */
+  TaskMicroAutowaHandle = osThreadNew(StartMicroAutoware, NULL, &TaskMicroAutowa_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -139,7 +137,7 @@ void MX_FREERTOS_Init(void) {
   * @retval None
   */
 /* USER CODE END Header_StartTaskDefault */
-void StartTaskDefault(void *argument)
+__weak void StartTaskDefault(void *argument)
 {
   /* USER CODE BEGIN StartTaskDefault */
   /* Infinite loop */
