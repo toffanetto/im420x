@@ -48,9 +48,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
-unsigned int ucADC1Buffer[2];
-
+extern uint32_t ucADC1Buffer[2];
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -115,8 +113,6 @@ void vApplicationMallocFailedHook(void)
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 
-  HAL_ADC_Start_DMA(&hadc1, ucADC1Buffer, 2);
-
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -160,17 +156,18 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
 
-  unsigned int ucADC1Channel2;
-  unsigned int ucADC1Channel6;
-
+  uint32_t ucADC1Channel2;
+  uint32_t ucADC1Channel6;
+  unsigned int ucJoySW;
   /* Infinite loop */
   for(;;)
   {
 
 	ucADC1Channel2 = ucADC1Buffer[0];
 	ucADC1Channel6 = ucADC1Buffer[1];
-	unsigned int temp = HAL_GPIO_ReadPin(JoySW_GPIO_Port, JoySW_Pin);
-    osDelay(10);
+	ucJoySW = HAL_GPIO_ReadPin(JoySW_GPIO_Port, JoySW_Pin);
+	printf_("%d | %d | %d\n\r",ucADC1Channel2, ucADC1Channel6, ucJoySW);
+    osDelay(100);
   }
   /* USER CODE END StartDefaultTask */
 }
