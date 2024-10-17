@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.18)  15 OCT 2024 17:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.18)  17 OCT 2024 11:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1219,7 +1219,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 Overfull \vbox (2.58087pt too high) detected at line 56
  []
 
-<img/core/Logo_LMA_icon.png, id=56, 658.46pt x 658.46pt>
+<img/core/Logo_LMA_icon.png, id=78, 658.46pt x 658.46pt>
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
 Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 56.
@@ -1257,7 +1257,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 [3
 
 ]
-<img/architecture.png, id=177, 628.0263pt x 368.577pt>
+<img/architecture.png, id=239, 628.0263pt x 368.577pt>
 File: img/architecture.png Graphic file (type png)
 <use img/architecture.png>
 Package pdftex.def Info: img/architecture.png  used on input line 98.
@@ -1283,7 +1283,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <5> not available
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/architecture_hil.pdf): PDF inclus
 ion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/architecture_HIL.pdf, id=178, 292.2117pt x 204.765pt>
+<img/architecture_HIL.pdf, id=240, 292.2117pt x 204.765pt>
 File: img/architecture_HIL.pdf Graphic file (type pdf)
 <use img/architecture_HIL.pdf>
 Package pdftex.def Info: img/architecture_HIL.pdf  used on input line 98.
@@ -1304,7 +1304,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
  <./img/architecture.png> <./img/architecture_hil.pdf>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 101.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 100.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1315,20 +1315,16 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 
 ]
 
-pdfTeX warning: /usr/bin/pdflatex (file ./img/system_diagram.pdf): PDF inclusio
-n: found PDF version <1.7>, but at most version <1.5> allowed
-<img/system_diagram.pdf, id=262, 499.8675pt x 331.2375pt>
-File: img/system_diagram.pdf Graphic file (type pdf)
-<use img/system_diagram.pdf>
-Package pdftex.def Info: img/system_diagram.pdf  used on input line 115.
-(pdftex.def)             Requested size: 273.14645pt x 181.00859pt.
-
-Overfull \vbox (11.94325pt too high) detected at line 115
- []
-
+pdfTeX warning: /usr/bin/pdflatex (file ./img/maquinadeestados.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<img/maquinadeestados.pdf, id=345, 555.99718pt x 244.9953pt>
+File: img/maquinadeestados.pdf Graphic file (type pdf)
+<use img/maquinadeestados.pdf>
+Package pdftex.def Info: img/maquinadeestados.pdf  used on input line 113.
+(pdftex.def)             Requested size: 364.19528pt x 160.48618pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 115.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 113.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1337,10 +1333,10 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 
 [6
 
- <./img/system_diagram.pdf>]
+ <./img/maquinadeestados.pdf>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 123.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 116.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1350,9 +1346,21 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 [7
 
 ]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/system_diagram.pdf): PDF inclusio
+n: found PDF version <1.7>, but at most version <1.5> allowed
+<img/system_diagram.pdf, id=449, 572.1375pt x 282.0939pt>
+File: img/system_diagram.pdf Graphic file (type pdf)
+<use img/system_diagram.pdf>
+Package pdftex.def Info: img/system_diagram.pdf  used on input line 130.
+(pdftex.def)             Requested size: 345.9844pt x 170.58769pt.
+
+Overfull \vbox (1.52235pt too high) detected at line 130
+ []
+
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 132.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 130.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1361,10 +1369,10 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 
 [8
 
-]
+ <./img/system_diagram.pdf>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 136.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 152.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1374,9 +1382,14 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 [9
 
 ]
+Underfull \hbox (badness 2635) in paragraph at lines 174--174
+[]|\T1/phv/m/n/8 Leitura dos \T1/phv/m/sl/8 subs-cri-bers \T1/phv/m/n/8 Au-towa
+re, lei-tura dos \T1/phv/m/sl/8 subs-cri-bers
+ []
+
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 142.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 174.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1386,9 +1399,22 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 [10
 
 ]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_taskcontrol_1.pdf): PD
+F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<img/fluxograma_taskcontrol_1.pdf, id=585, 470.7186pt x 384.47638pt>
+File: img/fluxograma_taskcontrol_1.pdf Graphic file (type pdf)
+<use img/fluxograma_taskcontrol_1.pdf>
+Package pdftex.def Info: img/fluxograma_taskcontrol_1.pdf  used on input line 1
+88.
+(pdftex.def)             Requested size: 218.51938pt x 178.48633pt.
+
+Overfull \vbox (9.42099pt too high) detected at line 188
+ []
+
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 148.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 188.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1397,10 +1423,23 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 
 [11
 
-]
+ <./img/fluxograma_taskcontrol_1.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_taskcontrol_2.pdf): PD
+F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<img/fluxograma_taskcontrol_2.pdf, id=638, 664.40218pt x 403.5075pt>
+File: img/fluxograma_taskcontrol_2.pdf Graphic file (type pdf)
+<use img/fluxograma_taskcontrol_2.pdf>
+Package pdftex.def Info: img/fluxograma_taskcontrol_2.pdf  used on input line 2
+02.
+(pdftex.def)             Requested size: 291.35733pt x 176.95277pt.
+
+Overfull \vbox (7.88744pt too high) detected at line 202
+ []
+
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 154.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 202.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1409,10 +1448,22 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 
 [12
 
-]
+ <./img/fluxograma_taskcontrol_2.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_joysw.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<img/fluxograma_joysw.pdf, id=692, 187.66109pt x 319.1925pt>
+File: img/fluxograma_joysw.pdf Graphic file (type pdf)
+<use img/fluxograma_joysw.pdf>
+Package pdftex.def Info: img/fluxograma_joysw.pdf  used on input line 216.
+(pdftex.def)             Requested size: 105.61418pt x 179.64275pt.
+
+Overfull \vbox (10.57741pt too high) detected at line 216
+ []
+
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 160.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 216.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1421,10 +1472,10 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 
 [13
 
-]
+ <./img/fluxograma_joysw.pdf>]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 163.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 220.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1434,9 +1485,14 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 [14
 
 ]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 27
+3.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 205.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 273.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1448,7 +1504,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 211.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 323.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1457,14 +1513,10 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 
 [16
 
-] (./IM420X-Projeto-Etapa_2-Gabriel_Toffanetto-Juan_Barraza.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 8.
-
-)
+]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 215.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 325.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1474,14 +1526,9 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 [17
 
 ]
-<img/core/Logo_LMA.png, id=641, 1363.0925pt x 658.46pt>
-File: img/core/Logo_LMA.png Graphic file (type png)
-<use img/core/Logo_LMA.png>
-Package pdftex.def Info: img/core/Logo_LMA.png  used on input line 241.
-(pdftex.def)             Requested size: 182.09764pt x 87.96391pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 241.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 368.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1489,6 +1536,99 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
  []
 
 [18
+
+]
+File: img/core/Logo_LMA_icon.png Graphic file (type png)
+<use img/core/Logo_LMA_icon.png>
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 371.
+(pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
+
+Overfull \hbox (1.38297pt too wide) has occurred while \output is active
+[][] 
+ []
+
+[19
+
+]
+File: img/core/Logo_LMA_icon.png Graphic file (type png)
+<use img/core/Logo_LMA_icon.png>
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 429.
+(pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
+
+Overfull \hbox (1.38297pt too wide) has occurred while \output is active
+[][] 
+ []
+
+[20
+
+]
+File: img/core/Logo_LMA_icon.png Graphic file (type png)
+<use img/core/Logo_LMA_icon.png>
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 432.
+(pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
+
+Overfull \hbox (1.38297pt too wide) has occurred while \output is active
+[][] 
+ []
+
+[21
+
+]
+File: img/core/Logo_LMA_icon.png Graphic file (type png)
+<use img/core/Logo_LMA_icon.png>
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 474.
+(pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
+
+Overfull \hbox (1.38297pt too wide) has occurred while \output is active
+[][] 
+ []
+
+[22
+
+]
+File: img/core/Logo_LMA_icon.png Graphic file (type png)
+<use img/core/Logo_LMA_icon.png>
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 480.
+(pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
+
+Overfull \hbox (1.38297pt too wide) has occurred while \output is active
+[][] 
+ []
+
+[23
+
+] (./IM420X-Projeto-Etapa_2-Gabriel_Toffanetto-Juan_Barraza.bbl
+
+LaTeX Warning: Empty `thebibliography' environment on input line 8.
+
+)
+File: img/core/Logo_LMA_icon.png Graphic file (type png)
+<use img/core/Logo_LMA_icon.png>
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 484.
+(pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
+
+Overfull \hbox (1.38297pt too wide) has occurred while \output is active
+[][] 
+ []
+
+[24
+
+]
+<img/core/Logo_LMA.png, id=1204, 1363.0925pt x 658.46pt>
+File: img/core/Logo_LMA.png Graphic file (type png)
+<use img/core/Logo_LMA.png>
+Package pdftex.def Info: img/core/Logo_LMA.png  used on input line 510.
+(pdftex.def)             Requested size: 182.09764pt x 87.96391pt.
+File: img/core/Logo_LMA_icon.png Graphic file (type png)
+<use img/core/Logo_LMA_icon.png>
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 510.
+(pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
+
+Overfull \hbox (1.38297pt too wide) has occurred while \output is active
+[][] 
+ []
+
+[25
 
  <./img/core/Logo_LMA.png>]
 \tf@nav=\write6
@@ -1504,25 +1644,27 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 (./IM420X-Projeto-Etapa_2-Gabriel_Toffanetto-Juan_Barraza.aux)
 Package rerunfilecheck Info: File `IM420X-Projeto-Etapa_2-Gabriel_Toffanetto-Ju
 an_Barraza.out' has not changed.
-(rerunfilecheck)             Checksum: F740387C7C90EB6B2AA10101BD95264B;724.
+(rerunfilecheck)             Checksum: 9F96FAB7581AA1013CEE9B370FEBE1FB;1188.
  ) 
 Here is how much of TeX's memory you used:
- 34354 strings out of 478287
- 698727 string characters out of 5849289
- 1052321 words of memory out of 5000000
- 51840 multiletter control sequences out of 15000+600000
- 510279 words of font info for 73 fonts, out of 8000000 for 9000
+ 34520 strings out of 478287
+ 702371 string characters out of 5849289
+ 1056566 words of memory out of 5000000
+ 51973 multiletter control sequences out of 15000+600000
+ 515468 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 142i,20n,136p,435b,808s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 142i,20n,136p,918b,912s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/urw/helvetic/uhvro8a.pfb>
-Output written on IM420X-Projeto-Etapa_2-Gabriel_Toffanetto-Juan_Barraza.pdf (1
-8 pages, 1033330 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/hel
+vetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8
+a.pfb>
+Output written on IM420X-Projeto-Etapa_2-Gabriel_Toffanetto-Juan_Barraza.pdf (2
+5 pages, 1163963 bytes).
 PDF statistics:
- 698 PDF objects out of 1000 (max. 8388607)
- 587 compressed objects within 6 object streams
- 46 named destinations out of 1000 (max. 500000)
- 276 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1285 PDF objects out of 1440 (max. 8388607)
+ 1111 compressed objects within 12 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 416 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,26 +1,155 @@
-14:37:12 **** Incremental Build of configuration Debug for project nucleo-H753ZI_TemplateAutoware_Serial ****
+17:24:41 **** Incremental Build of configuration Debug for project nucleo-H753ZI_TemplateAutoware_Serial ****
 make -j12 all 
-docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v /home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial:/project --env MICROROS_LIBRARY_FOLDER=autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v /home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial:/project --env MICROROS_LIBRARY_FOLDER=microautoware_vehicle_inferface_stm32/microros_static_library_ide microros/micro_ros_static_library_builder:humble
 humble: Pulling from microros/micro_ros_static_library_builder
 Digest: sha256:83ab4e8ce95b2a62feb5dd270ad4460218d2d026a455ea32a5873cf629aa1e99
 Status: Image is up to date for microros/micro_ros_static_library_builder:humble
 docker.io/microros/micro_ros_static_library_builder:humble
-dos2unix: converting file /project/autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
-micro-ROS library found. Skipping...
-Delete autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/ for rebuild.
- 
-arm-none-eabi-gcc "../Core/Src/dma_transport.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32H753xx -c -I../Core/Inc -I../autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32H7xx_HAL_Driver/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dma_transport.d" -MT"Core/Src/dma_transport.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dma_transport.o"
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32H753xx -c -I../Core/Inc -I../autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include -I../Drivers/STM32H7xx_HAL_Driver/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "nucleo-H753ZI_TemplateAutoware_Serial.elf" @"objects.list"  -lmicroros -mcpu=cortex-m7 -T"/home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial/STM32H753ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo-H753ZI_TemplateAutoware_Serial.map" -Wl,--gc-sections -static -L../autoware_micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-/opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld: /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard/libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
-(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
-Finished building target: nucleo-H753ZI_TemplateAutoware_Serial.elf
- 
-arm-none-eabi-size  nucleo-H753ZI_TemplateAutoware_Serial.elf 
-arm-none-eabi-objdump -h -S nucleo-H753ZI_TemplateAutoware_Serial.elf  > "nucleo-H753ZI_TemplateAutoware_Serial.list"
-   text	   data	    bss	    dec	    hex	filename
- 134496	   4896	 428840	 568232	  8aba8	nucleo-H753ZI_TemplateAutoware_Serial.elf
-Finished building: default.size.stdout
- 
-Finished building: nucleo-H753ZI_TemplateAutoware_Serial.list
- 
+dos2unix: converting file /project/microautoware_vehicle_inferface_stm32/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
+Found CFLAGS:
+-------------
+-ffunction-sections -fdata-sections -DSTM32CUBEIDE -DENOTSUP=1 -DECANCELED=1 -DEOWNERDEAD=1 -DENOTRECOVERABLE=1 -mcpu=cortex-m7 -mfloat-abi=hard -mthumb -mfpu=fpv5-d16 -O0 -DDEBUG -DSTM32H753xx -DUSE_HAL_DRIVER --specs=nano.specs -I/project/Drivers/CMSIS/Device/ST/STM32H7xx/Include -I/project/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I/project/Drivers/CMSIS/Include -I/project/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I/project/Middlewares/Third_Party/FreeRTOS/Source/include -I/project/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I/project/microautoware_vehicle_inferface_stm32/microros_static_library_ide/libmicroautoware/include -I/project/Drivers/STM32H7xx_HAL_Driver/Inc -I/project/Core/Inc
+-------------
+Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://packages.ros.org/ros2/ubuntu jammy InRelease [4682 B]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:8 http://packages.ros.org/ros2/ubuntu jammy/main amd64 Packages [1613 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2370 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [2648 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [3278 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [51.8 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1451 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [81.4 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [33.7 kB]
+Get:18 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1161 kB]
+Get:19 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [3194 kB]
+Get:20 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [44.7 kB]
+Fetched 36.3 MB in 14s (2553 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  binutils-arm-none-eabi libnewlib-arm-none-eabi libnewlib-dev
+  libstdc++-arm-none-eabi-dev libstdc++-arm-none-eabi-newlib
+Suggested packages:
+  libnewlib-doc
+The following NEW packages will be installed:
+  binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi
+  libnewlib-dev libstdc++-arm-none-eabi-dev libstdc++-arm-none-eabi-newlib
+0 upgraded, 6 newly installed, 0 to remove and 241 not upgraded.
+Need to get 442 MB of archives.
+After this operation, 2575 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 binutils-arm-none-eabi amd64 2.38-3ubuntu1+15build1 [3040 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/universe amd64 gcc-arm-none-eabi amd64 15:10.3-2021.07-4 [47.7 MB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libstdc++-arm-none-eabi-dev all 15:10.3-2021.07-4+17 [1049 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libnewlib-dev all 3.3.0-1.3 [137 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libnewlib-arm-none-eabi all 3.3.0-1.3 [43.2 MB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libstdc++-arm-none-eabi-newlib all 15:10.3-2021.07-4+17 [347 MB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 442 MB in 1min 31s (4856 kB/s)
+Selecting previously unselected package binutils-arm-none-eabi.
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 61287 files and directories currently installed.)
+Preparing to unpack .../0-binutils-arm-none-eabi_2.38-3ubuntu1+15build1_amd64.deb ...
+Unpacking binutils-arm-none-eabi (2.38-3ubuntu1+15build1) ...
+Selecting previously unselected package gcc-arm-none-eabi.
+Preparing to unpack .../1-gcc-arm-none-eabi_15%3a10.3-2021.07-4_amd64.deb ...
+Unpacking gcc-arm-none-eabi (15:10.3-2021.07-4) ...
+Selecting previously unselected package libstdc++-arm-none-eabi-dev.
+Preparing to unpack .../2-libstdc++-arm-none-eabi-dev_15%3a10.3-2021.07-4+17_all.deb ...
+Unpacking libstdc++-arm-none-eabi-dev (15:10.3-2021.07-4+17) ...
+Selecting previously unselected package libnewlib-dev.
+Preparing to unpack .../3-libnewlib-dev_3.3.0-1.3_all.deb ...
+Unpacking libnewlib-dev (3.3.0-1.3) ...
+Selecting previously unselected package libnewlib-arm-none-eabi.
+Preparing to unpack .../4-libnewlib-arm-none-eabi_3.3.0-1.3_all.deb ...
+Unpacking libnewlib-arm-none-eabi (3.3.0-1.3) ...
+Selecting previously unselected package libstdc++-arm-none-eabi-newlib.
+Preparing to unpack .../5-libstdc++-arm-none-eabi-newlib_15%3a10.3-2021.07-4+17_all.deb ...
+Unpacking libstdc++-arm-none-eabi-newlib (15:10.3-2021.07-4+17) ...
+Setting up binutils-arm-none-eabi (2.38-3ubuntu1+15build1) ...
+Setting up gcc-arm-none-eabi (15:10.3-2021.07-4) ...
+Setting up libnewlib-dev (3.3.0-1.3) ...
+Setting up libnewlib-arm-none-eabi (3.3.0-1.3) ...
+Setting up libstdc++-arm-none-eabi-dev (15:10.3-2021.07-4+17) ...
+Setting up libstdc++-arm-none-eabi-newlib (15:10.3-2021.07-4+17) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+Creating firmware for generate_lib platform generic
+.......
+=== ./ament/ament_cmake (git) ===
+Cloning into '.'...
+=== ./ament/ament_index (git) ===
+Cloning into '.'...
+=== ./ament/ament_lint (git) ===
+Cloning into '.'...
+=== ./ament/ament_package (git) ===
+Cloning into '.'...
+=== ./ament/googletest (git) ===
+Cloning into '.'...
+=== ./ament/uncrustify_vendor (git) ===
+Cloning into '.'...
+=== ./ros2/ament_cmake_ros (git) ===
+Cloning into '.'...
+List of repositories is empty
+#All required rosdeps installed successfully
+.....E....EE.E
+=== ./ros2/common_interfaces (git) ===
+Cloning into '.'...
+=== ./ros2/example_interfaces (git) ===
+Cloning into '.'...
+=== ./ros2/libyaml_vendor (git) ===
+Cloning into '.'...
+=== ./ros2/rcl (git) ===
+Cloning into '.'...
+=== ./ros2/rcl_interfaces (git) ===
+Cloning into '.'...
+=== ./ros2/rcl_logging (git) ===
+Cloning into '.'...
+=== ./ros2/rcpputils (git) ===
+Cloning into '.'...
+=== ./ros2/rmw (git) ===
+Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rmw.git/': Could not resolve host: github.com
+=== ./ros2/rmw_implementation (git) ===
+Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rmw_implementation.git/': Could not resolve host: github.com
+=== ./ros2/rosidl (git) ===
+Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rosidl.git/': Could not resolve host: github.com
+=== ./ros2/rosidl_dds (git) ===
+Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rosidl_dds.git/': Could not resolve host: github.com
+=== ./ros2/rosidl_defaults (git) ===
+Cloning into '.'...
+=== ./ros2/test_interface_files (git) ===
+Cloning into '.'...
+=== ./ros2/unique_identifier_msgs (git) ===
+Cloning into '.'...
+[ros2run]: Process exited with failure 1
+[ros2run]: Process exited with failure 1
+make[1]: *** [makefile:89: pre-build] Error 1
+make: *** [makefile:62: all] Error 2
+"make -j12 all" terminated with exit code 2. Build might be incomplete.

@@ -97,6 +97,21 @@
 	
 \end{frame}
 
+\section{Estados do sistema}
+
+\begin{frame}{Estados do sistema}
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{img/maquinadeestados}
+		\caption{Máquina de estados do sistema.}
+		\label{fig:maquinadeestados}
+	\end{figure}
+	
+	
+\end{frame}
+
 
 \section{Tarefas}
 
@@ -107,7 +122,7 @@
 	% TODO: \usepackage{graphicx} required
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.75\linewidth]{img/system_diagram}
+		\includegraphics[width=0.95\linewidth]{img/system_diagram}
 		\caption{Diagrama do sistema.}
 		\label{fig:systemdiagram}
 	\end{figure}
@@ -118,45 +133,299 @@
 
 \begin{frame}{Descrição das tarefas}
 	
+\begin{block}{\textbf{Tarefa}}
 	
+	\centering
+	
+	\begin{tabular}{c|p{8cm}}
+		\textbf{Nome} & TaskControle \\
+		\hline
+		\textbf{Prioridade}& AboveNormal \\
+		\hline
+		\textbf{Tamanho da stack} & 500 kB \\
+		\hline
+		\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de X ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o carro por meio de uma variável global, que é enviada para o MicroAutoware e sincronizado por \textit{ThreadFlag}. \\
+	\end{tabular}
+	
+\end{block}	
 	
 \end{frame}
 
 
 
+\begin{frame}{Descrição das tarefas}
 
-\begin{frame}{Fluxograma das tarefas}
+\begin{block}{\textbf{Tarefa}}
 	
+	\centering
 	
+	\begin{tabular}{c|p{8cm}}
+		\textbf{Nome} & MicroAutoware \\
+		\hline
+		\textbf{Prioridade}& Normal \\
+		\hline
+		\textbf{Tamanho da stack} & 3500 kB \\
+		\hline
+		\textbf{Detalhes} & Leitura dos \textit{subscribers} Autoware, leitura dos \textit{subscribers} CARLA, envio das informações para a TaskControle, recebimentos das informações da TaskControle, escrita dos \textit{publishes} Autoware, escrita dos \textit{publishers} CARLA. \\
+	\end{tabular}
 	
+\end{block}	
+
+\end{frame}
+
+
+
+
+\begin{frame}{Fluxograma TaskControl}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{img/fluxograma_taskcontrol_1}
+		\caption{Fluxograma da tarefa TaskControl (Parte 1/2).}
+		\label{fig:fluxograma_taskcontrol_1}
+	\end{figure}
+	
+\end{frame}
+
+
+\begin{frame}{Fluxograma TaskControl}
+
+
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{img/fluxograma_taskcontrol_2}
+		\caption{Fluxograma da tarefa TaskControl (Parte 2/2).}
+		\label{fig:fluxograma_taskcontrol_2}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Fluxograma ISR JoySW}
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.29\linewidth]{img/fluxograma_joysw}
+	\caption{Fluxograma da ISR JoySW.}
+	\label{fig:fluxograma_joysw}
+\end{figure}
+
 \end{frame}
 
 
 
 \section{Sincronização e comunicação entre tarefas}
 
-\begin{frame}{Troca do modo de controle -- Autoware}
+\begin{frame}{Sincronização entre tarefas}
 	
+	\begin{columns}
+		
+		\begin{column}{0.5\textwidth}
+			
+				\begin{block}{Sinalização \texttt{xButtonState}}
+				
+				\begin{itemize}
+					\item \textbf{Objeto:} \textit{ThreadFlag}
+					\item \textbf{Flag:} 0x1000
+					\item \textbf{Modo:} \textit{No wait}
+					\item \textbf{Descrição:} Sinaliza ocorrência da interrupção do botão JoySW.
+					
+				\end{itemize}
+				
+			\end{block}
 	
+
+			\begin{block}{Sinalização \texttt{xControlAction}}
+			
+			\begin{itemize}
+				\item \textbf{Objeto:} \textit{ThreadFlag}
+				\item \textbf{Flag:} 0x0100
+				\item \textbf{Modo:} \textit{Timeout} XX ms
+				\item \textbf{Descrição:} Sinaliza o recebimento de dados pela variável global \texttt{xControlAction}.
+				
+			\end{itemize}	
+			
+			\end{block}
+			
+		\end{column}
+		
+		\begin{column}{0.5\textwidth}
+			
+			\begin{block}{Sinalização \texttt{xControlSignal}}
+				
+				\begin{itemize}
+					\item \textbf{Objeto:} \textit{ThreadFlag}
+					\item \textbf{Flag:} 0x0100
+					\item \textbf{Modo:} \textit{Timeout} XX ms
+					\item \textbf{Descrição:} Sinaliza o recebimento de dados pela variável global \texttt{xControlSignal}.
+					
+				\end{itemize}	
+				
+			\end{block}
+			
+		\end{column}
+		
+	\end{columns}
 	
 \end{frame}
 
-\begin{frame}{Troca do modo de controle -- Joystick}
+\begin{frame}{Comunicação entre tarefas}
 
-
+	\begin{columns}
+	
+	\begin{column}{0.55\textwidth}
+		
+		\begin{block}{Alteração do modo de condução por interrupção JoySW}
+			
+			\begin{itemize}
+				\item \textbf{Objeto:} \textit{ThreadFlag}
+				\item \textbf{Flags:}
+				\begin{itemize}
+					\item Modo de controle alterado para AUTOWARE: 0x01
+					\item Modo de controle alterado para MANUAL: 0x10
+					
+				\end{itemize}
+				\item \textbf{Modo:} \textit{No wait}
+				\item \textbf{Descrição:} Realiza a sincronização do modo de operação da tarefa TaskControle para a MicroAutoware.
+				
+			\end{itemize}
+			
+		\end{block}
+		
+	\end{column}
+	
+	\begin{column}{0.55\textwidth}
+		
+		\begin{block}{Alteração do modo de condução pelo Autoware}
+			
+			\begin{itemize}
+				\item \textbf{Objeto:} \textit{ThreadFlag}
+				\item \textbf{Flags:}
+				\begin{itemize}
+					\item Modo de controle alterado para AUTOWARE: 0x01
+					\item Modo de controle alterado para MANUAL: 0x10
+					
+				\end{itemize}
+				\item \textbf{Modo:} \textit{No wait}
+				\item \textbf{Descrição:} Realiza a sincronização do modo de operação da tarefa MicroAutoware para a TaskControle.
+				
+			\end{itemize}
+			
+		\end{block}
+		
+	\end{column}
+	
+\end{columns}
 
 \end{frame}
 
-\begin{frame}{Envio da ação de controle de alto nível}
+\section{Proteção de recursos}
 
-
-
+\begin{frame}{Proteção de recursos}
+	
+	\begin{columns}
+		
+		\begin{column}{0.5\textwidth}
+			
+			\begin{block}{Variável global \texttt{xControlSignal}}
+				
+				\begin{itemize}
+					\item Protegida por MUTEX.
+					\begin{itemize}
+						\item \texttt{MutexControlSignal}
+						
+					\end{itemize}
+				\end{itemize}
+				
+			\end{block}
+			
+		\end{column}
+		
+		\begin{column}{0.5\textwidth}
+			
+			
+			
+			\begin{block}{Variável global \texttt{xControlAction}}
+				
+				\begin{itemize}
+					\item Protegida por MUTEX.
+					\begin{itemize}
+						\item \texttt{MutexControlAction}
+						
+					\end{itemize}
+					
+				\end{itemize}
+				
+			\end{block}
+			
+		\end{column}
+		
+	\end{columns}
+	
 \end{frame}
 
-\begin{frame}{Envio da ação de controle de baixo nível}
 
+\section{Padronização de projeto}
 
+\begin{frame}{Padronização de projeto}
+	
+	\begin{block}{}
+		\centering
+		\vspace{1mm}
+		Domínio ROS $\times$ Domínio FreeRTOS
+		\vspace{1mm}
+		
+	\end{block}
+	
+	\begin{columns}
+		
+		\begin{column}{0.42\textwidth}
+			
+			\begin{block}{Domínio ROS}
+				
+				\begin{itemize}
+					\item \textit{Vehicle interface};
+					\item Padronização de código do ROS.
+				\end{itemize}
+				
+			\end{block}
+		
+			\begin{block}{Domínio FreeRTOS}
+			
+				\begin{itemize}
+					\item Padronização padrão da disciplina.
+				\end{itemize}
+			
+			\end{block}
+			
+		\end{column}
+		
+		\begin{column}{0.45\textwidth}
+			
+			\begin{block}{Padronização de código ROS}
+				
+				\begin{itemize}
+					\item Subscriber: \texttt{nome\_subscriber\_sub\_}
+					\item Publisher: \texttt{nome\_subscriber\_pub\_}
+					\item Mensagem: \texttt{nome\_mensagem\_msg\_}
+					\item Node: \texttt{nome\_do\_node}
+					\item Callback: \texttt{nome\_do\_topico\_callback}
+					
+				\end{itemize}
+				
+			\end{block}
+			
+		\end{column}
+		
+	\end{columns}
 
+	\vspace{5mm}
+
+	\boxyellow[0.6]{\centering Considera-se que as padronizações não irao se misturar!}
+	
 \end{frame}
 
 
