@@ -2,7 +2,8 @@
 \beamer@slide {fig:architecture_HIL}{4}
 \beamer@slide {fig:maquinadeestados}{6}
 \beamer@slide {fig:systemdiagram}{8}
-\beamer@slide {fig:fluxograma_taskcontrol_1}{11}
-\beamer@slide {fig:fluxograma_taskcontrol_2}{12}
-\beamer@slide {fig:fluxograma_joysw}{13}
-\beamer@slide {tab:crono}{22}
+\beamer@slide {fig:fluxograma_microautoware}{11}
+\beamer@slide {fig:fluxograma_taskcontrol_1}{12}
+\beamer@slide {fig:fluxograma_taskcontrol_2}{13}
+\beamer@slide {fig:fluxograma_joysw}{14}
+\beamer@slide {tab:crono}{23}
