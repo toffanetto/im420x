@@ -3,6 +3,6 @@
 \beamer@sectionintoc {2}{Estados do sistema}{5}{0}{2}
 \beamer@sectionintoc {3}{Tarefas}{7}{0}{3}
 \beamer@sectionintoc {4}{Sincronização e comunicação entre tarefas}{15}{0}{4}
-\beamer@sectionintoc {5}{Proteção de recursos}{18}{0}{5}
-\beamer@sectionintoc {6}{Padronização de projeto}{20}{0}{6}
-\beamer@sectionintoc {7}{Cronograma}{22}{0}{7}
+\beamer@sectionintoc {5}{Proteção de recursos}{21}{0}{5}
+\beamer@sectionintoc {6}{Padronização de projeto}{24}{0}{6}
+\beamer@sectionintoc {7}{Cronograma}{30}{0}{7}
