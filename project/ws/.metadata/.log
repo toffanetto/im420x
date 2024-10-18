@@ -216,3 +216,18 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64
 
 !ENTRY org.eclipse.cdt.core 1 0 2024-10-16 17:23:20.375
 !MESSAGE Indexed 'nucleo-H753ZI_TemplateAutoware_Serial' (48 sources, 163 headers) in 5.78 sec: 20,742 declarations; 127,922 references; 28 unresolved inclusions; 156 syntax errors; 261 unresolved names (0.18%)
+!SESSION 2024-10-18 10:24:43.215 -----------------------------------------------
+eclipse.buildId=Version 1.15.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-10-18 10:24:50.635
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-10-18 10:24:50.637
+!MESSAGE Log4j2 initialized with config file /home/toffanetto/unicamp/im420x/project/ws/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-10-18 10:25:05.100
+!MESSAGE Started RMI Server, listening on port 41337
