@@ -129,30 +129,6 @@
 	
 \end{frame}
 
-
-
-\begin{frame}{Descrição das tarefas}
-	
-\begin{block}{\textbf{Tarefa}}
-	
-	\centering
-	
-	\begin{tabular}{c|p{8cm}}
-		\textbf{Nome} & TaskControle \\
-		\hline
-		\textbf{Prioridade}& AboveNormal \\
-		\hline
-		\textbf{Tamanho da stack} & 500 kB \\
-		\hline
-		\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de 30 ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o carro por meio de uma variável global, que é enviada para o MicroAutoware e sincronizado por \textit{ThreadFlag}. \\
-	\end{tabular}
-	
-\end{block}	
-	
-\end{frame}
-
-
-
 \begin{frame}{Descrição das tarefas}
 
 \begin{block}{\textbf{Tarefa}}
@@ -173,7 +149,51 @@
 
 \end{frame}
 
+\begin{frame}{Descrição das tarefas}
 
+% TODO: \usepackage{graphicx} required
+\begin{figure}
+	\centering
+	\includegraphics[width = \textwidth]{img/microautoware_blockrelease}
+	\caption{Elementos de bloqueio e desbloqueio da tarefa MicroAtuoware.}
+	\label{fig:microautoware_blockrelease}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{Descrição das tarefas}
+	
+\begin{block}{\textbf{Tarefa}}
+	
+	\centering
+	
+	\begin{tabular}{c|p{8cm}}
+		\textbf{Nome} & TaskControle \\
+		\hline
+		\textbf{Prioridade}& AboveNormal \\
+		\hline
+		\textbf{Tamanho da stack} & 500 kB \\
+		\hline
+		\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de 30 ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, aguardando 20 ms antes de cada leitura,  convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o MicroAutoware por uma variável global e sincronizado por \textit{ThreadFlag}. 
+	\end{tabular}
+	
+\end{block}	
+	
+\end{frame}
+
+\begin{frame}{Descrição das tarefas}
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}
+		\centering
+		\includegraphics[width = 0.82\textwidth]{img/taskcontrole_blockrelease}
+		\caption{Elementos de bloqueio e desbloqueio da tarefa TaskControle.}
+		\label{fig:taskcontrole_blockrelease}
+	\end{figure}
+	
+\end{frame}
 
 
 \begin{frame}{Fluxograma MicroAutoware}
