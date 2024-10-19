@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.18)  19 OCT 2024 12:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.18)  19 OCT 2024 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1671,7 +1671,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 476.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 477.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1683,7 +1683,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 476.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 477.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1695,7 +1695,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 476.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 477.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1707,7 +1707,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 476.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 477.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1719,7 +1719,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 476.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 477.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1731,7 +1731,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 479.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 480.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1743,7 +1743,7 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 ]
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 521.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 522.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1756,11 +1756,11 @@ Overfull \hbox (1.38297pt too wide) has occurred while \output is active
 <img/core/Logo_LMA.png, id=1598, 1363.0925pt x 658.46pt>
 File: img/core/Logo_LMA.png Graphic file (type png)
 <use img/core/Logo_LMA.png>
-Package pdftex.def Info: img/core/Logo_LMA.png  used on input line 557.
+Package pdftex.def Info: img/core/Logo_LMA.png  used on input line 558.
 (pdftex.def)             Requested size: 182.09764pt x 87.96391pt.
 File: img/core/Logo_LMA_icon.png Graphic file (type png)
 <use img/core/Logo_LMA_icon.png>
-Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 557.
+Package pdftex.def Info: img/core/Logo_LMA_icon.png  used on input line 558.
 (pdftex.def)             Requested size: 34.14322pt x 34.14064pt.
 
 Overfull \hbox (1.38297pt too wide) has occurred while \output is active
@@ -1788,7 +1788,7 @@ an_Barraza.out' has not changed.
 Here is how much of TeX's memory you used:
  34552 strings out of 478287
  703167 string characters out of 5849289
- 1057798 words of memory out of 5000000
+ 1056798 words of memory out of 5000000
  51985 multiletter control sequences out of 15000+600000
  515468 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1800,7 +1800,7 @@ ype1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/hel
 vetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8
 a.pfb>
 Output written on IM420X-Projeto-Etapa_2-Gabriel_Toffanetto-Juan_Barraza.pdf (3
-4 pages, 1289869 bytes).
+4 pages, 1290480 bytes).
 PDF statistics:
  1682 PDF objects out of 1728 (max. 8388607)
  1473 compressed objects within 15 object streams

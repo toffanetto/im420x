@@ -1,4 +1,4 @@
-17:24:41 **** Incremental Build of configuration Debug for project nucleo-H753ZI_TemplateAutoware_Serial ****
+15:25:59 **** Build of configuration Debug for project nucleo-H753ZI_TemplateAutoware_Serial ****
 make -j12 all 
 docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v /home/toffanetto/unicamp/im420x/project/ws/nucleo-H753ZI_TemplateAutoware_Serial:/project --env MICROROS_LIBRARY_FOLDER=microautoware_vehicle_inferface_stm32/microros_static_library_ide microros/micro_ros_static_library_builder:humble
 humble: Pulling from microros/micro_ros_static_library_builder
@@ -8,29 +8,29 @@ docker.io/microros/micro_ros_static_library_builder:humble
 dos2unix: converting file /project/microautoware_vehicle_inferface_stm32/microros_static_library_ide/library_generation/library_generation.sh to Unix format...
 Found CFLAGS:
 -------------
--ffunction-sections -fdata-sections -DSTM32CUBEIDE -DENOTSUP=1 -DECANCELED=1 -DEOWNERDEAD=1 -DENOTRECOVERABLE=1 -mcpu=cortex-m7 -mfloat-abi=hard -mthumb -mfpu=fpv5-d16 -O0 -DDEBUG -DSTM32H753xx -DUSE_HAL_DRIVER --specs=nano.specs -I/project/Drivers/CMSIS/Device/ST/STM32H7xx/Include -I/project/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I/project/Drivers/CMSIS/Include -I/project/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I/project/Middlewares/Third_Party/FreeRTOS/Source/include -I/project/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I/project/microautoware_vehicle_inferface_stm32/microros_static_library_ide/libmicroautoware/include -I/project/Drivers/STM32H7xx_HAL_Driver/Inc -I/project/Core/Inc
+-ffunction-sections -fdata-sections -DSTM32CUBEIDE -DENOTSUP=1 -DECANCELED=1 -DEOWNERDEAD=1 -DENOTRECOVERABLE=1 -mcpu=cortex-m7 -mfloat-abi=hard -mthumb -mfpu=fpv5-d16 -O0 -DUSE_HAL_DRIVER -DDEBUG -DSTM32H753xx --specs=nano.specs -I/project/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I/project/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I/project/Core/Inc -I/project/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I/project/Drivers/STM32H7xx_HAL_Driver/Inc -I/project/Drivers/CMSIS/Include -I/project/Middlewares/Third_Party/FreeRTOS/Source/include -I/project/microautoware_vehicle_inferface_stm32/microros_static_library_ide/libmicroautoware/include -I/project/Drivers/CMSIS/Device/ST/STM32H7xx/Include
 -------------
 Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
 Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
-Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
-Get:4 http://packages.ros.org/ros2/ubuntu jammy InRelease [4682 B]
-Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
-Get:6 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
-Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
-Get:8 http://packages.ros.org/ros2/ubuntu jammy/main amd64 Packages [1613 kB]
-Get:9 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
-Get:10 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2370 kB]
-Get:11 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
-Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [2648 kB]
-Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [3278 kB]
-Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [51.8 kB]
-Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1451 kB]
-Get:16 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [81.4 kB]
-Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [33.7 kB]
-Get:18 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1161 kB]
-Get:19 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [3194 kB]
-Get:20 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [44.7 kB]
-Fetched 36.3 MB in 14s (2553 kB/s)
+Get:3 http://packages.ros.org/ros2/ubuntu jammy InRelease [4682 B]
+Get:4 http://packages.ros.org/ros2/ubuntu jammy/main amd64 Packages [1622 kB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [44.7 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2372 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1162 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [3200 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [2648 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [3278 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1450 kB]
+Get:18 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [51.8 kB]
+Get:19 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [33.7 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [81.4 kB]
+Fetched 36.3 MB in 11s (3295 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -53,7 +53,7 @@ Get:4 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libnewlib-dev all 3.
 Get:5 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libnewlib-arm-none-eabi all 3.3.0-1.3 [43.2 MB]
 Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libstdc++-arm-none-eabi-newlib all 15:10.3-2021.07-4+17 [347 MB]
 debconf: delaying package configuration, since apt-utils is not installed
-Fetched 442 MB in 1min 31s (4856 kB/s)
+Fetched 442 MB in 1min 47s (4117 kB/s)
 Selecting previously unselected package binutils-arm-none-eabi.
 (Reading database ... 
 (Reading database ... 5%
@@ -119,7 +119,9 @@ Cloning into '.'...
 Cloning into '.'...
 List of repositories is empty
 #All required rosdeps installed successfully
-.....E....EE.E
+make: *** [makefile:62: all] Terminated
+make[1]: *** [makefile:89: pre-build] Terminated
+.....E...EE..E
 === ./ros2/common_interfaces (git) ===
 Cloning into '.'...
 === ./ros2/example_interfaces (git) ===
@@ -135,7 +137,7 @@ Cloning into '.'...
 === ./ros2/rcpputils (git) ===
 Cloning into '.'...
 === ./ros2/rmw (git) ===
-Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rmw.git/': Could not resolve host: github.com
+Cloning into '.'...
 === ./ros2/rmw_implementation (git) ===
 Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rmw_implementation.git/': Could not resolve host: github.com
 === ./ros2/rosidl (git) ===
@@ -143,13 +145,11 @@ Could not determine ref type of version: fatal: unable to access 'https://github
 === ./ros2/rosidl_dds (git) ===
 Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rosidl_dds.git/': Could not resolve host: github.com
 === ./ros2/rosidl_defaults (git) ===
-Cloning into '.'...
+Could not determine ref type of version: fatal: unable to access 'https://github.com/ros2/rosidl_defaults.git/': Could not resolve host: github.com
 === ./ros2/test_interface_files (git) ===
 Cloning into '.'...
 === ./ros2/unique_identifier_msgs (git) ===
 Cloning into '.'...
 [ros2run]: Process exited with failure 1
 [ros2run]: Process exited with failure 1
-make[1]: *** [makefile:89: pre-build] Error 1
-make: *** [makefile:62: all] Error 2
-"make -j12 all" terminated with exit code 2. Build might be incomplete.
+Command canceled

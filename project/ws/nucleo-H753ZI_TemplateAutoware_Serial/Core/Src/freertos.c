@@ -26,6 +26,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+// Task includes -- START
+#include "autoware.h"
+#include "taskcontrole.h"
+
+// Task includes -- END
+
 // Peripherals includes -- START
 #include "dma.h"
 #include "usart.h"
@@ -60,19 +66,19 @@
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
-/* Definitions for TaskDefault */
-osThreadId_t TaskDefaultHandle;
-const osThreadAttr_t TaskDefault_attributes = {
-  .name = "TaskDefault",
-  .stack_size = 200 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+/* Definitions for TaskControle */
+osThreadId_t TaskControleHandle;
+const osThreadAttr_t TaskControle_attributes = {
+  .name = "TaskControle",
+  .stack_size = 500 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for TaskMicroAutowa */
 osThreadId_t TaskMicroAutowaHandle;
 const osThreadAttr_t TaskMicroAutowa_attributes = {
   .name = "TaskMicroAutowa",
   .stack_size = 3500 * 4,
-  .priority = (osPriority_t) osPriorityLow,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -82,7 +88,7 @@ const osThreadAttr_t TaskMicroAutowa_attributes = {
 
 /* USER CODE END FunctionPrototypes */
 
-void StartTaskDefault(void *argument);
+void StartTaskControle(void *argument);
 extern void StartMicroAutoware(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -114,8 +120,8 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of TaskDefault */
-  TaskDefaultHandle = osThreadNew(StartTaskDefault, NULL, &TaskDefault_attributes);
+  /* creation of TaskControle */
+  TaskControleHandle = osThreadNew(StartTaskControle, NULL, &TaskControle_attributes);
 
   /* creation of TaskMicroAutowa */
   TaskMicroAutowaHandle = osThreadNew(StartMicroAutoware, NULL, &TaskMicroAutowa_attributes);
@@ -130,22 +136,22 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartTaskDefault */
+/* USER CODE BEGIN Header_StartTaskControle */
 /**
-  * @brief  Function implementing the TaskDefault thread.
+  * @brief  Function implementing the TaskControle thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartTaskDefault */
-__weak void StartTaskDefault(void *argument)
+/* USER CODE END Header_StartTaskControle */
+__weak void StartTaskControle(void *argument)
 {
-  /* USER CODE BEGIN StartTaskDefault */
+  /* USER CODE BEGIN StartTaskControle */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartTaskDefault */
+  /* USER CODE END StartTaskControle */
 }
 
 /* Private application code --------------------------------------------------*/
