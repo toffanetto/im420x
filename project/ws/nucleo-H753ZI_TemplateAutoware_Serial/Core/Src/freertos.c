@@ -1,25 +1,19 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * File Name          : freertos.c
-  * Description        : Code for freertos applications
+  * @file    freertos.c
+  * @brief   Base code for FreeRTOS applcation. Declaration of tasks, global
+  *          variables, kernel objects, typedefs and project libraries.
   ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
+  * @author  Gabriel Toffanetto França da Rocha 
+  *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
+  * @date    Created:  October, 21, 2024
+  *          Modified: 
   ******************************************************************************
   */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include <microAutoware.h>
-#include <taskControle.h>
 #include "FreeRTOS.h"
 #include "task.h"
 #include "main.h"
@@ -28,16 +22,23 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+// Tasks includes -- START
+#include <taskControle.h>
+#include <microAutoware.h>
+
+// Tasks includes -- END
+
 // Libraries includes -- START
 #include "light_printf.h"
 
 // Libraries includes -- END
 
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+
+// TODO is here a good place for that?
 typedef struct{
 	double dAcceleration;
 	double dBrake;
@@ -87,6 +88,16 @@ const osThreadAttr_t TaskMicroAutowa_attributes = {
   .stack_size = 3500 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for MutexControlSignal */
+osMutexId_t MutexControlSignalHandle;
+const osMutexAttr_t MutexControlSignal_attributes = {
+  .name = "MutexControlSignal"
+};
+/* Definitions for MutexControlAction */
+osMutexId_t MutexControlActionHandle;
+const osMutexAttr_t MutexControlAction_attributes = {
+  .name = "MutexControlAction"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -109,6 +120,12 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
+  /* Create the mutex(es) */
+  /* creation of MutexControlSignal */
+  MutexControlSignalHandle = osMutexNew(&MutexControlSignal_attributes);
+
+  /* creation of MutexControlAction */
+  MutexControlActionHandle = osMutexNew(&MutexControlAction_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -145,19 +162,15 @@ void MX_FREERTOS_Init(void) {
 
 /* USER CODE BEGIN Header_StartTaskControle */
 /**
-  * @brief  Function implementing the TaskControle thread.
+  * @brief  __weak function for TaskControle, overrided by
+  *         taskControle.h & taskControle.c.
   * @param  argument: Not used
-  * @retval None
   */
 /* USER CODE END Header_StartTaskControle */
 __weak void StartTaskControle(void *argument)
 {
   /* USER CODE BEGIN StartTaskControle */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
+
   /* USER CODE END StartTaskControle */
 }
 

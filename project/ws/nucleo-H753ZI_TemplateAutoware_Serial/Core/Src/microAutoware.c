@@ -1,7 +1,26 @@
-#include <microAutoware.h>
+/**
+  ******************************************************************************
+  * @file    microAutoware.c
+  * @brief   This file contains the FreeRTOS task microAutoware, implementing
+  *          a vehicle interface for Autoware using micro-ros.
+  ******************************************************************************
+  * @author  Gabriel Toffanetto França da Rocha 
+  *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
+  * @date    Created:  October, 9, 2024
+  *          Modified: 
+  ******************************************************************************
+  */
+ 
+ #include <microAutoware.h>
 
 unsigned int xSubscribersRecieved = 0;
 
+/**
+  * @name   StartMicroAutoware
+  * @brief  MicroAutoware task function.
+  * @param  argument : not used.
+  * @retval None
+  */
 void StartMicroAutoware(void *argument)
 {
 

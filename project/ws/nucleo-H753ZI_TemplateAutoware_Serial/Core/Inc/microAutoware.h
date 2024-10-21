@@ -1,4 +1,15 @@
-
+/**
+  ******************************************************************************
+  * @file    microAutoware.h
+  * @brief   This file contains the declarations for FreeRTOS task microAutoware, 
+  *          for implementing a vehicle interface for Autoware using micro-ros.
+  ******************************************************************************
+  * @author  Gabriel Toffanetto França da Rocha 
+  *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
+  * @date    Created:  October, 9, 2024
+  *          Modified: 
+  ******************************************************************************
+  */
 #ifndef MICROAUTOWARE_H_
 #define MICROAUTOWARE_H_
 
