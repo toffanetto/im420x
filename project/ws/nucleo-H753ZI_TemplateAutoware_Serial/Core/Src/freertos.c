@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
+#include <microAutoware.h>
+#include <taskControle.h>
 #include "FreeRTOS.h"
 #include "task.h"
 #include "main.h"
@@ -25,19 +27,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
-// Task includes -- START
-#include "autoware.h"
-#include "taskcontrole.h"
-
-// Task includes -- END
-
-// Peripherals includes -- START
-#include "dma.h"
-#include "usart.h"
-#include "gpio.h"
-
-// Peripherals includes -- END
 
 // Libraries includes -- START
 #include "light_printf.h"
@@ -49,7 +38,17 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+typedef struct{
+	double dAcceleration;
+	double dBrake;
+	// ...
+} control_action;
 
+typedef struct{
+	double dAcceleration;
+	double dBrake;
+	// ...
+} control_signal;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -64,6 +63,14 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+
+// Control action struct with high level control action from MicroAutoware to TaskControle,
+// for compute the vehicle control action.
+control_action xControlAction;
+
+// Control signal struct with low level control signal from TaskControle to MicroAutoware,
+// for publish in simulator topics by micro-ros.
+control_signal xControlSignal;
 
 /* USER CODE END Variables */
 /* Definitions for TaskControle */

@@ -1,0 +1,7 @@
+../Core/Src/callbacks.c:7:6:control_cmd_callback	1
+../Core/Src/callbacks.c:13:6:gear_cmd_callback	1
+../Core/Src/callbacks.c:19:6:turn_indicators_cmd_callback	1
+../Core/Src/callbacks.c:25:6:hazard_lights_cmd_callback	1
+../Core/Src/callbacks.c:31:6:actuation_cmd_callback	1
+../Core/Src/callbacks.c:37:6:emergency_callback	1
+../Core/Src/callbacks.c:43:6:control_mode_cmd_callback	1

@@ -1,6 +1,6 @@
 
-#ifndef AUTOWARE_H_
-#define AUTOWARE_H_
+#ifndef MICROAUTOWARE_H_
+#define MICROAUTOWARE_H_
 
   #define UART 1
   #define UDP 2
@@ -72,6 +72,4 @@
 
   // Function Prototypes -- END
 
-
-
-#endif /* AUTOWARE_H_ */
+#endif /* MICROAUTOWARE_H_ */

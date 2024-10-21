@@ -1,4 +1,6 @@
-#include "autoware.h"
+#include <microAutoware.h>
+
+unsigned int xSubscribersRecieved = 0;
 
 void StartMicroAutoware(void *argument)
 {
@@ -194,7 +196,7 @@ void StartMicroAutoware(void *argument)
   rclc_service_init_default(
 		    &control_mode_server_,
 			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, srv, ControlModeCommand),
+			ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_vehicle_msgs, srv, ControlModeCommand),
 			"/control/control_mode_request");
 
 
@@ -207,11 +209,30 @@ void StartMicroAutoware(void *argument)
   rclc_executor_add_subscription(&executor, &hazard_lights_cmd_sub_, &hazard_lights_cmd_msg_, &hazard_lights_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &emergency_sub_, &emergency_msg_, &emergency_callback, ON_NEW_DATA);
-  // TODO: Gather all subs data, then compact and send to TaskControle.
 
 
-  // running executor
-  rclc_executor_spin(&executor);
+
+  for (;;)
+  {
+
+    rclc_executor_spin_some(&executor, 1000 * (1000 * 1000)); // Spinning executor for 1s TODO set time in function of data rate.
+
+    // Verify flags
+
+	  // Pub mode change to autoware if needs
+
+    if(0x00111111 == xSubscribersRecieved)
+    {
+	  // TODO: Gather all subs data, then compact and send to TaskControle.
+	  // xControlAction
+
+	  // Wait for flag
+	  // Pub data
+
+	  xSubscribersRecieved = 0;
+    }
+
+  }
 
 
 }
