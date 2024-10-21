@@ -13,7 +13,7 @@
 
 #include <microAutoware.h>
 
-extern unsigned int xSubscribersRecieved;
+extern unsigned int ucSubscribersRecieved;
 
 // Subscriptors callbacks
 
@@ -26,7 +26,7 @@ extern unsigned int xSubscribersRecieved;
 void control_cmd_callback(const void * xMsgIn)
 {
   const autoware_control_msgs__msg__Control * control_cmd_msg_ = (const autoware_control_msgs__msg__Control * )xMsgIn;
-  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 0);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 0);
 }
 
 /**
@@ -38,7 +38,7 @@ void control_cmd_callback(const void * xMsgIn)
 void gear_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__GearCommand * gear_cmd_msg_ = (const autoware_vehicle_msgs__msg__GearCommand * )xMsgIn;
-  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 1);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 1);
 }
 
 /**
@@ -50,7 +50,7 @@ void gear_cmd_callback(const void * xMsgIn)
 void turn_indicators_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * turn_indicators_cmd_msg_ = (const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * )xMsgIn;
-  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 2);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 2);
 }
 
 /**
@@ -62,7 +62,7 @@ void turn_indicators_cmd_callback(const void * xMsgIn)
 void hazard_lights_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__HazardLightsCommand * hazard_lights_cmd_msg_ = (const autoware_vehicle_msgs__msg__HazardLightsCommand * )xMsgIn;
-  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 3);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 3);
 }
 
 // ! optional topic, probabily will not be used.
@@ -75,7 +75,7 @@ void hazard_lights_cmd_callback(const void * xMsgIn)
 void actuation_cmd_callback(const void * xMsgIn)
 {
   const tier4_vehicle_msgs__msg__ActuationCommandStamped * actuation_cmd_msg_ = (const tier4_vehicle_msgs__msg__ActuationCommandStamped * )xMsgIn;
-  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 4);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 4);
 }
 
 // ! optional topic, probabily will not be used.
@@ -88,7 +88,7 @@ void actuation_cmd_callback(const void * xMsgIn)
 void emergency_callback(const void * xMsgIn)
 {
   const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * emergency_msg_ = (const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * )xMsgIn;
-  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 5);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 5);
 }
 
 // TODO: CARLA callbacks
@@ -105,6 +105,9 @@ void emergency_callback(const void * xMsgIn)
 void control_mode_cmd_callback(const void * xRequestMsg, void * xResponseMsg)
 {
   const autoware_vehicle_msgs__srv__ControlModeCommand_Request * control_mode_request_msg_ = (const autoware_vehicle_msgs__srv__ControlModeCommand_Request * )xRequestMsg;
+
+  // TODO Send threadflag to TaskControle
+
 
   //xResponseMsg = &control_mode_response_msg_;
 }

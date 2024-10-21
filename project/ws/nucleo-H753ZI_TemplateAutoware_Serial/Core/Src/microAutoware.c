@@ -13,7 +13,11 @@
  
 #include <microAutoware.h>
 
-unsigned int xSubscribersRecieved = 0;
+/**
+  * @name   ucSubscribersRecieved
+  * @brief  Topic recieved flag for gather data and send to TaskControl.
+  */
+unsigned int ucSubscribersRecieved = 0;
 
 /**
   * @name   StartMicroAutoware
@@ -240,7 +244,7 @@ void StartMicroAutoware(void *argument)
 
 	  // Pub mode change to autoware if needs
 
-    if(0x00111111 == xSubscribersRecieved)
+    if(0x00111111 == ucSubscribersRecieved)
     {
 	  // TODO: Gather all subs data, then compact and send to TaskControle.
 	  // xControlAction
