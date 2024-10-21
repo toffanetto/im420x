@@ -6,7 +6,7 @@
   ******************************************************************************
   * @author  Gabriel Toffanetto França da Rocha 
   *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
-  * @date    Created:  October, 9, 2024
+  * @date    Created:  October 9, 2024
   *          Modified: 
   ******************************************************************************
   */

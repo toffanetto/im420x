@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    callbacks.c
+  * @file    executorCallbacks.c
   * @brief   This file contains all the callbacks functions from microAutoware
   *          task. Functions templates are in microAutoware.h.
   ******************************************************************************
   * @author  Gabriel Toffanetto França da Rocha 
   *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
-  * @date    Created:  October, 9, 2024
+  * @date    Created:  October 9, 2024
   *          Modified: 
   ******************************************************************************
   */
@@ -91,6 +91,11 @@ void hazard_lights_cmd_callback(const void * xMsgIn)
 //   xSubscribersRecieved = xSubscribersRecieved | (0x1 << 5);
 // }
 
+// TODO: CARLA callbacks
+
+// Service callbacks
+
+
 /**
   * @name   control_mode_cmd_callback
   * @brief  ROS service server callback to change the control mode and return a status about the change
@@ -103,5 +108,3 @@ void control_mode_cmd_callback(const void * xRequestMsg, void * xResponseMsg)
 
   //xResponseMsg = &control_mode_response_msg_;
 }
-
-// TODO: CARLA callbacks
