@@ -11,7 +11,7 @@
   ******************************************************************************
   */
  
- #include <microAutoware.h>
+#include <microAutoware.h>
 
 unsigned int xSubscribersRecieved = 0;
 

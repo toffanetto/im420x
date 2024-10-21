@@ -65,31 +65,31 @@ void hazard_lights_cmd_callback(const void * xMsgIn)
   xSubscribersRecieved = xSubscribersRecieved | (0x1 << 3);
 }
 
-// ! optional topics, probabily will not be used.
-// /**
-//   * @name   actuation_cmd_callback
-//   * @brief  ROS topic subscriber callback to recieve the control commands and save in actuation_cmd_msg_
-//   * @param  xMsgIn: pointer to the message recieved in the topic.
-//   * @retval None
-//   */
-// void actuation_cmd_callback(const void * xMsgIn)
-// {
-//   const tier4_vehicle_msgs__msg__ActuationCommandStamped * actuation_cmd_msg_ = (const tier4_vehicle_msgs__msg__ActuationCommandStamped * )xMsgIn;
-//   xSubscribersRecieved = xSubscribersRecieved | (0x1 << 4);
-// }
+// ! optional topic, probabily will not be used.
+/**
+  * @name   actuation_cmd_callback
+  * @brief  ROS topic subscriber callback to recieve the control commands and save in actuation_cmd_msg_
+  * @param  xMsgIn: pointer to the message recieved in the topic.
+  * @retval None
+  */
+void actuation_cmd_callback(const void * xMsgIn)
+{
+  const tier4_vehicle_msgs__msg__ActuationCommandStamped * actuation_cmd_msg_ = (const tier4_vehicle_msgs__msg__ActuationCommandStamped * )xMsgIn;
+  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 4);
+}
 
-// ! optional topics, probabily will not be used.
-// /**
-//   * @name   emergency_callback
-//   * @brief  ROS topic subscriber callback to recieve the control commands and save in emergency_msg_ 
-//   * @param  xMsgIn: pointer to the message recieved in the topic.
-//   * @retval None
-//   */
-// void emergency_callback(const void * xMsgIn)
-// {
-//   const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * emergency_msg_ = (const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * )xMsgIn;
-//   xSubscribersRecieved = xSubscribersRecieved | (0x1 << 5);
-// }
+// ! optional topic, probabily will not be used.
+/**
+  * @name   emergency_callback
+  * @brief  ROS topic subscriber callback to recieve the control commands and save in emergency_msg_ 
+  * @param  xMsgIn: pointer to the message recieved in the topic.
+  * @retval None
+  */
+void emergency_callback(const void * xMsgIn)
+{
+  const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * emergency_msg_ = (const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * )xMsgIn;
+  xSubscribersRecieved = xSubscribersRecieved | (0x1 << 5);
+}
 
 // TODO: CARLA callbacks
 
