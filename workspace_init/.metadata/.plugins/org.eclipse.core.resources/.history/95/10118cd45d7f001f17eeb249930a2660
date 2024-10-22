@@ -1,3 +1,0 @@
-
-
-void ledCallback(std_msgs__msg__UInt8MultiArray *);

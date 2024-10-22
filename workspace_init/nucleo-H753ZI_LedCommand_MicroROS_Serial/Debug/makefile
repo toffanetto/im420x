@@ -65,8 +65,8 @@ all:
 main-build: nucleo-H753ZI_LedCommand_MicroROS_Serial.elf secondary-outputs
 
 # Tool invocations
-nucleo-H753ZI_LedCommand_MicroROS_Serial.elf nucleo-H753ZI_LedCommand_MicroROS_Serial.map: $(OBJS) $(USER_OBJS) /home/toffanetto/subjects/im420x/workspace_init/nucleo-H753ZI_LedCommand_MicroROS_Serial/STM32H753ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "nucleo-H753ZI_LedCommand_MicroROS_Serial.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/toffanetto/subjects/im420x/workspace_init/nucleo-H753ZI_LedCommand_MicroROS_Serial/STM32H753ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo-H753ZI_LedCommand_MicroROS_Serial.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+nucleo-H753ZI_LedCommand_MicroROS_Serial.elf nucleo-H753ZI_LedCommand_MicroROS_Serial.map: $(OBJS) $(USER_OBJS) /home/toffanetto/unicamp/im420x/workspace_init/nucleo-H753ZI_LedCommand_MicroROS_Serial/STM32H753ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "nucleo-H753ZI_LedCommand_MicroROS_Serial.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/toffanetto/unicamp/im420x/workspace_init/nucleo-H753ZI_LedCommand_MicroROS_Serial/STM32H753ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo-H753ZI_LedCommand_MicroROS_Serial.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -86,7 +86,7 @@ clean:
 	-@echo ' '
 
 pre-build:
-	docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v "/home/toffanetto/subjects/im420x/workspace_init/nucleo-H753ZI_LedCommand_MicroROS_Serial":/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
+	docker pull microros/micro_ros_static_library_builder:humble && docker run --rm -v "/home/toffanetto/unicamp/im420x/workspace_init/nucleo-H753ZI_LedCommand_MicroROS_Serial":/project --env MICROROS_LIBRARY_FOLDER=micro_ros_stm32cubemx_utils/microros_static_library_ide microros/micro_ros_static_library_builder:humble
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

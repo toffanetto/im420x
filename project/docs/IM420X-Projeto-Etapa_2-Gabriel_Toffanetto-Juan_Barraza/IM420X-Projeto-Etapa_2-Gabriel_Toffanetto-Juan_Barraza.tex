@@ -140,7 +140,7 @@
 		\hline
 		\textbf{Prioridade}& Normal \\
 		\hline
-		\textbf{Tamanho da stack} & 3500 kB \\
+		\textbf{Tamanho da stack} & $3500 \times 4$ B \\
 		\hline
 		\textbf{Detalhes} & Leitura dos \textit{subscribers} Autoware, leitura dos \textit{subscribers} CARLA, envio das informações de controle e modo de operação para a TaskControle, recebimentos das informações de controle da TaskControle, escrita dos \textit{publishers} Autoware, escrita dos \textit{publishers} CARLA. \\
 	\end{tabular}
@@ -174,7 +174,7 @@
 		\hline
 		\textbf{Prioridade}& AboveNormal \\
 		\hline
-		\textbf{Tamanho da stack} & 500 kB \\
+		\textbf{Tamanho da stack} & $500 \times 4$ B \\
 		\hline
 		\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de 30 ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, aguardando 20 ms antes de cada leitura,  convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o MicroAutoware por uma variável global e sincronizado por \textit{ThreadFlag}. 
 	\end{tabular}

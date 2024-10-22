@@ -1,0 +1,49 @@
+
+#include <microAutoware.h>
+#include <freertos.c>
+
+// Subscriptors callbacks
+void control_cmd_callback(const void * xMsgIn)
+{
+  const autoware_control_msgs__msg__Control * control_cmd_msg_ = (const autoware_control_msgs__msg__Control * )xMsgIn;
+  xSubcribersRecieved = xSubcribersRecieved | (0x1 << 0);
+}
+
+void gear_cmd_callback(const void * xMsgIn)
+{
+  const autoware_vehicle_msgs__msg__GearCommand * gear_cmd_msg_ = (const autoware_vehicle_msgs__msg__GearCommand * )xMsgIn;
+  xSubcribersRecieved = xSubcribersRecieved | (0x1 << 1);
+}
+
+void turn_indicators_cmd_callback(const void * xMsgIn)
+{
+  const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * turn_indicators_cmd_msg_ = (const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * )xMsgIn;
+  xSubcribersRecieved = xSubcribersRecieved | (0x1 << 2);
+}
+
+void hazard_lights_cmd_callback(const void * xMsgIn)
+{
+  const autoware_vehicle_msgs__msg__HazardLightsCommand * hazard_lights_cmd_msg_ = (const autoware_vehicle_msgs__msg__HazardLightsCommand * )xMsgIn;
+  xSubcribersRecieved = xSubcribersRecieved | (0x1 << 3);
+}
+
+void actuation_cmd_callback(const void * xMsgIn)
+{
+  const tier4_vehicle_msgs__msg__ActuationCommandStamped * actuation_cmd_msg_ = (const tier4_vehicle_msgs__msg__ActuationCommandStamped * )xMsgIn;
+  xSubcribersRecieved = xSubcribersRecieved | (0x1 << 4);
+}
+
+void emergency_callback(const void * xMsgIn)
+{
+  const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * emergency_msg_ = (const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * )xMsgIn;
+  xSubcribersRecieved = xSubcribersRecieved | (0x1 << 5);
+}
+
+void control_mode_cmd_callback(const void * xRequestMsg, void * xResponseMsg)
+{
+  const autoware_vehicle_msgs__srv__ControlModeCommand_Request * control_mode_request_msg_ = (const autoware_vehicle_msgs__srv__ControlModeCommand_Request * )xRequestMsg;
+
+  //xResponseMsg = &control_mode_response_msg_;
+}
+
+// TODO: Publish callbacks
