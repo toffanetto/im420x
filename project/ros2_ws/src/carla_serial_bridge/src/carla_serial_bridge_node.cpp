@@ -17,6 +17,10 @@ class CarlaSerialBridge : public rclcpp::Node{
 
     CarlaSerialBridge() : Node("carla_serial_brigde"){
 
+      // TODO loop_rate = this->get_parameter("loop_rate");
+      // TODO baudrate = this->get_parameter("baudware");
+      // TODO port_name = this->get_parameter("port_name");
+
       timer_ = this->create_wall_timer(1000ms,
                                        std::bind(&CarlaSerialBridge::timer_callback, this));
 
@@ -43,6 +47,15 @@ class CarlaSerialBridge : public rclcpp::Node{
     }
 
     rclcpp::TimerBase::SharedPtr timer_;
+
+    rclcpp::Publisher<type>::SharedPtr ackerman_cmd_pub_;
+    rclcpp::Publisher<type>::SharedPtr publisher_;
+
+    rclcpp::Subscription<type>::SharedPtr subscription_;
+
+    __u_int loop_rate;
+    __uint16_t baudrate;
+    char * port_name;
 
     SerialCom serial_com_link{PORT, BAUDRATE};
 };
