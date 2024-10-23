@@ -1,0 +1,57 @@
+/**
+  ******************************************************************************
+  * @file    taskControle.h
+  * @brief   This file contains the declarations for the FreeRTOS task 
+  *          taskControle, which make a control of a autonomous vehicle by the
+  *          high level control action given by Autoware or manualy controled by
+  *          a physical joysitck.
+  ******************************************************************************
+  * @author  Gabriel Toffanetto França da Rocha 
+  *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
+  * @date    Created:  October 21, 2024
+  *          Modified: 
+  ******************************************************************************
+  */
+#include "taskControle.h"
+
+extern ucADC1Buffer[2];
+
+
+// Control action struct with high level control action from MicroAutoware to TaskControle,
+// for compute the vehicle control action. [From freertos.c].
+extern control_action xControlAction;
+
+// Control signal struct with low level control signal from TaskControle to MicroAutoware,
+// for publish in simulator topics by micro-ros. [From freertos.c].
+extern control_signal xControlSignal;
+
+/**
+  * @name   StartTaskControle
+  * @brief  TaskControle task function.
+  * @param  argument: not used.
+  * @retval None
+  */
+void StartTaskControle(void *argument)
+{
+
+  unsigned int uiX0;
+  unsigned int uiXMin;
+  unsigned int uiXMax;
+  unsigned int uiY0;
+  unsigned int uiYMin;
+  unsigned int uiYMax;
+
+  float fJoyXAxis;
+  float fJoyYAxis;
+
+
+  for(;;)
+  {
+
+
+	// Joystick read block -- START
+	fJoyXAxis = fGetJoyPostition(uiBuff, uiRef0, uiRefMax, uiRefMin)
+  }
+
+
+}

@@ -45,7 +45,9 @@ void StartTaskControle(void *argument)
 
   float fJoyXAxis;
   float fJoyYAxis;
-
+  float fTrottle;
+  float fBrake;
+  float fSteeringAngle;
 
 
   ucControlMode = AUTOWARE;
@@ -56,6 +58,11 @@ void StartTaskControle(void *argument)
     // Joystick read block -- START
     fJoyXAxis = fGetJoyPostition((unsigned int) ucADC1Buffer[0], uiX0, uiXMax, uiXMin);
 	fJoyYAxis = fGetJoyPostition((unsigned int) ucADC1Buffer[1], uiY0, uiYMax, uiYMin);
+
+	fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0;
+	fBrake = (fJoyYAxis < 0) ? fJoyYAxis*MAX_BRAKE : 0;
+	fSteetingAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+
 	osDelay(20);
 
     // Joystick read block -- END

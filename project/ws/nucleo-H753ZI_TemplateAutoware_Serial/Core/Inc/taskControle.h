@@ -20,5 +20,10 @@
 #define AUTOWARE 1
 #define MANUAL 2
 
+// Vehicle limits
+#define MAX_TROTTLE 100
+#define MAX_BRAKE 100
+#define MAX_STEERING_ANGLE 0.5235989 // pi/6
+
 
 #endif  /* TASKCONTROLE_H_ */
