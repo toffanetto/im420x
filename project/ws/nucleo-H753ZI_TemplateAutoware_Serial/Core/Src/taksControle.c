@@ -14,7 +14,11 @@
   */
 #include "taskControle.h"
 
-extern unsigned int ucADC1Buffer[2];
+extern unsigned int uiADC1Buffer[2];
+
+extern osMutexId_t MutexControlActionHandle;
+extern osMutexId_t MutexControlSignalHandle;
+extern osThreadId_t TaskMicroAutowaHandle;
 
 
 // Control action struct with high level control action from MicroAutoware to TaskControle,
@@ -43,6 +47,8 @@ void StartTaskControle(void *argument)
   unsigned int uiYMin = 1062;
   unsigned int uiYMax = 65535;
 
+  unsigned int uiFlags;
+
   float fJoyXAxis;
   float fJoyYAxis;
   float fTrottle;
@@ -55,15 +61,79 @@ void StartTaskControle(void *argument)
   for(;;)
   {
 
-    // Joystick read block -- START
-    fJoyXAxis = fGetJoyPostition((unsigned int) ucADC1Buffer[0], uiX0, uiXMax, uiXMin);
-	fJoyYAxis = fGetJoyPostition((unsigned int) ucADC1Buffer[1], uiY0, uiYMax, uiYMin);
+	uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAny, 0);
 
-	fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0;
-	fBrake = (fJoyYAxis < 0) ? fJoyYAxis*MAX_BRAKE : 0;
-	fSteetingAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+	if(0x01 == uiFlags)
+	{
+	  ucControlMode = AUTOWARE;
+	  uiFlags = 0;
+	}
 
-	osDelay(20);
+	if(0x10 == uiFlags)
+	{
+	  ucControlMode = MANUAL;
+	  uiFlags = 0;
+	}
+
+	uiFlags = osThreadFlagsWait(0x1000, osFlagsWaitAll, 0);
+
+	if(0x1000 == uiFlags)
+	{
+	  if(AUTOWARE == ucControlMode)
+	  {
+		ucControlMode = MANUAL;
+		osThreadFlagsSet(TaskMicroAutowaHandle, 0x10);
+	  }
+	  else if(MANUAL == ucControlMode)
+	  {
+		ucControlMode = AUTOWARE;
+		osThreadFlagsSet(TaskMicroAutowaHandle, 0x01);
+	  }
+	  uiFlags = 0;
+	}
+
+	if(AUTOWARE == ucControlMode)
+	{
+	  // WAIT for flag to sync xControlAction update
+	  uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_ACTION);
+
+	  // Timeout error
+	  if(osFlagsErrorTimeout == uiFlags)
+	  {
+	  // Deu ruim timeout
+	  }
+
+	  if(0x100 == uiFlags)
+	  {
+	  osMutexAcquire(MutexControlSignalHandle, osWaitForever);
+	  //xControlSignal
+	  osMutexRelease(MutexControlSignalHandle);
+
+	  osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
+	  }
+	}
+
+    if(MANUAL == ucControlMode)
+    {
+      // Joystick read block -- START
+      fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);
+      fJoyYAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[1], uiY0, uiYMax, uiYMin);
+
+      fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0;
+      fBrake = (fJoyYAxis < 0) ? fJoyYAxis*MAX_BRAKE : 0;
+      fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+
+      // Empacota xControlSignal
+      
+      osMutexAcquire(MutexControlSignalHandle, osWaitForever);
+      // xControlSignal
+      osMutexRelease(MutexControlSignalHandle);
+
+      osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
+
+      // WAIT
+      osDelay(20);
+    }
 
     // Joystick read block -- END
 

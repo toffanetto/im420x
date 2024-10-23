@@ -6,12 +6,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="xSubscribersRecieved"/>
+		<item key="selection" value="ucControlMode"/>
 		<list key="findhistory">
+			<item value="uiControlMode"/>
 			<item value="xSubcribersRecieved"/>
 			<item value="xSubscribersRecieved"/>
 		</list>
 		<list key="replacehistory">
+			<item value="ucControlMode"/>
 			<item value="xSubscribersRecieved"/>
 		</list>
 	</section>

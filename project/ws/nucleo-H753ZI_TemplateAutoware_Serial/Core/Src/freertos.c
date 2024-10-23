@@ -53,6 +53,8 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 
+extern unsigned char ucButtonState;
+
 // Control action struct with high level control action from MicroAutoware to TaskControle,
 // for compute the vehicle control action.
 control_action xControlAction;
@@ -164,6 +166,20 @@ __weak void StartTaskControle(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+
+/**
+  * @name   HAL_GPIO_EXTI_Callback
+  * @brief  ISR callback for the JoySW, switching the control mode.
+  * @param  GPIO_Pin: EXTI pin.
+  * @retval None
+  */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(JoySW_Pin == GPIO_Pin){
+    ucButtonState ^= 1;
+    osThreadFlagsSet(TaskControleHandle, 0x1000);
+  }
+}
 
 /* USER CODE END Application */
 

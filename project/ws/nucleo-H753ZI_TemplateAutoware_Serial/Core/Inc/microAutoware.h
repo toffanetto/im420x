@@ -21,6 +21,9 @@
   #define NODE_NAME "vehicle_interface"
   #define TRANSPORT UART
 
+// Timeout to wait control signal
+  #define TIMEOUT_GET_CONTROL_SIGNAL 30
+
 
   #if TRANSPORT == UART
     #include "usart.h"
@@ -28,6 +31,10 @@
   #endif  /* TRANSPORT == UART */
 
   // Includes -- START
+  #include "cmsis_os.h"
+  #include "utils.h"
+
+  // micro-ros includes
   #include <rcl/rcl.h>
   #include <rcl/error_handling.h>
   #include <rclc/rclc.h>

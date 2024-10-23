@@ -16,9 +16,10 @@
 #define TASKCONTROLE_H_
 
 #include "utils.h"
+#include "cmsis_os.h"
 
-#define AUTOWARE 1
-#define MANUAL 2
+// Timeout to wait control action
+#define TIMEOUT_GET_CONTROL_ACTION 30
 
 // Vehicle limits
 #define MAX_TROTTLE 100

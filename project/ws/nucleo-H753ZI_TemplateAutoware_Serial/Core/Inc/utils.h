@@ -15,16 +15,20 @@
 #define UTILS_H_
 
 typedef struct{
-	double dAcceleration;
-	double dBrake;
-	// ...
+  float fTrottle;
+  float fBrake;
+  float fSteeringAngle;
 } control_action;
 
 typedef struct{
-	double dAcceleration;
-	double dBrake;
-	// ...
+  float fTrottle;
+  float fBrake;
+  float fSteeringAngle;
+  // ...
 } control_signal;
+
+#define AUTOWARE 1
+#define MANUAL 2
 
 /**
   * @name   fGetJoyPostition

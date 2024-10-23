@@ -48,8 +48,10 @@
 
 /* USER CODE BEGIN PV */
 
+unsigned char ucButtonState = 0;
+
 // ADC1 buffer for channels 2 and 6.
-unsigned int ucADC1Buffer[2];
+unsigned int uiADC1Buffer[2];
 
 /* USER CODE END PV */
 
@@ -100,7 +102,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   // Starting ADC1 reading by DMA
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t * ) ucADC1Buffer, 2);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t * ) uiADC1Buffer, 2);
 
   /* USER CODE END 2 */
 

@@ -19,6 +19,10 @@
   */
 unsigned int ucSubscribersRecieved = 0;
 
+extern osMutexId_t MutexControlActionHandle;
+extern osMutexId_t MutexControlSignalHandle;
+extern osThreadId_t TaskControleHandle;
+
 /**
   * @name   StartMicroAutoware
   * @brief  MicroAutoware task function.
@@ -29,6 +33,9 @@ void StartMicroAutoware(void *argument)
 {
 
   // Variables -- START
+
+  unsigned int uiFlags;
+  unsigned char ucControlMode = AUTOWARE;
 
   // micro-ROS subscribers
   rcl_subscription_t control_cmd_sub_;           // autoware_control_msgs/msg/control.h
@@ -75,9 +82,6 @@ void StartMicroAutoware(void *argument)
   tier4_vehicle_msgs__msg__ActuationStatusStamped  actuation_status_msg_;
   tier4_vehicle_msgs__msg__SteeringWheelStatusStamped  steering_wheel_status_msg_;
 
-  // TODO allocate memory for the msgs and update this memory usage in stack size.
-
-  // TODO understand support and allocator
   rcl_node_t VehicleInterfaceNode;
 
   rclc_support_t support;
@@ -106,10 +110,6 @@ void StartMicroAutoware(void *argument)
   freeRTOS_allocator.reallocate = microros_reallocate;
   freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
 
-  if (!rcutils_set_default_allocator(&freeRTOS_allocator)) {
-    //printf_("Error on default allocators (line %d)\n", __LINE__);
-  }
-
   // micro-ROS app
 
   executor = rclc_executor_get_zero_initialized_executor();
@@ -120,7 +120,7 @@ void StartMicroAutoware(void *argument)
   rclc_support_init(&support, 0, NULL, &allocator);
 
   // create node
-  rclc_node_init_default(&VehicleInterfaceNode, NODE_NAME, "", &support);
+  rclc_node_init_default(&VehicleInterfaceNode, NODE_NAME, "microautoware", &support);
 
   // create executor
   rclc_executor_init(&executor, &support.context, 1, &allocator);
@@ -215,7 +215,6 @@ void StartMicroAutoware(void *argument)
 			"/vehicle/status/steering_wheel_status");
 
   // creating servers
-
   rclc_service_init_default(
 		    &control_mode_server_,
 			&VehicleInterfaceNode,
@@ -238,20 +237,69 @@ void StartMicroAutoware(void *argument)
   for (;;)
   {
 
-    rclc_executor_spin_some(&executor, 1000 * (1000 * 1000)); // Spinning executor for 1s TODO set time in function of data rate.
-
-    // Verify flags
-
-	  // Pub mode change to autoware if needs
+    rclc_executor_spin_some(&executor, 20 * (1000 * 1000)); // Spinning executor for 20 ms.
 
     if(0x00111111 == ucSubscribersRecieved)
     {
+
 	  // TODO: Gather all subs data, then compact and send to TaskControle.
-	  // xControlAction
 
-	  // Wait for flag
-	  // Pub data
+      // Verify if Autoware changed the operation mode
+	  if(AUTOWARE == ucControlMode)
+	  {
+		ucControlMode = MANUAL;
+		osThreadFlagsSet(TaskControleHandle, 0x10);
+	  }
+	  else if(MANUAL == ucControlMode)
+	  {
+		ucControlMode = AUTOWARE;
+		osThreadFlagsSet(TaskControleHandle, 0x01);
+	  }
 
+	  // Autonomous mode: send commands
+      if(AUTOWARE == ucControlMode)
+      {
+    	osMutexAcquire(MutexControlActionHandle, osWaitForever);
+	    // xControlAction
+		osMutexRelease(MutexControlSignalHandle);
+
+		osThreadFlagsSet(TaskControleHandle, 0x100);
+      }
+
+      // WAIT for flag to sync xControlSignal update
+      uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
+
+      // Timeout Error
+      if(osFlagsErrorTimeout == uiFlags)
+      {
+
+      }
+
+      // xControlSignal updated
+      if(0x100 == uiFlags)
+      {
+    	// Pub data carla
+      }
+
+      // Checking control mode update by hardware.
+      uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAll, 0);
+
+	  if(0x01 == uiFlags)
+	  {
+	    ucControlMode = AUTOWARE;
+	    // publish to autoware
+	    uiFlags = 0;
+	  }
+
+	  if(0x10 == uiFlags)
+	  {
+	    ucControlMode = MANUAL;
+		// publish to autoware
+		uiFlags = 0;
+	  }
+
+
+	  // Reseting subscribers flags
 	  ucSubscribersRecieved = 0;
     }
 
