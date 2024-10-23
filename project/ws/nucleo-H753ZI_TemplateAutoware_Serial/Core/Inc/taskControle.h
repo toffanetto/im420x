@@ -15,7 +15,10 @@
 #ifndef TASKCONTROLE_H_
 #define TASKCONTROLE_H_
 
+#include "utils.h"
 
+#define AUTOWARE 1
+#define MANUAL 2
 
 
 #endif  /* TASKCONTROLE_H_ */

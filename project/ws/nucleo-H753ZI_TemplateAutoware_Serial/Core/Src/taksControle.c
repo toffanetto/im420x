@@ -12,7 +12,18 @@
   *          Modified: 
   ******************************************************************************
   */
-#include <taskControle.h>
+#include "taskControle.h"
+
+extern unsigned int ucADC1Buffer[2];
+
+
+// Control action struct with high level control action from MicroAutoware to TaskControle,
+// for compute the vehicle control action. [From freertos.c].
+extern control_action xControlAction;
+
+// Control signal struct with low level control signal from TaskControle to MicroAutoware,
+// for publish in simulator topics by micro-ros. [From freertos.c].
+extern control_signal xControlSignal;
 
 /**
   * @name   StartTaskControle
@@ -22,5 +33,34 @@
   */
 void StartTaskControle(void *argument)
 {
+
+  unsigned char ucControlMode;
+
+  unsigned int uiX0   = 33970;
+  unsigned int uiXMin = 1057;
+  unsigned int uiXMax = 65535;
+  unsigned int uiY0   = 33580;
+  unsigned int uiYMin = 1062;
+  unsigned int uiYMax = 65535;
+
+  float fJoyXAxis;
+  float fJoyYAxis;
+
+
+
+  ucControlMode = AUTOWARE;
+
+  for(;;)
+  {
+
+    // Joystick read block -- START
+    fJoyXAxis = fGetJoyPostition((unsigned int) ucADC1Buffer[0], uiX0, uiXMax, uiXMin);
+	fJoyYAxis = fGetJoyPostition((unsigned int) ucADC1Buffer[1], uiY0, uiYMax, uiYMin);
+	osDelay(20);
+
+    // Joystick read block -- END
+
+  }
+
 
 }

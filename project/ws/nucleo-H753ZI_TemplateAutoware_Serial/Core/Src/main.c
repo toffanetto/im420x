@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "adc.h"
 #include "dma.h"
 #include "usart.h"
 #include "gpio.h"
@@ -46,6 +47,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+// ADC1 buffer for channels 2 and 6.
+unsigned int ucADC1Buffer[2];
 
 /* USER CODE END PV */
 
@@ -92,7 +96,11 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_USART3_UART_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
+
+  // Starting ADC1 reading by DMA
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t * ) ucADC1Buffer, 2);
 
   /* USER CODE END 2 */
 

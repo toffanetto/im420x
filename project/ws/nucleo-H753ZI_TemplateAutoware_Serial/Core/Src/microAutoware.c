@@ -252,7 +252,7 @@ void StartMicroAutoware(void *argument)
 	  // Wait for flag
 	  // Pub data
 
-	  xSubscribersRecieved = 0;
+	  ucSubscribersRecieved = 0;
     }
 
   }

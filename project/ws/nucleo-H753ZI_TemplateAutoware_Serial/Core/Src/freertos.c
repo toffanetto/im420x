@@ -23,8 +23,8 @@
 /* USER CODE BEGIN Includes */
 
 // Tasks includes -- START
-#include <taskControle.h>
-#include <microAutoware.h>
+#include "taskControle.h"
+#include "microAutoware.h"
 
 // Tasks includes -- END
 
@@ -38,18 +38,6 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
-// TODO is here a good place for that?
-typedef struct{
-	double dAcceleration;
-	double dBrake;
-	// ...
-} control_action;
-
-typedef struct{
-	double dAcceleration;
-	double dBrake;
-	// ...
-} control_signal;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

@@ -11,8 +11,9 @@
   ******************************************************************************
   */
 
-#include <microAutoware.h>
+#include "microAutoware.h"
 
+// From microAutoware.c
 extern unsigned int ucSubscribersRecieved;
 
 // Subscriptors callbacks
