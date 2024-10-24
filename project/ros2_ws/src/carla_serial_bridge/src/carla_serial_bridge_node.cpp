@@ -12,6 +12,11 @@
 
 using namespace std::chrono_literals;
 
+typedef union{
+  float f;
+  __uint8_t bytes[4];
+} float_bytes;
+
 class CarlaSerialBridge : public rclcpp::Node{
   public:
 
@@ -23,16 +28,19 @@ class CarlaSerialBridge : public rclcpp::Node{
 
       timer_ = this->create_wall_timer(1000ms,
                                        std::bind(&CarlaSerialBridge::timer_callback, this));
-
+      ss_state = 0;
       
     }
 
   private:
 
     void timer_callback(){
-      char * rx_msg;
+      unsigned char * rx_msg;
       rx_msg = serial_com_link.readSerialPort();
-      std::cout << rx_msg << std::endl;
+
+      for(int i = 0; i < sizeof(rx_msg); i++){
+        if(rx_msg[i])
+      }
 
       // Process rx_msg
 
@@ -56,6 +64,17 @@ class CarlaSerialBridge : public rclcpp::Node{
     __u_int loop_rate;
     __uint16_t baudrate;
     char * port_name;
+
+    __uint8_t ss_state;
+    float_bytes trottle_rx;
+    float_bytes steering_rx;
+    float_bytes brake_rx;
+    __uint8_t hand_brake_rx;
+    __uint8_t manual_shift_rx;
+    __uint8_t reverse_rx;
+    __uint8_t gear_rx;
+
+    
 
     SerialCom serial_com_link{PORT, BAUDRATE};
 };
