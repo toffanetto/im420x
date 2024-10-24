@@ -14,18 +14,40 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
+/**
+  * @name   control_action
+  * @brief  Struct with Autoware recieved data compressed for TaskControle.
+  */
 typedef struct{
   float fTrottle;
   float fBrake;
   float fSteeringAngle;
+  unsigned char ucHandBrake;
+  unsigned char ucReverse;
+  unsigned char ucManualGearShift;
+  unsigned int uiGear;
+  unsigned char ucControlMode;
 } control_action;
 
+
+/**
+  * @name   control_action
+  * @brief  Struct with vehicle control data compressed for MicroAutoware
+  *         and CARLA.
+  */
 typedef struct{
   float fTrottle;
   float fBrake;
   float fSteeringAngle;
-  // ...
+  unsigned char ucHandBrake;
+  unsigned char ucReverse;
+  unsigned char ucManualGearShift;
+  unsigned int uiGear;
+  float fVelocity;
+  float fAcceleraton;
+  float fOrientation;
 } control_signal;
+
 
 #define AUTOWARE 1
 #define MANUAL 2
