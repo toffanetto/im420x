@@ -1,9 +1,1 @@
-#
-# Copyright (c) 2019 Intel Corporation.
-#
-# This work is licensed under the terms of the MIT license.
-# For a copy, see <https://opensource.org/licenses/MIT>.
-#
-
-CarlaActorInfo[] actors
-
+/home/toffanetto/subjects/im420x/project/ros2_ws/src/ros-bridge/carla-ros-bridge/carla_msgs/msg/CarlaActorList.msg

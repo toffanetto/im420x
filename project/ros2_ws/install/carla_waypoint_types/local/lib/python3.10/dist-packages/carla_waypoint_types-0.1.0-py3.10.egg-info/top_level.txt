@@ -1,1 +1,1 @@
-carla_waypoint_types
+/home/toffanetto/subjects/im420x/project/ros2_ws/build/carla_waypoint_types/ament_cmake_python/carla_waypoint_types/carla_waypoint_types.egg-info/top_level.txt

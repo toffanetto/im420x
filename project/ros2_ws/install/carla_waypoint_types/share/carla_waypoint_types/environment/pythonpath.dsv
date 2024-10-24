@@ -1,1 +1,1 @@
-prepend-non-duplicate;PYTHONPATH;local/lib/python3.10/dist-packages
+/home/toffanetto/subjects/im420x/project/ros2_ws/build/carla_waypoint_types/ament_cmake_environment_hooks/pythonpath.dsv

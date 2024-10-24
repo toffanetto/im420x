@@ -1,11 +1,1 @@
-// generated from rosidl_generator_cpp/resource/idl.hpp.em
-// generated code does not contain a copyright notice
-
-#ifndef CARLA_MSGS__MSG__CARLA_WALKER_CONTROL_HPP_
-#define CARLA_MSGS__MSG__CARLA_WALKER_CONTROL_HPP_
-
-#include "carla_msgs/msg/detail/carla_walker_control__struct.hpp"
-#include "carla_msgs/msg/detail/carla_walker_control__builder.hpp"
-#include "carla_msgs/msg/detail/carla_walker_control__traits.hpp"
-
-#endif  // CARLA_MSGS__MSG__CARLA_WALKER_CONTROL_HPP_
+/home/toffanetto/subjects/im420x/project/ros2_ws/build/carla_msgs/rosidl_generator_cpp/carla_msgs/msg/carla_walker_control.hpp

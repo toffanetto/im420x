@@ -1,9 +1,1 @@
-#
-# Copyright (c) 2020 Intel Corporation.
-#
-# This work is licensed under the terms of the MIT license.
-# For a copy, see <https://opensource.org/licenses/MIT>.
-#
-geometry_msgs/Vector3 center
-
-geometry_msgs/Vector3 size
+/home/toffanetto/subjects/im420x/project/ros2_ws/src/ros-bridge/carla-ros-bridge/carla_msgs/msg/CarlaBoundingBox.msg

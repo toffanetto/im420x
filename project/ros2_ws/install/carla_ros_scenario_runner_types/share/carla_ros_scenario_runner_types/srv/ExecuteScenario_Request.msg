@@ -1,7 +1,1 @@
-#
-# Copyright (c) 2020 Intel Corporation.
-#
-# This work is licensed under the terms of the MIT license.
-# For a copy, see <https://opensource.org/licenses/MIT>.
-#
-CarlaScenario scenario
+/home/toffanetto/subjects/im420x/project/ros2_ws/build/carla_ros_scenario_runner_types/rosidl_cmake/srv/ExecuteScenario_Request.msg

@@ -1,13 +1,1 @@
-#
-# Copyright (c) 2020 Intel Corporation.
-#
-# This work is licensed under the terms of the MIT license.
-# For a copy, see <https://opensource.org/licenses/MIT>.
-#
-
-string type
-string id
-diagnostic_msgs/KeyValue[] attributes
-geometry_msgs/Pose transform
-uint32 attach_to
-bool random_pose
+/home/toffanetto/subjects/im420x/project/ros2_ws/build/carla_msgs/rosidl_cmake/srv/SpawnObject_Request.msg
