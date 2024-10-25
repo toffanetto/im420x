@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;nucleo-H753ZI_Ping-Pong_MicroROS_Serial/nucleo-H753ZI_TemplateMicroROS_Serial.ioc&apos; to &apos;nucleo-H753ZI_Ping-Pong_MicroROS_Serial.ioc&apos;" description="Rename resource &apos;nucleo-H753ZI_TemplateMicroROS_Serial.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="nucleo-H753ZI_TemplateMicroROS_Serial.ioc" name="nucleo-H753ZI_Ping-Pong_MicroROS_Serial.ioc" stamp="1727721076002" updateReferences="true"/>
-</session>
