@@ -50,19 +50,6 @@ class CarlaSerialBridge : public rclcpp::Node{
     }
 
     void publish_to_carla(){
-    /**
-     * Empacotar:
-     *  throttle_rx.f
-     *  steering_rx.f
-     *  brake_rx.f
-     *  (int)hand_brake_rx
-     *  (int)manual_shift_rx
-     *  (int)reverse_rx
-     *  (int)gear_rx
-     * 
-     * Tipo da msg: CarlaEgoVehicleControl.msg
-     * carla_msgs::msg::CarlaEgoVehicleControl
-     */
 
         auto vehicle_control_msg_ = carla_msgs::msg::CarlaEgoVehicleControl();
 
@@ -257,8 +244,8 @@ class CarlaSerialBridge : public rclcpp::Node{
 
 
 int main(int argc, char ** argv){
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<CarlaSerialBridge>());
-  rclcpp::shutdown();
-  return 0;
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<CarlaSerialBridge>());
+    rclcpp::shutdown();
+    return 0;
 }
