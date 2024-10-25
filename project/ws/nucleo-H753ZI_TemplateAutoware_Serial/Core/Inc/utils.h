@@ -14,6 +14,18 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
+#include <stdio.h>
+#include <string.h>
+
+/**
+  * @name   float_bytes
+  * @brief  Union to send float through UART.
+  */
+typedef union{
+  float fFloat;
+  unsigned char ucBytes[4];
+} float_bytes;
+
 /**
   * @name   control_action
   * @brief  Struct with Autoware recieved data compressed for TaskControle.
@@ -25,15 +37,26 @@ typedef struct{
   unsigned char ucHandBrake;
   unsigned char ucReverse;
   unsigned char ucManualGearShift;
-  unsigned int uiGear;
+  unsigned char ucGear;
   unsigned char ucControlMode;
 } control_action;
 
 
 /**
-  * @name   control_action
-  * @brief  Struct with vehicle control data compressed for MicroAutoware
-  *         and CARLA.
+  * @name   vehicle_status
+  * @brief  Struct with vehicle status information recieved from CARLA.
+  */
+typedef struct{
+  float_bytes fLongSpeed;
+  float_bytes fLatSpeed;
+  float_bytes fHeadingRate;
+  unsigned char ucGear;
+} vehicle_status;
+
+
+/**
+  * @name   control_signal
+  * @brief  Struct with vehicle control data compressed for CARLA.
   */
 typedef struct{
   float fTrottle;
@@ -62,5 +85,11 @@ typedef struct{
   * @retval Float value with joystick position between -1 and 1.
   */
 float fGetJoyPostition(unsigned int uiValue, unsigned int uiRef0, unsigned int uiRefMax, unsigned int uiRefMin);
+
+
+unsigned char * cGetStringFromControlAction(control_action xControlActionTx);
+
+
+unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx, unsigned char * ucSmState);
 
 #endif  /* UTILS_H_ */

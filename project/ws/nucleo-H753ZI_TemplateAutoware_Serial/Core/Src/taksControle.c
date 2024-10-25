@@ -25,7 +25,7 @@ extern osThreadId_t TaskMicroAutowaHandle;
 // for compute the vehicle control action. [From freertos.c].
 extern control_action xControlAction;
 
-// Control signal struct with low level control signal from TaskControle to MicroAutoware,
+// Control signal struct with low level control signal from TaskControle to CARLA,
 // for publish in simulator topics by micro-ros. [From freertos.c].
 extern control_signal xControlSignal;
 
@@ -39,6 +39,9 @@ void StartTaskControle(void *argument)
 {
 
   unsigned char ucControlMode;
+  unsigned char ucFlagFullMsg;
+
+  unsigned char ucSmState = 0;
 
   unsigned int uiX0   = 33970;
   unsigned int uiXMin = 1057;
@@ -51,10 +54,17 @@ void StartTaskControle(void *argument)
 
   float fJoyXAxis;
   float fJoyYAxis;
-  float fTrottle;
-  float fBrake;
-  float fSteeringAngle;
 
+  unsigned char * cTxMsgToCarla;
+
+  vehicle_status xVehicleStatus;
+
+  unsigned char cDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
+  struct uxrCustomTransport xUart2DmaTransport;
+
+  xUart2DmaTransport.args = &huart2;
+
+  HAL_UART_Receive_DMA(&huart2, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   ucControlMode = AUTOWARE;
 
@@ -105,11 +115,27 @@ void StartTaskControle(void *argument)
 
 	  if(0x100 == uiFlags)
 	  {
-	  osMutexAcquire(MutexControlSignalHandle, osWaitForever);
-	  //xControlSignal
-	  osMutexRelease(MutexControlSignalHandle);
+	    osMutexAcquire(MutexControlActionHandle, osWaitForever);
+	    cTxMsgToCarla = cGetStringFromControlAction(xControlAction);
+	    osMutexRelease(MutexControlActionHandle);
 
-	  osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
+	    // Send cTxMsgToCarla to CARLA
+	    cubemx_transport_write(&xUart2DmaTransport, cTxMsgToCarla, strlen((char * ) cTxMsgToCarla), 0);
+
+	    // Recieve data from CARLA
+	    do{
+		  // Read xVehicleStatus
+		  cubemx_transport_read(&xUart2DmaTransport, cDmaBuffer, UART2_DMA_BUFFER_SIZE, 1, 0); // Using timeout = 1 tick.
+
+		  ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer, &ucSmState);
+
+	    } while(!ucFlagFullMsg); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
+
+	    osMutexAcquire(MutexControlSignalHandle, osWaitForever);
+	    //xControlSignal
+	    osMutexRelease(MutexControlSignalHandle);
+
+	    osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
 	  }
 	}
 
@@ -119,9 +145,26 @@ void StartTaskControle(void *argument)
       fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);
       fJoyYAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[1], uiY0, uiYMax, uiYMin);
 
-      fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0;
-      fBrake = (fJoyYAxis < 0) ? fJoyYAxis*MAX_BRAKE : 0;
-      fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+      osMutexAcquire(MutexControlActionHandle, osWaitForever);
+      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0;
+      xControlAction.fBrake = (fJoyYAxis < 0) ? fJoyYAxis*MAX_BRAKE : 0;
+      xControlAction.fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+      xControlAction.ucManualGearShift = 0;
+      xControlAction.ucHandBrake = 0;
+      xControlAction.ucReverse = 0;
+      xControlAction.ucControlMode = MANUAL;
+      xControlAction.ucGear = 1;
+
+      cTxMsgToCarla = cGetStringFromControlAction(xControlAction);
+
+	  osMutexRelease(MutexControlActionHandle);
+
+	  // Send cTxMsgToCarla to CARLA
+	  cubemx_transport_write(&xUart2DmaTransport, cTxMsgToCarla, strlen((char * ) cTxMsgToCarla), 0);
+
+
+	  // Recieve data from CARLA
+
 
       // Empacota xControlSignal
       

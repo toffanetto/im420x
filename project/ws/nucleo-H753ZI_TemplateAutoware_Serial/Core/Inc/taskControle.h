@@ -16,10 +16,15 @@
 #define TASKCONTROLE_H_
 
 #include "utils.h"
+#include "main.h"
 #include "cmsis_os.h"
+#include "microAutoware.h"
 
 // Timeout to wait control action
 #define TIMEOUT_GET_CONTROL_ACTION 30
+
+// UART RX DMA BUFFER SIZE
+#define UART2_DMA_BUFFER_SIZE 64
 
 // Vehicle limits
 #define MAX_TROTTLE 100
