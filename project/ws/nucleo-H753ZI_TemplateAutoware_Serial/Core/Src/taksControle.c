@@ -116,7 +116,7 @@ void StartTaskControle(void *argument)
 	  if(0x100 == uiFlags)
 	  {
 	    osMutexAcquire(MutexControlActionHandle, osWaitForever);
-	    cTxMsgToCarla = cGetStringFromControlAction(xControlAction);
+	    cTxMsgToCarla = ucGetStringFromControlAction(xControlAction);
 	    osMutexRelease(MutexControlActionHandle);
 
 	    // Send cTxMsgToCarla to CARLA
@@ -155,7 +155,7 @@ void StartTaskControle(void *argument)
       xControlAction.ucControlMode = MANUAL;
       xControlAction.ucGear = 1;
 
-      cTxMsgToCarla = cGetStringFromControlAction(xControlAction);
+      cTxMsgToCarla = ucGetStringFromControlAction(xControlAction);
 
 	  osMutexRelease(MutexControlActionHandle);
 

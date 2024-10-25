@@ -79,17 +79,32 @@ typedef struct{
   * @name   fGetJoyPostition
   * @brief  Calculate the position of the joystick in [-1, 1] intervals.
   * @param  uiValue:  Analog value for axis
-  *         uiRef0:   Analog zero value
-  *         uiRefMax: Analog value for axis maximum limit.
-  *         uiRefMin: Analog value for axis minimum limit.
+  * @param  uiRef0:   Analog zero value
+  * @param  uiRefMax: Analog value for axis maximum limit.
+  * @param  uiRefMin: Analog value for axis minimum limit.
   * @retval Float value with joystick position between -1 and 1.
   */
 float fGetJoyPostition(unsigned int uiValue, unsigned int uiRef0, unsigned int uiRefMax, unsigned int uiRefMin);
 
 
-unsigned char * cGetStringFromControlAction(control_action xControlActionTx);
+/**
+  * @name   ucGetStringFromControlAction
+  * @brief  Converts the compressed data in control_action form to string in form
+  *         #T%c%c%c%cS%c%c%c%cB%c%c%c%cH%cR%cG%cM%c$
+  * @param  xControlActionTx: Compressed data with information to CARLA.
+  * @retval String casted in uc that will be send in serial.
+  */
+unsigned char * ucGetStringFromControlAction(control_action xControlActionTx);
 
-
+/**
+  * @name   ucGetVehicleStatusFromString
+  * @brief  Converts the message recieved by UART in vehicle_status compressed data,
+  *         using a state macine
+  * @param  xVehicleStatusRx: Compressed data with information to CARLA.
+  * @param  ucStringRx: RX Message.
+  * @param  ucSmState: State machine state.
+  * @retval String casted in uc that will be send in serial.
+  */
 unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx, unsigned char * ucSmState);
 
 #endif  /* UTILS_H_ */
