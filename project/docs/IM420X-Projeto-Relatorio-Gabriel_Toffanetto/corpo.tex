@@ -126,14 +126,21 @@
 
 \begin{figure}[H]
 	\centering
+	\includegraphics[width=0.75\linewidth]{img/highLevelblock_diagram.pdf}
+	\caption{Diagrama de blocos em alto nível da arquitetura HIL.}
+	\label{fig:highLevelblock_diagram}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
 	\includegraphics[width=0.75\linewidth]{img/block_diagram.pdf}
-	\caption{Diagrama de blocos da arquitetura HIL.}
+	\caption{Diagrama de blocos do sistema embarcado.}
 	\label{fig:blockdiagram}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\linewidth]{img/esquematico.pdf}
+	\includegraphics[width=0.6\linewidth]{img/esquematico.pdf}
 	\caption{Esquemático de ligações elétricas.}
 	\label{fig:esquematico}
 \end{figure}
@@ -198,16 +205,69 @@
 	\label{fig:maquinadeestados}
 \end{figure}
 
+\subsubsection*{Protocolo de comunicação serial}
+
+
+\begin{enumerate}
+	\item CARLA $\longrightarrow$ RTOS (\texttt{USART3})
+	\begin{itemize}
+		\item Informações:
+		\begin{itemize}
+			\item Acelerador, \texttt{float}.
+			\item Freio, \texttt{float}.
+			\item Esterçamento, \texttt{float}.
+			\item Freio de mão, \texttt{unsigned char}.	
+			\item Troca de marcha manual, \texttt{unsigned char}.	
+			\item Modo reverter, \texttt{unsigned char}.	
+			\item Marcha, \texttt{unsigned char}.			
+		\end{itemize}
+		\item Padrão da mensagem: \texttt{\#T\%c\%c\%c\%cS\%c\%c\%c\%cB\%c\%c\%c\%cH\%cR\%cG\%cM\%c\$}
+		
+	\end{itemize}
+	\item RTOS $\longrightarrow$ CARLA (\texttt{USART2})
+	\begin{itemize}
+		\item Informações:
+		\begin{itemize}
+			\item Velocidade longitudinal, \texttt{float}.
+			\item Velocidade lateral, \texttt{float}.
+			\item Velocidade de guinada, \texttt{float}.
+			\item Marcha atual, \texttt{unsigned char}.			
+		\end{itemize}
+		\item Padrão da mensagem: \texttt{\#A\%c\%c\%c\%cB\%c\%c\%c\%cC\%c\%c\%c\%cD\%c\$}
+		
+	\end{itemize}
+\end{enumerate}
+
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{img/sm_uc_carla}
+	\caption{Máquina de estados da comunicação serial do RTOS para o CARLA.}
+	\label{fig:smuccarla}
+\end{figure}
+
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{img/sm_carla_uc}
+\caption{Máquina de estados da comunicação serial do CARLA para o RTOS.}
+\label{fig:sm_carla_uc}
+\end{figure}
+
+
+
 \subsubsection*{Tarefas}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \textwidth]{img/system_diagram}
-	\caption{Diagrama do sistema.}
+	\caption{Diagrama do sistema embarcado.}
 	\label{fig:systemdiagram}
 \end{figure}
 
-\begin{table}
+\begin{table}[H]
 	\centering
 	\begin{tabular}{c|p{11.5cm}}
 		\textbf{Nome} & MicroAutoware \\
@@ -216,7 +276,7 @@
 		\hline
 		\textbf{Tamanho da stack} & 3500 kB \\
 		\hline
-		\textbf{Detalhes} & Leitura dos \textit{subscribers} Autoware, leitura dos \textit{subscribers} CARLA, envio das informações de controle e modo de operação para a TaskControle, recebimentos das informações de controle da TaskControle, escrita dos \textit{publishers} Autoware, escrita dos \textit{publishers} CARLA. \\
+		\textbf{Detalhes} & Leitura dos \textit{subscribers} Autoware, leitura dos \textit{subscribers} CARLA, envio das informações de controle e modo de operação para a TaskControle, recebimentos das informações de controle da TaskControle, escrita dos \textit{publishers} Autoware, escrita dos \textit{publishers} CARLA.\\
 	\end{tabular}
 	\caption{Especificaçõe da tarefa MicroAutoware.}
 	\label{tab:microautoware}
@@ -229,7 +289,7 @@
 	\label{fig:fluxograma_microautoware}
 \end{figure}
 
-\begin{table}
+\begin{table}[H]
 	\centering
 	\begin{tabular}{c|p{11.5cm}}
 	\textbf{Nome} & TaskControle \\
@@ -238,7 +298,7 @@
 	\hline
 	\textbf{Tamanho da stack} & 500 kB \\
 	\hline
-	\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de 30 ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o carro por meio de uma variável global, que é enviada para o MicroAutoware e sincronizado por \textit{ThreadFlag}. \\
+	\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de 30 ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, aguardando 20 ms antes de cada leitura,  convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o MicroAutoware por uma variável global e sincronizado por \textit{ThreadFlag}. 
 	\end{tabular}
 	\caption{Especificaçõe da tarefa TaskControle.}
 	\label{tab:taskcontrole}
@@ -359,6 +419,7 @@
 	\begin{itemize}
 		\item Subscriber: \texttt{nome\_subscriber\_sub\_}
 		\item Publisher: \texttt{nome\_subscriber\_pub\_}
+		\item Service server: \texttt{nome\_subscriber\_server\_}
 		\item Mensagem: \texttt{nome\_mensagem\_msg\_}
 		\item Node: \texttt{nome\_do\_node}
 		\item Callback: \texttt{nome\_do\_topico\_callback}
