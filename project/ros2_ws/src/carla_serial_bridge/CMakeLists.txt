@@ -14,6 +14,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(carla_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(rosgraph_msgs REQUIRED)
 
 add_executable(carla_serial_bridge_node 
                src/carla_serial_bridge_node.cpp 
@@ -32,6 +33,7 @@ ament_target_dependencies(
   "carla_msgs"
   "nav_msgs"
   "geometry_msgs"
+  "rosgraph_msgs"
 )
 
 install(TARGETS carla_serial_bridge_node

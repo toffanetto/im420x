@@ -2,23 +2,32 @@
 #include <chrono>
 #include <functional>
 #include <memory>
-
 #include <cstring>
 
 #include "rclcpp/rclcpp.hpp"
-//#include "sensor_rx_msgs/rx_msg/point_cloud2.hpp"
 
-#include "carla_serial_bridge/serial_com.hpp"
 #include "carla_msgs/msg/carla_ego_vehicle_control.hpp"
 #include "carla_msgs/msg/carla_ego_vehicle_status.hpp"
+#include "nav_msgs/msg/odometry.hpp"
+#include "rosgraph_msgs/msg/clock.hpp"
+
+#include "carla_serial_bridge/serial_com.hpp"
 
 #define PORT "/dev/ttyACM0"
 #define BAUDRATE B115200
+#define RX_POOLING_RATE 15ms
 
 typedef union{
   float f;
   char bytes[4];
 } float_bytes;
+
+typedef struct{
+  float_bytes fLongSpeed;
+  float_bytes fLatSpeed;
+  float_bytes fHeadingRate;
+  unsigned char ucGear;
+} vehicle_status;
 
 using namespace std::chrono_literals;
 
@@ -29,24 +38,47 @@ class CarlaSerialBridge : public rclcpp::Node{
 
     CarlaSerialBridge() : Node("carla_serial_brigde"){
 
-      // TODO loop_rate = this->get_parameter("loop_rate");
-      // TODO baudrate = this->get_parameter("baudware");
-      // TODO port_name = this->get_parameter("port_name");
-
       vehicle_control_pub_ = this->create_publisher<carla_msgs::msg::CarlaEgoVehicleControl>("/carla/hero/vehicle_control_cmd", 10); // This 10 is QoS?
 
       vehicle_status_sub_ = this->create_subscription<carla_msgs::msg::CarlaEgoVehicleStatus>("/carla/hero/vehicle_status", 
                                                                                               10, std::bind(&CarlaSerialBridge::vehicle_status_sub_callback, this, _1));
 
-      timer_ = this->create_wall_timer(1000ms, std::bind(&CarlaSerialBridge::timer_callback, this));
+      odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>("/carla/hero/odometry", 10, std::bind(&CarlaSerialBridge::odom_sub_callback, this, _1));
+
+      clock_sub_ = this->create_subscription<rosgraph_msgs::msg::Clock>("/clock", 10, std::bind(&CarlaSerialBridge::clock_sub_callback, this, _1));
+
+      timer_ = this->create_wall_timer(RX_POOLING_RATE, std::bind(&CarlaSerialBridge::timer_callback, this));
       sm_state = 0;
+      publish_seq = 0;
       
     }
 
   private:
 
-    void vehicle_status_sub_callback(const carla_msgs::msg::CarlaEgoVehicleStatus::SharedPtr msg) const{
+    void clock_sub_callback(const rosgraph_msgs::msg::Clock::SharedPtr msg){
+        clock = msg->clock;
+    }
 
+    void odom_sub_callback(const nav_msgs::msg::Odometry::SharedPtr msg){
+        vehicle_status vehicle_status_tx;
+
+        vehicle_status_tx.ucGear = (unsigned char) gear_rx;
+        vehicle_status_tx.fLongSpeed.f = (float) msg->twist.twist.linear.x;
+        vehicle_status_tx.fLatSpeed.f = (float) msg->twist.twist.linear.y;
+        vehicle_status_tx.fHeadingRate.f = (float) msg->twist.twist.angular.z;
+
+        char * tx_msg = NULL;
+        sprintf(tx_msg, "#A%c%c%c%cB%c%c%c%cC%c%c%c%cD%c$",
+                vehicle_status_tx.fLongSpeed.bytes[0], vehicle_status_tx.fLongSpeed.bytes[1], vehicle_status_tx.fLongSpeed.bytes[2], vehicle_status_tx.fLongSpeed.bytes[3], 
+                vehicle_status_tx.fLatSpeed.bytes[0], vehicle_status_tx.fLatSpeed.bytes[1], vehicle_status_tx.fLatSpeed.bytes[2], vehicle_status_tx.fLatSpeed.bytes[3],
+                vehicle_status_tx.fHeadingRate.bytes[0], vehicle_status_tx.fHeadingRate.bytes[1], vehicle_status_tx.fHeadingRate.bytes[2], vehicle_status_tx.fHeadingRate.bytes[3],
+                vehicle_status_tx.ucGear);
+
+        serial_com_link.writeSerialPort(tx_msg);
+    }
+
+    void vehicle_status_sub_callback(const carla_msgs::msg::CarlaEgoVehicleStatus::SharedPtr msg) const{
+        
     }
 
     void publish_to_carla(){
@@ -61,10 +93,10 @@ class CarlaSerialBridge : public rclcpp::Node{
         vehicle_control_msg_.manual_gear_shift = (bool) manual_shift_rx;
         vehicle_control_msg_.gear = (__uint32_t) gear_rx;
 
-        // TODO vehicle_control_msg_->header
-        // ! stamp pending
-
+        vehicle_control_msg_.header.stamp = clock;
+    
         vehicle_control_pub_->publish(vehicle_control_msg_);
+        publish_seq++;
     }
 
     void timer_callback(){
@@ -223,6 +255,8 @@ class CarlaSerialBridge : public rclcpp::Node{
     rclcpp::Publisher<carla_msgs::msg::CarlaEgoVehicleControl>::SharedPtr vehicle_control_pub_;
 
     rclcpp::Subscription<carla_msgs::msg::CarlaEgoVehicleStatus>::SharedPtr vehicle_status_sub_;
+    rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
+    rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr clock_sub_;
 
     __uint32_t loop_rate;
     __uint32_t baudrate;
@@ -237,7 +271,8 @@ class CarlaSerialBridge : public rclcpp::Node{
     char reverse_rx;
     char gear_rx;
 
-    
+    rclcpp::Time clock;
+    __uint32_t publish_seq;
 
     SerialCom serial_com_link{PORT, BAUDRATE};
 };
