@@ -1,1 +1,0 @@
-/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_waypoint_types/rosidl_generator_py/carla_waypoint_types/__init__.py

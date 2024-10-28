@@ -47,9 +47,9 @@ typedef struct{
   * @brief  Struct with vehicle status information recieved from CARLA.
   */
 typedef struct{
-  float_bytes fLongSpeed;
-  float_bytes fLatSpeed;
-  float_bytes fHeadingRate;
+  float_bytes xLongSpeed;
+  float_bytes xLatSpeed;
+  float_bytes xHeadingRate;
   unsigned char ucGear;
 } vehicle_status;
 
@@ -92,9 +92,10 @@ float fGetJoyPostition(unsigned int uiValue, unsigned int uiRef0, unsigned int u
   * @brief  Converts the compressed data in control_action form to string in form
   *         #T%c%c%c%cS%c%c%c%cB%c%c%c%cH%cR%cG%cM%c$
   * @param  xControlActionTx: Compressed data with information to CARLA.
-  * @retval String casted in uc that will be send in serial.
+  * @param  ucTxMsg: Formated msg to be transmitted.
+  * @retval None.
   */
-unsigned char * ucGetStringFromControlAction(control_action xControlActionTx);
+void vGetStringFromControlAction(control_action xControlActionTx, unsigned char * ucTxMsg);
 
 /**
   * @name   ucGetVehicleStatusFromString
@@ -105,6 +106,6 @@ unsigned char * ucGetStringFromControlAction(control_action xControlActionTx);
   * @param  ucSmState: State machine state.
   * @retval String casted in uc that will be send in serial.
   */
-unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx, unsigned char * ucSmState);
+unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx);
 
 #endif  /* UTILS_H_ */

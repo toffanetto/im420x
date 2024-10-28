@@ -13,9 +13,9 @@
 
 #include "carla_serial_bridge/serial_com.hpp"
 
-#define PORT "/dev/ttyACM0"
+#define PORT "/dev/ttyUSB0"
 #define BAUDRATE B115200
-#define RX_POOLING_RATE 15ms
+#define RX_POOLING_RATE 50ms
 
 typedef union{
   float f;
@@ -48,8 +48,6 @@ class CarlaSerialBridge : public rclcpp::Node{
       clock_sub_ = this->create_subscription<rosgraph_msgs::msg::Clock>("/clock", 10, std::bind(&CarlaSerialBridge::clock_sub_callback, this, _1));
 
       timer_ = this->create_wall_timer(RX_POOLING_RATE, std::bind(&CarlaSerialBridge::timer_callback, this));
-      sm_state = 0;
-      publish_seq = 0;
       
     }
 
@@ -96,147 +94,176 @@ class CarlaSerialBridge : public rclcpp::Node{
         vehicle_control_msg_.header.stamp = clock;
     
         vehicle_control_pub_->publish(vehicle_control_msg_);
-        publish_seq++;
     }
 
     void timer_callback(){
-      char * rx_msg;
-      rx_msg = serial_com_link.readSerialPort();
+        char sm_state = 0;
+        
+        char * rx_msg;
 
-     for(int i = 0; i < (int)strlen(rx_msg); i++){
+        rx_msg = serial_com_link.readSerialPort();
 
-        switch (sm_state){
-            case 0:
-                if('#' == rx_msg[i]){
+        for(int i = 0; i < (int)strlen(rx_msg); i++){
+            
+            switch (sm_state){
+
+                case 0:  
+                    if(rx_msg[i] == '#'){   
+                        sm_state = 1;
+                    }
+                    break;
+                
+                case 1:
+                    switch (rx_msg[i]){
+                        case 'T':
+                            sm_state = 20;                 
+                            break;
+
+                        case 'S':
+                            sm_state = 30;                 
+                            break;
+
+                        case 'B':
+                            sm_state = 40;                 
+                            break;
+
+                        case 'H':
+                            sm_state = 50;                 
+                            break;
+
+                        case 'M':
+                            sm_state = 60;                 
+                            break;
+
+                        case 'R':
+                            sm_state = 70;                 
+                            break;
+
+                        case 'G':
+                            sm_state = 80;                                     
+                            break;
+
+                        case '$':
+                            sm_state = 0;   
+                            //this->publish_to_carla();
+                            std::cout << throttle_rx.f << std::endl
+                            << brake_rx.f << std::endl
+                            << steering_rx.f << std::endl
+                            << (int)hand_brake_rx << std::endl
+                            << (int)gear_rx << std::endl
+                            << (int)reverse_rx << std::endl
+                            << (int)manual_shift_rx << std::endl;             
+                            break;
+                        
+                        default:
+                            break;
+                    }
+                    break;        
+                
+                case 20:
+                    throttle_rx.bytes[0] = rx_msg[i];
+                    sm_state = 21;                 
+                    break;        
+                
+                case 21:
+                    throttle_rx.bytes[1] = rx_msg[i];
+                    sm_state = 22;                 
+                    break;        
+                
+                case 22:
+                    throttle_rx.bytes[2] = rx_msg[i];
+                    sm_state = 23;                 
+                    break;        
+                
+                case 23:
+                    throttle_rx.bytes[3] = rx_msg[i];
                     sm_state = 1;                 
-                }
-                break;
-            
-            case 1:
-                switch (rx_msg[i]){
-                    case 'T':
-                        sm_state = 20;                 
-                        break;
+                    break;        
+                
+                case 30:
+                    steering_rx.bytes[0] = rx_msg[i];
+                    sm_state = 31;                 
+                    break;        
+                
+                case 31:
+                    steering_rx.bytes[1] = rx_msg[i];
+                    sm_state = 32;                 
+                    break;
+                
+                
+                case 32:
+                    steering_rx.bytes[2] = rx_msg[i];
+                    sm_state = 33;                 
+                    break;        
+                
+                case 33:
+                    steering_rx.bytes[3] = rx_msg[i];
+                    sm_state = 1;                 
+                    break;        
+                
+                case 40:
+                    brake_rx.bytes[0] = rx_msg[i];
+                    sm_state = 41;                 
+                    break;        
+                
+                case 41:
+                    brake_rx.bytes[1] = rx_msg[i];
+                    sm_state = 42;                 
+                    break;        
+                
+                case 42:
+                    brake_rx.bytes[2] = rx_msg[i];
+                    sm_state = 43;                 
+                    break;        
+                
+                case 43:
+                    brake_rx.bytes[3] = rx_msg[i];
+                    sm_state = 1;                 
+                    break;        
+                
+                case 50:
+                    hand_brake_rx = rx_msg[i];
+                    sm_state = 1;                             
+                    break;        
+                
+                case 60:
+                    manual_shift_rx = rx_msg[i];
+                    sm_state = 1;                            
+                    break;        
+                
+                case 70:
+                    reverse_rx = rx_msg[i];
+                    sm_state = 1;                             
+                    break;        
+                
+                case 80:
+                    gear_rx = rx_msg[i];
+                    sm_state = 1;                             
+                    break;
+                
+                default:
+                    break;
+            }
 
-                    case 'S':
-                        sm_state = 30;                 
-                        break;
 
-                    case 'B':
-                        sm_state = 40;                 
-                        break;
+            vehicle_status vehicle_status_tx;
 
-                    case 'H':
-                        sm_state = 50;                 
-                        break;
+            vehicle_status_tx.ucGear = (unsigned char) gear_rx;
+            vehicle_status_tx.fLongSpeed.f = (float) 55.55;
+            vehicle_status_tx.fLatSpeed.f = (float) 66.66;
+            vehicle_status_tx.fHeadingRate.f = (float) 77.77;
 
-                    case 'M':
-                        sm_state = 60;                 
-                        break;
+            char tx_msg[100];
+            sprintf(tx_msg, "#A%c%c%c%cB%c%c%c%cC%c%c%c%cD%c$",
+                    vehicle_status_tx.fLongSpeed.bytes[0], vehicle_status_tx.fLongSpeed.bytes[1], vehicle_status_tx.fLongSpeed.bytes[2], vehicle_status_tx.fLongSpeed.bytes[3], 
+                    vehicle_status_tx.fLatSpeed.bytes[0], vehicle_status_tx.fLatSpeed.bytes[1], vehicle_status_tx.fLatSpeed.bytes[2], vehicle_status_tx.fLatSpeed.bytes[3],
+                    vehicle_status_tx.fHeadingRate.bytes[0], vehicle_status_tx.fHeadingRate.bytes[1], vehicle_status_tx.fHeadingRate.bytes[2], vehicle_status_tx.fHeadingRate.bytes[3],
+                    vehicle_status_tx.ucGear);
 
-                    case 'R':
-                        sm_state = 70;                 
-                        break;
-
-                    case 'G':
-                        sm_state = 80;                                     
-                        break;
-
-                    case '$':
-                        sm_state = 0;   
-                        this->publish_to_carla();              
-                        break;
-                    
-                    default:
-                        break;
-                }
-                break;        
-            
-            case 20:
-                throttle_rx.bytes[0] = rx_msg[i];
-                sm_state = 21;                 
-                break;        
-            
-            case 21:
-                throttle_rx.bytes[1] = rx_msg[i];
-                sm_state = 22;                 
-                break;        
-            
-            case 22:
-                throttle_rx.bytes[2] = rx_msg[i];
-                sm_state = 23;                 
-                break;        
-            
-            case 23:
-                throttle_rx.bytes[3] = rx_msg[i];
-                sm_state = 1;                 
-                break;        
-            
-            case 30:
-                steering_rx.bytes[0] = rx_msg[i];
-                sm_state = 31;                 
-                break;        
-            
-            case 31:
-                steering_rx.bytes[1] = rx_msg[i];
-                sm_state = 32;                 
-                break;
+            serial_com_link.writeSerialPort(tx_msg); 
             
             
-            case 32:
-                steering_rx.bytes[2] = rx_msg[i];
-                sm_state = 33;                 
-                break;        
-            
-            case 33:
-                steering_rx.bytes[3] = rx_msg[i];
-                sm_state = 1;                 
-                break;        
-            
-            case 40:
-                brake_rx.bytes[0] = rx_msg[i];
-                sm_state = 41;                 
-                break;        
-            
-            case 41:
-                brake_rx.bytes[1] = rx_msg[i];
-                sm_state = 42;                 
-                break;        
-            
-            case 42:
-                brake_rx.bytes[2] = rx_msg[i];
-                sm_state = 43;                 
-                break;        
-            
-            case 43:
-                brake_rx.bytes[3] = rx_msg[i];
-                sm_state = 1;                 
-                break;        
-            
-            case 50:
-                hand_brake_rx = rx_msg[i];
-                sm_state = 1;                             
-                break;        
-            
-            case 60:
-                manual_shift_rx = rx_msg[i];
-                sm_state = 1;                            
-                break;        
-            
-            case 70:
-                reverse_rx = rx_msg[i];
-                sm_state = 1;                             
-                break;        
-            
-            case 80:
-                gear_rx = rx_msg[i];
-                sm_state = 1;                             
-                break;
-            
-            default:
-                break;
         }
-    }
 
       // Process rx_msg
 
@@ -262,7 +289,6 @@ class CarlaSerialBridge : public rclcpp::Node{
     __uint32_t baudrate;
     char * port_name;
 
-    char sm_state;
     float_bytes throttle_rx;
     float_bytes steering_rx;
     float_bytes brake_rx;
@@ -272,7 +298,6 @@ class CarlaSerialBridge : public rclcpp::Node{
     char gear_rx;
 
     rclcpp::Time clock;
-    __uint32_t publish_seq;
 
     SerialCom serial_com_link{PORT, BAUDRATE};
 };

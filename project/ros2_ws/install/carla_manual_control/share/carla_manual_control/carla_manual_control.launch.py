@@ -1,1 +1,0 @@
-/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_manual_control/launch/carla_manual_control.launch.py

@@ -11,6 +11,8 @@ typedef union{
 
 int main(){
 
+    cout << "Oi";
+
     int ss_state = 0;
     float_bytes trottle_rx;
     float_bytes steering_rx;
@@ -21,7 +23,7 @@ int main(){
     char gear_rx;
 
     // #Tf[0:3]Sf[0:3]Bf[0:3]HbRbGiMb$
-    char * msg;
+    char msg[100];
 
     float_bytes t;
     t.f = 11.11;

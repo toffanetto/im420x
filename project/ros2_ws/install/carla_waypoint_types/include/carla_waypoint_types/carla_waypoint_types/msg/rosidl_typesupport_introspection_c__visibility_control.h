@@ -1,1 +1,0 @@
-/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_waypoint_types/rosidl_typesupport_introspection_c/carla_waypoint_types/msg/rosidl_typesupport_introspection_c__visibility_control.h

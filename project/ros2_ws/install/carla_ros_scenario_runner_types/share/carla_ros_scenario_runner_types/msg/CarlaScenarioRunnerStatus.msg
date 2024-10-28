@@ -1,1 +1,0 @@
-/home/toffanetto/unicamp/im420x/project/ros2_ws/src/ros-bridge/carla-ros-bridge/carla_ros_scenario_runner_types/msg/CarlaScenarioRunnerStatus.msg

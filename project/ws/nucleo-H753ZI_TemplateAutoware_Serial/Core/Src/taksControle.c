@@ -41,8 +41,6 @@ void StartTaskControle(void *argument)
   unsigned char ucControlMode;
   unsigned char ucFlagFullMsg;
 
-  unsigned char ucSmState = 0;
-
   unsigned int uiX0   = 33970;
   unsigned int uiXMin = 1057;
   unsigned int uiXMax = 65535;
@@ -55,7 +53,7 @@ void StartTaskControle(void *argument)
   float fJoyXAxis;
   float fJoyYAxis;
 
-  unsigned char * cTxMsgToCarla;
+  unsigned char ucTxMsgToCarla[26];
 
   vehicle_status xVehicleStatus;
 
@@ -67,6 +65,45 @@ void StartTaskControle(void *argument)
   HAL_UART_Receive_DMA(&huart2, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   ucControlMode = AUTOWARE;
+
+
+	xControlAction.fTrottle = 11.11;
+	xControlAction.fBrake = 22.22;
+	xControlAction.fSteeringAngle = 33.33;
+	xControlAction.ucManualGearShift = 1;
+	xControlAction.ucHandBrake = 2;
+	xControlAction.ucReverse = 3;
+	xControlAction.ucControlMode = MANUAL;
+	xControlAction.ucGear = 4;
+
+  while(1){
+
+	vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
+
+	// Send cTxMsgToCarla to CARLA
+	cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
+
+	do{
+		// Read xVehicleStatus
+		cubemx_transport_read(&xUart2DmaTransport, cDmaBuffer, UART2_DMA_BUFFER_SIZE, 0, 0); // Using timeout = 1 tick.
+
+	    HAL_UART_DMAPause(&huart2);
+		ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer);
+	    HAL_UART_DMAResume(&huart2);
+
+	} while(!ucFlagFullMsg); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
+
+	xControlAction.fTrottle = xVehicleStatus.xHeadingRate.fFloat;
+	xControlAction.fBrake = xVehicleStatus.xLatSpeed.fFloat;
+	xControlAction.fSteeringAngle = xVehicleStatus.xLongSpeed.fFloat;
+	xControlAction.ucGear = xVehicleStatus.ucGear+1;
+
+	HAL_Delay(15);
+
+  }
+
+
+
 
   for(;;)
   {
@@ -116,18 +153,18 @@ void StartTaskControle(void *argument)
 	  if(0x100 == uiFlags)
 	  {
 	    osMutexAcquire(MutexControlActionHandle, osWaitForever);
-	    cTxMsgToCarla = ucGetStringFromControlAction(xControlAction);
+	    vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 	    osMutexRelease(MutexControlActionHandle);
 
 	    // Send cTxMsgToCarla to CARLA
-	    cubemx_transport_write(&xUart2DmaTransport, cTxMsgToCarla, strlen((char * ) cTxMsgToCarla), 0);
+	    cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
 
 	    // Recieve data from CARLA
 	    do{
 		  // Read xVehicleStatus
 		  cubemx_transport_read(&xUart2DmaTransport, cDmaBuffer, UART2_DMA_BUFFER_SIZE, 1, 0); // Using timeout = 1 tick.
 
-		  ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer, &ucSmState);
+		  ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer);
 
 	    } while(!ucFlagFullMsg); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
 
@@ -155,12 +192,12 @@ void StartTaskControle(void *argument)
       xControlAction.ucControlMode = MANUAL;
       xControlAction.ucGear = 1;
 
-      cTxMsgToCarla = ucGetStringFromControlAction(xControlAction);
+	  vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
 	  osMutexRelease(MutexControlActionHandle);
 
 	  // Send cTxMsgToCarla to CARLA
-	  cubemx_transport_write(&xUart2DmaTransport, cTxMsgToCarla, strlen((char * ) cTxMsgToCarla), 0);
+	  cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
 
 
 	  // Recieve data from CARLA
