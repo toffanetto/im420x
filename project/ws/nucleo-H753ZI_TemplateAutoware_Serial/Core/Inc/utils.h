@@ -104,8 +104,8 @@ void vGetStringFromControlAction(control_action xControlActionTx, unsigned char 
   * @param  xVehicleStatusRx: Compressed data with information to CARLA.
   * @param  ucStringRx: RX Message.
   * @param  ucSmState: State machine state.
+  * @param  ucBufferSize: DMA buffer size.
   * @retval String casted in uc that will be send in serial.
   */
-unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx);
-
+unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx, unsigned char ucBufferSize)
 #endif  /* UTILS_H_ */

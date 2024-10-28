@@ -40,6 +40,7 @@ void StartTaskControle(void *argument)
 
   unsigned char ucControlMode;
   unsigned char ucFlagFullMsg;
+  unsigned char ucGetVehicleDataAttempts = 0;
 
   unsigned int uiX0   = 33970;
   unsigned int uiXMin = 1057;
@@ -53,7 +54,7 @@ void StartTaskControle(void *argument)
   float fJoyXAxis;
   float fJoyYAxis;
 
-  unsigned char ucTxMsgToCarla[26];
+  unsigned char ucTxMsgToCarla[MSG_TO_CARLA_SIZE];
 
   vehicle_status xVehicleStatus;
 
@@ -81,17 +82,24 @@ void StartTaskControle(void *argument)
 	vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
 	// Send cTxMsgToCarla to CARLA
-	cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
+	if (&huart2->gState == HAL_UART_STATE_READY)
+	{
+	  HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
+	}
 
 	do{
-		// Read xVehicleStatus
-		cubemx_transport_read(&xUart2DmaTransport, cDmaBuffer, UART2_DMA_BUFFER_SIZE, 0, 0); // Using timeout = 1 tick.
 
-	    HAL_UART_DMAPause(&huart2);
-		ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer);
+	    HAL_UART_DMAPause(&huart2); // Maybe its not a good idea pause DMA just after transmit
+		ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
 	    HAL_UART_DMAResume(&huart2);
+		ucGetVehicleDataAttempts++;
 
-	} while(!ucFlagFullMsg); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
+	} while(!ucFlagFullMsg || ucGetVehicleDataAttempts < MAX_VEHICLE_GET_DATA_ATTEMPTS); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
+
+	if(ucGetVehicleDataAttempts == MAX_VEHICLE_GET_DATA_ATTEMPTS)
+	{
+		// Chamar rotina de emergência
+	}
 
 	xControlAction.fTrottle = xVehicleStatus.xHeadingRate.fFloat;
 	xControlAction.fBrake = xVehicleStatus.xLatSpeed.fFloat;
@@ -141,6 +149,10 @@ void StartTaskControle(void *argument)
 
 	if(AUTOWARE == ucControlMode)
 	{
+    // Setting driving mode lights
+    HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 1);
+    HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0);
+
 	  // WAIT for flag to sync xControlAction update
 	  uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_ACTION);
 
@@ -152,32 +164,44 @@ void StartTaskControle(void *argument)
 
 	  if(0x100 == uiFlags)
 	  {
-	    osMutexAcquire(MutexControlActionHandle, osWaitForever);
-	    vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
-	    osMutexRelease(MutexControlActionHandle);
+        osMutexAcquire(MutexControlActionHandle, osWaitForever);
+        vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
+        osMutexRelease(MutexControlActionHandle);
 
-	    // Send cTxMsgToCarla to CARLA
-	    cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
+        // Send cTxMsgToCarla to CARLA
+        cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
 
-	    // Recieve data from CARLA
-	    do{
-		  // Read xVehicleStatus
-		  cubemx_transport_read(&xUart2DmaTransport, cDmaBuffer, UART2_DMA_BUFFER_SIZE, 1, 0); // Using timeout = 1 tick.
+        // Recieve data from CARLA
+      do{
 
-		  ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer);
+        HAL_UART_DMAPause(&huart2);
+        ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
+        HAL_UART_DMAResume(&huart2);
+        ucGetVehicleDataAttempts++;
 
-	    } while(!ucFlagFullMsg); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
+      } while(!ucFlagFullMsg || ucGetVehicleDataAttempts < MAX_VEHICLE_GET_DATA_ATTEMPTS); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
 
-	    osMutexAcquire(MutexControlSignalHandle, osWaitForever);
-	    //xControlSignal
-	    osMutexRelease(MutexControlSignalHandle);
+      if(ucGetVehicleDataAttempts == MAX_VEHICLE_GET_DATA_ATTEMPTS)
+      {
+        // Chamar rotina de emergência
+      }
 
-	    osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
+      ucGetVehicleDataAttempts = 0;
+
+      osMutexAcquire(MutexControlSignalHandle, osWaitForever);
+      //xControlSignal
+      osMutexRelease(MutexControlSignalHandle);
+
+      osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
 	  }
 	}
 
     if(MANUAL == ucControlMode)
     {
+      // Setting driving mode lights
+      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 0);
+      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 1);
+
       // Joystick read block -- START
       fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);
       fJoyYAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[1], uiY0, uiYMax, uiYMin);

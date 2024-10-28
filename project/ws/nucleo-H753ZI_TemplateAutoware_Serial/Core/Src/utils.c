@@ -70,6 +70,7 @@ void vGetStringFromControlAction(control_action xControlActionTx, unsigned char 
   ucTxMsg[23] = xControlActionTx.ucManualGearShift;
   ucTxMsg[24] = (unsigned char)'$';
   ucTxMsg[25] = (unsigned char)'\0';
+  
 }
 
 /**
@@ -79,27 +80,29 @@ void vGetStringFromControlAction(control_action xControlActionTx, unsigned char 
   * @param  xVehicleStatusRx: Compressed data with information to CARLA.
   * @param  ucStringRx: RX Message.
   * @param  ucSmState: State machine state.
+  * @param  ucBufferSize: DMA buffer size.
   * @retval String casted in uc that will be send in serial.
   */
-unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx)
+unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx, unsigned char ucBufferSize)
 {
+  unsigned char ucSmState = 0;
+  unsigned char ucDataProcessed = 0;
+  unsigned char ucIndex = 0;
 
-  unsigned int ucSmState = 0;
-
-
-  for(int i = 0; i < strlen((char * )ucStringRx); i++)
+  while(ucDataProcessed < strlen(ucStringRx))
   {
     switch (ucSmState)
     {
       case 0:
-        if('#' == ucStringRx[i])
+        if('#' == ucStringRx[ucIndex])
         {
           ucSmState = 1;
+          ucDataProcessed = 0;
         }
         break;
       
       case 1:
-        switch (ucStringRx[i])
+        switch (ucStringRx[ucIndex])
         {
           case 'A':
             ucSmState = 10;
@@ -128,67 +131,67 @@ unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, un
         break;
 
       case 10:
-        xVehicleStatusRx->xLongSpeed.ucBytes[0] = ucStringRx[i];
+        xVehicleStatusRx->xLongSpeed.ucBytes[0] = ucStringRx[ucIndex];
         ucSmState = 11;
         break;
 
       case 11:
-        xVehicleStatusRx->xLongSpeed.ucBytes[1] = ucStringRx[i];
+        xVehicleStatusRx->xLongSpeed.ucBytes[1] = ucStringRx[ucIndex];
         ucSmState = 12;
         break;
 
       case 12:
-        xVehicleStatusRx->xLongSpeed.ucBytes[2] = ucStringRx[i];
+        xVehicleStatusRx->xLongSpeed.ucBytes[2] = ucStringRx[ucIndex];
         ucSmState = 13;
         break;
 
       case 13:
-        xVehicleStatusRx->xLongSpeed.ucBytes[3] = ucStringRx[i];
+        xVehicleStatusRx->xLongSpeed.ucBytes[3] = ucStringRx[ucIndex];
         ucSmState = 1;
         break;
 
       case 20:
-        xVehicleStatusRx->xLatSpeed.ucBytes[0] = ucStringRx[i];
+        xVehicleStatusRx->xLatSpeed.ucBytes[0] = ucStringRx[ucIndex];
         ucSmState = 21;
         break;
 
       case 21:
-        xVehicleStatusRx->xLatSpeed.ucBytes[1] = ucStringRx[i];
+        xVehicleStatusRx->xLatSpeed.ucBytes[1] = ucStringRx[ucIndex];
         ucSmState = 22;
         break;
 
       case 22:
-        xVehicleStatusRx->xLatSpeed.ucBytes[2] = ucStringRx[i];
+        xVehicleStatusRx->xLatSpeed.ucBytes[2] = ucStringRx[ucIndex];
         ucSmState = 23;
         break;
 
       case 23:
-        xVehicleStatusRx->xLatSpeed.ucBytes[3] = ucStringRx[i];
+        xVehicleStatusRx->xLatSpeed.ucBytes[3] = ucStringRx[ucIndex];
         ucSmState = 1;
         break;
 
       case 30:
-        xVehicleStatusRx->xHeadingRate.ucBytes[0] = ucStringRx[i];
+        xVehicleStatusRx->xHeadingRate.ucBytes[0] = ucStringRx[ucIndex];
         ucSmState = 31;
         break;
 
       case 31:
-        xVehicleStatusRx->xHeadingRate.ucBytes[1] = ucStringRx[i];
+        xVehicleStatusRx->xHeadingRate.ucBytes[1] = ucStringRx[ucIndex];
         ucSmState = 32;
         break;
 
       case 32:
-        xVehicleStatusRx->xHeadingRate.ucBytes[2] = ucStringRx[i];
+        xVehicleStatusRx->xHeadingRate.ucBytes[2] = ucStringRx[ucIndex];
         ucSmState = 33;
         break;
 
       case 33:
-        xVehicleStatusRx->xHeadingRate.ucBytes[3] = ucStringRx[i];
+        xVehicleStatusRx->xHeadingRate.ucBytes[3] = ucStringRx[ucIndex];
         ucSmState = 1;
         break;
 
       case 40:
-        xVehicleStatusRx->ucGear = ucStringRx[i];
+        xVehicleStatusRx->ucGear = ucStringRx[ucIndex];
         ucSmState = 1;
         break;
 
@@ -196,6 +199,10 @@ unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, un
       default:
           break;
     }
+
+    ucIndex = (ucIndex + 1) % ucBufferSize;
+    ucDataProcessed++;
+
   }
   return 0;
 }
