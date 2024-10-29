@@ -658,10 +658,10 @@
           <mxGeometry x="1492.2513793103453" y="1720" as="geometry" />
         </mxCell>
         <mxCell id="DgSRfWrRvpDGbcAEBHVI-42" value="Publishers" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="1447.25" y="1460" width="90" height="30" as="geometry" />
+          <mxGeometry x="1447.25" y="1440" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="DgSRfWrRvpDGbcAEBHVI-43" value="Subscribers" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="1962.25" y="1460" width="100" height="30" as="geometry" />
+          <mxGeometry x="1962.25" y="1440" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kYtsY3oVQzDorpDFKkJO-1" value="&lt;i&gt;GPIO&lt;/i&gt;&lt;div&gt;&lt;i&gt;PU&lt;/i&gt;&lt;/div&gt;&lt;div&gt;PF13&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=1;fontSize=10;" parent="1" connectable="0" vertex="1">
           <mxGeometry x="1906.996666666667" y="1132" as="geometry">
@@ -695,8 +695,8 @@
             <mxPoint x="4" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="y_a_9eLIx64UZbRKkLCx-1" value="&lt;div&gt;&lt;span style=&quot;font-size: 14px; font-weight: 700; font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; text-align: left;&quot;&gt;Service server&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;b&gt;&lt;i&gt;/control/control_mode_request&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;strokeWidth=2;arcSize=40;" vertex="1" parent="1">
-          <mxGeometry x="1632.25" y="1490" width="210" height="60" as="geometry" />
+        <mxCell id="y_a_9eLIx64UZbRKkLCx-1" value="&lt;div&gt;&lt;span style=&quot;font-size: 14px; font-weight: 700; font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; text-align: left;&quot;&gt;Service server&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 14px; font-style: italic; font-weight: 700; font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; text-align: left;&quot;&gt;/&lt;/span&gt;&lt;font style=&quot;font-size: 14px; font-style: italic; font-weight: 700; text-wrap: nowrap;&quot; face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/current_gate_mode&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1640" y="1490" width="200" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
