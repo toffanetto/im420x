@@ -59,16 +59,17 @@ typedef struct{
   * @brief  Struct with vehicle control data compressed for CARLA.
   */
 typedef struct{
-  float fTrottle;
+  float fThrottle;
   float fBrake;
   float fSteeringAngle;
   unsigned char ucHandBrake;
   unsigned char ucReverse;
   unsigned char ucManualGearShift;
-  unsigned int uiGear;
-  float fVelocity;
-  float fAcceleraton;
-  float fOrientation;
+  unsigned char ucGear;
+  unsigned char ucControlMode;
+  float fLongSpeed;
+  float fLatSpeed;
+  float fHeadingRate;
 } control_signal;
 
 
@@ -107,5 +108,6 @@ void vGetStringFromControlAction(control_action xControlActionTx, unsigned char 
   * @param  ucBufferSize: DMA buffer size.
   * @retval String casted in uc that will be send in serial.
   */
-unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx, unsigned char ucBufferSize)
+unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, unsigned char * ucStringRx, unsigned char ucBufferSize);
+
 #endif  /* UTILS_H_ */

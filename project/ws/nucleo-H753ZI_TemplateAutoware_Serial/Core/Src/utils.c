@@ -89,7 +89,7 @@ unsigned char ucGetVehicleStatusFromString(vehicle_status * xVehicleStatusRx, un
   unsigned char ucDataProcessed = 0;
   unsigned char ucIndex = 0;
 
-  while(ucDataProcessed < strlen(ucStringRx))
+  while(ucDataProcessed < strlen((char * )ucStringRx))
   {
     switch (ucSmState)
     {

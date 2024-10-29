@@ -38,10 +38,12 @@ extern control_signal xControlSignal;
 void StartTaskControle(void *argument)
 {
 
+  // Local variables -- START
   unsigned char ucControlMode;
   unsigned char ucFlagFullMsg;
   unsigned char ucGetVehicleDataAttempts = 0;
 
+  // Joystick calibration
   unsigned int uiX0   = 33970;
   unsigned int uiXMin = 1057;
   unsigned int uiXMax = 65535;
@@ -49,24 +51,31 @@ void StartTaskControle(void *argument)
   unsigned int uiYMin = 1062;
   unsigned int uiYMax = 65535;
 
+  // Return flags
   unsigned int uiFlags;
 
+  // Joystick reading
   float fJoyXAxis;
   float fJoyYAxis;
 
+  // Message buffer to CARLA by UART2
   unsigned char ucTxMsgToCarla[MSG_TO_CARLA_SIZE];
 
+  // Data structure for data received from CARLA by UART2
   vehicle_status xVehicleStatus;
 
+  // Buffer for data received from CARLA by UART2
   unsigned char cDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
-  struct uxrCustomTransport xUart2DmaTransport;
 
-  xUart2DmaTransport.args = &huart2;
+  // Local variables -- END
 
+  // Initialization of DMA RX in circular mode
   HAL_UART_Receive_DMA(&huart2, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
+  // Initialization of operation mode
   ucControlMode = AUTOWARE;
 
+  // TESTING CODE FOR UART -- START
 
 	xControlAction.fTrottle = 11.11;
 	xControlAction.fBrake = 22.22;
@@ -82,7 +91,7 @@ void StartTaskControle(void *argument)
 	vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
 	// Send cTxMsgToCarla to CARLA
-	if (&huart2->gState == HAL_UART_STATE_READY)
+	if (huart2.gState == HAL_UART_STATE_READY)
 	{
 	  HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
 	}
@@ -110,12 +119,14 @@ void StartTaskControle(void *argument)
 
   }
 
+  // TESTING CODE FOR UART -- END
 
 
 
+  // Task loop
   for(;;)
   {
-
+	// Looking fot operation mode change by Autoware -- START
 	uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAny, 0);
 
 	if(0x01 == uiFlags)
@@ -129,7 +140,9 @@ void StartTaskControle(void *argument)
 	  ucControlMode = MANUAL;
 	  uiFlags = 0;
 	}
+	// Looking for operation mode change by Autoware -- END
 
+	// Looking for operation mode change by JoySW -- START
 	uiFlags = osThreadFlagsWait(0x1000, osFlagsWaitAll, 0);
 
 	if(0x1000 == uiFlags)
@@ -146,7 +159,9 @@ void StartTaskControle(void *argument)
 	  }
 	  uiFlags = 0;
 	}
+	// Looking for operation mode change by JoySW -- END
 
+	// Autonomous mode (AUTOWARE) routine -- START
 	if(AUTOWARE == ucControlMode)
 	{
     // Setting driving mode lights
@@ -169,7 +184,7 @@ void StartTaskControle(void *argument)
         osMutexRelease(MutexControlActionHandle);
 
         // Send cTxMsgToCarla to CARLA
-        cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
+        HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
 
         // Recieve data from CARLA
       do{
@@ -189,13 +204,26 @@ void StartTaskControle(void *argument)
       ucGetVehicleDataAttempts = 0;
 
       osMutexAcquire(MutexControlSignalHandle, osWaitForever);
-      //xControlSignal
+      xControlSignal.fThrottle = xControlAction.fTrottle;
+      xControlSignal.fBrake = xControlAction.fBrake;
+      xControlSignal.fSteeringAngle = xControlAction.fSteeringAngle;
+      xControlSignal.ucManualGearShift = xControlAction.ucManualGearShift;
+      xControlSignal.ucHandBrake = xControlAction.ucHandBrake;
+      xControlSignal.ucReverse = xControlAction.ucReverse;
+      xControlSignal.ucControlMode = AUTOWARE;
+      xControlSignal.ucGear = xVehicleStatus.ucGear;
+      xControlSignal.fLongSpeed = xVehicleStatus.xLongSpeed.fFloat;
+      xControlSignal.fLatSpeed = xVehicleStatus.xLatSpeed.fFloat;
+      xControlSignal.fHeadingRate = xVehicleStatus.xHeadingRate.fFloat;
       osMutexRelease(MutexControlSignalHandle);
 
       osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
 	  }
 	}
+	// Autonomous mode (AUTOWARE) routine -- END
 
+
+	// Manual mode (MANUAL) routine -- START
     if(MANUAL == ucControlMode)
     {
       // Setting driving mode lights
@@ -207,9 +235,9 @@ void StartTaskControle(void *argument)
       fJoyYAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[1], uiY0, uiYMax, uiYMin);
 
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
-      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0;
-      xControlAction.fBrake = (fJoyYAxis < 0) ? fJoyYAxis*MAX_BRAKE : 0;
-      xControlAction.fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis : 0;
+      xControlAction.fBrake = (fJoyYAxis < 0) ? fJoyYAxis : 0;
+      xControlAction.fSteeringAngle = fJoyXAxis;
       xControlAction.ucManualGearShift = 0;
       xControlAction.ucHandBrake = 0;
       xControlAction.ucReverse = 0;
@@ -221,16 +249,26 @@ void StartTaskControle(void *argument)
 	  osMutexRelease(MutexControlActionHandle);
 
 	  // Send cTxMsgToCarla to CARLA
-	  cubemx_transport_write(&xUart2DmaTransport, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla), 0);
+	  HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
 
 
-	  // Recieve data from CARLA
+	  // Recieve data from CARLA, even not using for control, only monitoring
 
 
       // Empacota xControlSignal
-      
+
       osMutexAcquire(MutexControlSignalHandle, osWaitForever);
-      // xControlSignal
+      xControlSignal.fThrottle = xControlAction.fTrottle;
+      xControlSignal.fBrake = xControlAction.fBrake;
+      xControlSignal.fSteeringAngle = xControlAction.fSteeringAngle;
+      xControlSignal.ucManualGearShift = xControlAction.ucManualGearShift;
+      xControlSignal.ucHandBrake = xControlAction.ucHandBrake;
+      xControlSignal.ucReverse = xControlAction.ucReverse;
+      xControlSignal.ucControlMode = MANUAL;
+      xControlSignal.ucGear = xVehicleStatus.ucGear;
+      xControlSignal.fLongSpeed = xVehicleStatus.xLongSpeed.fFloat;
+      xControlSignal.fLatSpeed = xVehicleStatus.xLatSpeed.fFloat;
+      xControlSignal.fHeadingRate = xVehicleStatus.xHeadingRate.fFloat;
       osMutexRelease(MutexControlSignalHandle);
 
       osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
@@ -238,8 +276,7 @@ void StartTaskControle(void *argument)
       // WAIT
       osDelay(20);
     }
-
-    // Joystick read block -- END
+	// Manual mode (MANUAL) routine -- END
 
   }
 
