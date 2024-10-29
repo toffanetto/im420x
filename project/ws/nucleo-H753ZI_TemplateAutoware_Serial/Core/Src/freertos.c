@@ -30,6 +30,7 @@
 
 // Libraries includes -- START
 #include "light_printf.h"
+#include "utils.h"
 
 // Libraries includes -- END
 
@@ -62,6 +63,12 @@ control_action xControlAction;
 // Control signal struct with low level control signal from TaskControle to MicroAutoware,
 // for publish in simulator topics by micro-ros.
 control_signal xControlSignal;
+
+
+vehicle_status xVehicleStatusRx;
+
+
+unsigned int ucSmState = 0;
 
 /* USER CODE END Variables */
 /* Definitions for TaskControle */
@@ -138,7 +145,7 @@ void MX_FREERTOS_Init(void) {
   TaskControleHandle = osThreadNew(StartTaskControle, NULL, &TaskControle_attributes);
 
   /* creation of TaskMicroAutowa */
-//  TaskMicroAutowaHandle = osThreadNew(StartMicroAutoware, NULL, &TaskMicroAutowa_attributes);
+  //TaskMicroAutowaHandle = osThreadNew(StartMicroAutoware, NULL, &TaskMicroAutowa_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -178,6 +185,128 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   if(JoySW_Pin == GPIO_Pin){
     ucButtonState ^= 1;
     osThreadFlagsSet(TaskControleHandle, 0x1000);
+  }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart2 == * huart)
+  {
+	unsigned char ucStringRx = dma_head;
+
+	switch (ucSmState)
+		{
+		  case 0:
+			if('#' == ucStringRx)
+			{
+			  ucSmState = 1;
+			  ucDataProcessed = 0;
+			}
+			break;
+
+		  case 1:
+			switch (ucStringRx)
+			{
+			  case 'A':
+				ucSmState = 10;
+				break;
+
+			  case 'B':
+				ucSmState = 20;
+				break;
+
+			  case 'C':
+				ucSmState = 30;
+				break;
+
+			  case 'D':
+				ucSmState = 40;
+				break;
+
+			  case '$':
+				ucSmState = 0;
+				return 1;
+				break;
+
+			  default:
+				  break;
+			}
+			break;
+
+		  case 10:
+			xVehicleStatusRx.xLongSpeed.ucBytes[0] = ucStringRx;
+			ucSmState = 11;
+			break;
+
+		  case 11:
+			xVehicleStatusRx.xLongSpeed.ucBytes[1] = ucStringRx;
+			ucSmState = 12;
+			break;
+
+		  case 12:
+			xVehicleStatusRx.xLongSpeed.ucBytes[2] = ucStringRx;
+			ucSmState = 13;
+			break;
+
+		  case 13:
+			xVehicleStatusRx.xLongSpeed.ucBytes[3] = ucStringRx;
+			ucSmState = 1;
+			break;
+
+		  case 20:
+			xVehicleStatusRx.xLatSpeed.ucBytes[0] = ucStringRx;
+			ucSmState = 21;
+			break;
+
+		  case 21:
+			xVehicleStatusRx.xLatSpeed.ucBytes[1] = ucStringRx;
+			ucSmState = 22;
+			break;
+
+		  case 22:
+			xVehicleStatusRx.xLatSpeed.ucBytes[2] = ucStringRx;
+			ucSmState = 23;
+			break;
+
+		  case 23:
+			xVehicleStatusRx.xLatSpeed.ucBytes[3] = ucStringRx;
+			ucSmState = 1;
+			break;
+
+		  case 30:
+			xVehicleStatusRx.xHeadingRate.ucBytes[0] = ucStringRx;
+			ucSmState = 31;
+			break;
+
+		  case 31:
+			xVehicleStatusRx.xHeadingRate.ucBytes[1] = ucStringRx;
+			ucSmState = 32;
+			break;
+
+		  case 32:
+			xVehicleStatusRx.xHeadingRate.ucBytes[2] = ucStringRx;
+			ucSmState = 33;
+			break;
+
+		  case 33:
+			xVehicleStatusRx.xHeadingRate.ucBytes[3] = ucStringRx;
+			ucSmState = 1;
+			break;
+
+		  case 40:
+			xVehicleStatusRx.ucGear = ucStringRx;
+			ucSmState = 1;
+			break;
+
+
+		  default:
+			  break;
+		}
+
+	if(ret == 1){
+		//setar flag
+	}
+
   }
 }
 

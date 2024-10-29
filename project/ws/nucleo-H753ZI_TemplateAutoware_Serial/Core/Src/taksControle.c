@@ -41,7 +41,6 @@ void StartTaskControle(void *argument)
   // Local variables -- START
   unsigned char ucControlMode;
   unsigned char ucFlagFullMsg;
-  unsigned char ucGetVehicleDataAttempts = 0;
 
   // Joystick calibration
   unsigned int uiX0   = 33970;
@@ -91,31 +90,16 @@ void StartTaskControle(void *argument)
 	vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
 	// Send cTxMsgToCarla to CARLA
-	if (huart2.gState == HAL_UART_STATE_READY)
-	{
-	  HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
-	}
+	HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
 
-	do{
-
-	    HAL_UART_DMAPause(&huart2); // Maybe its not a good idea pause DMA just after transmit
-		ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
-	    HAL_UART_DMAResume(&huart2);
-		ucGetVehicleDataAttempts++;
-
-	} while(!ucFlagFullMsg || ucGetVehicleDataAttempts < MAX_VEHICLE_GET_DATA_ATTEMPTS); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
-
-	if(ucGetVehicleDataAttempts == MAX_VEHICLE_GET_DATA_ATTEMPTS)
-	{
-		// Chamar rotina de emergência
-	}
+	// Esperar flag que recebeu tudo
 
 	xControlAction.fTrottle = xVehicleStatus.xHeadingRate.fFloat;
 	xControlAction.fBrake = xVehicleStatus.xLatSpeed.fFloat;
 	xControlAction.fSteeringAngle = xVehicleStatus.xLongSpeed.fFloat;
-	xControlAction.ucGear = xVehicleStatus.ucGear+1;
+	xControlAction.ucGear = xVehicleStatus.ucGear;
 
-	HAL_Delay(15);
+	HAL_Delay(500);
 
   }
 
