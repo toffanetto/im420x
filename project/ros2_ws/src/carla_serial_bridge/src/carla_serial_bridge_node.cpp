@@ -15,7 +15,7 @@
 
 #define PORT "/dev/ttyUSB0"
 #define BAUDRATE B115200
-#define RX_POOLING_RATE 50ms
+#define RX_POOLING_RATE 500ms
 
 typedef union{
   float f;
@@ -152,7 +152,9 @@ class CarlaSerialBridge : public rclcpp::Node{
                             << (int)hand_brake_rx << std::endl
                             << (int)gear_rx << std::endl
                             << (int)reverse_rx << std::endl
-                            << (int)manual_shift_rx << std::endl;             
+                            << (int)manual_shift_rx << std::endl;     
+                            gear_rx++;   
+                            i = 100;
                             break;
                         
                         default:

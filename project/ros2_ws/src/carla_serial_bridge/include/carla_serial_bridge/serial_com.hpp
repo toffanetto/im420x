@@ -30,7 +30,7 @@ class SerialCom{
 
         struct termios tty;
 
-        char buffer[100];
+        char buffer[64];
         int buffer_size;
 
 
