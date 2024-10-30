@@ -33,7 +33,7 @@ extern control_signal xControlSignal;
 extern vehicle_status xVehicleStatus;
 
 // Buffer for data received from CARLA by UART2
-extern unsigned char * ucDmaBuffer; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
+extern unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
 
 
 /**
@@ -58,7 +58,7 @@ void StartTaskControle(void *argument)
   unsigned int uiYMax = 65535;
 
   // Return flags
-  unsigned int uiFlags;
+  unsigned int uiFlags = 0;
 
   // Joystick reading
   float fJoyXAxis;
@@ -70,42 +70,48 @@ void StartTaskControle(void *argument)
   // Local variables -- END
 
   // Initialization of DMA RX in circular mode
-  HAL_UART_Receive_IT(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
+  HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   // Initialization of operation mode
-  ucControlMode = AUTOWARE;
+  ucControlMode = MANUAL;
 
-  // TESTING CODE FOR UART -- START
-
-	xControlAction.fTrottle = 11.11;
-	xControlAction.fBrake = 22.22;
-	xControlAction.fSteeringAngle = 33.33;
-	xControlAction.ucManualGearShift = 1;
-	xControlAction.ucHandBrake = 2;
-	xControlAction.ucReverse = 3;
-	xControlAction.ucControlMode = MANUAL;
-	xControlAction.ucGear = 4;
-
-  while(1){
-
-	vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
-
-	// Send cTxMsgToCarla to CARLA
-	HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
-
-	// Wait CARLA full msg xVehicleStatusRx
-	//uiFlags = osThreadFlagsWait(0x10000, osFlagsWaitAll, osWaitForever);
-
-	xControlAction.fTrottle = xVehicleStatus.xHeadingRate.fFloat;
-	xControlAction.fBrake = xVehicleStatus.xLatSpeed.fFloat;
-	xControlAction.fSteeringAngle = xVehicleStatus.xLongSpeed.fFloat;
-	xControlAction.ucGear = xVehicleStatus.ucGear;
-
-	HAL_Delay(15);
-
-  }
-
-  // TESTING CODE FOR UART -- END
+//  // TESTING CODE FOR UART -- START
+//
+//	xControlAction.fTrottle = 11.11;
+//	xControlAction.fBrake = 22.22;
+//	xControlAction.fSteeringAngle = 33.33;
+//	xControlAction.ucManualGearShift = 1;
+//	xControlAction.ucHandBrake = 2;
+//	xControlAction.ucReverse = 3;
+//	xControlAction.ucControlMode = MANUAL;
+//	xControlAction.ucGear = 4;
+//
+//  while(1){
+//
+//	vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
+//
+//	// Send cTxMsgToCarla to CARLA
+//	HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
+//
+//	// Wait CARLA full msg xVehicleStatusRx
+//	uiFlags = osThreadFlagsWait(0x10000, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
+//
+//	// Timeout error
+//	if(osFlagsErrorTimeout == uiFlags)
+//	{
+//	// Deu ruim timeout
+//	}
+//
+//	xControlAction.fTrottle = xVehicleStatus.xHeadingRate.fFloat;
+//	xControlAction.fBrake = xVehicleStatus.xLatSpeed.fFloat;
+//	xControlAction.fSteeringAngle = xVehicleStatus.xLongSpeed.fFloat;
+//	xControlAction.ucGear = xVehicleStatus.ucGear;
+//
+//	HAL_Delay(15);
+//
+//  }
+//
+//  // TESTING CODE FOR UART -- END
 
 
 
@@ -151,8 +157,8 @@ void StartTaskControle(void *argument)
 	if(AUTOWARE == ucControlMode)
 	{
     // Setting driving mode lights
-    HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 1);
-    HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0);
+    HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 1);
+    HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin, 0);
 
 	  // WAIT for flag to sync xControlAction update
 	  uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_ACTION);
@@ -198,33 +204,42 @@ void StartTaskControle(void *argument)
     if(MANUAL == ucControlMode)
     {
       // Setting driving mode lights
-      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 0);
-      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 1);
+      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0);
+      HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin, 1);
 
       // Joystick read block -- START
       fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);
       fJoyYAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[1], uiY0, uiYMax, uiYMin);
 
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
-      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis : 0;
-      xControlAction.fBrake = (fJoyYAxis < 0) ? fJoyYAxis : 0;
-      xControlAction.fSteeringAngle = fJoyXAxis;
-      xControlAction.ucManualGearShift = 0;
-      xControlAction.ucHandBrake = 0;
-      xControlAction.ucReverse = 0;
+      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
+      xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
+      xControlAction.fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+      xControlAction.ucManualGearShift = 1;
+      xControlAction.ucHandBrake = 2;
+      xControlAction.ucReverse = 3;
       xControlAction.ucControlMode = MANUAL;
-      xControlAction.ucGear = 1;
+      xControlAction.ucGear = 4;
 
-	  vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
+      vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
 	  osMutexRelease(MutexControlActionHandle);
 
 	  // Send cTxMsgToCarla to CARLA
-	  HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
+	  if(huart2.gState == HAL_UART_STATE_READY)
+	  {
+		HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
+	  }
 
+	  // Wait CARLA full msg xVehicleStatusRx
+	  uiFlags = osThreadFlagsWait(0x10000, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
 
-	  // Recieve data from CARLA, even not using for control, only monitoring
-
+	  // Timeout error
+	  if(osFlagsErrorTimeout == uiFlags)
+	  {
+	  // Deu ruim timeout
+	  }
+	  uiFlags = 0;
 
       // Empacota xControlSignal
 
@@ -245,7 +260,7 @@ void StartTaskControle(void *argument)
       osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
 
       // WAIT
-      osDelay(20);
+      osDelay(200);
     }
 	// Manual mode (MANUAL) routine -- END
 

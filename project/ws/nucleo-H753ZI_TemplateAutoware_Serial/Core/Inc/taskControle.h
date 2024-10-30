@@ -23,17 +23,20 @@
 // Timeout to wait control action
 #define TIMEOUT_GET_CONTROL_ACTION 30
 
-// UART RX DMA BUFFER SIZE
-#define UART2_DMA_BUFFER_SIZE 1
+// Timeout to wait CARLA data
+#define TIMEOUT_GET_CARLA_RX 20
+
+// UART RX DMA BUFFER SIZE = MSG_RX_SIZE = 19 bytes
+#define UART2_DMA_BUFFER_SIZE 19
 
 #define MSG_TO_CARLA_SIZE 26
 
 #define MAX_VEHICLE_GET_DATA_ATTEMPTS 5
 
 // Vehicle limits
-#define MAX_TROTTLE 100
-#define MAX_BRAKE 100
-#define MAX_STEERING_ANGLE 0.5235989 // pi/6
+#define MAX_TROTTLE 1
+#define MAX_BRAKE 1
+#define MAX_STEERING_ANGLE 1 // pi/6
 
 
 #endif  /* TASKCONTROLE_H_ */

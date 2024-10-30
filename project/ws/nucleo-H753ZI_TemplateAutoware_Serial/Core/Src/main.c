@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "utils.h"
+#include "taskControle.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,9 +66,7 @@ control_signal xControlSignal;
 vehicle_status xVehicleStatus;
 
 // Buffer for data received from CARLA by UART2
-unsigned char * ucDmaBuffer; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
-
-unsigned int ucSmState = 0;
+unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
 
 
 extern osThreadId_t TaskControleHandle;
@@ -232,17 +231,21 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
   if(&huart2 == huart)
   {
 
-    switch (ucSmState)
+    unsigned int ucSmState = 0;
+
+    for(unsigned char i = 0; i<UART2_DMA_BUFFER_SIZE; i++)
+    {
+      switch (ucSmState)
       {
         case 0:
-        if('#' == * ucDmaBuffer)
+        if('#' == ucDmaBuffer[i])
         {
           ucSmState = 1;
         }
         break;
 
         case 1:
-        switch (* ucDmaBuffer)
+        switch (ucDmaBuffer[i])
         {
           case 'A':
           ucSmState = 10;
@@ -272,76 +275,77 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
         break;
 
         case 10:
-        xVehicleStatus.xLongSpeed.ucBytes[0] = * ucDmaBuffer;
+        xVehicleStatus.xLongSpeed.ucBytes[0] = ucDmaBuffer[i];
         ucSmState = 11;
         break;
 
         case 11:
-        xVehicleStatus.xLongSpeed.ucBytes[1] = * ucDmaBuffer;
+        xVehicleStatus.xLongSpeed.ucBytes[1] = ucDmaBuffer[i];
         ucSmState = 12;
         break;
 
         case 12:
-        xVehicleStatus.xLongSpeed.ucBytes[2] = * ucDmaBuffer;
+        xVehicleStatus.xLongSpeed.ucBytes[2] = ucDmaBuffer[i];
         ucSmState = 13;
         break;
 
         case 13:
-        xVehicleStatus.xLongSpeed.ucBytes[3] = * ucDmaBuffer;
+        xVehicleStatus.xLongSpeed.ucBytes[3] = ucDmaBuffer[i];
         ucSmState = 1;
         break;
 
         case 20:
-        xVehicleStatus.xLatSpeed.ucBytes[0] = * ucDmaBuffer;
+        xVehicleStatus.xLatSpeed.ucBytes[0] = ucDmaBuffer[i];
         ucSmState = 21;
         break;
 
         case 21:
-        xVehicleStatus.xLatSpeed.ucBytes[1] = * ucDmaBuffer;
+        xVehicleStatus.xLatSpeed.ucBytes[1] = ucDmaBuffer[i];
         ucSmState = 22;
         break;
 
         case 22:
-        xVehicleStatus.xLatSpeed.ucBytes[2] = * ucDmaBuffer;
+        xVehicleStatus.xLatSpeed.ucBytes[2] = ucDmaBuffer[i];
         ucSmState = 23;
         break;
 
         case 23:
-        xVehicleStatus.xLatSpeed.ucBytes[3] = * ucDmaBuffer;
+        xVehicleStatus.xLatSpeed.ucBytes[3] = ucDmaBuffer[i];
         ucSmState = 1;
         break;
 
         case 30:
-        xVehicleStatus.xHeadingRate.ucBytes[0] = * ucDmaBuffer;
+        xVehicleStatus.xHeadingRate.ucBytes[0] = ucDmaBuffer[i];
         ucSmState = 31;
         break;
 
         case 31:
-        xVehicleStatus.xHeadingRate.ucBytes[1] = * ucDmaBuffer;
+        xVehicleStatus.xHeadingRate.ucBytes[1] = ucDmaBuffer[i];
         ucSmState = 32;
         break;
 
         case 32:
-        xVehicleStatus.xHeadingRate.ucBytes[2] = * ucDmaBuffer;
+        xVehicleStatus.xHeadingRate.ucBytes[2] = ucDmaBuffer[i];
         ucSmState = 33;
         break;
 
         case 33:
-        xVehicleStatus.xHeadingRate.ucBytes[3] = * ucDmaBuffer;
+        xVehicleStatus.xHeadingRate.ucBytes[3] = ucDmaBuffer[i];
         ucSmState = 1;
         break;
 
         case 40:
-        xVehicleStatus.ucGear = * ucDmaBuffer;
+        xVehicleStatus.ucGear = ucDmaBuffer[i];
         ucSmState = 1;
         break;
 
-
         default:
-		  ucSmState = 0;
+		      ucSmState = 0;
           break;
       }
-    HAL_UART_Receive_IT(&huart2, ucDmaBuffer, 1);
+    }
+    HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
+
   }
 }
 

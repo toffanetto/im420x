@@ -19,7 +19,7 @@
 
 typedef union{
   float f;
-  char bytes[4];
+  unsigned char bytes[4];
 } float_bytes;
 
 typedef struct{
@@ -48,8 +48,6 @@ class CarlaSerialBridge : public rclcpp::Node{
         clock_sub_ = this->create_subscription<rosgraph_msgs::msg::Clock>("/clock", 10, std::bind(&CarlaSerialBridge::clock_sub_callback, this, _1));
 
         timer_ = this->create_wall_timer(RX_POOLING_RATE, std::bind(&CarlaSerialBridge::timer_callback, this));
-
-        gear_rx = 0;
 
     }
 
@@ -105,7 +103,7 @@ class CarlaSerialBridge : public rclcpp::Node{
         
         rx_msg = serial_com_link.readSerialPort();
 
-        for(int i = 0; i < (int)strlen(rx_msg); i++){
+        for(int i = 0; i < 64; i++){
             
             switch (sm_state){
 
@@ -147,14 +145,15 @@ class CarlaSerialBridge : public rclcpp::Node{
 
                         case '$':
                             sm_state = 0;   
-                            //this->publish_to_carla();
-                            std::cout << throttle_rx.f << std::endl
-                            << brake_rx.f << std::endl
-                            << steering_rx.f << std::endl
-                            << (int)hand_brake_rx << std::endl
-                            << (int)gear_rx << std::endl
-                            << (int)reverse_rx << std::endl
-                            << (int)manual_shift_rx << std::endl;     
+                            this->publish_to_carla();
+                            std::cout << "   Throttle: " << throttle_rx.f << std::endl
+                                      << "      Brake: " << brake_rx.f << std::endl
+                                      << "   Steering: " << steering_rx.f << std::endl
+                                      << "  HandBrake: " << (int)hand_brake_rx << std::endl
+                                      << "       Gear: " << (int)gear_rx << std::endl
+                                      << "    Reverse: " << (int)reverse_rx << std::endl
+                                      << "ManualShift: " << (int)manual_shift_rx << std::endl  
+                                      << "--------------------------" << std::endl;     
                             gear_rx++;   
                             break;
                         

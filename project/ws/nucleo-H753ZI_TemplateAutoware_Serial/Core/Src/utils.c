@@ -23,7 +23,7 @@
   */
 float fGetJoyPostition(unsigned int uiValue, unsigned int uiRef0, unsigned int uiRefMax, unsigned int uiRefMin)
 {
-  return (uiValue - uiRef0 > 0) ? (uiValue - uiRef0)/((float)(uiRefMax - uiRef0)) : (uiValue - uiRef0)/((float)(uiRef0 - uiRefMin));
+  return ((int)(uiValue - uiRef0) > 0) ? ((int)(uiValue - uiRef0))/((float)(uiRefMax - uiRef0)) : ((int)(uiValue - uiRef0))/((float)(uiRef0 - uiRefMin));
 }
 
 /**
