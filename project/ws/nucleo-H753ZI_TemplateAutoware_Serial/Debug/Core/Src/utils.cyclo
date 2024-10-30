@@ -1,3 +1,2 @@
 ../Core/Src/utils.c:24:7:fGetJoyPostition	2
 ../Core/Src/utils.c:37:6:vGetStringFromControlAction	1
-../Core/Src/utils.c:86:15:ucGetVehicleStatusFromString	23

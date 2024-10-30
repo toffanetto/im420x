@@ -64,6 +64,8 @@ char * SerialCom::readSerialPort(){
     }
     else{
         std::cout << "4 Error reading from serial port: " << strerror(errno) << std::endl;
+        strcpy(buffer, "");
+        return buffer;
     }
 }
 

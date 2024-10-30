@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "utils.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,6 +52,25 @@ unsigned char ucButtonState = 0;
 
 // ADC1 buffer for channels 2 and 6.
 unsigned int uiADC1Buffer[2];
+
+// Control action struct with high level control action from MicroAutoware to TaskControle,
+// for compute the vehicle control action.
+control_action xControlAction;
+
+// Control signal struct with low level control signal from TaskControle to MicroAutoware,
+// for publish in simulator topics by micro-ros.
+control_signal xControlSignal;
+
+// Data structure for data received from CARLA by UART2
+vehicle_status xVehicleStatus;
+
+// Buffer for data received from CARLA by UART2
+unsigned char * ucDmaBuffer; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
+
+unsigned int ucSmState = 0;
+
+
+extern osThreadId_t TaskControleHandle;
 
 /* USER CODE END PV */
 
@@ -194,6 +213,137 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+/**
+  * @name   HAL_GPIO_EXTI_Callback
+  * @brief  ISR callback for the JoySW, switching the control mode.
+  * @param  GPIO_Pin: EXTI pin.
+  * @retval None
+  */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(JoySW_Pin == GPIO_Pin){
+    ucButtonState ^= 1;
+    osThreadFlagsSet(TaskControleHandle, 0x1000);
+  }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
+{
+  if(&huart2 == huart)
+  {
+
+    switch (ucSmState)
+      {
+        case 0:
+        if('#' == * ucDmaBuffer)
+        {
+          ucSmState = 1;
+        }
+        break;
+
+        case 1:
+        switch (* ucDmaBuffer)
+        {
+          case 'A':
+          ucSmState = 10;
+          break;
+
+          case 'B':
+          ucSmState = 20;
+          break;
+
+          case 'C':
+          ucSmState = 30;
+          break;
+
+          case 'D':
+          ucSmState = 40;
+          break;
+
+          case '$':
+          ucSmState = 0;
+          osThreadFlagsSet(TaskControleHandle, 0x10000);
+          break;
+
+          default:
+            ucSmState = 0;
+            break;
+        }
+        break;
+
+        case 10:
+        xVehicleStatus.xLongSpeed.ucBytes[0] = * ucDmaBuffer;
+        ucSmState = 11;
+        break;
+
+        case 11:
+        xVehicleStatus.xLongSpeed.ucBytes[1] = * ucDmaBuffer;
+        ucSmState = 12;
+        break;
+
+        case 12:
+        xVehicleStatus.xLongSpeed.ucBytes[2] = * ucDmaBuffer;
+        ucSmState = 13;
+        break;
+
+        case 13:
+        xVehicleStatus.xLongSpeed.ucBytes[3] = * ucDmaBuffer;
+        ucSmState = 1;
+        break;
+
+        case 20:
+        xVehicleStatus.xLatSpeed.ucBytes[0] = * ucDmaBuffer;
+        ucSmState = 21;
+        break;
+
+        case 21:
+        xVehicleStatus.xLatSpeed.ucBytes[1] = * ucDmaBuffer;
+        ucSmState = 22;
+        break;
+
+        case 22:
+        xVehicleStatus.xLatSpeed.ucBytes[2] = * ucDmaBuffer;
+        ucSmState = 23;
+        break;
+
+        case 23:
+        xVehicleStatus.xLatSpeed.ucBytes[3] = * ucDmaBuffer;
+        ucSmState = 1;
+        break;
+
+        case 30:
+        xVehicleStatus.xHeadingRate.ucBytes[0] = * ucDmaBuffer;
+        ucSmState = 31;
+        break;
+
+        case 31:
+        xVehicleStatus.xHeadingRate.ucBytes[1] = * ucDmaBuffer;
+        ucSmState = 32;
+        break;
+
+        case 32:
+        xVehicleStatus.xHeadingRate.ucBytes[2] = * ucDmaBuffer;
+        ucSmState = 33;
+        break;
+
+        case 33:
+        xVehicleStatus.xHeadingRate.ucBytes[3] = * ucDmaBuffer;
+        ucSmState = 1;
+        break;
+
+        case 40:
+        xVehicleStatus.ucGear = * ucDmaBuffer;
+        ucSmState = 1;
+        break;
+
+
+        default:
+		  ucSmState = 0;
+          break;
+      }
+    HAL_UART_Receive_IT(&huart2, ucDmaBuffer, 1);
+  }
+}
 
 /* USER CODE END 4 */
 

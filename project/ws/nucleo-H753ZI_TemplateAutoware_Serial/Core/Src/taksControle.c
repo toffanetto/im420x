@@ -29,6 +29,13 @@ extern control_action xControlAction;
 // for publish in simulator topics by micro-ros. [From freertos.c].
 extern control_signal xControlSignal;
 
+// Data structure for data received from CARLA by UART2
+extern vehicle_status xVehicleStatus;
+
+// Buffer for data received from CARLA by UART2
+extern unsigned char * ucDmaBuffer; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
+
+
 /**
   * @name   StartTaskControle
   * @brief  TaskControle task function.
@@ -60,16 +67,10 @@ void StartTaskControle(void *argument)
   // Message buffer to CARLA by UART2
   unsigned char ucTxMsgToCarla[MSG_TO_CARLA_SIZE];
 
-  // Data structure for data received from CARLA by UART2
-  vehicle_status xVehicleStatus;
-
-  // Buffer for data received from CARLA by UART2
-  unsigned char cDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
-
   // Local variables -- END
 
   // Initialization of DMA RX in circular mode
-  HAL_UART_Receive_DMA(&huart2, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
+  HAL_UART_Receive_IT(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   // Initialization of operation mode
   ucControlMode = AUTOWARE;
@@ -92,14 +93,15 @@ void StartTaskControle(void *argument)
 	// Send cTxMsgToCarla to CARLA
 	HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
 
-	// Esperar flag que recebeu tudo
+	// Wait CARLA full msg xVehicleStatusRx
+	//uiFlags = osThreadFlagsWait(0x10000, osFlagsWaitAll, osWaitForever);
 
 	xControlAction.fTrottle = xVehicleStatus.xHeadingRate.fFloat;
 	xControlAction.fBrake = xVehicleStatus.xLatSpeed.fFloat;
 	xControlAction.fSteeringAngle = xVehicleStatus.xLongSpeed.fFloat;
 	xControlAction.ucGear = xVehicleStatus.ucGear;
 
-	HAL_Delay(500);
+	HAL_Delay(15);
 
   }
 
@@ -170,22 +172,7 @@ void StartTaskControle(void *argument)
         // Send cTxMsgToCarla to CARLA
         HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
 
-        // Recieve data from CARLA
-      do{
-
-        HAL_UART_DMAPause(&huart2);
-        ucFlagFullMsg = ucGetVehicleStatusFromString(&xVehicleStatus, cDmaBuffer, UART2_DMA_BUFFER_SIZE);
-        HAL_UART_DMAResume(&huart2);
-        ucGetVehicleDataAttempts++;
-
-      } while(!ucFlagFullMsg || ucGetVehicleDataAttempts < MAX_VEHICLE_GET_DATA_ATTEMPTS); //NAO_ENCONTRAR_O_$ -> Precisa da mensagem inteira
-
-      if(ucGetVehicleDataAttempts == MAX_VEHICLE_GET_DATA_ATTEMPTS)
-      {
-        // Chamar rotina de emergência
-      }
-
-      ucGetVehicleDataAttempts = 0;
+  	  // Recieve data from CARLA
 
       osMutexAcquire(MutexControlSignalHandle, osWaitForever);
       xControlSignal.fThrottle = xControlAction.fTrottle;

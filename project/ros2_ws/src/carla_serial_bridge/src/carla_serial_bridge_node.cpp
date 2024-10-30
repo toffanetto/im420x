@@ -15,7 +15,7 @@
 
 #define PORT "/dev/ttyUSB0"
 #define BAUDRATE B115200
-#define RX_POOLING_RATE 500ms
+#define RX_POOLING_RATE 50ms
 
 typedef union{
   float f;
@@ -38,17 +38,19 @@ class CarlaSerialBridge : public rclcpp::Node{
 
     CarlaSerialBridge() : Node("carla_serial_brigde"){
 
-      vehicle_control_pub_ = this->create_publisher<carla_msgs::msg::CarlaEgoVehicleControl>("/carla/hero/vehicle_control_cmd", 10); // This 10 is QoS?
+        vehicle_control_pub_ = this->create_publisher<carla_msgs::msg::CarlaEgoVehicleControl>("/carla/hero/vehicle_control_cmd", 10); // This 10 is QoS?
 
-      vehicle_status_sub_ = this->create_subscription<carla_msgs::msg::CarlaEgoVehicleStatus>("/carla/hero/vehicle_status", 
-                                                                                              10, std::bind(&CarlaSerialBridge::vehicle_status_sub_callback, this, _1));
+        vehicle_status_sub_ = this->create_subscription<carla_msgs::msg::CarlaEgoVehicleStatus>("/carla/hero/vehicle_status", 
+                                                                                                10, std::bind(&CarlaSerialBridge::vehicle_status_sub_callback, this, _1));
 
-      odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>("/carla/hero/odometry", 10, std::bind(&CarlaSerialBridge::odom_sub_callback, this, _1));
+        odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>("/carla/hero/odometry", 10, std::bind(&CarlaSerialBridge::odom_sub_callback, this, _1));
 
-      clock_sub_ = this->create_subscription<rosgraph_msgs::msg::Clock>("/clock", 10, std::bind(&CarlaSerialBridge::clock_sub_callback, this, _1));
+        clock_sub_ = this->create_subscription<rosgraph_msgs::msg::Clock>("/clock", 10, std::bind(&CarlaSerialBridge::clock_sub_callback, this, _1));
 
-      timer_ = this->create_wall_timer(RX_POOLING_RATE, std::bind(&CarlaSerialBridge::timer_callback, this));
-      
+        timer_ = this->create_wall_timer(RX_POOLING_RATE, std::bind(&CarlaSerialBridge::timer_callback, this));
+
+        gear_rx = 0;
+
     }
 
   private:
@@ -99,8 +101,8 @@ class CarlaSerialBridge : public rclcpp::Node{
     void timer_callback(){
         char sm_state = 0;
         
-        char * rx_msg;
-
+        char * rx_msg; 
+        
         rx_msg = serial_com_link.readSerialPort();
 
         for(int i = 0; i < (int)strlen(rx_msg); i++){
@@ -154,10 +156,10 @@ class CarlaSerialBridge : public rclcpp::Node{
                             << (int)reverse_rx << std::endl
                             << (int)manual_shift_rx << std::endl;     
                             gear_rx++;   
-                            i = 100;
                             break;
                         
                         default:
+                            sm_state = 0;       
                             break;
                     }
                     break;        
@@ -244,28 +246,27 @@ class CarlaSerialBridge : public rclcpp::Node{
                     break;
                 
                 default:
+                    sm_state = 0;       
                     break;
-            }
-
-
-            vehicle_status vehicle_status_tx;
-
-            vehicle_status_tx.ucGear = (unsigned char) gear_rx;
-            vehicle_status_tx.fLongSpeed.f = (float) 55.55;
-            vehicle_status_tx.fLatSpeed.f = (float) 66.66;
-            vehicle_status_tx.fHeadingRate.f = (float) 77.77;
-
-            char tx_msg[100];
-            sprintf(tx_msg, "#A%c%c%c%cB%c%c%c%cC%c%c%c%cD%c$",
-                    vehicle_status_tx.fLongSpeed.bytes[0], vehicle_status_tx.fLongSpeed.bytes[1], vehicle_status_tx.fLongSpeed.bytes[2], vehicle_status_tx.fLongSpeed.bytes[3], 
-                    vehicle_status_tx.fLatSpeed.bytes[0], vehicle_status_tx.fLatSpeed.bytes[1], vehicle_status_tx.fLatSpeed.bytes[2], vehicle_status_tx.fLatSpeed.bytes[3],
-                    vehicle_status_tx.fHeadingRate.bytes[0], vehicle_status_tx.fHeadingRate.bytes[1], vehicle_status_tx.fHeadingRate.bytes[2], vehicle_status_tx.fHeadingRate.bytes[3],
-                    vehicle_status_tx.ucGear);
-
-            serial_com_link.writeSerialPort(tx_msg); 
-            
+            }   
             
         }
+
+        vehicle_status vehicle_status_tx;
+
+        vehicle_status_tx.ucGear = (unsigned char) gear_rx;
+        vehicle_status_tx.fLongSpeed.f = (float) 55.55;
+        vehicle_status_tx.fLatSpeed.f = (float) 66.66;
+        vehicle_status_tx.fHeadingRate.f = (float) 77.77;
+
+        char tx_msg[100];
+        sprintf(tx_msg, "#A%c%c%c%cB%c%c%c%cC%c%c%c%cD%c$",
+                vehicle_status_tx.fLongSpeed.bytes[0], vehicle_status_tx.fLongSpeed.bytes[1], vehicle_status_tx.fLongSpeed.bytes[2], vehicle_status_tx.fLongSpeed.bytes[3], 
+                vehicle_status_tx.fLatSpeed.bytes[0], vehicle_status_tx.fLatSpeed.bytes[1], vehicle_status_tx.fLatSpeed.bytes[2], vehicle_status_tx.fLatSpeed.bytes[3],
+                vehicle_status_tx.fHeadingRate.bytes[0], vehicle_status_tx.fHeadingRate.bytes[1], vehicle_status_tx.fHeadingRate.bytes[2], vehicle_status_tx.fHeadingRate.bytes[3],
+                vehicle_status_tx.ucGear);
+
+        serial_com_link.writeSerialPort(tx_msg); 
 
       // Process rx_msg
 
