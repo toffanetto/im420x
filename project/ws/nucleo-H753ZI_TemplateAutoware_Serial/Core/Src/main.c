@@ -49,6 +49,7 @@
 
 /* USER CODE BEGIN PV */
 
+// 
 unsigned char ucButtonState = 0;
 
 // ADC1 buffer for channels 2 and 6.
@@ -68,7 +69,7 @@ vehicle_status xVehicleStatus;
 // Buffer for data received from CARLA by UART2
 unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
 
-
+// Handle of FreeRTOS task TaskControle
 extern osThreadId_t TaskControleHandle;
 
 /* USER CODE END PV */
@@ -212,25 +213,33 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 /**
   * @name   HAL_GPIO_EXTI_Callback
   * @brief  ISR callback for the JoySW, switching the control mode.
   * @param  GPIO_Pin: EXTI pin.
   * @retval None
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) 
 {
-  if(JoySW_Pin == GPIO_Pin){
+  if(JoySW_Pin == GPIO_Pin){ // ! JoySW is bouncing, calling ISR in push and pull button
     ucButtonState ^= 1;
     osThreadFlagsSet(TaskControleHandle, 0x1000);
   }
 }
 
+/**
+  * @name   HAL_UART_RxCpltCallback
+  * @brief  ISR callback for reading msg from UART with UART2_DMA_BUFFER_SIZE bytes.
+  * @param  huart: Handle for serial UART
+  * @retval None
+  */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
 {
   if(&huart2 == huart)
   {
 
+    // State machine state
     unsigned int ucSmState = 0;
 
     for(unsigned char i = 0; i<UART2_DMA_BUFFER_SIZE; i++)
@@ -265,6 +274,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
 
           case '$':
           ucSmState = 0;
+
+          // Message fully received, setting TaskControle ThreadFlag for sync.
           osThreadFlagsSet(TaskControleHandle, 0x10000);
           break;
 
@@ -344,6 +355,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
           break;
       }
     }
+    // Starting other UART reading
     HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   }

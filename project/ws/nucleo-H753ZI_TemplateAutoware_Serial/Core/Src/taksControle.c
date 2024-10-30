@@ -73,47 +73,7 @@ void StartTaskControle(void *argument)
   HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   // Initialization of operation mode
-  ucControlMode = MANUAL;
-
-//  // TESTING CODE FOR UART -- START
-//
-//	xControlAction.fTrottle = 11.11;
-//	xControlAction.fBrake = 22.22;
-//	xControlAction.fSteeringAngle = 33.33;
-//	xControlAction.ucManualGearShift = 1;
-//	xControlAction.ucHandBrake = 2;
-//	xControlAction.ucReverse = 3;
-//	xControlAction.ucControlMode = MANUAL;
-//	xControlAction.ucGear = 4;
-//
-//  while(1){
-//
-//	vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
-//
-//	// Send cTxMsgToCarla to CARLA
-//	HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
-//
-//	// Wait CARLA full msg xVehicleStatusRx
-//	uiFlags = osThreadFlagsWait(0x10000, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
-//
-//	// Timeout error
-//	if(osFlagsErrorTimeout == uiFlags)
-//	{
-//	// Deu ruim timeout
-//	}
-//
-//	xControlAction.fTrottle = xVehicleStatus.xHeadingRate.fFloat;
-//	xControlAction.fBrake = xVehicleStatus.xLatSpeed.fFloat;
-//	xControlAction.fSteeringAngle = xVehicleStatus.xLongSpeed.fFloat;
-//	xControlAction.ucGear = xVehicleStatus.ucGear;
-//
-//	HAL_Delay(15);
-//
-//  }
-//
-//  // TESTING CODE FOR UART -- END
-
-
+  ucControlMode = MANUAL; // ! MANUAL for testing joy + UART
 
   // Task loop
   for(;;)
