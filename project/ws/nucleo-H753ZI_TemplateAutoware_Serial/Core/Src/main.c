@@ -37,7 +37,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+// Number of ticks for JoySW debounce delay
 #define DEBOUNCE_TICKS 1000
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -54,9 +57,6 @@ unsigned char ucButtonState = 0;
 
 // ADC1 buffer for channels 2 and 6.
 unsigned int uiADC1Buffer[2];
-
-// Kernel tick on press JowSW for debounce
-unsigned int uiJoySWTickOnPress = 0;
 
 // Control action struct with high level control action from MicroAutoware to TaskControle,
 // for compute the vehicle control action.
@@ -75,8 +75,6 @@ unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro t
 // Handle of FreeRTOS task TaskControle
 extern osThreadId_t TaskControleHandle;
 
-// Handle of FreeRTOS timer TimerDebouncing
-extern osTimerId_t TimerDebouncingHandle;
 
 /* USER CODE END PV */
 
@@ -220,6 +218,8 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+// System ISRs -- START
+
 /**
   * @name   HAL_GPIO_EXTI_Callback
   * @brief  ISR callback for the JoySW, switching the control mode.
@@ -228,17 +228,16 @@ void SystemClock_Config(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) 
 {
-  if(JoySW_Pin == GPIO_Pin){ // ! JoySW is bouncing, calling ISR in push and pull button
+  if(JoySW_Pin == GPIO_Pin){
 
-	unsigned int uiTick = osKernelGetTickCount();
+    unsigned int uiTick = osKernelGetTickCount();
 
-	if(uiTick > (uiJoySWTickOnPress + DEBOUNCE_TICKS)) // DEBOUNCE_TICKS debounce
-	{
-	  ucButtonState ^= 1;
-	  uiJoySWTickOnPress = uiTick;
-	  osThreadFlagsSet(TaskControleHandle, 0x1000);
-	  HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
-	}
+    if(uiTick > (uiJoySWTickOnPress + DEBOUNCE_TICKS)) // DEBOUNCE_TICKS debounce
+    {
+      ucButtonState ^= 1;
+      uiJoySWTickOnPress = uiTick;
+      osThreadFlagsSet(TaskControleHandle, 0x1000);
+    }
   }
 }
 
@@ -261,108 +260,108 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
       switch (ucSmState)
       {
         case 0:
-        if('#' == ucDmaBuffer[i])
-        {
-          ucSmState = 1;
-        }
-        break;
+          if('#' == ucDmaBuffer[i])
+          {
+            ucSmState = 1;
+          }
+          break;
 
         case 1:
-        switch (ucDmaBuffer[i])
-        {
-          case 'A':
-          ucSmState = 10;
-          break;
-
-          case 'B':
-          ucSmState = 20;
-          break;
-
-          case 'C':
-          ucSmState = 30;
-          break;
-
-          case 'D':
-          ucSmState = 40;
-          break;
-
-          case '$':
-          ucSmState = 0;
-
-          // Message fully received, setting TaskControle ThreadFlag for sync.
-          osThreadFlagsSet(TaskControleHandle, 0x10000);
-          break;
-
-          default:
-            ucSmState = 0;
+          switch (ucDmaBuffer[i])
+          {
+            case 'A':
+            ucSmState = 10;
             break;
-        }
-        break;
+
+            case 'B':
+            ucSmState = 20;
+            break;
+
+            case 'C':
+            ucSmState = 30;
+            break;
+
+            case 'D':
+            ucSmState = 40;
+            break;
+
+            case '$':
+            ucSmState = 0;
+
+            // Message fully received, setting TaskControle ThreadFlag for sync.
+            osThreadFlagsSet(TaskControleHandle, 0x10000);
+            break;
+
+            default:
+              ucSmState = 0;
+              break;
+          }
+          break;
 
         case 10:
-        xVehicleStatus.xLongSpeed.ucBytes[0] = ucDmaBuffer[i];
-        ucSmState = 11;
-        break;
+          xVehicleStatus.xLongSpeed.ucBytes[0] = ucDmaBuffer[i];
+          ucSmState = 11;
+          break;
 
         case 11:
-        xVehicleStatus.xLongSpeed.ucBytes[1] = ucDmaBuffer[i];
-        ucSmState = 12;
-        break;
+          xVehicleStatus.xLongSpeed.ucBytes[1] = ucDmaBuffer[i];
+          ucSmState = 12;
+          break;
 
         case 12:
-        xVehicleStatus.xLongSpeed.ucBytes[2] = ucDmaBuffer[i];
-        ucSmState = 13;
-        break;
+          xVehicleStatus.xLongSpeed.ucBytes[2] = ucDmaBuffer[i];
+          ucSmState = 13;
+          break;
 
         case 13:
-        xVehicleStatus.xLongSpeed.ucBytes[3] = ucDmaBuffer[i];
-        ucSmState = 1;
-        break;
+          xVehicleStatus.xLongSpeed.ucBytes[3] = ucDmaBuffer[i];
+          ucSmState = 1;
+          break;
 
         case 20:
-        xVehicleStatus.xLatSpeed.ucBytes[0] = ucDmaBuffer[i];
-        ucSmState = 21;
-        break;
+          xVehicleStatus.xLatSpeed.ucBytes[0] = ucDmaBuffer[i];
+          ucSmState = 21;
+          break;
 
         case 21:
-        xVehicleStatus.xLatSpeed.ucBytes[1] = ucDmaBuffer[i];
-        ucSmState = 22;
-        break;
+          xVehicleStatus.xLatSpeed.ucBytes[1] = ucDmaBuffer[i];
+          ucSmState = 22;
+          break;
 
         case 22:
-        xVehicleStatus.xLatSpeed.ucBytes[2] = ucDmaBuffer[i];
-        ucSmState = 23;
-        break;
+          xVehicleStatus.xLatSpeed.ucBytes[2] = ucDmaBuffer[i];
+          ucSmState = 23;
+          break;
 
         case 23:
-        xVehicleStatus.xLatSpeed.ucBytes[3] = ucDmaBuffer[i];
-        ucSmState = 1;
-        break;
+          xVehicleStatus.xLatSpeed.ucBytes[3] = ucDmaBuffer[i];
+          ucSmState = 1;
+          break;
 
         case 30:
-        xVehicleStatus.xHeadingRate.ucBytes[0] = ucDmaBuffer[i];
-        ucSmState = 31;
-        break;
+          xVehicleStatus.xHeadingRate.ucBytes[0] = ucDmaBuffer[i];
+          ucSmState = 31;
+          break;
 
         case 31:
-        xVehicleStatus.xHeadingRate.ucBytes[1] = ucDmaBuffer[i];
-        ucSmState = 32;
-        break;
+          xVehicleStatus.xHeadingRate.ucBytes[1] = ucDmaBuffer[i];
+          ucSmState = 32;
+          break;
 
         case 32:
-        xVehicleStatus.xHeadingRate.ucBytes[2] = ucDmaBuffer[i];
-        ucSmState = 33;
-        break;
+          xVehicleStatus.xHeadingRate.ucBytes[2] = ucDmaBuffer[i];
+          ucSmState = 33;
+          break;
 
         case 33:
-        xVehicleStatus.xHeadingRate.ucBytes[3] = ucDmaBuffer[i];
-        ucSmState = 1;
-        break;
+          xVehicleStatus.xHeadingRate.ucBytes[3] = ucDmaBuffer[i];
+          ucSmState = 1;
+          break;
 
         case 40:
-        xVehicleStatus.ucGear = ucDmaBuffer[i];
-        ucSmState = 1;
-        break;
+          xVehicleStatus.ucGear = ucDmaBuffer[i];
+          ucSmState = 1;
+          break;
 
         default:
 		      ucSmState = 0;
@@ -371,9 +370,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
     }
     // Starting other UART reading
     HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
-
   }
 }
+
+// System ISRs -- END
 
 /* USER CODE END 4 */
 

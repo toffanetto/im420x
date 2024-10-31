@@ -97,7 +97,7 @@ void StartMicroAutoware(void *argument)
   // Setting transport layer
   rmw_uros_set_custom_transport(
     true,
-    (void *) &huart3,
+    (void * ) &huart3,
     cubemx_transport_open,
     cubemx_transport_close,
     cubemx_transport_write,
@@ -167,59 +167,59 @@ void StartMicroAutoware(void *argument)
   // create publishers
   // TODO set QoS
   rclc_publisher_init_default(
-		  	&control_mode_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, ControlModeReport),
-			"/vehicle/status/control_mode");
+        &control_mode_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, ControlModeReport),
+        "/vehicle/status/control_mode");
 
   rclc_publisher_init_default(
-		  	&vehicle_twist_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, VelocityReport),
-			"/vehicle/status/velocity_status");
+		    &vehicle_twist_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, VelocityReport),
+        "/vehicle/status/velocity_status");
 
   rclc_publisher_init_default(
-			&steering_status_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, SteeringReport),
-			"/vehicle/status/steering_status");
+        &steering_status_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, SteeringReport),
+        "/vehicle/status/steering_status");
 
   rclc_publisher_init_default(
-			&gear_status_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, GearReport),
-			"/vehicle/status/gear_status");
+        &gear_status_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, GearReport),
+        "/vehicle/status/gear_status");
 
   rclc_publisher_init_default(
-			&turn_indicators_status_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, TurnIndicatorsReport),
-			"/vehicle/status/turn_indicators_status");
+        &turn_indicators_status_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, TurnIndicatorsReport),
+        "/vehicle/status/turn_indicators_status");
+
+    rclc_publisher_init_default(
+        &hazard_lights_status_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, HazardLightsReport),
+        "/vehicle/status/hazard_lights_status");
 
   rclc_publisher_init_default(
-			&hazard_lights_status_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, HazardLightsReport),
-			"/vehicle/status/hazard_lights_status");
+        &actuation_status_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, ActuationStatusStamped),
+        "/vehicle/status/actuation_status");
 
   rclc_publisher_init_default(
-			&actuation_status_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, ActuationStatusStamped),
-			"/vehicle/status/actuation_status");
-
-  rclc_publisher_init_default(
-			&steering_wheel_status_pub_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, SteeringWheelStatusStamped),
-			"/vehicle/status/steering_wheel_status");
+        &steering_wheel_status_pub_,
+        &VehicleInterfaceNode,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, SteeringWheelStatusStamped),
+        "/vehicle/status/steering_wheel_status");
 
   // creating servers
   rclc_service_init_default(
 		    &control_mode_server_,
-			&VehicleInterfaceNode,
-			ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_vehicle_msgs, srv, ControlModeCommand),
-			"/control/control_mode_request");
+        &VehicleInterfaceNode,
+        ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_vehicle_msgs, srv, ControlModeCommand),
+        "/control/control_mode_request");
 
 
   // adding callbacks to executor
@@ -242,47 +242,47 @@ void StartMicroAutoware(void *argument)
     if(0x00111111 == ucSubscribersRecieved)
     {
 
-	  // TODO: Gather all subs data, then compact and send to TaskControle.
+	    // TODO: Gather all subs data, then compact and send to TaskControle.
 
       // Verify if Autoware changed the operation mode
 	  if(AUTOWARE == ucControlMode)
 	  {
-		ucControlMode = MANUAL;
-		osThreadFlagsSet(TaskControleHandle, 0x10);
+      ucControlMode = MANUAL;
+      osThreadFlagsSet(TaskControleHandle, 0x10);
 	  }
 	  else if(MANUAL == ucControlMode)
 	  {
-		ucControlMode = AUTOWARE;
-		osThreadFlagsSet(TaskControleHandle, 0x01);
+      ucControlMode = AUTOWARE;
+      osThreadFlagsSet(TaskControleHandle, 0x01);
 	  }
 
 	  // Autonomous mode: send commands
-      if(AUTOWARE == ucControlMode)
-      {
+    if(AUTOWARE == ucControlMode)
+    {
     	osMutexAcquire(MutexControlActionHandle, osWaitForever);
 	    // xControlAction
-		osMutexRelease(MutexControlSignalHandle);
+		  osMutexRelease(MutexControlSignalHandle);
 
-		osThreadFlagsSet(TaskControleHandle, 0x100);
-      }
+		  osThreadFlagsSet(TaskControleHandle, 0x100);
+    }
 
-      // WAIT for flag to sync xControlSignal update
-      uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
+    // WAIT for flag to sync xControlSignal update
+    uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
 
-      // Timeout Error
-      if(osFlagsErrorTimeout == uiFlags)
-      {
+    // Timeout Error
+    if(osFlagsErrorTimeout == uiFlags)
+    {
 
-      }
+    }
 
-      // xControlSignal updated
-      if(0x100 == uiFlags)
-      {
-    	// Pub data carla
-      }
+    // xControlSignal updated
+    if(0x100 == uiFlags)
+    {
+    // Pub data carla
+    }
 
-      // Checking control mode update by hardware.
-      uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAll, 0);
+    // Checking control mode update by hardware.
+    uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAll, 0);
 
 	  if(0x01 == uiFlags)
 	  {
@@ -294,10 +294,9 @@ void StartMicroAutoware(void *argument)
 	  if(0x10 == uiFlags)
 	  {
 	    ucControlMode = MANUAL;
-		// publish to autoware
-		uiFlags = 0;
+		  // publish to autoware
+		  uiFlags = 0;
 	  }
-
 
 	  // Reseting subscribers flags
 	  ucSubscribersRecieved = 0;
