@@ -118,7 +118,7 @@ void StartTaskControle(void *argument)
 	{
     // Setting driving mode lights
     HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 1);
-    HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin, 0);
+    HAL_GPIO_WritePin(LD1_GPIO_Port,LD3_Pin, 0);
 
 	  // WAIT for flag to sync xControlAction update
 	  uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_ACTION);
@@ -165,7 +165,7 @@ void StartTaskControle(void *argument)
     {
       // Setting driving mode lights
       HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0);
-      HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin, 1);
+      HAL_GPIO_WritePin(LD1_GPIO_Port,LD3_Pin, 1);
 
       // Joystick read block -- START
       fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);

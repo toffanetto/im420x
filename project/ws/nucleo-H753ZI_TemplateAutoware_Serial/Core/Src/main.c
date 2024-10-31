@@ -37,7 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DEBOUNCE_TICKS 1000
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,6 +55,9 @@ unsigned char ucButtonState = 0;
 // ADC1 buffer for channels 2 and 6.
 unsigned int uiADC1Buffer[2];
 
+// Kernel tick on press JowSW for debounce
+unsigned int uiJoySWTickOnPress = 0;
+
 // Control action struct with high level control action from MicroAutoware to TaskControle,
 // for compute the vehicle control action.
 control_action xControlAction;
@@ -71,6 +74,9 @@ unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro t
 
 // Handle of FreeRTOS task TaskControle
 extern osThreadId_t TaskControleHandle;
+
+// Handle of FreeRTOS timer TimerDebouncing
+extern osTimerId_t TimerDebouncingHandle;
 
 /* USER CODE END PV */
 
@@ -223,8 +229,16 @@ void SystemClock_Config(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) 
 {
   if(JoySW_Pin == GPIO_Pin){ // ! JoySW is bouncing, calling ISR in push and pull button
-    ucButtonState ^= 1;
-    osThreadFlagsSet(TaskControleHandle, 0x1000);
+
+	unsigned int uiTick = osKernelGetTickCount();
+
+	if(uiTick > (uiJoySWTickOnPress + DEBOUNCE_TICKS)) // DEBOUNCE_TICKS debounce
+	{
+	  ucButtonState ^= 1;
+	  uiJoySWTickOnPress = uiTick;
+	  osThreadFlagsSet(TaskControleHandle, 0x1000);
+	  HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+	}
   }
 }
 
