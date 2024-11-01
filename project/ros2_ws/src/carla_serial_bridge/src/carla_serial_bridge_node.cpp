@@ -65,14 +65,14 @@ class CarlaSerialBridge : public rclcpp::Node{
         vehicle_status_tx.fLatSpeed.f = (float) msg->twist.twist.linear.y;
         vehicle_status_tx.fHeadingRate.f = (float) msg->twist.twist.angular.z;
 
-        char * tx_msg[100];
+        char tx_msg[100];
         sprintf(tx_msg, "#A%c%c%c%cB%c%c%c%cC%c%c%c%cD%c$",
                 vehicle_status_tx.fLongSpeed.bytes[0], vehicle_status_tx.fLongSpeed.bytes[1], vehicle_status_tx.fLongSpeed.bytes[2], vehicle_status_tx.fLongSpeed.bytes[3], 
                 vehicle_status_tx.fLatSpeed.bytes[0], vehicle_status_tx.fLatSpeed.bytes[1], vehicle_status_tx.fLatSpeed.bytes[2], vehicle_status_tx.fLatSpeed.bytes[3],
                 vehicle_status_tx.fHeadingRate.bytes[0], vehicle_status_tx.fHeadingRate.bytes[1], vehicle_status_tx.fHeadingRate.bytes[2], vehicle_status_tx.fHeadingRate.bytes[3],
                 vehicle_status_tx.ucGear);
 
-        serial_com_link.writeSerialPort(tx_msg);
+        serial_com_link.writeSerialPort(tx_msg); 
     }
 
     void vehicle_status_sub_callback(const carla_msgs::msg::CarlaEgoVehicleStatus::SharedPtr msg) const{
