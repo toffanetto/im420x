@@ -118,8 +118,7 @@ void StartTaskControle(void *argument)
     if(AUTOWARE == ucControlMode)
     {
       // Setting driving mode lights
-      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 1);
-      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 0);
+	  vDrivingModeLights(ucControlMode);
 
       // WAIT for flag to sync xControlAction update
   	  uiFlags = osThreadFlagsGet();
@@ -166,8 +165,7 @@ void StartTaskControle(void *argument)
     if(MANUAL == ucControlMode)
     {
       // Setting driving mode lights
-      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0);
-      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 1);
+  	  vDrivingModeLights(ucControlMode);
 
       // Joystick read block -- START
       fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);
@@ -188,10 +186,10 @@ void StartTaskControle(void *argument)
       osMutexRelease(MutexControlActionHandle);
 
       // Send cTxMsgToCarla to CARLA
-      if(huart2.gState == HAL_UART_STATE_READY)
-      {
-      HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
-      }
+      //if(huart2.gState == HAL_UART_STATE_READY)
+      //{
+        HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
+      //}
 
       // Wait CARLA full msg xVehicleStatusRx
   	  uiFlags = osThreadFlagsGet();
@@ -201,6 +199,7 @@ void StartTaskControle(void *argument)
       if(osFlagsErrorTimeout == uiFlags)
       {
       // Deu ruim timeout
+
       }
       uiFlags = 0;
 

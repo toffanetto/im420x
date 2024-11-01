@@ -72,3 +72,37 @@ void vGetStringFromControlAction(control_action xControlActionTx, unsigned char 
   ucTxMsg[25] = (unsigned char)'\0';
   
 }
+
+/**
+  * @name   vDrivingModeLights
+  * @brief  Update driving mode signaling lights
+  * @param  ucDrivingMode:  Driving mode
+  * @retval None
+  */
+void vDrivingModeLights(unsigned char ucDrivingMode)
+{
+  switch (ucDrivingMode)
+  {
+    case AUTOWARE:
+      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 0); // Green LED
+      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 1); // Ambar LED
+      HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin, 0); // Red LED
+      break;
+
+    case MANUAL:
+      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 1); // Green LED
+      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0); // Ambar LED
+      HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin, 0); // Red LED
+      break;
+
+    case EMERGENCY:
+      HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0); // Green LED
+      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 0); // Ambar LED
+      HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin, 1); // Red LED
+      break;
+
+    default:
+      break;
+  }
+
+}

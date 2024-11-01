@@ -16,6 +16,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "cmsis_os.h"
+#include "main.h"
 
 /**
   * @name   float_bytes
@@ -72,7 +74,8 @@ typedef struct{
   float fHeadingRate;
 } control_signal;
 
-
+// Driving mode
+#define EMERGENCY 0
 #define AUTOWARE 1
 #define MANUAL 2
 
@@ -98,5 +101,12 @@ float fGetJoyPostition(unsigned int uiValue, unsigned int uiRef0, unsigned int u
   */
 void vGetStringFromControlAction(control_action xControlActionTx, unsigned char * ucTxMsg);
 
+/**
+  * @name   vDrivingModeLights
+  * @brief  Update driving mode signaling lights
+  * @param  ucDrivingMode:  Driving mode
+  * @retval None
+  */
+void vDrivingModeLights(unsigned char ucDrivingMode);
 
 #endif  /* UTILS_H_ */
