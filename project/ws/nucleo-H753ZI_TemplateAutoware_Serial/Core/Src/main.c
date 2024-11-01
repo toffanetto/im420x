@@ -58,6 +58,9 @@ unsigned char ucButtonState = 0;
 // ADC1 buffer for channels 2 and 6.
 unsigned int uiADC1Buffer[2];
 
+// On press JoySW tick counter for JoySW debounce delay
+unsigned int uiJoySWTickOnPress = 0;
+
 // Control action struct with high level control action from MicroAutoware to TaskControle,
 // for compute the vehicle control action.
 control_action xControlAction;

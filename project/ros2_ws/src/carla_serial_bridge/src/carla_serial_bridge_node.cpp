@@ -14,7 +14,7 @@
 #include "carla_serial_bridge/serial_com.hpp"
 
 #define PORT "/dev/ttyUSB0"
-#define BAUDRATE B115200
+#define BAUDRATE B921600
 #define RX_POOLING_RATE 50ms
 
 typedef union{

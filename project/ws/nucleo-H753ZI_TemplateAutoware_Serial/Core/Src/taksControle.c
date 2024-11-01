@@ -78,7 +78,9 @@ void StartTaskControle(void *argument)
   // Task loop
   for(;;)
   {
+
     // Looking fot operation mode change by Autoware -- START
+	uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAny, 0);
 
     if(0x01 == uiFlags)
@@ -93,7 +95,9 @@ void StartTaskControle(void *argument)
     // Looking for operation mode change by Autoware -- END
 
     // Looking for operation mode change by JoySW -- START
-    uiFlags = osThreadFlagsWait(0x1000, osFlagsWaitAll, 0); // ! 0x1000 flag has been overried by previous osThreadFlagWait
+    uiFlags = osThreadFlagsGet();
+    uiFlags = osThreadFlagsWait(0x1000, osFlagsWaitAll, 0);
+
 
     if(0x1000 == uiFlags)
     {
@@ -115,9 +119,10 @@ void StartTaskControle(void *argument)
     {
       // Setting driving mode lights
       HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 1);
-      HAL_GPIO_WritePin(LD1_GPIO_Port,LD3_Pin, 0);
+      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 0);
 
       // WAIT for flag to sync xControlAction update
+  	  uiFlags = osThreadFlagsGet();
       uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_ACTION);
 
       // Timeout error
@@ -162,7 +167,7 @@ void StartTaskControle(void *argument)
     {
       // Setting driving mode lights
       HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin, 0);
-      HAL_GPIO_WritePin(LD1_GPIO_Port,LD3_Pin, 1);
+      HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin, 1);
 
       // Joystick read block -- START
       fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);
@@ -172,11 +177,11 @@ void StartTaskControle(void *argument)
       xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
       xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
       xControlAction.fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
-      xControlAction.ucManualGearShift = 1;
-      xControlAction.ucHandBrake = 2;
-      xControlAction.ucReverse = 3;
+      xControlAction.ucManualGearShift = 0;
+      xControlAction.ucHandBrake = 0;
+      xControlAction.ucReverse = 0;
       xControlAction.ucControlMode = MANUAL;
-      xControlAction.ucGear = 4;
+      xControlAction.ucGear = 1;
 
       vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
@@ -189,6 +194,7 @@ void StartTaskControle(void *argument)
       }
 
       // Wait CARLA full msg xVehicleStatusRx
+  	  uiFlags = osThreadFlagsGet();
       uiFlags = osThreadFlagsWait(0x10000, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
 
       // Timeout error
