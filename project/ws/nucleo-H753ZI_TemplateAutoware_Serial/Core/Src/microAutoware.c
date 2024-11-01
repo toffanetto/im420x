@@ -23,6 +23,9 @@ extern osMutexId_t MutexControlActionHandle;
 extern osMutexId_t MutexControlSignalHandle;
 extern osThreadId_t TaskControleHandle;
 
+extern control_action xControlAction;
+extern control_signal xControlSignal;
+
 /**
   * @name   StartMicroAutoware
   * @brief  MicroAutoware task function.
@@ -237,6 +240,8 @@ void StartMicroAutoware(void *argument)
   for (;;)
   {
 
+    // Sync time with ROS
+
     rclc_executor_spin_some(&executor, 20 * (1000 * 1000)); // Spinning executor for 20 ms.
 
     if(0x00111111 == ucSubscribersRecieved)
@@ -247,12 +252,10 @@ void StartMicroAutoware(void *argument)
       // Verify if Autoware changed the operation mode
 	  if(AUTOWARE == ucControlMode)
 	  {
-      ucControlMode = MANUAL;
       osThreadFlagsSet(TaskControleHandle, 0x10);
 	  }
 	  else if(MANUAL == ucControlMode)
 	  {
-      ucControlMode = AUTOWARE;
       osThreadFlagsSet(TaskControleHandle, 0x01);
 	  }
 
@@ -260,13 +263,21 @@ void StartMicroAutoware(void *argument)
     if(AUTOWARE == ucControlMode)
     {
     	osMutexAcquire(MutexControlActionHandle, osWaitForever);
-	    // xControlAction
+      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
+      xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
+      xControlAction.fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+      xControlAction.ucManualGearShift = 0;
+      xControlAction.ucHandBrake = 0;
+      xControlAction.ucReverse = 0;
+      xControlAction.ucControlMode = MANUAL;
+      xControlAction.ucGear = 1;
 		  osMutexRelease(MutexControlSignalHandle);
 
 		  osThreadFlagsSet(TaskControleHandle, 0x100);
     }
 
     // WAIT for flag to sync xControlSignal update
+    uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
 
     // Timeout Error
@@ -278,7 +289,19 @@ void StartMicroAutoware(void *argument)
     // xControlSignal updated
     if(0x100 == uiFlags)
     {
-    // Pub data carla
+    // Pub data autoware
+      osMutexAcquire(MutexControlSignalHandle, osWaitForever);  
+    // xControlSignal.fThrottle;
+    // xControlSignal.fBrake;
+    // xControlSignal.fSteeringAngle;
+    // xControlSignal.ucManualGearShift;
+    // xControlSignal.ucHandBrake;
+    // xControlSignal.ucReverse;
+    // xControlSignal.ucGear;
+    // xControlSignal.fLongSpeed;
+    // xControlSignal.fLatSpeed;
+    // xControlSignal.fHeadingRate;
+      osMutexRelease(MutexControlSignalHandle);
     }
 
     // Checking control mode update by hardware.
@@ -287,16 +310,13 @@ void StartMicroAutoware(void *argument)
 	  if(0x01 == uiFlags)
 	  {
 	    ucControlMode = AUTOWARE;
-	    // publish to autoware
-	    uiFlags = 0;
 	  }
-
-	  if(0x10 == uiFlags)
+    else if(0x10 == uiFlags)
 	  {
 	    ucControlMode = MANUAL;
-		  // publish to autoware
-		  uiFlags = 0;
 	  }
+    
+    
 
 	  // Reseting subscribers flags
 	  ucSubscribersRecieved = 0;

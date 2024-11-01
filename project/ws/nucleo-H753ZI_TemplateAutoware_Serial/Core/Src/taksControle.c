@@ -80,7 +80,7 @@ void StartTaskControle(void *argument)
   {
 
     // Looking fot operation mode change by Autoware -- START
-	uiFlags = osThreadFlagsGet();
+	  uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAny, 0);
 
     if(0x01 == uiFlags)
@@ -97,7 +97,6 @@ void StartTaskControle(void *argument)
     // Looking for operation mode change by JoySW -- START
     uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(0x1000, osFlagsWaitAll, 0);
-
 
     if(0x1000 == uiFlags)
     {
@@ -174,7 +173,7 @@ void StartTaskControle(void *argument)
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
       xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
       xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
-      xControlAction.fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
+      xControlAction.fSteeringAngle = -fJoyXAxis*MAX_STEERING_ANGLE;
       xControlAction.ucManualGearShift = 0;
       xControlAction.ucHandBrake = 0;
       xControlAction.ucReverse = 0;
@@ -201,7 +200,6 @@ void StartTaskControle(void *argument)
       // Deu ruim timeout
 
       }
-      uiFlags = 0;
 
       // Empacota xControlSignal
 
