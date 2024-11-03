@@ -48,6 +48,7 @@
 \usepackage{verbatim}
 \usepackage{xcolor}
 \usepackage{svg}
+\usepackage{multimedia}
 
 \captionsetup[figure]{labelformat=simple}
 
