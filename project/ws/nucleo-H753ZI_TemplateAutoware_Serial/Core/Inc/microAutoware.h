@@ -21,8 +21,11 @@
   #define NODE_NAME "vehicle_interface"
   #define TRANSPORT UART
 
-// Timeout to wait control signal
+  // Timeout to wait control signal
   #define TIMEOUT_GET_CONTROL_SIGNAL 30
+
+  // Timeout for sync timestamp with ROS
+  #define TIMEOUT_TS_SYNC 100
 
 
   #if TRANSPORT == UART
@@ -42,6 +45,9 @@
   #include <uxr/client/transport.h>
   #include <rmw_microxrcedds_c/config.h>
   #include <rmw_microros/rmw_microros.h>
+
+  // Clock msg type
+  #include <rosgraph_msgs/msg/clock.h>
 
   // Autoware msg types
   #include <autoware_control_msgs/msg/control.h>
@@ -80,13 +86,14 @@
   void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
 
   // Executor callbacks (implemented in executorCallbacks.c)
+  void clock_callback(const void * xMsgIn);
   void control_cmd_callback(const void * xMsgIn);
   void gear_cmd_callback(const void * xMsgIn);
   void turn_indicators_cmd_callback(const void * xMsgIn);
   void hazard_lights_cmd_callback(const void * xMsgIn);
   void actuation_cmd_callback(const void * xMsgIn);
   void emergency_callback(const void * xMsgIn);
-  void control_mode_cmd_callback(const void * xRequestMsg, void * xResponseMsg);
+  void control_mode_cmd_callback(const void * xRequestMsg, autoware_vehicle_msgs__srv__ControlModeCommand_Response * xResponseMsg);
 
   // Function Prototypes -- END
 

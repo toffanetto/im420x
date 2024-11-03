@@ -77,7 +77,7 @@ typedef struct{
 // Driving mode
 #define EMERGENCY 0
 #define AUTOWARE 1
-#define MANUAL 2
+#define MANUAL 4
 
 /**
   * @name   fGetJoyPostition

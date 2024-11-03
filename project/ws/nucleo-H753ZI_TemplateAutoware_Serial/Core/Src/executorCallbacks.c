@@ -14,9 +14,26 @@
 #include "microAutoware.h"
 
 // From microAutoware.c
-extern unsigned int ucSubscribersRecieved;
+extern unsigned char ucSubscribersRecieved;
+extern autoware_vehicle_msgs__srv__ControlModeCommand_Response control_mode_response_msg_;
+
+// From freertos.c
+extern osThreadId_t TaskControleHandle;
+extern osThreadId_t TaskMicroAutowaHandle;
 
 // Subscriptors callbacks
+
+/**
+  * @name   clock_callback
+  * @brief  ROS topic subscriber callback to recieve current timestamp
+  * @param  xMsgIn: pointer to the message recieved in the topic.
+  * @retval None
+  */
+void clock_callback(const void * xMsgIn)
+{
+  const rosgraph_msgs__msg__Clock * clock_msg_ = (const rosgraph_msgs__msg__Clock * )xMsgIn;
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 0);
+}
 
 /**
   * @name   control_cmd_callback
@@ -27,7 +44,7 @@ extern unsigned int ucSubscribersRecieved;
 void control_cmd_callback(const void * xMsgIn)
 {
   const autoware_control_msgs__msg__Control * control_cmd_msg_ = (const autoware_control_msgs__msg__Control * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 0);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 1);
 }
 
 /**
@@ -39,7 +56,7 @@ void control_cmd_callback(const void * xMsgIn)
 void gear_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__GearCommand * gear_cmd_msg_ = (const autoware_vehicle_msgs__msg__GearCommand * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 1);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 2);
 }
 
 /**
@@ -51,7 +68,7 @@ void gear_cmd_callback(const void * xMsgIn)
 void turn_indicators_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * turn_indicators_cmd_msg_ = (const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 2);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 3);
 }
 
 /**
@@ -63,7 +80,7 @@ void turn_indicators_cmd_callback(const void * xMsgIn)
 void hazard_lights_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__HazardLightsCommand * hazard_lights_cmd_msg_ = (const autoware_vehicle_msgs__msg__HazardLightsCommand * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 3);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 4);
 }
 
 // ! optional topic, probabily will not be used.
@@ -76,7 +93,7 @@ void hazard_lights_cmd_callback(const void * xMsgIn)
 void actuation_cmd_callback(const void * xMsgIn)
 {
   const tier4_vehicle_msgs__msg__ActuationCommandStamped * actuation_cmd_msg_ = (const tier4_vehicle_msgs__msg__ActuationCommandStamped * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 4);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 5);
 }
 
 // ! optional topic, probabily will not be used.
@@ -89,10 +106,8 @@ void actuation_cmd_callback(const void * xMsgIn)
 void emergency_callback(const void * xMsgIn)
 {
   const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * emergency_msg_ = (const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 5);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 6);
 }
-
-// TODO: CARLA callbacks
 
 // Service callbacks
 
@@ -100,15 +115,24 @@ void emergency_callback(const void * xMsgIn)
 /**
   * @name   control_mode_cmd_callback
   * @brief  ROS service server callback to change the control mode and return a status about the change
-  * @param  xMsgIn: pointer to the message recieved in the topic.
+  * @param  xRequestMsg: pointer to the request made for the server.
+  * @param  xResponseMsg: pointer to the response gave by the server.
   * @retval None
   */
-void control_mode_cmd_callback(const void * xRequestMsg, void * xResponseMsg)
+void control_mode_cmd_callback(const void * xRequestMsg, autoware_vehicle_msgs__srv__ControlModeCommand_Response * xResponseMsg)
 {
   const autoware_vehicle_msgs__srv__ControlModeCommand_Request * control_mode_request_msg_ = (const autoware_vehicle_msgs__srv__ControlModeCommand_Request * )xRequestMsg;
 
-  // TODO Send threadflag to TaskControle
+  if(AUTOWARE == control_mode_request_msg_->mode)
+  {
+    osThreadFlagsSet(TaskControleHandle, 0x10);
+    osThreadFlagsSet(TaskMicroAutowaHandle, 0x10);
+  }
+  else if(MANUAL == control_mode_request_msg_->mode)
+  {
+    osThreadFlagsSet(TaskControleHandle, 0x01);
+    osThreadFlagsSet(TaskMicroAutowaHandle, 0x01);
+  }
 
-
-  //xResponseMsg = &control_mode_response_msg_;
+  xResponseMsg->success = true;
 }

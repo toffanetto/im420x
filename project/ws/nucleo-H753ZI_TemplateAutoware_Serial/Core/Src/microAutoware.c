@@ -17,12 +17,14 @@
   * @name   ucSubscribersRecieved
   * @brief  Topic recieved flag for gather data and send to TaskControl.
   */
-unsigned int ucSubscribersRecieved = 0;
+unsigned char ucSubscribersRecieved = 0;
 
+// From freertos.c
 extern osMutexId_t MutexControlActionHandle;
 extern osMutexId_t MutexControlSignalHandle;
 extern osThreadId_t TaskControleHandle;
 
+// From main.c
 extern control_action xControlAction;
 extern control_signal xControlSignal;
 
@@ -32,7 +34,7 @@ extern control_signal xControlSignal;
   * @param  argument : not used.
   * @retval None
   */
-void StartMicroAutoware(void *argument)
+void StartMicroAutoware(void * argument)
 {
 
   // Variables -- START
@@ -41,6 +43,8 @@ void StartMicroAutoware(void *argument)
   unsigned char ucControlMode = AUTOWARE;
 
   // micro-ROS subscribers
+  rcl_subscription_t clock_sub_;                 // rosgraph_msgs/msg/clock.h
+
   rcl_subscription_t control_cmd_sub_;           // autoware_control_msgs/msg/control.h
   rcl_subscription_t gear_cmd_sub_;              // autoware_vehicle_msgs/msg/gearcommand.h
 
@@ -64,6 +68,8 @@ void StartMicroAutoware(void *argument)
   rcl_service_t control_mode_server_;
 
   // micro-ROS messages
+  rosgraph_msgs__msg__Clock clock_msg_;
+
   autoware_control_msgs__msg__Control control_cmd_msg_;
   autoware_vehicle_msgs__msg__GearCommand gear_cmd_msg_;
 
@@ -132,6 +138,12 @@ void StartMicroAutoware(void *argument)
   // create subscribers
   // TODO set QoS
   rclc_subscription_init_default(
+    		&clock_sub_,
+    		&VehicleInterfaceNode,
+    		ROSIDL_GET_MSG_TYPE_SUPPORT(rosgraph_msgs, msg, clock),
+    		"/clock");
+        
+  rclc_subscription_init_default(
     		&control_cmd_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_control_msgs, msg, Control),
@@ -199,7 +211,7 @@ void StartMicroAutoware(void *argument)
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, TurnIndicatorsReport),
         "/vehicle/status/turn_indicators_status");
 
-    rclc_publisher_init_default(
+  rclc_publisher_init_default(
         &hazard_lights_status_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, HazardLightsReport),
@@ -226,6 +238,7 @@ void StartMicroAutoware(void *argument)
 
 
   // adding callbacks to executor
+  rclc_executor_add_subscription(&executor, &clock_sub_, &clock_msg_, &clock_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &control_cmd_sub_, &control_cmd_msg_, &control_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &gear_cmd_sub_, &gear_cmd_msg_, &gear_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_service(&executor, &control_mode_server_, &control_mode_request_msg_, &control_mode_response_msg_, control_mode_cmd_callback);
@@ -235,95 +248,105 @@ void StartMicroAutoware(void *argument)
   rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &emergency_sub_, &emergency_msg_, &emergency_callback, ON_NEW_DATA);
 
-
-
+  // Task loop
   for (;;)
   {
 
     // Sync time with ROS
+    rmw_uros_sync_session(TIMEOUT_TS_SYNC);
 
     rclc_executor_spin_some(&executor, 20 * (1000 * 1000)); // Spinning executor for 20 ms.
 
-    if(0x00111111 == ucSubscribersRecieved)
-    {
-
-	    // TODO: Gather all subs data, then compact and send to TaskControle.
-
-      // Verify if Autoware changed the operation mode
-	  if(AUTOWARE == ucControlMode)
-	  {
-      osThreadFlagsSet(TaskControleHandle, 0x10);
-	  }
-	  else if(MANUAL == ucControlMode)
-	  {
-      osThreadFlagsSet(TaskControleHandle, 0x01);
-	  }
-
-	  // Autonomous mode: send commands
-    if(AUTOWARE == ucControlMode)
-    {
-    	osMutexAcquire(MutexControlActionHandle, osWaitForever);
-      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
-      xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
-      xControlAction.fSteeringAngle = fJoyXAxis*MAX_STEERING_ANGLE;
-      xControlAction.ucManualGearShift = 0;
-      xControlAction.ucHandBrake = 0;
-      xControlAction.ucReverse = 0;
-      xControlAction.ucControlMode = MANUAL;
-      xControlAction.ucGear = 1;
-		  osMutexRelease(MutexControlSignalHandle);
-
-		  osThreadFlagsSet(TaskControleHandle, 0x100);
-    }
-
-    // WAIT for flag to sync xControlSignal update
+    // Checking if control mode has changed.
     uiFlags = osThreadFlagsGet();
-    uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
+    uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAny, 0);
 
-    // Timeout Error
-    if(osFlagsErrorTimeout == uiFlags)
+    if(0x01 == uiFlags)
     {
-
+      ucControlMode = AUTOWARE;
     }
-
-    // xControlSignal updated
-    if(0x100 == uiFlags)
-    {
-    // Pub data autoware
-      osMutexAcquire(MutexControlSignalHandle, osWaitForever);  
-    // xControlSignal.fThrottle;
-    // xControlSignal.fBrake;
-    // xControlSignal.fSteeringAngle;
-    // xControlSignal.ucManualGearShift;
-    // xControlSignal.ucHandBrake;
-    // xControlSignal.ucReverse;
-    // xControlSignal.ucGear;
-    // xControlSignal.fLongSpeed;
-    // xControlSignal.fLatSpeed;
-    // xControlSignal.fHeadingRate;
-      osMutexRelease(MutexControlSignalHandle);
-    }
-
-    // Checking control mode update by hardware.
-    uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAll, 0);
-
-	  if(0x01 == uiFlags)
-	  {
-	    ucControlMode = AUTOWARE;
-	  }
     else if(0x10 == uiFlags)
-	  {
-	    ucControlMode = MANUAL;
-	  }
-    
-    
+    {
+      ucControlMode = MANUAL;
+    }
+    else if(0x11 == uiFlags)
+    {
+      ucControlMode = MANUAL;
+    }
 
-	  // Reseting subscribers flags
-	  ucSubscribersRecieved = 0;
+    control_mode_msg_.stamp = clock_msg_.clock;
+    control_mode_msg_.mode = ucControlMode;
+    rcl_publish(&control_mode_pub_, &control_mode_msg_, NULL);
+
+    // All topics are recieved
+    if(0b1111111 == ucSubscribersRecieved)
+    {
+      // Autonomous mode: Gather all subs data, then compact and send to TaskControle.
+      if(AUTOWARE == ucControlMode)
+      {
+        osMutexAcquire(MutexControlActionHandle, osWaitForever);
+        xControlAction.fTrottle = (float) actuation_cmd_msg_.actuation.accel_cmd;
+        xControlAction.fBrake = (float) actuation_cmd_msg_.actuation.brake_cmd;
+        xControlAction.fSteeringAngle = (float) control_cmd_msg_.lateral.steering_tire_angle; // ! Look if use this ou actuation_cmd_msg_ steer_cmd
+        xControlAction.ucManualGearShift = 0;
+        xControlAction.ucHandBrake = 0;
+        xControlAction.ucReverse = 0;
+        xControlAction.ucControlMode = MANUAL;
+        xControlAction.ucGear = 1;
+        osMutexRelease(MutexControlSignalHandle);
+
+        osThreadFlagsSet(TaskControleHandle, 0x100);
+      }
+
+      // WAIT for flag to sync xControlSignal update
+      uiFlags = osThreadFlagsGet();
+      uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
+
+      // Timeout Error
+      if(osFlagsErrorTimeout == uiFlags)
+      {
+
+      }
+
+      // xControlSignal updated
+      if(0x100 == uiFlags)
+      {
+        // Assembling microAutoware msgs
+        osMutexAcquire(MutexControlSignalHandle, osWaitForever);  
+
+        // vehicle_twist_msg_ data
+        vehicle_twist_msg_.header.stamp = clock_msg_.clock;
+        vehicle_twist_msg_.heading_rate = xControlSignal.fHeadingRate;
+        vehicle_twist_msg_.lateral_velocity = xControlSignal.fLatSpeed;
+        vehicle_twist_msg_.longitudinal_velocity = xControlSignal.fLongSpeed;
+
+        // steering_status_msg_ data
+        steering_status_msg_.stamp = clock_msg_.clock;
+        steering_status_msg_.steering_tire_angle = xControlSignal.fSteeringAngle; // ! Needs to be mapped
+
+        // gear_status_msg_ data
+        gear_status_msg_.stamp = clock_msg_.clock;
+        gear_status_msg_.report = xControlSignal.ucGear;
+
+        // actuation_status_msg_ data
+        actuation_status_msg_.header.stamp = clock_msg_.clock;
+        actuation_status_msg_.status.accel_status = xControlSignal.fThrottle;
+        actuation_status_msg_.status.brake_status = xControlSignal.fBrake;
+        actuation_status_msg_.status.steer_status = xControlSignal.fSteeringAngle;
+
+        osMutexRelease(MutexControlSignalHandle);
+
+        // Publishing in Autoware topics
+        rcl_publish(&vehicle_twist_pub_, &vehicle_twist_msg_, NULL);
+        rcl_publish(&steering_status_pub_, &steering_status_msg_, NULL);
+        rcl_publish(&gear_status_pub_, &gear_status_msg_, NULL);
+        rcl_publish(&actuation_status_pub_, &actuation_status_msg_, NULL);
+
+        // Reseting subscribers flags
+        ucSubscribersRecieved = 0;
+      }
     }
 
   }
 
-
 }
-
