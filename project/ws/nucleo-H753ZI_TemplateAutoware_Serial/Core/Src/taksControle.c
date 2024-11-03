@@ -33,7 +33,7 @@ extern control_signal xControlSignal;
 extern vehicle_status xVehicleStatus;
 
 // Buffer for data received from CARLA by UART2
-extern unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffer pro tamanho da mensagem, manter a mais nova
+extern unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE];
 
 
 /**
@@ -42,7 +42,7 @@ extern unsigned char ucDmaBuffer[UART2_DMA_BUFFER_SIZE]; // TODO Ajustar o buffe
   * @param  argument: not used.
   * @retval None
   */
-void StartTaskControle(void *argument)
+void StartTaskControle(void * argument)
 {
 
   // Local variables -- START
@@ -75,20 +75,32 @@ void StartTaskControle(void *argument)
   // Initialization of operation mode
   ucControlMode = MANUAL; // ! MANUAL for testing joy + UART
 
+  
+  uiFlags = osThreadFlagsGet();
+  uiFlags = osThreadFlagsWait(MICRO_ROS_AGENT_ONLINE_FLAG, osFlagsWaitAny, 1000 * 20); // Wait 20 seconds for uROS init
+
+  if(osFlagsErrorTimeout == uiFlags)
+  {
+   ucControlMode = MANUAL;
+  }
+
   // Task loop
   for(;;)
   {
 
     // Looking fot operation mode change by Autoware -- START
 	  uiFlags = osThreadFlagsGet();
-    uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAny, 0);
+    uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
-    if(0x01 == uiFlags)
+    if(TO_AUTOWARE_MODE_FLAG == uiFlags)
     {
       ucControlMode = AUTOWARE;
     }
-
-    if(0x10 == uiFlags)
+    else if(TO_MANUAL_MODE_FLAG == uiFlags)
+    {
+      ucControlMode = MANUAL;
+    }
+    else if((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG) == uiFlags)
     {
       ucControlMode = MANUAL;
     }
@@ -96,19 +108,19 @@ void StartTaskControle(void *argument)
 
     // Looking for operation mode change by JoySW -- START
     uiFlags = osThreadFlagsGet();
-    uiFlags = osThreadFlagsWait(0x1000, osFlagsWaitAll, 0);
+    uiFlags = osThreadFlagsWait(JOYSW_FLAG, osFlagsWaitAll, 0);
 
-    if(0x1000 == uiFlags)
+    if(JOYSW_FLAG == uiFlags)
     {
       if(AUTOWARE == ucControlMode)
       {
-      ucControlMode = MANUAL;
-      osThreadFlagsSet(TaskMicroAutowaHandle, 0x10);
+        ucControlMode = MANUAL;
+        osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
       }
       else if(MANUAL == ucControlMode)
       {
-      ucControlMode = AUTOWARE;
-      osThreadFlagsSet(TaskMicroAutowaHandle, 0x01);
+        ucControlMode = AUTOWARE;
+        osThreadFlagsSet(TaskMicroAutowaHandle, TO_AUTOWARE_MODE_FLAG);
       }
     }
     // Looking for operation mode change by JoySW -- END
@@ -117,19 +129,20 @@ void StartTaskControle(void *argument)
     if(AUTOWARE == ucControlMode)
     {
       // Setting driving mode lights
-	  vDrivingModeLights(ucControlMode);
+	    vDrivingModeLights(ucControlMode);
 
       // WAIT for flag to sync xControlAction update
   	  uiFlags = osThreadFlagsGet();
-      uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_ACTION);
+      uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, TIMEOUT_GET_CONTROL_ACTION);
 
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)
       {
-      // Deu ruim timeout
+        ucControlMode = MANUAL;
+        osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
       }
 
-      if(0x100 == uiFlags)
+      if(DATA_UPDATED_FLAG == uiFlags)
       {
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
         vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
@@ -154,7 +167,7 @@ void StartTaskControle(void *argument)
         xControlSignal.fHeadingRate = xVehicleStatus.xHeadingRate.fFloat;
         osMutexRelease(MutexControlSignalHandle);
 
-        osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
+        osThreadFlagsSet(TaskMicroAutowaHandle, DATA_UPDATED_FLAG);
       }
     }
     // Autonomous mode (AUTOWARE) routine -- END
@@ -170,7 +183,9 @@ void StartTaskControle(void *argument)
       fJoyXAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[0], uiX0, uiXMax, uiXMin);
       fJoyYAxis = fGetJoyPostition((unsigned int) uiADC1Buffer[1], uiY0, uiYMax, uiYMin);
 
+      // Assembling xControlAction
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
+
       xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
       xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
       xControlAction.fSteeringAngle = -fJoyXAxis*MAX_STEERING_ANGLE;
@@ -185,25 +200,22 @@ void StartTaskControle(void *argument)
       osMutexRelease(MutexControlActionHandle);
 
       // Send cTxMsgToCarla to CARLA
-      //if(huart2.gState == HAL_UART_STATE_READY)
-      //{
-        HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
-      //}
+      HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
 
       // Wait CARLA full msg xVehicleStatusRx
   	  uiFlags = osThreadFlagsGet();
-      uiFlags = osThreadFlagsWait(0x10000, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
+      uiFlags = osThreadFlagsWait(UART_NEW_DATA_FLAG, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
 
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)
       {
-      // Deu ruim timeout
+        ucControlMode = EMERGENCY;
 
       }
 
-      // Empacota xControlSignal
-
+      // Assembling xControlSignal
       osMutexAcquire(MutexControlSignalHandle, osWaitForever);
+
       xControlSignal.fThrottle = xControlAction.fTrottle;
       xControlSignal.fBrake = xControlAction.fBrake;
       xControlSignal.fSteeringAngle = xControlAction.fSteeringAngle;
@@ -215,14 +227,47 @@ void StartTaskControle(void *argument)
       xControlSignal.fLongSpeed = xVehicleStatus.xLongSpeed.fFloat;
       xControlSignal.fLatSpeed = xVehicleStatus.xLatSpeed.fFloat;
       xControlSignal.fHeadingRate = xVehicleStatus.xHeadingRate.fFloat;
+
       osMutexRelease(MutexControlSignalHandle);
 
-      osThreadFlagsSet(TaskMicroAutowaHandle, 0x100);
+      osThreadFlagsSet(TaskMicroAutowaHandle, DATA_UPDATED_FLAG);
 
       // WAIT
-      osDelay(200);
+      osDelay(MANUAL_CONTROL_TIME_COMMAND);
     }
     // Manual mode (MANUAL) routine -- END
+
+    // Emergency mode (EMERGENCY) routine -- START
+    if(EMERGENCY == ucControlMode)
+    {
+      // Setting driving mode lights
+  	  vDrivingModeLights(ucControlMode);
+    
+      osMutexAcquire(MutexControlActionHandle, osWaitForever);
+
+      xControlAction.fTrottle = 0.0;
+      xControlAction.fBrake = 1.0;
+      xControlAction.fSteeringAngle = 0;
+      xControlAction.ucManualGearShift = 0;
+      xControlAction.ucHandBrake = 1;
+      xControlAction.ucReverse = 0;
+      xControlAction.ucControlMode = MANUAL;
+      xControlAction.ucGear = 1;
+
+      vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
+
+      // Try to stop the car whatever it takes
+      while(1)
+      {
+
+        HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
+
+        HAL_Delay(MANUAL_CONTROL_TIME_COMMAND);
+
+      }
+      
+    }
+    // Emergency mode (EMERGENCY) routine -- END
 
   }
 

@@ -29,9 +29,11 @@
 // UART RX DMA BUFFER SIZE = MSG_RX_SIZE = 19 bytes
 #define UART2_DMA_BUFFER_SIZE 19
 
+// Number of bytes of control message sent to CARLA.
 #define MSG_TO_CARLA_SIZE 26
 
-#define MAX_VEHICLE_GET_DATA_ATTEMPTS 5
+// Time period for wait between manual commands sent to CARLA.
+#define MANUAL_CONTROL_TIME_COMMAND 200
 
 // Vehicle limits
 #define MAX_TROTTLE 1

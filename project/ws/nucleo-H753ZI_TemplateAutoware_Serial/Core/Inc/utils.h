@@ -79,6 +79,14 @@ typedef struct{
 #define AUTOWARE 1
 #define MANUAL 4
 
+// ThreadFlags
+#define TO_AUTOWARE_MODE_FLAG 0x01
+#define TO_MANUAL_MODE_FLAG 0x10
+#define DATA_UPDATED_FLAG 0x100
+#define JOYSW_FLAG 0x1000
+#define UART_NEW_DATA_FLAG 0x10000
+#define MICRO_ROS_AGENT_ONLINE_FLAG 0x100000 
+
 /**
   * @name   fGetJoyPostition
   * @brief  Calculate the position of the joystick in [-1, 1] intervals.

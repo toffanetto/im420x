@@ -42,6 +42,9 @@ void StartMicroAutoware(void * argument)
   unsigned int uiFlags;
   unsigned char ucControlMode = AUTOWARE;
 
+  // micro-ros QoS
+  const rmw_qos_profile_t * qos_autoware = &rmw_qos_profile_autoware;
+
   // micro-ROS subscribers
   rcl_subscription_t clock_sub_;                 // rosgraph_msgs/msg/clock.h
 
@@ -66,6 +69,9 @@ void StartMicroAutoware(void * argument)
 
   //micro-ROS services
   rcl_service_t control_mode_server_;
+
+  // micro-ROS timers
+  rcl_timer_t timer_watchdog_agent;
 
   // micro-ROS messages
   rosgraph_msgs__msg__Clock clock_msg_;
@@ -134,107 +140,109 @@ void StartMicroAutoware(void * argument)
   // create executor
   rclc_executor_init(&executor, &support.context, 1, &allocator);
 
+  // create timers
+  rclc_timer_init_default(&timer_watchdog_agent, &support, WATCHDOG_AGENT_TIMEOUT, timer_watchdog_agent_callback);
 
   // create subscribers
   // TODO set QoS
-  rclc_subscription_init_default(
+  rclc_subscription_init(
     		&clock_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(rosgraph_msgs, msg, clock),
-    		"/clock");
+    		"/clock", qos_autoware);
         
-  rclc_subscription_init_default(
+  rclc_subscription_init(
     		&control_cmd_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_control_msgs, msg, Control),
-    		"/control/command/control_cmd");
+    		"/control/command/control_cmd", qos_autoware);
 
-  rclc_subscription_init_default(
+  rclc_subscription_init(
     		&gear_cmd_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, GearCommand),
-    		"/control/command/gear_cmd");
+    		"/control/command/gear_cmd", qos_autoware);
 
-  rclc_subscription_init_default(
+  rclc_subscription_init(
     		&turn_indicators_cmd_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, TurnIndicatorsCommand),
-    		"/control/command/turn_indicators_cmd");
+    		"/control/command/turn_indicators_cmd", qos_autoware);
 
-  rclc_subscription_init_default(
+  rclc_subscription_init(
     		&hazard_lights_cmd_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, HazardLightsCommand ),
-    		"/control/command/hazard_lights_cmd");
+    		"/control/command/hazard_lights_cmd", qos_autoware);
 
-  rclc_subscription_init_default(
+  rclc_subscription_init(
     		&actuation_cmd_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, ActuationCommandStamped),
-    		"/control/command/actuation_cmd");
+    		"/control/command/actuation_cmd", qos_autoware);
 
-  rclc_subscription_init_default(
+  rclc_subscription_init(
     		&emergency_sub_,
     		&VehicleInterfaceNode,
     		ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, VehicleEmergencyStamped),
-    		"/control/command/emergency_cmd");
+    		"/control/command/emergency_cmd", qos_autoware);
 
   // create publishers
   // TODO set QoS
-  rclc_publisher_init_default(
+  rclc_publisher_init(
         &control_mode_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, ControlModeReport),
-        "/vehicle/status/control_mode");
+        "/vehicle/status/control_mode", qos_autoware);
 
-  rclc_publisher_init_default(
+  rclc_publisher_init(
 		    &vehicle_twist_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, VelocityReport),
-        "/vehicle/status/velocity_status");
+        "/vehicle/status/velocity_status", qos_autoware);
 
-  rclc_publisher_init_default(
+  rclc_publisher_init(
         &steering_status_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, SteeringReport),
-        "/vehicle/status/steering_status");
+        "/vehicle/status/steering_status", qos_autoware);
 
-  rclc_publisher_init_default(
+  rclc_publisher_init(
         &gear_status_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, GearReport),
-        "/vehicle/status/gear_status");
+        "/vehicle/status/gear_status", qos_autoware);
 
-  rclc_publisher_init_default(
+  rclc_publisher_init(
         &turn_indicators_status_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, TurnIndicatorsReport),
-        "/vehicle/status/turn_indicators_status");
+        "/vehicle/status/turn_indicators_status", qos_autoware);
 
-  rclc_publisher_init_default(
+  rclc_publisher_init(
         &hazard_lights_status_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, HazardLightsReport),
-        "/vehicle/status/hazard_lights_status");
+        "/vehicle/status/hazard_lights_status", qos_autoware);
 
-  rclc_publisher_init_default(
+  rclc_publisher_init(
         &actuation_status_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, ActuationStatusStamped),
-        "/vehicle/status/actuation_status");
+        "/vehicle/status/actuation_status", qos_autoware);
 
-  rclc_publisher_init_default(
+  rclc_publisher_init(
         &steering_wheel_status_pub_,
         &VehicleInterfaceNode,
         ROSIDL_GET_MSG_TYPE_SUPPORT(tier4_vehicle_msgs, msg, SteeringWheelStatusStamped),
-        "/vehicle/status/steering_wheel_status");
+        "/vehicle/status/steering_wheel_status", qos_autoware);
 
   // creating servers
-  rclc_service_init_default(
+  rclc_service_init(
 		    &control_mode_server_,
         &VehicleInterfaceNode,
         ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_vehicle_msgs, srv, ControlModeCommand),
-        "/control/control_mode_request");
+        "/control/control_mode_request", qos_autoware);
 
 
   // adding callbacks to executor
@@ -248,6 +256,14 @@ void StartMicroAutoware(void * argument)
   rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &emergency_sub_, &emergency_msg_, &emergency_callback, ON_NEW_DATA);
 
+
+  // pinging micro-ros agent
+  rmw_ret_t xPingResult = rmw_uros_ping_agent(1000, 20);
+
+  // Setting flag on TaskControle to enable autonomus mode
+  osThreadFlagsSet(TaskControleHandle, MICRO_ROS_AGENT_ONLINE_FLAG);
+
+
   // Task loop
   for (;;)
   {
@@ -259,17 +275,17 @@ void StartMicroAutoware(void * argument)
 
     // Checking if control mode has changed.
     uiFlags = osThreadFlagsGet();
-    uiFlags = osThreadFlagsWait(0x11, osFlagsWaitAny, 0);
+    uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
-    if(0x01 == uiFlags)
+    if(TO_AUTOWARE_MODE_FLAG == uiFlags)
     {
       ucControlMode = AUTOWARE;
     }
-    else if(0x10 == uiFlags)
+    else if(TO_MANUAL_MODE_FLAG == uiFlags)
     {
       ucControlMode = MANUAL;
     }
-    else if(0x11 == uiFlags)
+    else if((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG) == uiFlags)
     {
       ucControlMode = MANUAL;
     }
@@ -295,12 +311,12 @@ void StartMicroAutoware(void * argument)
         xControlAction.ucGear = 1;
         osMutexRelease(MutexControlSignalHandle);
 
-        osThreadFlagsSet(TaskControleHandle, 0x100);
+        osThreadFlagsSet(TaskControleHandle, DATA_UPDATED_FLAG);
       }
 
       // WAIT for flag to sync xControlSignal update
       uiFlags = osThreadFlagsGet();
-      uiFlags = osThreadFlagsWait(0x100, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
+      uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
 
       // Timeout Error
       if(osFlagsErrorTimeout == uiFlags)

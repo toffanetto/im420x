@@ -27,6 +27,8 @@
   // Timeout for sync timestamp with ROS
   #define TIMEOUT_TS_SYNC 100
 
+  // Timeout ping to micro-ros agent
+  #define WATCHDOG_AGENT_TIMEOUT 1000
 
   #if TRANSPORT == UART
     #include "usart.h"
@@ -68,6 +70,19 @@
   #include <tier4_vehicle_msgs/msg/vehicle_emergency_stamped.h>
   // Includes -- END
 
+  // Autoware Quality of Service
+  static const rmw_qos_profile_t rmw_qos_profile_autoware =
+    {
+      RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+      1,
+      RMW_QOS_POLICY_RELIABILITY_RELIABLE,
+      RMW_QOS_POLICY_DURABILITY_VOLATILE,
+      RMW_QOS_DEADLINE_DEFAULT,
+      RMW_QOS_LIFESPAN_DEFAULT,
+      RMW_QOS_POLICY_LIVELINESS_SYSTEM_DEFAULT,
+      RMW_QOS_LIVELINESS_LEASE_DURATION_DEFAULT,
+      false
+    };
 
   // Function Prototypes -- START
 
@@ -86,6 +101,7 @@
   void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
 
   // Executor callbacks (implemented in executorCallbacks.c)
+  void timer_watchdog_agent_callback(rcl_timer_t * timer, int64_t last_call_time);
   void clock_callback(const void * xMsgIn);
   void control_cmd_callback(const void * xMsgIn);
   void gear_cmd_callback(const void * xMsgIn);
