@@ -57,3 +57,4 @@ log/
 .metadata/
 .vscode/
 *.code-workspace
+*.mp4
