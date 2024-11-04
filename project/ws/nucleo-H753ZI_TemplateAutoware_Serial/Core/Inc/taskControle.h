@@ -30,7 +30,7 @@
 #define UART2_DMA_BUFFER_SIZE 19
 
 // Number of bytes of control message sent to CARLA.
-#define MSG_TO_CARLA_SIZE 26
+#define MSG_TO_CARLA_SIZE 28
 
 // Time period for wait between manual commands sent to CARLA.
 #define MANUAL_CONTROL_TIME_COMMAND 200

@@ -11,9 +11,12 @@ find_package(rclcpp REQUIRED)
 #find_package(carla_ros_bridge REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(carla_msgs REQUIRED)
+#ind_package(carla_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(ackermann_msgs REQUIRED)
+find_package(autoware_vehicle_msgs REQUIRED)
+find_package(autoware_control_msgs REQUIRED)
 find_package(rosgraph_msgs REQUIRED)
 
 add_executable(carla_serial_bridge_node 
@@ -30,9 +33,10 @@ ament_target_dependencies(
   "rclcpp"
   "std_msgs"
   "sensor_msgs"
-  "carla_msgs"
   "nav_msgs"
-  "geometry_msgs"
+  "ackermann_msgs"
+  "autoware_vehicle_msgs"
+  "autoware_control_msgs"
   "rosgraph_msgs"
 )
 

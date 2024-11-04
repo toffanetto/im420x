@@ -148,7 +148,7 @@ void StartMicroAutoware(void * argument)
   rclc_subscription_init(
     		&clock_sub_,
     		&VehicleInterfaceNode,
-    		ROSIDL_GET_MSG_TYPE_SUPPORT(rosgraph_msgs, msg, clock),
+    		ROSIDL_GET_MSG_TYPE_SUPPORT(rosgraph_msgs, msg, Clock),
     		"/clock", qos_autoware);
         
   rclc_subscription_init(
@@ -294,21 +294,18 @@ void StartMicroAutoware(void * argument)
     control_mode_msg_.mode = ucControlMode;
     rcl_publish(&control_mode_pub_, &control_mode_msg_, NULL);
 
-    // All topics are recieved
-    if(0b1111111 == ucSubscribersRecieved)
+    // All topics are recieved (maybe not all...)
+    if(0b10 & ucSubscribersRecieved) // Checking if control_cmd_sub_ data arrives
     {
       // Autonomous mode: Gather all subs data, then compact and send to TaskControle.
       if(AUTOWARE == ucControlMode)
       {
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
-        xControlAction.fTrottle = (float) actuation_cmd_msg_.actuation.accel_cmd;
-        xControlAction.fBrake = (float) actuation_cmd_msg_.actuation.brake_cmd;
-        xControlAction.fSteeringAngle = (float) control_cmd_msg_.lateral.steering_tire_angle; // ! Look if use this ou actuation_cmd_msg_ steer_cmd
-        xControlAction.ucManualGearShift = 0;
-        xControlAction.ucHandBrake = 0;
-        xControlAction.ucReverse = 0;
-        xControlAction.ucControlMode = MANUAL;
-        xControlAction.ucGear = 1;
+        xControlAction.xSteeringAngle.fFloat = control_cmd_msg_.lateral.steering_tire_angle;
+        xControlAction.xSteeringVelocity.fFloat = control_cmd_msg_.lateral.steering_tire_rotation_rate;
+        xControlAction.xSpeed.fFloat = control_cmd_msg_.longitudinal.velocity;
+        xControlAction.xAcceleration.fFloat = control_cmd_msg_.longitudinal.acceleration;
+        xControlAction.xJerk.fFloat = control_cmd_msg_.longitudinal.jerk;
         osMutexRelease(MutexControlSignalHandle);
 
         osThreadFlagsSet(TaskControleHandle, DATA_UPDATED_FLAG);
@@ -338,26 +335,13 @@ void StartMicroAutoware(void * argument)
 
         // steering_status_msg_ data
         steering_status_msg_.stamp = clock_msg_.clock;
-        steering_status_msg_.steering_tire_angle = xControlSignal.fSteeringAngle; // ! Needs to be mapped
-
-        // gear_status_msg_ data
-        gear_status_msg_.stamp = clock_msg_.clock;
-        gear_status_msg_.report = xControlSignal.ucGear;
-
-        // actuation_status_msg_ data
-        actuation_status_msg_.header.stamp = clock_msg_.clock;
-        actuation_status_msg_.status.accel_status = xControlSignal.fThrottle;
-        actuation_status_msg_.status.brake_status = xControlSignal.fBrake;
-        actuation_status_msg_.status.steer_status = xControlSignal.fSteeringAngle;
+        steering_status_msg_.steering_tire_angle = xControlSignal.fSteeringStatus;
 
         osMutexRelease(MutexControlSignalHandle);
 
         // Publishing in Autoware topics
         rcl_publish(&vehicle_twist_pub_, &vehicle_twist_msg_, NULL);
         rcl_publish(&steering_status_pub_, &steering_status_msg_, NULL);
-        rcl_publish(&gear_status_pub_, &gear_status_msg_, NULL);
-        rcl_publish(&actuation_status_pub_, &actuation_status_msg_, NULL);
-
         // Reseting subscribers flags
         ucSubscribersRecieved = 0;
       }

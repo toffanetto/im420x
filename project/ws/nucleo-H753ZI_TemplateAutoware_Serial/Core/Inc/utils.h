@@ -33,14 +33,11 @@ typedef union{
   * @brief  Struct with Autoware recieved data compressed for TaskControle.
   */
 typedef struct{
-  float fTrottle;
-  float fBrake;
-  float fSteeringAngle;
-  unsigned char ucHandBrake;
-  unsigned char ucReverse;
-  unsigned char ucManualGearShift;
-  unsigned char ucGear;
-  unsigned char ucControlMode;
+  float_bytes xSteeringAngle;
+  float_bytes xSteeringVelocity;
+  float_bytes xSpeed;
+  float_bytes xAcceleration;
+  float_bytes xJerk;
 } control_action;
 
 
@@ -52,7 +49,7 @@ typedef struct{
   float_bytes xLongSpeed;
   float_bytes xLatSpeed;
   float_bytes xHeadingRate;
-  unsigned char ucGear;
+  float_bytes xSteeringStatus;
 } vehicle_status;
 
 
@@ -72,6 +69,7 @@ typedef struct{
   float fLongSpeed;
   float fLatSpeed;
   float fHeadingRate;
+  float fSteeringStatus;
 } control_signal;
 
 // Driving mode

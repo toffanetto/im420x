@@ -151,20 +151,23 @@ void StartTaskControle(void * argument)
         // Send cTxMsgToCarla to CARLA
         HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
 
-        // Recieve data from CARLA
+        // Wait CARLA full msg xVehicleStatusRx
+        uiFlags = osThreadFlagsGet();
+        uiFlags = osThreadFlagsWait(UART_NEW_DATA_FLAG, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
+
+        // Timeout error
+        if(osFlagsErrorTimeout == uiFlags)
+        {
+          ucControlMode = EMERGENCY;
+        }
 
         osMutexAcquire(MutexControlSignalHandle, osWaitForever);
-        xControlSignal.fThrottle = xControlAction.fTrottle;
-        xControlSignal.fBrake = xControlAction.fBrake;
-        xControlSignal.fSteeringAngle = xControlAction.fSteeringAngle;
-        xControlSignal.ucManualGearShift = xControlAction.ucManualGearShift;
-        xControlSignal.ucHandBrake = xControlAction.ucHandBrake;
-        xControlSignal.ucReverse = xControlAction.ucReverse;
-        xControlSignal.ucControlMode = AUTOWARE;
-        xControlSignal.ucGear = xVehicleStatus.ucGear;
+
         xControlSignal.fLongSpeed = xVehicleStatus.xLongSpeed.fFloat;
         xControlSignal.fLatSpeed = xVehicleStatus.xLatSpeed.fFloat;
         xControlSignal.fHeadingRate = xVehicleStatus.xHeadingRate.fFloat;
+        xControlSignal.fSteeringStatus = xVehicleStatus.xSteeringStatus.fFloat;
+
         osMutexRelease(MutexControlSignalHandle);
 
         osThreadFlagsSet(TaskMicroAutowaHandle, DATA_UPDATED_FLAG);
@@ -186,14 +189,21 @@ void StartTaskControle(void * argument)
       // Assembling xControlAction
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
 
-      xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
-      xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
-      xControlAction.fSteeringAngle = -fJoyXAxis*MAX_STEERING_ANGLE;
-      xControlAction.ucManualGearShift = 0;
-      xControlAction.ucHandBrake = 0;
-      xControlAction.ucReverse = 0;
-      xControlAction.ucControlMode = MANUAL;
-      xControlAction.ucGear = 1;
+      // xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
+      // xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
+      // xControlAction.fSteeringAngle = -fJoyXAxis*MAX_STEERING_ANGLE;
+      // xControlAction.ucManualGearShift = 0;
+      // xControlAction.ucHandBrake = 0;
+      // xControlAction.ucReverse = 0;
+      // xControlAction.ucControlMode = MANUAL;
+      // xControlAction.ucGear = 1;
+
+      // New xControlAction struct
+      // xControlAction.xSteeringAngle.f = control_cmd_msg_.lateral.steering_tire_angle;
+      // xControlAction.xSteeringVelocity.f = control_cmd_msg_.lateral.steering_tire_rotation_rate;
+      // xControlAction.xSpeed.f = control_cmd_msg_.longitudinal.velocity;
+      // xControlAction.xAcceleration.f = control_cmd_msg_.longitudinal.acceleration;
+      // xControlAction.xJerk.f = control_cmd_msg_.longitudinal.jerk;
 
       vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
@@ -210,23 +220,15 @@ void StartTaskControle(void * argument)
       if(osFlagsErrorTimeout == uiFlags)
       {
         ucControlMode = EMERGENCY;
-
       }
 
       // Assembling xControlSignal
       osMutexAcquire(MutexControlSignalHandle, osWaitForever);
 
-      xControlSignal.fThrottle = xControlAction.fTrottle;
-      xControlSignal.fBrake = xControlAction.fBrake;
-      xControlSignal.fSteeringAngle = xControlAction.fSteeringAngle;
-      xControlSignal.ucManualGearShift = xControlAction.ucManualGearShift;
-      xControlSignal.ucHandBrake = xControlAction.ucHandBrake;
-      xControlSignal.ucReverse = xControlAction.ucReverse;
-      xControlSignal.ucControlMode = MANUAL;
-      xControlSignal.ucGear = xVehicleStatus.ucGear;
       xControlSignal.fLongSpeed = xVehicleStatus.xLongSpeed.fFloat;
       xControlSignal.fLatSpeed = xVehicleStatus.xLatSpeed.fFloat;
       xControlSignal.fHeadingRate = xVehicleStatus.xHeadingRate.fFloat;
+      xControlSignal.fSteeringStatus = xVehicleStatus.xSteeringStatus.fFloat;
 
       osMutexRelease(MutexControlSignalHandle);
 
@@ -245,14 +247,11 @@ void StartTaskControle(void * argument)
     
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
 
-      xControlAction.fTrottle = 0.0;
-      xControlAction.fBrake = 1.0;
-      xControlAction.fSteeringAngle = 0;
-      xControlAction.ucManualGearShift = 0;
-      xControlAction.ucHandBrake = 1;
-      xControlAction.ucReverse = 0;
-      xControlAction.ucControlMode = MANUAL;
-      xControlAction.ucGear = 1;
+      xControlAction.xSteeringAngle.fFloat = 0;
+      xControlAction.xSteeringVelocity.fFloat = 0;
+      xControlAction.xSpeed.fFloat = 0;
+      xControlAction.xAcceleration.fFloat = 0;
+      xControlAction.xJerk.fFloat = 0;
 
       vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 

@@ -362,7 +362,22 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
           break;
 
         case 40:
-          xVehicleStatus.ucGear = ucDmaBuffer[i];
+          xVehicleStatus.xSteeringStatus.ucBytes[0] = ucDmaBuffer[i];
+          ucSmState = 41;
+          break;
+
+        case 41:
+          xVehicleStatus.xSteeringStatus.ucBytes[1] = ucDmaBuffer[i];
+          ucSmState = 42;
+          break;
+
+        case 42:
+          xVehicleStatus.xSteeringStatus.ucBytes[2] = ucDmaBuffer[i];
+          ucSmState = 43;
+          break;
+
+        case 43:
+          xVehicleStatus.xSteeringStatus.ucBytes[3] = ucDmaBuffer[i];
           ucSmState = 1;
           break;
 

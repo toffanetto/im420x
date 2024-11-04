@@ -36,40 +36,34 @@ float fGetJoyPostition(unsigned int uiValue, unsigned int uiRef0, unsigned int u
   */
 void vGetStringFromControlAction(control_action xControlActionTx, unsigned char * ucTxMsg)
 {
-  float_bytes xThrottle;
-  float_bytes xSteering;
-  float_bytes xBrake;
-
-  xThrottle.fFloat = xControlActionTx.fTrottle;
-  xSteering.fFloat = xControlActionTx.fSteeringAngle;
-  xBrake.fFloat = xControlActionTx.fBrake;
-
   ucTxMsg[0]  = (unsigned char)'#';
-  ucTxMsg[1]  = (unsigned char)'T';
-  ucTxMsg[2]  = xThrottle.ucBytes[0];
-  ucTxMsg[3]  = xThrottle.ucBytes[1];
-  ucTxMsg[4]  = xThrottle.ucBytes[2];
-  ucTxMsg[5]  = xThrottle.ucBytes[3];
-  ucTxMsg[6]  = (unsigned char)'S';
-  ucTxMsg[7]  = xSteering.ucBytes[0];
-  ucTxMsg[8]  = xSteering.ucBytes[1];
-  ucTxMsg[9]  = xSteering.ucBytes[2];
-  ucTxMsg[10] = xSteering.ucBytes[3];
-  ucTxMsg[11] = (unsigned char)'B';
-  ucTxMsg[12] = xBrake.ucBytes[0];
-  ucTxMsg[13] = xBrake.ucBytes[1];
-  ucTxMsg[14] = xBrake.ucBytes[2];
-  ucTxMsg[15] = xBrake.ucBytes[3];
-  ucTxMsg[16] = (unsigned char)'H';
-  ucTxMsg[17] = xControlActionTx.ucHandBrake;
-  ucTxMsg[18] = (unsigned char)'R';
-  ucTxMsg[19] = xControlActionTx.ucReverse;
-  ucTxMsg[20] = (unsigned char)'G';
-  ucTxMsg[21] = xControlActionTx.ucGear;
-  ucTxMsg[22] = (unsigned char)'M';
-  ucTxMsg[23] = xControlActionTx.ucManualGearShift;
-  ucTxMsg[24] = (unsigned char)'$';
-  ucTxMsg[25] = (unsigned char)'\0';
+  ucTxMsg[1]  = (unsigned char)'S';
+  ucTxMsg[2]  = xControlActionTx.xSteeringAngle.ucBytes[0];
+  ucTxMsg[3]  = xControlActionTx.xSteeringAngle.ucBytes[1];
+  ucTxMsg[4]  = xControlActionTx.xSteeringAngle.ucBytes[2];
+  ucTxMsg[5]  = xControlActionTx.xSteeringAngle.ucBytes[3];
+  ucTxMsg[6]  = (unsigned char)'W';
+  ucTxMsg[7]  = xControlActionTx.xSteeringVelocity.ucBytes[0];
+  ucTxMsg[8]  = xControlActionTx.xSteeringVelocity.ucBytes[1];
+  ucTxMsg[9]  = xControlActionTx.xSteeringVelocity.ucBytes[2];
+  ucTxMsg[10] = xControlActionTx.xSteeringVelocity.ucBytes[3];
+  ucTxMsg[11] = (unsigned char)'V';
+  ucTxMsg[12] = xControlActionTx.xSpeed.ucBytes[0];
+  ucTxMsg[13] = xControlActionTx.xSpeed.ucBytes[1];
+  ucTxMsg[14] = xControlActionTx.xSpeed.ucBytes[2];
+  ucTxMsg[15] = xControlActionTx.xSpeed.ucBytes[3];
+  ucTxMsg[16] = (unsigned char)'A';
+  ucTxMsg[17] = xControlActionTx.xAcceleration.ucBytes[0];
+  ucTxMsg[18] = xControlActionTx.xAcceleration.ucBytes[1];
+  ucTxMsg[19] = xControlActionTx.xAcceleration.ucBytes[2];
+  ucTxMsg[20] = xControlActionTx.xAcceleration.ucBytes[3];
+  ucTxMsg[21] = (unsigned char)'J';
+  ucTxMsg[22] = xControlActionTx.xJerk.ucBytes[0];
+  ucTxMsg[23] = xControlActionTx.xJerk.ucBytes[1];
+  ucTxMsg[24] = xControlActionTx.xJerk.ucBytes[2];
+  ucTxMsg[25] = xControlActionTx.xJerk.ucBytes[3];
+  ucTxMsg[26] = (unsigned char)'$';
+  ucTxMsg[27] = (unsigned char)'\0';
   
 }
 
