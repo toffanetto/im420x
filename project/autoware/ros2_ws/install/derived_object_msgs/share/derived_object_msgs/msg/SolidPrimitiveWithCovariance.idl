@@ -1,0 +1,49 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from derived_object_msgs/msg/SolidPrimitiveWithCovariance.msg
+// generated code does not contain a copyright notice
+
+
+module derived_object_msgs {
+  module msg {
+    module SolidPrimitiveWithCovariance_Constants {
+      const uint8 BOX = 1;
+      const uint8 SPHERE = 2;
+      const uint8 CYLINDER = 3;
+      const uint8 CONE = 4;
+      @verbatim (language="comment", text=
+        "The meaning of the shape dimensions: each constant defines the index in the 'dimensions' array" "\n"        "For the BOX type, the X, Y, and Z dimensions are the length of the corresponding" "\n"        "sides of the box.")
+      const uint8 BOX_X = 0;
+      const uint8 BOX_Y = 1;
+      const uint8 BOX_Z = 2;
+      @verbatim (language="comment", text=
+        "For the SPHERE type, only one component is used, and it gives the radius of" "\n"        "the sphere.")
+      const uint8 SPHERE_RADIUS = 0;
+      @verbatim (language="comment", text=
+        "For the CYLINDER and CONE types, the center line is oriented along" "\n"        "the Z axis.  Therefore the CYLINDER_HEIGHT (CONE_HEIGHT) component" "\n"        "of dimensions gives the height of the cylinder (cone).  The" "\n"        "CYLINDER_RADIUS (CONE_RADIUS) component of dimensions gives the" "\n"        "radius of the base of the cylinder (cone).  Cone and cylinder" "\n"        "primitives are defined to be circular. The tip of the cone is" "\n"        "pointing up, along +Z axis.")
+      const uint8 CYLINDER_HEIGHT = 0;
+      const uint8 CYLINDER_RADIUS = 1;
+      const uint8 CONE_HEIGHT = 0;
+      const uint8 CONE_RADIUS = 1;
+    };
+    @verbatim (language="comment", text=
+      "Define box, sphere, cylinder, cone " "\n"
+      "All shapes are defined to have their bounding boxes centered around 0,0,0." "\n"
+      "This message based on shape_msgs/SolidPrimitive")
+    struct SolidPrimitiveWithCovariance {
+      @verbatim (language="comment", text=
+        "The type of the shape")
+      uint8 type;
+
+      @verbatim (language="comment", text=
+        "The dimensions of the shape")
+      sequence<double> dimensions;
+
+      @verbatim (language="comment", text=
+        "Row-major representation of the covariance matrix associated with the shape." "\n"
+        "For the BOX type, this should be a 3x3 matrix defining the uncertainty of the X, Y, and Z measurements." "\n"
+        "For the SPHERE type, this should contain only one value for the radius." "\n"
+        "For the CYLINDER and CONE types, this will be a 2x2 matrix defining the uncertainty of the HEIGHT and RADIUS measurements.")
+      sequence<double> covariance;
+    };
+  };
+};
