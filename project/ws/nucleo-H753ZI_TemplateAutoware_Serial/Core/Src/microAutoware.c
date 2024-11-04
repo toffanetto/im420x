@@ -271,7 +271,7 @@ void StartMicroAutoware(void * argument)
     // Sync time with ROS
     rmw_uros_sync_session(TIMEOUT_TS_SYNC);
 
-    rclc_executor_spin_some(&executor, 20 * (1000 * 1000)); // Spinning executor for 20 ms.
+    rclc_executor_spin_some(&executor, EXECUTOR_SPIN_PERIOD * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
 
     // Checking if control mode has changed.
     uiFlags = osThreadFlagsGet();

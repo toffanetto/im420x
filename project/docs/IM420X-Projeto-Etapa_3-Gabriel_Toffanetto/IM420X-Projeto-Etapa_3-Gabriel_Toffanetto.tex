@@ -154,27 +154,23 @@
 	
 	\begin{columns}
 		
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.435\textwidth}
 			
 			\begin{block}{Sistema embarcado $\longrightarrow$ CARLA}
 				
 				\begin{itemize}
-					\item \texttt{float fTrottle;}
-					\item \texttt{float fBrake;}
 					\item \texttt{float fSteeringAngle;}
-					\item \texttt{unsigned char ucHandBrake;}
-					\item \texttt{unsigned char ucReverse;}
-					\item \texttt{unsigned char ucManualGearShift;}
-					\item \texttt{unsigned char ucGear;}
-					\item \texttt{unsigned char ucControlMode;}
-					
+					\item \texttt{float fSteeringVelocity;}
+					\item \texttt{float fSpeed;}
+					\item \texttt{float fAcceleration;}
+					\item \texttt{float fJerk;}					
 				\end{itemize}
 				
 			\end{block}
 			
 		\end{column}
 		
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.435\textwidth}
 			
 			\begin{block}{CARLA $\longrightarrow$ Sistema embarcado }
 				
@@ -182,15 +178,34 @@
 					\item \texttt{float fLongSpeed;}
 					\item \texttt{float fLatSpeed;}
 					\item \texttt{float fHeadingRate;}
-					\item \texttt{unsigned char ucGear;}
+					\item \texttt{float fSteeringStatus;}
 					
 				\end{itemize}
+			
+				
 				
 			\end{block}
 			
 		\end{column}
 		
 	\end{columns}
+
+	\begin{block}{}
+		
+		\textbf{Padrão de Mensagem:} Sistema embarcado $\longrightarrow$ CARLA
+		
+		\begin{itemize}
+			\item \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}J\texttt{\%c\%c\%c\%c}\textbf{\$}
+			
+		\end{itemize}
+		
+		\textbf{Padro de Mensagem:} CARLA $\longrightarrow$ Sistema embarcado
+		\begin{itemize}
+			\item \textbf{\#A}\texttt{\%c\%c\%c\%c}\textbf{B}\texttt{\%c\%c\%c\%c}\textbf{C}\texttt{\%c\%c\%c\%c}\textbf{D}\texttt{\%c\%c\%c\%c}\textbf{\$}
+			
+		\end{itemize}
+		
+	\end{block}
 	
 \end{frame}
 
@@ -198,7 +213,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=\linewidth]{sm_uc_2_carla}
+		\includegraphics[width=0.9\linewidth]{sm_uc_2_carla}
 		\caption{Maquina de estados da comunicação sistema embarcado $\longrightarrow$ CARLA.}
 		\label{fig:sm_uc_2_carla}
 	\end{figure}

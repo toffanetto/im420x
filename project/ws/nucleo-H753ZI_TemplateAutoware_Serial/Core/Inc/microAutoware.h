@@ -22,13 +22,16 @@
   #define TRANSPORT UART
 
   // Timeout to wait control signal
-  #define TIMEOUT_GET_CONTROL_SIGNAL 30
+  #define TIMEOUT_GET_CONTROL_SIGNAL 300
 
   // Timeout for sync timestamp with ROS
   #define TIMEOUT_TS_SYNC 100
 
   // Timeout ping to micro-ros agent
   #define WATCHDOG_AGENT_TIMEOUT 1000
+
+  // Executor spin period
+  #define EXECUTOR_SPIN_PERIOD 200
 
   #if TRANSPORT == UART
     #include "usart.h"

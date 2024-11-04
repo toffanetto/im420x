@@ -73,7 +73,7 @@ void StartTaskControle(void * argument)
   HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   // Initialization of operation mode
-  ucControlMode = MANUAL; // ! MANUAL for testing joy + UART
+  ucControlMode = AUTOWARE;
 
   
   uiFlags = osThreadFlagsGet();
