@@ -1,0 +1,13 @@
+repositories:
+    autoware:
+        type: git
+        url: https://github.com/autowarefoundation/autoware.git
+        version: 2024.01
+    Carla-Autoware-Bridge:
+        type: git
+        url: https://github.com/LMA-FEM-UNICAMP/Carla-Autoware-Bridge.git
+        version: main
+    Carla_t2:
+        type: git
+        url: https://github.com/TUMFTM/Carla_t2.git
+        version: main

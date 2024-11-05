@@ -1,0 +1,12 @@
+setup.py
+autoware_perception_msgs/__init__.py
+autoware_perception_msgs.egg-info/PKG-INFO
+autoware_perception_msgs.egg-info/SOURCES.txt
+autoware_perception_msgs.egg-info/dependency_links.txt
+autoware_perception_msgs.egg-info/top_level.txt
+autoware_perception_msgs/msg/__init__.py
+autoware_perception_msgs/msg/_traffic_light.py
+autoware_perception_msgs/msg/_traffic_light_array.py
+autoware_perception_msgs/msg/_traffic_light_element.py
+autoware_perception_msgs/msg/_traffic_signal.py
+autoware_perception_msgs/msg/_traffic_signal_array.py
