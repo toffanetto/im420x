@@ -11,7 +11,7 @@ find_package(rclcpp REQUIRED)
 #find_package(carla_ros_bridge REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-#ind_package(carla_msgs REQUIRED)
+find_package(carla_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(ackermann_msgs REQUIRED)
@@ -34,6 +34,7 @@ ament_target_dependencies(
   "std_msgs"
   "sensor_msgs"
   "nav_msgs"
+  "carla_msgs"
   "ackermann_msgs"
   "autoware_vehicle_msgs"
   "autoware_control_msgs"

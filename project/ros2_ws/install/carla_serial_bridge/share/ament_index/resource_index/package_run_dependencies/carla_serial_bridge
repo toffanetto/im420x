@@ -1,1 +1,1 @@
-rclcpp;std_msgs;sensor_msgs;nav_msgs;geometry_msgs;ackermann_msgs;autoware_control_msgs;autoware_vehicle_msgs;rosgraph_msgs;ament_lint_auto;ament_lint_common
+rclcpp;std_msgs;sensor_msgs;nav_msgs;geometry_msgs;carla_msgs;ackermann_msgs;autoware_control_msgs;autoware_vehicle_msgs;rosgraph_msgs;ament_lint_auto;ament_lint_common

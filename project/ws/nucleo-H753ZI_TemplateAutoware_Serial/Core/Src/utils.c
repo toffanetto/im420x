@@ -62,8 +62,10 @@ void vGetStringFromControlAction(control_action xControlActionTx, unsigned char 
   ucTxMsg[23] = xControlActionTx.xJerk.ucBytes[1];
   ucTxMsg[24] = xControlActionTx.xJerk.ucBytes[2];
   ucTxMsg[25] = xControlActionTx.xJerk.ucBytes[3];
-  ucTxMsg[26] = (unsigned char)'$';
-  ucTxMsg[27] = (unsigned char)'\0';
+  ucTxMsg[26] = (unsigned char)'M';
+  ucTxMsg[27] = xControlActionTx.ucControlMode;
+  ucTxMsg[28] = (unsigned char)'$';
+  ucTxMsg[29] = (unsigned char)'\0';
   
 }
 

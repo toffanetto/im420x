@@ -6,12 +6,18 @@
 
 #include "rclcpp/rclcpp.hpp"
 
+#include "carla_msgs/msg/carla_ego_vehicle_control.hpp"
 #include "autoware_vehicle_msgs/msg/velocity_report.hpp"
 #include "autoware_vehicle_msgs/msg/steering_report.hpp"
 #include "ackermann_msgs/msg/ackermann_drive.hpp"
 #include "rosgraph_msgs/msg/clock.hpp"
 
 #include "carla_serial_bridge/serial_com.hpp"
+
+// Driving mode
+#define EMERGENCY 0
+#define AUTOWARE 1
+#define MANUAL 4
 
 #define PORT "/dev/ttyUSB0"
 #define BAUDRATE B921600
@@ -39,6 +45,8 @@ class CarlaSerialBridge : public rclcpp::Node{
     CarlaSerialBridge() : Node("carla_serial_brigde"){
 
         vehicle_control_pub_ = this->create_publisher<ackermann_msgs::msg::AckermannDrive>("/carla/ego_vehicle/ackermann_cmd", 1);
+
+        vehicle_manual_control_pub_ = this->create_publisher<carla_msgs::msg::CarlaEgoVehicleControl>("/carla/ego_vehicle/vehicle_control_cmd", 1); // This 10 is QoS?
 
         velocity_status_sub_ = this->create_subscription<autoware_vehicle_msgs::msg::VelocityReport>("/microautoware/vehicle/status/velocity_status", 
                                                                                                 1, std::bind(&CarlaSerialBridge::velocity_status_sub_callback, this, _1));
@@ -70,19 +78,40 @@ class CarlaSerialBridge : public rclcpp::Node{
 
         bVelocityData = 0;
         bSteeringData = 0;
+        ucControlMode = 0;
     }
 
     void publish_to_carla(){
 
-        auto vehicle_control_msg_ = ackermann_msgs::msg::AckermannDrive();
+        if((AUTOWARE == ucControlMode) || (EMERGENCY == ucControlMode)){
 
-        vehicle_control_msg_.steering_angle = xSteeringAngle_Control.f;
-        vehicle_control_msg_.steering_angle_velocity = xSteeringAngleVelocity_Control.f;
-        vehicle_control_msg_.speed = xSpeed_Control.f;
-        vehicle_control_msg_.acceleration = xAcceleration_Control.f;
-        vehicle_control_msg_.jerk = xJerk_Control.f;
-    
-        vehicle_control_pub_->publish(vehicle_control_msg_);
+            auto vehicle_control_msg_ = ackermann_msgs::msg::AckermannDrive();
+
+            vehicle_control_msg_.steering_angle = xSteeringAngle_Control.f;
+            vehicle_control_msg_.steering_angle_velocity = xSteeringAngleVelocity_Control.f;
+            vehicle_control_msg_.speed = xSpeed_Control.f;
+            vehicle_control_msg_.acceleration = xAcceleration_Control.f;
+            vehicle_control_msg_.jerk = xJerk_Control.f;
+        
+            vehicle_control_pub_->publish(vehicle_control_msg_);
+
+        }
+        else if(MANUAL == ucControlMode){
+
+            auto vehicle_control_msg_ = carla_msgs::msg::CarlaEgoVehicleControl();
+
+            vehicle_control_msg_.throttle = xSpeed_Control.f;
+            vehicle_control_msg_.steer = xSteeringAngle_Control.f;
+            vehicle_control_msg_.brake = xAcceleration_Control.f;
+            vehicle_control_msg_.hand_brake = 0;
+            vehicle_control_msg_.reverse = 0;
+            vehicle_control_msg_.manual_gear_shift = 0;
+            vehicle_control_msg_.gear = 1;
+
+            vehicle_control_msg_.header.stamp = clock;
+        
+            vehicle_manual_control_pub_->publish(vehicle_control_msg_);
+        }
     }
 
     void clock_sub_callback(const rosgraph_msgs::msg::Clock::SharedPtr msg){
@@ -130,6 +159,10 @@ class CarlaSerialBridge : public rclcpp::Node{
                 
                 case 1:
                     switch (rx_msg[i]){
+                        case 'M':
+                            sm_state = 20;                 
+                            break;
+
                         case 'S':
                             sm_state = 30;                 
                             break;
@@ -166,6 +199,11 @@ class CarlaSerialBridge : public rclcpp::Node{
                             break;
                     }
                     break;        
+                
+                case 20:
+                    ucControlMode = rx_msg[i];
+                    sm_state = 31;                 
+                    break;     
                 
                 case 30:
                     xSteeringAngle_Control.bytes[0] = rx_msg[i];
@@ -281,6 +319,8 @@ class CarlaSerialBridge : public rclcpp::Node{
 
     rclcpp::Publisher<ackermann_msgs::msg::AckermannDrive>::SharedPtr vehicle_control_pub_;
 
+    rclcpp::Publisher<carla_msgs::msg::CarlaEgoVehicleControl>::SharedPtr vehicle_manual_control_pub_;
+
     rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr clock_sub_;
 
     rclcpp::Subscription<autoware_vehicle_msgs::msg::VelocityReport>::SharedPtr velocity_status_sub_;
@@ -297,6 +337,8 @@ class CarlaSerialBridge : public rclcpp::Node{
     float_bytes xSpeed_Control;
     float_bytes xAcceleration_Control;
     float_bytes xJerk_Control;
+
+    unsigned char ucControlMode;
 
     bool bSteeringData;
     bool bVelocityData;

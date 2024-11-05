@@ -305,6 +305,7 @@ void StartMicroAutoware(void * argument)
         xControlAction.xSpeed.fFloat = control_cmd_msg_.longitudinal.velocity;
         xControlAction.xAcceleration.fFloat = control_cmd_msg_.longitudinal.acceleration;
         xControlAction.xJerk.fFloat = control_cmd_msg_.longitudinal.jerk;
+        xControlAction.ucControlMode = AUTOWARE;
         osMutexRelease(MutexControlSignalHandle);
 
         osThreadFlagsSet(TaskControleHandle, DATA_UPDATED_FLAG);

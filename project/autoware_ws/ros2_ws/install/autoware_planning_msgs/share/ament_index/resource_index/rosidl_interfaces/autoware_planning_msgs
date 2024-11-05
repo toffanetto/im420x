@@ -1,8 +1,0 @@
-msg/LaneletPrimitive.idl
-msg/LaneletPrimitive.msg
-msg/LaneletRoute.idl
-msg/LaneletRoute.msg
-msg/LaneletSegment.idl
-msg/LaneletSegment.msg
-msg/PoseWithUuidStamped.idl
-msg/PoseWithUuidStamped.msg

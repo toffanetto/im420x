@@ -38,6 +38,7 @@ typedef struct{
   float_bytes xSpeed;
   float_bytes xAcceleration;
   float_bytes xJerk;
+  unsigned char ucControlMode;
 } control_action;
 
 

@@ -188,23 +188,12 @@ void StartTaskControle(void * argument)
 
       // Assembling xControlAction
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
-
-      // xControlAction.fTrottle = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
-      // xControlAction.fBrake = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
-      // xControlAction.fSteeringAngle = -fJoyXAxis*MAX_STEERING_ANGLE;
-      // xControlAction.ucManualGearShift = 0;
-      // xControlAction.ucHandBrake = 0;
-      // xControlAction.ucReverse = 0;
-      // xControlAction.ucControlMode = MANUAL;
-      // xControlAction.ucGear = 1;
-
-      // New xControlAction struct
-      // xControlAction.xSteeringAngle.f = control_cmd_msg_.lateral.steering_tire_angle;
-      // xControlAction.xSteeringVelocity.f = control_cmd_msg_.lateral.steering_tire_rotation_rate;
-      // xControlAction.xSpeed.f = control_cmd_msg_.longitudinal.velocity;
-      // xControlAction.xAcceleration.f = control_cmd_msg_.longitudinal.acceleration;
-      // xControlAction.xJerk.f = control_cmd_msg_.longitudinal.jerk;
-
+      xControlAction.xSteeringAngle.f = -fJoyXAxis*MAX_STEERING_ANGLE;
+      xControlAction.xSteeringVelocity.f = 0;
+      xControlAction.xSpeed.f = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
+      xControlAction.xAcceleration.f = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
+      xControlAction.xJerk.f = 0;
+      xControlAction.ucControlMode = MANUAL;
       vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
       osMutexRelease(MutexControlActionHandle);
@@ -252,7 +241,7 @@ void StartTaskControle(void * argument)
       xControlAction.xSpeed.fFloat = 0;
       xControlAction.xAcceleration.fFloat = 0;
       xControlAction.xJerk.fFloat = 0;
-
+      xControlAction.ucControlMode = EMERGENCY;
       vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
       // Try to stop the car whatever it takes
