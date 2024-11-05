@@ -66,7 +66,7 @@
 	
 	\begin{columns}
 		
-		\begin{column}{0.7\textwidth}
+		\begin{column}{0.6\textwidth}
 			
 				\begin{figure}[H]
 				\centering
@@ -79,7 +79,7 @@
 		
 		\hspace{-0.5cm}
 		
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.45\textwidth}
 			
 				\begin{figure}[H]
 				\centering
@@ -94,7 +94,7 @@
 	
 \end{frame}
 
-\section{Sistema embarcado}
+\section[Sistema embarcado]{Atualizações no sistema embarcado}
 
 \begin{frame}{Diagrama de blocos}
 	
@@ -121,7 +121,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.95\linewidth]{block_diagram}
+		\includegraphics[width=0.9\linewidth]{block_diagram}
 		\caption{Diagrama de blocos atualizado.}
 		\label{fig:block_diagram}
 	\end{figure}
@@ -195,7 +195,7 @@
 		\textbf{Padrão de Mensagem:} Sistema embarcado $\longrightarrow$ CARLA
 		
 		\begin{itemize}
-			\item \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}J\texttt{\%c\%c\%c\%c}\textbf{\$}
+			\item \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}\textbf{J}\texttt{\%c\%c\%c\%c}\textbf{\$}
 			
 		\end{itemize}
 		
@@ -308,7 +308,15 @@
 				
 				\begin{itemize}
 					\item Perda de ThreadFlags;
-					\item Bounce no botão JoySW;
+					\begin{itemize}
+						\item Leitura de \textit{flags} com \texttt{osThreadFlagGet()} antes de \texttt{osThreadFlagWait()}.
+						
+					\end{itemize}
+					\item \textit{Bounce} no botão JoySW.
+					\begin{itemize}
+						\item \textit{Debounce} em \textit{software} por meio de bloqueio por 1000 \textit{ticks}.
+						
+					\end{itemize}
 					
 				\end{itemize}
 				
@@ -322,6 +330,11 @@
 				
 				\begin{itemize}
 					\item Escolha dos \textit{timeouts};
+					\item Escolha das taxas de envio de dados.
+					\begin{itemize}
+						\item CARLA $\leftrightarrow$ microAutoware $\leftrightarrow$ Autoware
+						
+					\end{itemize}
 					
 				\end{itemize}
 				

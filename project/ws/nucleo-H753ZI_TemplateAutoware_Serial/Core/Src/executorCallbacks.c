@@ -45,7 +45,7 @@ void timer_watchdog_agent_callback(rcl_timer_t * timer, int64_t last_call_time)
 void clock_callback(const void * xMsgIn)
 {
   const rosgraph_msgs__msg__Clock * clock_msg_ = (const rosgraph_msgs__msg__Clock * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 0);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 0);
 }
 
 /**
@@ -57,7 +57,7 @@ void clock_callback(const void * xMsgIn)
 void control_cmd_callback(const void * xMsgIn)
 {
   const autoware_control_msgs__msg__Control * control_cmd_msg_ = (const autoware_control_msgs__msg__Control * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 1);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 1);
 }
 
 /**
@@ -69,7 +69,7 @@ void control_cmd_callback(const void * xMsgIn)
 void gear_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__GearCommand * gear_cmd_msg_ = (const autoware_vehicle_msgs__msg__GearCommand * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 2);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 2);
 }
 
 /**
@@ -81,7 +81,7 @@ void gear_cmd_callback(const void * xMsgIn)
 void turn_indicators_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * turn_indicators_cmd_msg_ = (const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 3);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 3);
 }
 
 /**
@@ -93,10 +93,9 @@ void turn_indicators_cmd_callback(const void * xMsgIn)
 void hazard_lights_cmd_callback(const void * xMsgIn)
 {
   const autoware_vehicle_msgs__msg__HazardLightsCommand * hazard_lights_cmd_msg_ = (const autoware_vehicle_msgs__msg__HazardLightsCommand * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 4);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 4);
 }
 
-// ! optional topic, probabily will not be used.
 /**
   * @name   actuation_cmd_callback
   * @brief  ROS topic subscriber callback to recieve the control commands and save in actuation_cmd_msg_
@@ -106,10 +105,9 @@ void hazard_lights_cmd_callback(const void * xMsgIn)
 void actuation_cmd_callback(const void * xMsgIn)
 {
   const tier4_vehicle_msgs__msg__ActuationCommandStamped * actuation_cmd_msg_ = (const tier4_vehicle_msgs__msg__ActuationCommandStamped * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 5);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 5);
 }
 
-// ! optional topic, probabily will not be used.
 /**
   * @name   emergency_callback
   * @brief  ROS topic subscriber callback to recieve the control commands and save in emergency_msg_ 
@@ -119,7 +117,7 @@ void actuation_cmd_callback(const void * xMsgIn)
 void emergency_callback(const void * xMsgIn)
 {
   const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * emergency_msg_ = (const tier4_vehicle_msgs__msg__VehicleEmergencyStamped * )xMsgIn;
-  ucSubscribersRecieved = ucSubscribersRecieved | (0x1 << 6);
+  ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 6);
 }
 
 // Service callbacks

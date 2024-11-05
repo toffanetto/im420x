@@ -144,7 +144,6 @@ void StartMicroAutoware(void * argument)
   rclc_timer_init_default(&timer_watchdog_agent, &support, WATCHDOG_AGENT_TIMEOUT, timer_watchdog_agent_callback);
 
   // create subscribers
-  // TODO set QoS
   rclc_subscription_init(
     		&clock_sub_,
     		&VehicleInterfaceNode,
@@ -188,7 +187,6 @@ void StartMicroAutoware(void * argument)
     		"/control/command/emergency_cmd", qos_autoware);
 
   // create publishers
-  // TODO set QoS
   rclc_publisher_init(
         &control_mode_pub_,
         &VehicleInterfaceNode,
@@ -248,9 +246,10 @@ void StartMicroAutoware(void * argument)
   // adding callbacks to executor
   rclc_executor_add_subscription(&executor, &clock_sub_, &clock_msg_, &clock_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &control_cmd_sub_, &control_cmd_msg_, &control_cmd_callback, ON_NEW_DATA);
-  rclc_executor_add_subscription(&executor, &gear_cmd_sub_, &gear_cmd_msg_, &gear_cmd_callback, ON_NEW_DATA);
+  
   rclc_executor_add_service(&executor, &control_mode_server_, &control_mode_request_msg_, &control_mode_response_msg_, control_mode_cmd_callback);
 
+  rclc_executor_add_subscription(&executor, &gear_cmd_sub_, &gear_cmd_msg_, &gear_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &turn_indicators_cmd_sub_, &turn_indicators_cmd_msg_, &turn_indicators_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &hazard_lights_cmd_sub_, &hazard_lights_cmd_msg_, &hazard_lights_cmd_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
@@ -273,7 +272,7 @@ void StartMicroAutoware(void * argument)
 
     rclc_executor_spin_some(&executor, EXECUTOR_SPIN_PERIOD * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
 
-    // Checking if control mode has changed.
+    // Checking if control mode has changed by vehicle or Autoware.
     uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
@@ -295,7 +294,7 @@ void StartMicroAutoware(void * argument)
     rcl_publish(&control_mode_pub_, &control_mode_msg_, NULL);
 
     // All topics are recieved (maybe not all...)
-    if(0b10 & ucSubscribersRecieved) // Checking if control_cmd_sub_ data arrives
+    if(0b1 & (ucSubscribersRecieved >> 1)) // Checking if control_cmd_sub_ data arrives (second bit of ucSubscribersRecieved)
     {
       // Autonomous mode: Gather all subs data, then compact and send to TaskControle.
       if(AUTOWARE == ucControlMode)
