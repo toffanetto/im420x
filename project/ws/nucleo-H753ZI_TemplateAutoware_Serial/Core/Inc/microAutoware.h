@@ -13,31 +13,6 @@
 #ifndef MICROAUTOWARE_H_
 #define MICROAUTOWARE_H_
 
-  #define UART 1
-  #define UDP 2
-  #define USB 3
-  #define OTHER 0
-
-  #define NODE_NAME "vehicle_interface"
-  #define TRANSPORT UART
-
-  // Timeout to wait control signal
-  #define TIMEOUT_GET_CONTROL_SIGNAL 300
-
-  // Timeout for sync timestamp with ROS
-  #define TIMEOUT_TS_SYNC 100
-
-  // Timeout ping to micro-ros agent
-  #define WATCHDOG_AGENT_TIMEOUT 1000
-
-  // Executor spin period
-  #define EXECUTOR_SPIN_PERIOD 200
-
-  #if TRANSPORT == UART
-    #include "usart.h"
-    #include "dma.h"
-  #endif  /* TRANSPORT == UART */
-
   // Includes -- START
   #include "cmsis_os.h"
   #include "utils.h"
@@ -72,6 +47,31 @@
   #include <tier4_vehicle_msgs/msg/steering_wheel_status_stamped.h>
   #include <tier4_vehicle_msgs/msg/vehicle_emergency_stamped.h>
   // Includes -- END
+
+  #define UART 1
+  #define UDP 2
+  #define USB 3
+  #define OTHER 0
+
+  #define NODE_NAME "vehicle_interface"
+  #define TRANSPORT UART
+
+  // Timeout to wait control signal
+  #define TIMEOUT_GET_CONTROL_SIGNAL 300
+
+  // Timeout for sync timestamp with ROS
+  #define TIMEOUT_TS_SYNC 100
+
+  // Timeout ping to micro-ros agent
+  #define WATCHDOG_AGENT_TIMEOUT 1000
+
+  // Executor spin period
+  #define EXECUTOR_SPIN_PERIOD 200
+
+  #if TRANSPORT == UART
+    #include "usart.h"
+    #include "dma.h"
+  #endif  /* TRANSPORT == UART */
 
   // Autoware Quality of Service
   static const rmw_qos_profile_t rmw_qos_profile_autoware =
