@@ -300,8 +300,8 @@ void StartMicroAutoware(void * argument)
       if(AUTOWARE == ucControlMode)
       {
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
-        xControlAction.xSteeringAngle.fFloat = control_cmd_msg_.lateral.steering_tire_angle;
-        xControlAction.xSteeringVelocity.fFloat = control_cmd_msg_.lateral.steering_tire_rotation_rate;
+        xControlAction.xSteeringAngle.fFloat = control_cmd_msg_.lateral.steering_tire_angle * 1.2;
+        xControlAction.xSteeringVelocity.fFloat = control_cmd_msg_.lateral.steering_tire_rotation_rate * 1.2;
         xControlAction.xSpeed.fFloat = control_cmd_msg_.longitudinal.velocity;
         xControlAction.xAcceleration.fFloat = control_cmd_msg_.longitudinal.acceleration;
         xControlAction.xJerk.fFloat = control_cmd_msg_.longitudinal.jerk;
