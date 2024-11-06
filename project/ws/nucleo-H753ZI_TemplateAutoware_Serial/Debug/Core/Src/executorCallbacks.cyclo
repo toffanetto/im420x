@@ -4,6 +4,6 @@
 ../Core/Src/executorCallbacks.c:69:6:gear_cmd_callback	1
 ../Core/Src/executorCallbacks.c:81:6:turn_indicators_cmd_callback	1
 ../Core/Src/executorCallbacks.c:93:6:hazard_lights_cmd_callback	1
-../Core/Src/executorCallbacks.c:106:6:actuation_cmd_callback	1
-../Core/Src/executorCallbacks.c:119:6:emergency_callback	1
-../Core/Src/executorCallbacks.c:135:6:control_mode_cmd_callback	3
+../Core/Src/executorCallbacks.c:105:6:actuation_cmd_callback	1
+../Core/Src/executorCallbacks.c:117:6:emergency_callback	1
+../Core/Src/executorCallbacks.c:133:6:control_mode_cmd_callback	3

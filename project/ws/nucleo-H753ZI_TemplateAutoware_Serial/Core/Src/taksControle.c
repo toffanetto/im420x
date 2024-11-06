@@ -188,11 +188,11 @@ void StartTaskControle(void * argument)
 
       // Assembling xControlAction
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
-      xControlAction.xSteeringAngle.f = -fJoyXAxis*MAX_STEERING_ANGLE;
-      xControlAction.xSteeringVelocity.f = 0;
-      xControlAction.xSpeed.f = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
-      xControlAction.xAcceleration.f = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
-      xControlAction.xJerk.f = 0;
+      xControlAction.xSteeringAngle.fFloat = -fJoyXAxis*MAX_STEERING_ANGLE;
+      xControlAction.xSteeringVelocity.fFloat = 0;
+      xControlAction.xSpeed.fFloat = (fJoyYAxis > 0) ? fJoyYAxis*MAX_TROTTLE : 0.0;
+      xControlAction.xAcceleration.fFloat = (fJoyYAxis < 0) ? -fJoyYAxis*MAX_BRAKE : 0.0;
+      xControlAction.xJerk.fFloat = 0;
       xControlAction.ucControlMode = MANUAL;
       vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
 
