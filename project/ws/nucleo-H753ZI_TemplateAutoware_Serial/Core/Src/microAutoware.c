@@ -48,22 +48,22 @@ void StartMicroAutoware(void * argument)
   // micro-ROS subscribers
   rcl_subscription_t clock_sub_;                 // rosgraph_msgs/msg/clock.h
 
-  rcl_subscription_t control_cmd_sub_;           // autoware_control_msgs/msg/control.h
-  rcl_subscription_t gear_cmd_sub_;              // autoware_vehicle_msgs/msg/gearcommand.h
+  rcl_subscription_t control_cmd_sub_;           // autoware_auto_control_msgs/msg/control.h
+  rcl_subscription_t gear_cmd_sub_;              // autoware_auto_vehicle_msgs/msg/gearcommand.h
 
-  rcl_subscription_t turn_indicators_cmd_sub_;   // autoware_vehicle_msgs/msg/turn_indicators_command.h
-  rcl_subscription_t hazard_lights_cmd_sub_;     // autoware_vehicle_msgs/msg/hazard_lights_command.h
+  rcl_subscription_t turn_indicators_cmd_sub_;   // autoware_auto_vehicle_msgs/msg/turn_indicators_command.h
+  rcl_subscription_t hazard_lights_cmd_sub_;     // autoware_auto_vehicle_msgs/msg/hazard_lights_command.h
   rcl_subscription_t actuation_cmd_sub_;         // tier4_vehicle_msgs/msg/actuation_command_stamped.h
   rcl_subscription_t emergency_sub_;             // tier4_vehicle_msgs/msg/vehicle_emergency_stamped.h
 
   // micro-ROS publishers
-  rcl_publisher_t control_mode_pub_;             // autoware_vehicle_msgs/msg/control_mode_report.h
-  rcl_publisher_t vehicle_twist_pub_;            // autoware_vehicle_msgs/msg/velocity_report.h>
-  rcl_publisher_t steering_status_pub_;          // autoware_vehicle_msgs/msg/steering_report.h
-  rcl_publisher_t gear_status_pub_;              // autoware_vehicle_msgs/msg/gear_report.h
+  rcl_publisher_t control_mode_pub_;             // autoware_auto_vehicle_msgs/msg/control_mode_report.h
+  rcl_publisher_t vehicle_twist_pub_;            // autoware_auto_vehicle_msgs/msg/velocity_report.h>
+  rcl_publisher_t steering_status_pub_;          // autoware_auto_vehicle_msgs/msg/steering_report.h
+  rcl_publisher_t gear_status_pub_;              // autoware_auto_vehicle_msgs/msg/gear_report.h
 
-  rcl_publisher_t turn_indicators_status_pub_;   // autoware_vehicle_msgs/msg/turn_indicators_report.h
-  rcl_publisher_t hazard_lights_status_pub_;     // autoware_vehicle_msgs/msg/hazard_lights_report.h
+  rcl_publisher_t turn_indicators_status_pub_;   // autoware_auto_vehicle_msgs/msg/turn_indicators_report.h
+  rcl_publisher_t hazard_lights_status_pub_;     // autoware_auto_vehicle_msgs/msg/hazard_lights_report.h
   rcl_publisher_t actuation_status_pub_;         // tier4_vehicle_msgs/msg/actuation_status_stamped.h
   rcl_publisher_t steering_wheel_status_pub_;    // tier4_vehicle_msgs/msg/steering_wheel_status_stamped.h
 
@@ -76,24 +76,24 @@ void StartMicroAutoware(void * argument)
   // micro-ROS messages
   rosgraph_msgs__msg__Clock clock_msg_;
 
-  autoware_control_msgs__msg__Control control_cmd_msg_;
-  autoware_vehicle_msgs__msg__GearCommand gear_cmd_msg_;
+  autoware_auto_control_msgs__msg__AckermannControlCommand control_cmd_msg_;
+  autoware_auto_vehicle_msgs__msg__GearCommand gear_cmd_msg_;
 
-  autoware_vehicle_msgs__msg__TurnIndicatorsCommand turn_indicators_cmd_msg_;
-  autoware_vehicle_msgs__msg__HazardLightsCommand hazard_lights_cmd_msg_;
+  autoware_auto_vehicle_msgs__msg__TurnIndicatorsCommand turn_indicators_cmd_msg_;
+  autoware_auto_vehicle_msgs__msg__HazardLightsCommand hazard_lights_cmd_msg_;
   tier4_vehicle_msgs__msg__ActuationCommandStamped actuation_cmd_msg_;
   tier4_vehicle_msgs__msg__VehicleEmergencyStamped emergency_msg_;
 
-  autoware_vehicle_msgs__srv__ControlModeCommand_Request control_mode_request_msg_;
-  autoware_vehicle_msgs__srv__ControlModeCommand_Response control_mode_response_msg_;
+  autoware_auto_vehicle_msgs__srv__ControlModeCommand_Request control_mode_request_msg_;
+  autoware_auto_vehicle_msgs__srv__ControlModeCommand_Response control_mode_response_msg_;
 
-  autoware_vehicle_msgs__msg__ControlModeReport control_mode_msg_;
-  autoware_vehicle_msgs__msg__VelocityReport vehicle_twist_msg_;
-  autoware_vehicle_msgs__msg__SteeringReport steering_status_msg_;
-  autoware_vehicle_msgs__msg__GearReport gear_status_msg_;
+  autoware_auto_vehicle_msgs__msg__ControlModeReport control_mode_msg_;
+  autoware_auto_vehicle_msgs__msg__VelocityReport vehicle_twist_msg_;
+  autoware_auto_vehicle_msgs__msg__SteeringReport steering_status_msg_;
+  autoware_auto_vehicle_msgs__msg__GearReport gear_status_msg_;
 
-  autoware_vehicle_msgs__msg__TurnIndicatorsReport turn_indicators_status_msg_;
-  autoware_vehicle_msgs__msg__HazardLightsReport hazard_lights_status_msg_;
+  autoware_auto_vehicle_msgs__msg__TurnIndicatorsReport turn_indicators_status_msg_;
+  autoware_auto_vehicle_msgs__msg__HazardLightsReport hazard_lights_status_msg_;
   tier4_vehicle_msgs__msg__ActuationStatusStamped  actuation_status_msg_;
   tier4_vehicle_msgs__msg__SteeringWheelStatusStamped  steering_wheel_status_msg_;
 
@@ -153,25 +153,25 @@ void StartMicroAutoware(void * argument)
   rclc_subscription_init(
     		&control_cmd_sub_,
     		&VehicleInterfaceNode,
-    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_control_msgs, msg, Control),
+    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_control_msgs, msg, AckermannControlCommand),
     		"/control/command/control_cmd", qos_autoware);
 
   rclc_subscription_init(
     		&gear_cmd_sub_,
     		&VehicleInterfaceNode,
-    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, GearCommand),
+    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, GearCommand),
     		"/control/command/gear_cmd", qos_autoware);
 
   rclc_subscription_init(
     		&turn_indicators_cmd_sub_,
     		&VehicleInterfaceNode,
-    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, TurnIndicatorsCommand),
+    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, TurnIndicatorsCommand),
     		"/control/command/turn_indicators_cmd", qos_autoware);
 
   rclc_subscription_init(
     		&hazard_lights_cmd_sub_,
     		&VehicleInterfaceNode,
-    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, HazardLightsCommand ),
+    		ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, HazardLightsCommand ),
     		"/control/command/hazard_lights_cmd", qos_autoware);
 
   rclc_subscription_init(
@@ -190,37 +190,37 @@ void StartMicroAutoware(void * argument)
   rclc_publisher_init(
         &control_mode_pub_,
         &VehicleInterfaceNode,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, ControlModeReport),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, ControlModeReport),
         "/vehicle/status/control_mode", qos_autoware);
 
   rclc_publisher_init(
 		    &vehicle_twist_pub_,
         &VehicleInterfaceNode,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, VelocityReport),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, VelocityReport),
         "/vehicle/status/velocity_status", qos_autoware);
 
   rclc_publisher_init(
         &steering_status_pub_,
         &VehicleInterfaceNode,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, SteeringReport),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, SteeringReport),
         "/vehicle/status/steering_status", qos_autoware);
 
   rclc_publisher_init(
         &gear_status_pub_,
         &VehicleInterfaceNode,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, GearReport),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, GearReport),
         "/vehicle/status/gear_status", qos_autoware);
 
   rclc_publisher_init(
         &turn_indicators_status_pub_,
         &VehicleInterfaceNode,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, TurnIndicatorsReport),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, TurnIndicatorsReport),
         "/vehicle/status/turn_indicators_status", qos_autoware);
 
   rclc_publisher_init(
         &hazard_lights_status_pub_,
         &VehicleInterfaceNode,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_vehicle_msgs, msg, HazardLightsReport),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(autoware_auto_vehicle_msgs, msg, HazardLightsReport),
         "/vehicle/status/hazard_lights_status", qos_autoware);
 
   rclc_publisher_init(
@@ -239,7 +239,7 @@ void StartMicroAutoware(void * argument)
   rclc_service_init(
 		    &control_mode_server_,
         &VehicleInterfaceNode,
-        ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_vehicle_msgs, srv, ControlModeCommand),
+        ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_auto_vehicle_msgs, srv, ControlModeCommand),
         "/control/control_mode_request", qos_autoware);
 
 
@@ -302,7 +302,7 @@ void StartMicroAutoware(void * argument)
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
         xControlAction.xSteeringAngle.fFloat = control_cmd_msg_.lateral.steering_tire_angle * 1.2;
         xControlAction.xSteeringVelocity.fFloat = control_cmd_msg_.lateral.steering_tire_rotation_rate * 1.2;
-        xControlAction.xSpeed.fFloat = control_cmd_msg_.longitudinal.velocity;
+        xControlAction.xSpeed.fFloat = control_cmd_msg_.longitudinal.speed;
         xControlAction.xAcceleration.fFloat = control_cmd_msg_.longitudinal.acceleration;
         xControlAction.xJerk.fFloat = control_cmd_msg_.longitudinal.jerk;
         xControlAction.ucControlMode = AUTOWARE;
@@ -311,40 +311,49 @@ void StartMicroAutoware(void * argument)
         osThreadFlagsSet(TaskControleHandle, DATA_UPDATED_FLAG);
       }
 
-      // WAIT for flag to sync xControlSignal update
-      uiFlags = osThreadFlagsGet();
-      uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
+    }
 
-      // Timeout Error
-      if(osFlagsErrorTimeout == uiFlags)
-      {
+    // WAIT for flag to sync xControlSignal update
+    uiFlags = osThreadFlagsGet();
+    uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
 
-      }
+    // Timeout Error
+    if(osFlagsErrorTimeout == uiFlags)
+    {
 
-      // xControlSignal updated
-      if(0x100 == uiFlags)
-      {
-        // Assembling microAutoware msgs
-        osMutexAcquire(MutexControlSignalHandle, osWaitForever);  
+    }
 
-        // vehicle_twist_msg_ data
-        vehicle_twist_msg_.header.stamp = clock_msg_.clock;
-        vehicle_twist_msg_.heading_rate = xControlSignal.fHeadingRate;
-        vehicle_twist_msg_.lateral_velocity = xControlSignal.fLatSpeed;
-        vehicle_twist_msg_.longitudinal_velocity = xControlSignal.fLongSpeed;
+    // xControlSignal updated
+    if(0x100 == uiFlags)
+    {
+      // Assembling microAutoware msgs
+      osMutexAcquire(MutexControlSignalHandle, osWaitForever);
 
-        // steering_status_msg_ data
-        steering_status_msg_.stamp = clock_msg_.clock;
-        steering_status_msg_.steering_tire_angle = xControlSignal.fSteeringStatus;
+      // vehicle_twist_msg_ data
 
-        osMutexRelease(MutexControlSignalHandle);
+      rosidl_runtime_c__String xFrameId;
+      char cFrame[10] = "base_link";
+      xFrameId.data = cFrame;
+      xFrameId.size = 9;
+      xFrameId.capacity = 9;
 
-        // Publishing in Autoware topics
-        rcl_publish(&vehicle_twist_pub_, &vehicle_twist_msg_, NULL);
-        rcl_publish(&steering_status_pub_, &steering_status_msg_, NULL);
-        // Reseting subscribers flags
-        ucSubscribersRecieved = 0;
-      }
+      vehicle_twist_msg_.header.stamp = clock_msg_.clock;
+      vehicle_twist_msg_.header.frame_id = xFrameId;
+      vehicle_twist_msg_.heading_rate = xControlSignal.fHeadingRate;
+      vehicle_twist_msg_.lateral_velocity = xControlSignal.fLatSpeed;
+      vehicle_twist_msg_.longitudinal_velocity = xControlSignal.fLongSpeed;
+
+      // steering_status_msg_ data
+      steering_status_msg_.stamp = clock_msg_.clock;
+      steering_status_msg_.steering_tire_angle = xControlSignal.fSteeringStatus;
+
+      osMutexRelease(MutexControlSignalHandle);
+
+      // Publishing in Autoware topics
+      rcl_publish(&vehicle_twist_pub_, &vehicle_twist_msg_, NULL);
+      rcl_publish(&steering_status_pub_, &steering_status_msg_, NULL);
+      // Reseting subscribers flags
+      ucSubscribersRecieved = 0;
     }
 
   }

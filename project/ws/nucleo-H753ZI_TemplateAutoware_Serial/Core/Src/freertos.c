@@ -59,14 +59,14 @@
 osThreadId_t TaskControleHandle;
 const osThreadAttr_t TaskControle_attributes = {
   .name = "TaskControle",
-  .stack_size = 500 * 4,
+  .stack_size = 1500 * 4,
   .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for TaskMicroAutowa */
 osThreadId_t TaskMicroAutowaHandle;
 const osThreadAttr_t TaskMicroAutowa_attributes = {
   .name = "TaskMicroAutowa",
-  .stack_size = 3500 * 4,
+  .stack_size = 4500 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for MutexControlSignal */
@@ -129,7 +129,7 @@ void MX_FREERTOS_Init(void) {
   TaskControleHandle = osThreadNew(StartTaskControle, NULL, &TaskControle_attributes);
 
   /* creation of TaskMicroAutowa */
-  TaskMicroAutowaHandle = osThreadNew(StartMicroAutoware, NULL, &TaskMicroAutowa_attributes);
+  //TaskMicroAutowaHandle = osThreadNew(StartMicroAutoware, NULL, &TaskMicroAutowa_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

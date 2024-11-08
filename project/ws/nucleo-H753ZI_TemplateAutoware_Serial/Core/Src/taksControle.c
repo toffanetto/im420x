@@ -73,15 +73,15 @@ void StartTaskControle(void * argument)
   HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   // Initialization of operation mode
-  ucControlMode = AUTOWARE;
+  ucControlMode = MANUAL; // ! MANUAL to test communication with carla
 
   
-  uiFlags = osThreadFlagsGet();
-  uiFlags = osThreadFlagsWait(MICRO_ROS_AGENT_ONLINE_FLAG, osFlagsWaitAny, 1000 * 20); // Wait 20 seconds for uROS init
+  //uiFlags = osThreadFlagsGet();
+  //uiFlags = osThreadFlagsWait(MICRO_ROS_AGENT_ONLINE_FLAG, osFlagsWaitAny, 1000 * 20); // Wait 20 seconds for uROS init
 
   if(osFlagsErrorTimeout == uiFlags)
   {
-   ucControlMode = MANUAL;
+    ucControlMode = MANUAL;
   }
 
   // Task loop
@@ -89,7 +89,7 @@ void StartTaskControle(void * argument)
   {
 
     // Looking fot operation mode change by Autoware -- START
-	  uiFlags = osThreadFlagsGet();
+	uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
     if(TO_AUTOWARE_MODE_FLAG == uiFlags)
@@ -149,7 +149,7 @@ void StartTaskControle(void * argument)
         osMutexRelease(MutexControlActionHandle);
 
         // Send cTxMsgToCarla to CARLA
-        HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, strlen((char * ) ucTxMsgToCarla));
+        HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
 
         // Wait CARLA full msg xVehicleStatusRx
         uiFlags = osThreadFlagsGet();
@@ -208,7 +208,7 @@ void StartTaskControle(void * argument)
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)
       {
-        ucControlMode = EMERGENCY;
+        //ucControlMode = EMERGENCY;
       }
 
       // Assembling xControlSignal

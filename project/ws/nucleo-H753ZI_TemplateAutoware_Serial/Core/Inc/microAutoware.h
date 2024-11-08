@@ -30,18 +30,18 @@
   #include <rosgraph_msgs/msg/clock.h>
 
   // Autoware msg types
-  #include <autoware_control_msgs/msg/control.h>
-  #include <autoware_vehicle_msgs/msg/control_mode_report.h>
-  #include <autoware_vehicle_msgs/msg/engage.h>
-  #include <autoware_vehicle_msgs/msg/gear_command.h>
-  #include <autoware_vehicle_msgs/msg/gear_report.h>
-  #include <autoware_vehicle_msgs/msg/hazard_lights_command.h>
-  #include <autoware_vehicle_msgs/msg/hazard_lights_report.h>
-  #include <autoware_vehicle_msgs/msg/steering_report.h>
-  #include <autoware_vehicle_msgs/msg/turn_indicators_command.h>
-  #include <autoware_vehicle_msgs/msg/turn_indicators_report.h>
-  #include <autoware_vehicle_msgs/msg/velocity_report.h>
-  #include <autoware_vehicle_msgs/srv/control_mode_command.h>
+  #include <autoware_auto_control_msgs/msg/ackermann_control_command.h>
+  #include <autoware_auto_vehicle_msgs/msg/control_mode_report.h>
+  #include <autoware_auto_vehicle_msgs/msg/engage.h>
+  #include <autoware_auto_vehicle_msgs/msg/gear_command.h>
+  #include <autoware_auto_vehicle_msgs/msg/gear_report.h>
+  #include <autoware_auto_vehicle_msgs/msg/hazard_lights_command.h>
+  #include <autoware_auto_vehicle_msgs/msg/hazard_lights_report.h>
+  #include <autoware_auto_vehicle_msgs/msg/steering_report.h>
+  #include <autoware_auto_vehicle_msgs/msg/turn_indicators_command.h>
+  #include <autoware_auto_vehicle_msgs/msg/turn_indicators_report.h>
+  #include <autoware_auto_vehicle_msgs/msg/velocity_report.h>
+  #include <autoware_auto_vehicle_msgs/srv/control_mode_command.h>
   #include <tier4_vehicle_msgs/msg/actuation_command_stamped.h>
   #include <tier4_vehicle_msgs/msg/actuation_status_stamped.h>
   #include <tier4_vehicle_msgs/msg/steering_wheel_status_stamped.h>
@@ -57,7 +57,7 @@
   #define TRANSPORT UART
 
   // Timeout to wait control signal
-  #define TIMEOUT_GET_CONTROL_SIGNAL 300
+  #define TIMEOUT_GET_CONTROL_SIGNAL 1000
 
   // Timeout for sync timestamp with ROS
   #define TIMEOUT_TS_SYNC 100
@@ -112,7 +112,7 @@
   void hazard_lights_cmd_callback(const void * xMsgIn);
   void actuation_cmd_callback(const void * xMsgIn);
   void emergency_callback(const void * xMsgIn);
-  void control_mode_cmd_callback(const void * xRequestMsg, autoware_vehicle_msgs__srv__ControlModeCommand_Response * xResponseMsg);
+  void control_mode_cmd_callback(const void * xRequestMsg, autoware_auto_vehicle_msgs__srv__ControlModeCommand_Response * xResponseMsg);
 
   // Function Prototypes -- END
 

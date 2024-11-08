@@ -15,7 +15,7 @@
 
 // From microAutoware.c
 extern unsigned char ucSubscribersRecieved;
-extern autoware_vehicle_msgs__srv__ControlModeCommand_Response control_mode_response_msg_;
+extern autoware_auto_vehicle_msgs__srv__ControlModeCommand_Response control_mode_response_msg_;
 
 // From freertos.c
 extern osThreadId_t TaskControleHandle;
@@ -56,7 +56,7 @@ void clock_callback(const void * xMsgIn)
   */
 void control_cmd_callback(const void * xMsgIn)
 {
-  const autoware_control_msgs__msg__Control * control_cmd_msg_ = (const autoware_control_msgs__msg__Control * )xMsgIn;
+  const autoware_auto_control_msgs__msg__AckermannControlCommand * control_cmd_msg_ = (const autoware_auto_control_msgs__msg__AckermannControlCommand * )xMsgIn;
   ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 1);
 }
 
@@ -68,7 +68,7 @@ void control_cmd_callback(const void * xMsgIn)
   */
 void gear_cmd_callback(const void * xMsgIn)
 {
-  const autoware_vehicle_msgs__msg__GearCommand * gear_cmd_msg_ = (const autoware_vehicle_msgs__msg__GearCommand * )xMsgIn;
+  const autoware_auto_vehicle_msgs__msg__GearCommand * gear_cmd_msg_ = (const autoware_auto_vehicle_msgs__msg__GearCommand * )xMsgIn;
   ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 2);
 }
 
@@ -80,7 +80,7 @@ void gear_cmd_callback(const void * xMsgIn)
   */
 void turn_indicators_cmd_callback(const void * xMsgIn)
 {
-  const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * turn_indicators_cmd_msg_ = (const autoware_vehicle_msgs__msg__TurnIndicatorsCommand * )xMsgIn;
+  const autoware_auto_vehicle_msgs__msg__TurnIndicatorsCommand * turn_indicators_cmd_msg_ = (const autoware_auto_vehicle_msgs__msg__TurnIndicatorsCommand * )xMsgIn;
   ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 3);
 }
 
@@ -92,7 +92,7 @@ void turn_indicators_cmd_callback(const void * xMsgIn)
   */
 void hazard_lights_cmd_callback(const void * xMsgIn)
 {
-  const autoware_vehicle_msgs__msg__HazardLightsCommand * hazard_lights_cmd_msg_ = (const autoware_vehicle_msgs__msg__HazardLightsCommand * )xMsgIn;
+  const autoware_auto_vehicle_msgs__msg__HazardLightsCommand * hazard_lights_cmd_msg_ = (const autoware_auto_vehicle_msgs__msg__HazardLightsCommand * )xMsgIn;
   ucSubscribersRecieved = ucSubscribersRecieved | (0b1 << 4);
 }
 
@@ -130,9 +130,9 @@ void emergency_callback(const void * xMsgIn)
   * @param  xResponseMsg: pointer to the response gave by the server.
   * @retval None
   */
-void control_mode_cmd_callback(const void * xRequestMsg, autoware_vehicle_msgs__srv__ControlModeCommand_Response * xResponseMsg)
+void control_mode_cmd_callback(const void * xRequestMsg, autoware_auto_vehicle_msgs__srv__ControlModeCommand_Response * xResponseMsg)
 {
-  const autoware_vehicle_msgs__srv__ControlModeCommand_Request * control_mode_request_msg_ = (const autoware_vehicle_msgs__srv__ControlModeCommand_Request * )xRequestMsg;
+  const autoware_auto_vehicle_msgs__srv__ControlModeCommand_Request * control_mode_request_msg_ = (const autoware_auto_vehicle_msgs__srv__ControlModeCommand_Request * )xRequestMsg;
 
   if(AUTOWARE == control_mode_request_msg_->mode)
   {
