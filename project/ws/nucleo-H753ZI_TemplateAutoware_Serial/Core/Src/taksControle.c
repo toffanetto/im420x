@@ -74,6 +74,7 @@ void StartTaskControle(void * argument)
 
   // Initialization of operation mode
   ucControlMode = MANUAL; // ! MANUAL to test communication with carla
+  osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
 
   
   //uiFlags = osThreadFlagsGet();

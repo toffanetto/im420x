@@ -273,27 +273,27 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
           switch (ucDmaBuffer[i])
           {
             case 'A':
-            ucSmState = 10;
-            break;
+              ucSmState = 10;
+              break;
 
             case 'B':
-            ucSmState = 20;
-            break;
+              ucSmState = 20;
+              break;
 
             case 'C':
-            ucSmState = 30;
-            break;
+              ucSmState = 30;
+              break;
 
             case 'D':
-            ucSmState = 40;
-            break;
+              ucSmState = 40;
+              break;
 
             case '$':
-            ucSmState = 0;
+              ucSmState = 0;
 
-            // Message fully received, setting TaskControle ThreadFlag for sync.
-            osThreadFlagsSet(TaskControleHandle, 0x10000);
-            break;
+              // Message fully received, setting TaskControle ThreadFlag for sync.
+              osThreadFlagsSet(TaskControleHandle, 0x10000);
+              break;
 
             default:
               ucSmState = 0;
