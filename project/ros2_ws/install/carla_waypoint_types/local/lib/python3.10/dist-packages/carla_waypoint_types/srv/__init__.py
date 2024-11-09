@@ -1,2 +1,1 @@
-from carla_waypoint_types.srv._get_actor_waypoint import GetActorWaypoint  # noqa: F401
-from carla_waypoint_types.srv._get_waypoint import GetWaypoint  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_waypoint_types/rosidl_generator_py/carla_waypoint_types/srv/__init__.py

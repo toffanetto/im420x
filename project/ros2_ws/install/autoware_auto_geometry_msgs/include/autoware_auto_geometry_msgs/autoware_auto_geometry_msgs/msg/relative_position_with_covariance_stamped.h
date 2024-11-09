@@ -1,12 +1,1 @@
-// generated from rosidl_generator_c/resource/idl.h.em
-// with input from autoware_auto_geometry_msgs:msg/RelativePositionWithCovarianceStamped.idl
-// generated code does not contain a copyright notice
-
-#ifndef AUTOWARE_AUTO_GEOMETRY_MSGS__MSG__RELATIVE_POSITION_WITH_COVARIANCE_STAMPED_H_
-#define AUTOWARE_AUTO_GEOMETRY_MSGS__MSG__RELATIVE_POSITION_WITH_COVARIANCE_STAMPED_H_
-
-#include "autoware_auto_geometry_msgs/msg/detail/relative_position_with_covariance_stamped__struct.h"
-#include "autoware_auto_geometry_msgs/msg/detail/relative_position_with_covariance_stamped__functions.h"
-#include "autoware_auto_geometry_msgs/msg/detail/relative_position_with_covariance_stamped__type_support.h"
-
-#endif  // AUTOWARE_AUTO_GEOMETRY_MSGS__MSG__RELATIVE_POSITION_WITH_COVARIANCE_STAMPED_H_
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_auto_geometry_msgs/rosidl_generator_c/autoware_auto_geometry_msgs/msg/relative_position_with_covariance_stamped.h

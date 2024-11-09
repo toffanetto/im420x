@@ -1,3 +1,1 @@
-
-int32 id
-string error_string
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_msgs/rosidl_cmake/srv/SpawnObject_Response.msg

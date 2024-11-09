@@ -1,7 +1,1 @@
-#
-# Copyright (c) 2020 Intel Corporation.
-#
-# This work is licensed under the terms of the MIT license.
-# For a copy, see <https://opensource.org/licenses/MIT>.
-#
-string filter
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_msgs/rosidl_cmake/srv/GetBlueprints_Request.msg

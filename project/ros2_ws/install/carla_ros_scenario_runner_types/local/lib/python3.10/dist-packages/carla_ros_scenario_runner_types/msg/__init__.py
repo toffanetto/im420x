@@ -1,3 +1,1 @@
-from carla_ros_scenario_runner_types.msg._carla_scenario import CarlaScenario  # noqa: F401
-from carla_ros_scenario_runner_types.msg._carla_scenario_list import CarlaScenarioList  # noqa: F401
-from carla_ros_scenario_runner_types.msg._carla_scenario_runner_status import CarlaScenarioRunnerStatus  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_ros_scenario_runner_types/rosidl_generator_py/carla_ros_scenario_runner_types/msg/__init__.py

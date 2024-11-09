@@ -292,7 +292,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
               ucSmState = 0;
 
               // Message fully received, setting TaskControle ThreadFlag for sync.
-              osThreadFlagsSet(TaskControleHandle, 0x10000);
+              osThreadFlagsSet(TaskControleHandle, UART_NEW_DATA_FLAG);
+              //HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
               break;
 
             default:

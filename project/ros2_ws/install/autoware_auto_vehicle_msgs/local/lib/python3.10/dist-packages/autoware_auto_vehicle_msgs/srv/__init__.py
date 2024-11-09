@@ -1,2 +1,1 @@
-from autoware_auto_vehicle_msgs.srv._autonomy_mode_change import AutonomyModeChange  # noqa: F401
-from autoware_auto_vehicle_msgs.srv._control_mode_command import ControlModeCommand  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_auto_vehicle_msgs/rosidl_generator_py/autoware_auto_vehicle_msgs/srv/__init__.py

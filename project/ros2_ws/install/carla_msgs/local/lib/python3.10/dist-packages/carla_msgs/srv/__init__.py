@@ -1,3 +1,1 @@
-from carla_msgs.srv._destroy_object import DestroyObject  # noqa: F401
-from carla_msgs.srv._get_blueprints import GetBlueprints  # noqa: F401
-from carla_msgs.srv._spawn_object import SpawnObject  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_msgs/rosidl_generator_py/carla_msgs/srv/__init__.py

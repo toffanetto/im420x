@@ -1,0 +1,1 @@
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_map_msgs/rosidl_generator_py/autoware_map_msgs/msg/_area_info_s.c

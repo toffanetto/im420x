@@ -1,4 +1,1 @@
-from autoware_control_msgs.msg._control import Control  # noqa: F401
-from autoware_control_msgs.msg._control_horizon import ControlHorizon  # noqa: F401
-from autoware_control_msgs.msg._lateral import Lateral  # noqa: F401
-from autoware_control_msgs.msg._longitudinal import Longitudinal  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_control_msgs/rosidl_generator_py/autoware_control_msgs/msg/__init__.py

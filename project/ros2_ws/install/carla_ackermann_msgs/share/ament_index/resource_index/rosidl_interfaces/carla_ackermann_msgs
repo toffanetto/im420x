@@ -1,10 +1,1 @@
-msg/EgoVehicleControlCurrent.idl
-msg/EgoVehicleControlCurrent.msg
-msg/EgoVehicleControlInfo.idl
-msg/EgoVehicleControlInfo.msg
-msg/EgoVehicleControlMaxima.idl
-msg/EgoVehicleControlMaxima.msg
-msg/EgoVehicleControlStatus.idl
-msg/EgoVehicleControlStatus.msg
-msg/EgoVehicleControlTarget.idl
-msg/EgoVehicleControlTarget.msg
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_ackermann_msgs/ament_cmake_index/share/ament_index/resource_index/rosidl_interfaces/carla_ackermann_msgs

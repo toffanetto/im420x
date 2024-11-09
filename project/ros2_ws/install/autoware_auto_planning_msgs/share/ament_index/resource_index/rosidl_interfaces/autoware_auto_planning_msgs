@@ -1,14 +1,1 @@
-action/PlanTrajectory.idl
-action/PlannerCostmap.idl
-action/RecordTrajectory.idl
-action/ReplayTrajectory.idl
-msg/HADMapRoute.idl
-msg/OrderMovement.idl
-msg/Path.idl
-msg/PathPoint.idl
-msg/PathPointWithLaneId.idl
-msg/PathWithLaneId.idl
-msg/Route.idl
-msg/Trajectory.idl
-msg/TrajectoryPoint.idl
-srv/ModifyTrajectory.idl
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_auto_planning_msgs/ament_cmake_index/share/ament_index/resource_index/rosidl_interfaces/autoware_auto_planning_msgs

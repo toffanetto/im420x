@@ -1,2 +1,1 @@
-
-carla_waypoint_types/CarlaWaypoint waypoint
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_waypoint_types/rosidl_cmake/srv/GetWaypoint_Response.msg

@@ -1,1 +1,1 @@
-from autoware_auto_planning_msgs.srv._modify_trajectory import ModifyTrajectory  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_auto_planning_msgs/rosidl_generator_py/autoware_auto_planning_msgs/srv/__init__.py

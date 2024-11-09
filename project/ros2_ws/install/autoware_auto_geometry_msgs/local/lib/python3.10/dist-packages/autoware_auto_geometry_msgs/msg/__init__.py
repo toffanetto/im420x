@@ -1,3 +1,1 @@
-from autoware_auto_geometry_msgs.msg._complex32 import Complex32  # noqa: F401
-from autoware_auto_geometry_msgs.msg._quaternion32 import Quaternion32  # noqa: F401
-from autoware_auto_geometry_msgs.msg._relative_position_with_covariance_stamped import RelativePositionWithCovarianceStamped  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_auto_geometry_msgs/rosidl_generator_py/autoware_auto_geometry_msgs/msg/__init__.py

@@ -1,2 +1,1 @@
-source;share/carla_ad_demo/environment/ament_prefix_path.sh
-source;share/carla_ad_demo/environment/path.sh
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_ad_demo/ament_cmake_environment_hooks/local_setup.dsv

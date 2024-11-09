@@ -1,0 +1,1 @@
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_localization_msgs/ament_cmake_core/autoware_localization_msgsConfig-version.cmake

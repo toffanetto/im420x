@@ -1,2 +1,1 @@
-
-string[] blueprints
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/carla_msgs/rosidl_cmake/srv/GetBlueprints_Response.msg

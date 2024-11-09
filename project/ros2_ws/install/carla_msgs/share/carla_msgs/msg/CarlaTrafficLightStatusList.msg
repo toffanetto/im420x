@@ -1,7 +1,1 @@
-#
-# Copyright (c) 2020 Intel Corporation.
-#
-# This work is licensed under the terms of the MIT license.
-# For a copy, see <https://opensource.org/licenses/MIT>.
-#
-CarlaTrafficLightStatus[] traffic_lights
+/home/toffanetto/unicamp/im420x/project/ros2_ws/src/ros-bridge/carla-ros-bridge/carla_msgs/msg/CarlaTrafficLightStatusList.msg

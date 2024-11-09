@@ -65,8 +65,8 @@
   // Timeout ping to micro-ros agent
   #define WATCHDOG_AGENT_TIMEOUT 1000
 
-  // Executor spin period
-  #define EXECUTOR_SPIN_PERIOD 1000
+  // Executor spin once timeout in ms
+  #define EXECUTOR_SPIN_TIME 60
 
   #if TRANSPORT == UART
     #include "usart.h"

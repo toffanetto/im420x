@@ -73,11 +73,11 @@ void StartTaskControle(void * argument)
   HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   // Initialization of operation mode
-  ucControlMode = AUTOWARE;
+  ucControlMode = MANUAL;
 
   
-  //uiFlags = osThreadFlagsGet();
-  //uiFlags = osThreadFlagsWait(MICRO_ROS_AGENT_ONLINE_FLAG, osFlagsWaitAny, 1000 * 20); // Wait 20 seconds for uROS init
+  uiFlags = osThreadFlagsGet();
+  uiFlags = osThreadFlagsWait(MICRO_ROS_AGENT_ONLINE_FLAG, osFlagsWaitAny, 1000 * 20); // Wait 20 seconds for uROS init
 
   if(osFlagsErrorTimeout == uiFlags)
   {
@@ -202,12 +202,12 @@ void StartTaskControle(void * argument)
 
       // Wait CARLA full msg xVehicleStatusRx
   	  uiFlags = osThreadFlagsGet();
-      uiFlags = osThreadFlagsWait(UART_NEW_DATA_FLAG, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX); 
+      uiFlags = osThreadFlagsWait(UART_NEW_DATA_FLAG, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
 
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)
       {
-        //ucControlMode = EMERGENCY;
+        ucControlMode = EMERGENCY;
       }
 
       // Assembling xControlSignal

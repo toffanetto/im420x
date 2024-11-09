@@ -40,7 +40,7 @@ void StartMicroAutoware(void * argument)
   // Variables -- START
 
   unsigned int uiFlags;
-  unsigned char ucControlMode = AUTOWARE;
+  unsigned char ucControlMode = MANUAL;
 
   // micro-ros QoS
   const rmw_qos_profile_t * qos_autoware = &rmw_qos_profile_autoware;
@@ -105,6 +105,9 @@ void StartMicroAutoware(void * argument)
 
   rclc_executor_t executor;
 
+  // Number of subscribers + number of timers + number of services OR Number total of callbacks
+  unsigned char ucNumberOfHandles = 3;
+
   // Variables -- END
 
   // micro-ROS configuration
@@ -138,7 +141,7 @@ void StartMicroAutoware(void * argument)
   rclc_node_init_default(&VehicleInterfaceNode, NODE_NAME, "microautoware", &support);
 
   // create executor
-  rclc_executor_init(&executor, &support.context, 1, &allocator);
+  rclc_executor_init(&executor, &support.context, ucNumberOfHandles, &allocator);
 
   // create timers
   rclc_timer_init_default(&timer_watchdog_agent, &support, WATCHDOG_AGENT_TIMEOUT, timer_watchdog_agent_callback);
@@ -246,14 +249,14 @@ void StartMicroAutoware(void * argument)
   // adding callbacks to executor
   rclc_executor_add_subscription(&executor, &clock_sub_, &clock_msg_, &clock_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &control_cmd_sub_, &control_cmd_msg_, &control_cmd_callback, ON_NEW_DATA);
-  
+
   rclc_executor_add_service(&executor, &control_mode_server_, &control_mode_request_msg_, &control_mode_response_msg_, control_mode_cmd_callback);
 
-  rclc_executor_add_subscription(&executor, &gear_cmd_sub_, &gear_cmd_msg_, &gear_cmd_callback, ON_NEW_DATA);
-  rclc_executor_add_subscription(&executor, &turn_indicators_cmd_sub_, &turn_indicators_cmd_msg_, &turn_indicators_cmd_callback, ON_NEW_DATA);
-  rclc_executor_add_subscription(&executor, &hazard_lights_cmd_sub_, &hazard_lights_cmd_msg_, &hazard_lights_cmd_callback, ON_NEW_DATA);
-  rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
-  rclc_executor_add_subscription(&executor, &emergency_sub_, &emergency_msg_, &emergency_callback, ON_NEW_DATA);
+//  rclc_executor_add_subscription(&executor, &gear_cmd_sub_, &gear_cmd_msg_, &gear_cmd_callback, ON_NEW_DATA);
+//  rclc_executor_add_subscription(&executor, &turn_indicators_cmd_sub_, &turn_indicators_cmd_msg_, &turn_indicators_cmd_callback, ON_NEW_DATA);
+//  rclc_executor_add_subscription(&executor, &hazard_lights_cmd_sub_, &hazard_lights_cmd_msg_, &hazard_lights_cmd_callback, ON_NEW_DATA);
+//  rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
+//  rclc_executor_add_subscription(&executor, &emergency_sub_, &emergency_msg_, &emergency_callback, ON_NEW_DATA);
 
 
   // pinging micro-ros agent
@@ -270,7 +273,7 @@ void StartMicroAutoware(void * argument)
     // Sync time with ROS
     rmw_uros_sync_session(TIMEOUT_TS_SYNC);
 
-    rclc_executor_spin_some(&executor, 1000 * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
+    rclc_executor_spin_some(&executor, EXECUTOR_SPIN_TIME * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
 
     // Checking if control mode has changed by vehicle or Autoware.
     uiFlags = osThreadFlagsGet();
@@ -306,7 +309,7 @@ void StartMicroAutoware(void * argument)
         xControlAction.xAcceleration.fFloat = control_cmd_msg_.longitudinal.acceleration;
         xControlAction.xJerk.fFloat = control_cmd_msg_.longitudinal.jerk;
         xControlAction.ucControlMode = AUTOWARE;
-        osMutexRelease(MutexControlSignalHandle);
+        osMutexRelease(MutexControlActionHandle);
 
         osThreadFlagsSet(TaskControleHandle, DATA_UPDATED_FLAG);
       }

@@ -1,0 +1,1 @@
+/home/toffanetto/unicamp/im420x/project/ros2_ws/src/autoware_msgs/autoware_planning_msgs/msg/Path.msg

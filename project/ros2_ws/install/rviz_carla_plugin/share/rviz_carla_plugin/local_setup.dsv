@@ -1,3 +1,1 @@
-source;share/rviz_carla_plugin/environment/ament_prefix_path.sh
-source;share/rviz_carla_plugin/environment/library_path.sh
-source;share/rviz_carla_plugin/environment/path.sh
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/rviz_carla_plugin/ament_cmake_environment_hooks/local_setup.dsv

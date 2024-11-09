@@ -1,1 +1,1 @@
-from autoware_auto_mapping_msgs.srv._had_map_service import HADMapService  # noqa: F401
+/home/toffanetto/unicamp/im420x/project/ros2_ws/build/autoware_auto_mapping_msgs/rosidl_generator_py/autoware_auto_mapping_msgs/srv/__init__.py
