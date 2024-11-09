@@ -353,8 +353,9 @@ void StartMicroAutoware(void * argument)
       rcl_publish(&vehicle_twist_pub_, &vehicle_twist_msg_, NULL);
       rcl_publish(&steering_status_pub_, &steering_status_msg_, NULL);
       // Reseting subscribers flags
-      ucSubscribersRecieved = 0;
     }
+    
+    ucSubscribersRecieved = 0;
 
   }
 

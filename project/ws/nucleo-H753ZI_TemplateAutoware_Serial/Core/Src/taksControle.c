@@ -90,7 +90,7 @@ void StartTaskControle(void * argument)
   {
 
     // Looking fot operation mode change by Autoware -- START
-	uiFlags = osThreadFlagsGet();
+	  uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
     if(TO_AUTOWARE_MODE_FLAG == uiFlags)
