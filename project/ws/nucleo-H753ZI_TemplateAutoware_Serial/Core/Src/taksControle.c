@@ -73,8 +73,7 @@ void StartTaskControle(void * argument)
   HAL_UART_Receive_DMA(&huart2, ucDmaBuffer, UART2_DMA_BUFFER_SIZE);
 
   // Initialization of operation mode
-  ucControlMode = MANUAL; // ! MANUAL to test communication with carla
-  osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
+  ucControlMode = AUTOWARE;
 
   
   //uiFlags = osThreadFlagsGet();
@@ -93,15 +92,15 @@ void StartTaskControle(void * argument)
 	  uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
-    if(TO_AUTOWARE_MODE_FLAG == uiFlags)
+    if(CHECK_FLAG(TO_AUTOWARE_MODE_FLAG, uiFlags))
     {
       ucControlMode = AUTOWARE;
     }
-    else if(TO_MANUAL_MODE_FLAG == uiFlags)
+    else if(CHECK_FLAG(TO_MANUAL_MODE_FLAG, uiFlags))
     {
       ucControlMode = MANUAL;
     }
-    else if((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG) == uiFlags)
+    else if(CHECK_FLAG((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG), uiFlags))
     {
       ucControlMode = MANUAL;
     }
@@ -111,7 +110,7 @@ void StartTaskControle(void * argument)
     uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(JOYSW_FLAG, osFlagsWaitAll, 0);
 
-    if(JOYSW_FLAG == uiFlags)
+    if(CHECK_FLAG(JOYSW_FLAG, uiFlags))
     {
       if(AUTOWARE == ucControlMode)
       {
@@ -130,7 +129,7 @@ void StartTaskControle(void * argument)
     if(AUTOWARE == ucControlMode)
     {
       // Setting driving mode lights
-	    vDrivingModeLights(ucControlMode);
+	  vDrivingModeLights(ucControlMode);
 
       // WAIT for flag to sync xControlAction update
   	  uiFlags = osThreadFlagsGet();
@@ -142,8 +141,7 @@ void StartTaskControle(void * argument)
         ucControlMode = MANUAL;
         osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
       }
-
-      if(DATA_UPDATED_FLAG == uiFlags)
+      else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
       {
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
         vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
@@ -204,7 +202,7 @@ void StartTaskControle(void * argument)
 
       // Wait CARLA full msg xVehicleStatusRx
   	  uiFlags = osThreadFlagsGet();
-      uiFlags = osThreadFlagsWait(UART_NEW_DATA_FLAG, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX);
+      uiFlags = osThreadFlagsWait(UART_NEW_DATA_FLAG, osFlagsWaitAll, TIMEOUT_GET_CARLA_RX); 
 
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)

@@ -86,6 +86,9 @@ typedef struct{
 #define UART_NEW_DATA_FLAG 0x10000
 #define MICRO_ROS_AGENT_ONLINE_FLAG 0x100000 
 
+// Check flag macro for bitwise comparison of ThreadFlags
+#define CHECK_FLAG(flag, input) ((flag & input) == flag && !(input >> 31))
+
 /**
   * @name   fGetJoyPostition
   * @brief  Calculate the position of the joystick in [-1, 1] intervals.

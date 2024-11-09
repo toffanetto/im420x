@@ -270,21 +270,21 @@ void StartMicroAutoware(void * argument)
     // Sync time with ROS
     rmw_uros_sync_session(TIMEOUT_TS_SYNC);
 
-    rclc_executor_spin_some(&executor, EXECUTOR_SPIN_PERIOD * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
+    rclc_executor_spin_some(&executor, 1000 * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
 
     // Checking if control mode has changed by vehicle or Autoware.
     uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
-    if(TO_AUTOWARE_MODE_FLAG == uiFlags)
+    if(CHECK_FLAG(TO_AUTOWARE_MODE_FLAG, uiFlags))
     {
       ucControlMode = AUTOWARE;
     }
-    else if(TO_MANUAL_MODE_FLAG == uiFlags)
+    else if(CHECK_FLAG(TO_MANUAL_MODE_FLAG, uiFlags))
     {
       ucControlMode = MANUAL;
     }
-    else if((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG) == uiFlags)
+    else if(CHECK_FLAG((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG), uiFlags))
     {
       ucControlMode = MANUAL;
     }
@@ -324,7 +324,7 @@ void StartMicroAutoware(void * argument)
     }
 
     // xControlSignal updated
-    if(0x100 == uiFlags)
+    else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
     {
       // Assembling microAutoware msgs
       osMutexAcquire(MutexControlSignalHandle, osWaitForever);

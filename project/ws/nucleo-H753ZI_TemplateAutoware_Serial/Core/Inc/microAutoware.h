@@ -57,7 +57,7 @@
   #define TRANSPORT UART
 
   // Timeout to wait control signal
-  #define TIMEOUT_GET_CONTROL_SIGNAL 500
+  #define TIMEOUT_GET_CONTROL_SIGNAL 100
 
   // Timeout for sync timestamp with ROS
   #define TIMEOUT_TS_SYNC 100
@@ -66,7 +66,7 @@
   #define WATCHDOG_AGENT_TIMEOUT 1000
 
   // Executor spin period
-  #define EXECUTOR_SPIN_PERIOD 200
+  #define EXECUTOR_SPIN_PERIOD 1000
 
   #if TRANSPORT == UART
     #include "usart.h"

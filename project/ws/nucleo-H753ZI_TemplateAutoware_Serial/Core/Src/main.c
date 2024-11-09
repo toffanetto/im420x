@@ -239,7 +239,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       ucButtonState ^= 1;
       uiJoySWTickOnPress = uiTick;
-      osThreadFlagsSet(TaskControleHandle, 0x1000);
+      osThreadFlagsSet(TaskControleHandle, JOYSW_FLAG);
     }
   }
 }
