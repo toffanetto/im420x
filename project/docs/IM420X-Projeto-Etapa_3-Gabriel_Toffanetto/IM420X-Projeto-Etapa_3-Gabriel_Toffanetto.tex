@@ -163,7 +163,8 @@
 					\item \texttt{float fSteeringVelocity;}
 					\item \texttt{float fSpeed;}
 					\item \texttt{float fAcceleration;}
-					\item \texttt{float fJerk;}					
+					\item \texttt{float fJerk;}	
+					\item \texttt{unsigned char ucControlMode;}					
 				\end{itemize}
 				
 			\end{block}
@@ -195,13 +196,15 @@
 		\textbf{Padrão de Mensagem:} Sistema embarcado $\longrightarrow$ CARLA
 		
 		\begin{itemize}
-			\item \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}\textbf{J}\texttt{\%c\%c\%c\%c}\textbf{\$}
+			\item \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}\textbf{J}\texttt{\%c\%c\%c\%c}\textbf{M}\texttt{\%c}\textbf{\$}
+			\item 30 bytes
 			
 		\end{itemize}
 		
 		\textbf{Padro de Mensagem:} CARLA $\longrightarrow$ Sistema embarcado
 		\begin{itemize}
 			\item \textbf{\#A}\texttt{\%c\%c\%c\%c}\textbf{B}\texttt{\%c\%c\%c\%c}\textbf{C}\texttt{\%c\%c\%c\%c}\textbf{D}\texttt{\%c\%c\%c\%c}\textbf{\$}
+			\item 22 bytes
 			
 		\end{itemize}
 		
@@ -213,7 +216,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.9\linewidth]{sm_uc_2_carla}
+		\includegraphics[width=0.8\linewidth]{sm_uc_2_carla}
 		\caption{Maquina de estados da comunicação sistema embarcado $\longrightarrow$ CARLA.}
 		\label{fig:sm_uc_2_carla}
 	\end{figure}
@@ -225,7 +228,7 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\linewidth]{sm_carla_2_uc}
-		\caption{Maquina de estados da comunicação CARLA $\longrightarrow$ sistema embarcado .}
+		\caption{Maquina de estados da comunicação CARLA $\longrightarrow$ sistema embarcado.}
 		\label{fig:sm_carla_2_uc}
 	\end{figure}
 
@@ -285,7 +288,7 @@
 \end{frame}
 
 
-\begin{frame}{micro-ROS}
+\begin{frame}{micro-ROS \textit{Vehicle Interface}}
 
 	\begin{figure}[H]
 		\centering
@@ -297,7 +300,7 @@
 \end{frame}
 
 
-\begin{frame}{micro-ROS}
+\begin{frame}{ROS}
 
 \begin{figure}[H]
 	\centering
@@ -308,8 +311,19 @@
 
 \end{frame}
 
+\begin{frame}{ROS: micro-ROS \textit{Vehicle Interface} }
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{micro_ros_nodes_scope}
+	\caption{Diagrama de blocos -- micro-ros.}
+	\label{fig:micro_ros_nodes_scope}
+\end{figure}	
+	
+\end{frame}
 
-\begin{frame}{micro-ROS}
+
+\begin{frame}{ROS: micro-ROS \textit{Vehicle Interface} }
 
 \begin{figure}[H]
 	\centering
@@ -320,8 +334,20 @@
 
 \end{frame}
 
+\begin{frame}{ROS: CARLA-Serial-Bridge}
 
-\begin{frame}{micro-ROS}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{carla_bridge_nodes_scope}
+	\caption{Diagrama de blocos -- CARLA-Serial-Bridge.}
+	\label{fig:carla_bridge_nodes_scope}
+\end{figure}	
+
+\end{frame}
+
+
+
+\begin{frame}{ROS: CARLA-Serial-Bridge}
 
 \begin{figure}[H]
 	\centering
@@ -333,7 +359,7 @@
 \end{frame}
 
 
-\begin{frame}{micro-ROS}
+\begin{frame}{Teste do fluxo de dados ROS $\times$ micro-ROS}
 
 \begin{figure}[H]
 	\centering
