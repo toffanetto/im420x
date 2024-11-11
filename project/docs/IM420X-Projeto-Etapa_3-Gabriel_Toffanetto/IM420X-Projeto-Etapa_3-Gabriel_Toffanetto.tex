@@ -101,7 +101,7 @@
 	\begin{block}{}
 		
 		\begin{itemize}
-			\item Sobrecarga do micro-ros para controle e tráfego dos dados do simulador;
+			\item Sobrecarga do micro-ROS para controle e tráfego dos dados do simulador;
 			\item Aproximação que leva à \textit{overhead} comparado com a arquitetura real.
 			
 		\end{itemize}
@@ -217,7 +217,7 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{sm_uc_2_carla}
-		\caption{Maquina de estados da comunicação sistema embarcado $\longrightarrow$ CARLA.}
+		\caption{Maquina de estados da comunicação sistema embarcado $\longrightarrow$ CARLA (\texttt{CarlaSerialBridgeNode}).}
 		\label{fig:sm_uc_2_carla}
 	\end{figure}
 	
@@ -228,7 +228,7 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\linewidth]{sm_carla_2_uc}
-		\caption{Maquina de estados da comunicação CARLA $\longrightarrow$ sistema embarcado.}
+		\caption{Maquina de estados da comunicação CARLA $\longrightarrow$ sistema embarcado (\texttt{HAL\_UART\_RxCpltCallback()}).}
 		\label{fig:sm_carla_2_uc}
 	\end{figure}
 

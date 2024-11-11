@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Page-1" id="Dqvt2uRBSsBD4MVUOECL">
-    <mxGraphModel dx="1383" dy="589" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+    <mxGraphModel dx="163" dy="69" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -100,8 +100,8 @@
         <mxCell id="kms28JUfVFOcH4j1UVIH-1" value="MicroROS&lt;div&gt;agent&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="DLu0dR6_hnOtP6MYCA8Z-1" vertex="1">
           <mxGeometry x="343.75" y="164" width="92.5" height="54" as="geometry" />
         </mxCell>
-        <mxCell id="kms28JUfVFOcH4j1UVIH-4" value="SerialComNode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="DLu0dR6_hnOtP6MYCA8Z-1" vertex="1">
-          <mxGeometry x="343.75" y="313" width="92.5" height="54" as="geometry" />
+        <mxCell id="kms28JUfVFOcH4j1UVIH-4" value="Carla-Serial-Bridge&lt;div&gt;Node&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="DLu0dR6_hnOtP6MYCA8Z-1" vertex="1">
+          <mxGeometry x="331.88" y="313" width="116.25" height="54" as="geometry" />
         </mxCell>
         <mxCell id="DLu0dR6_hnOtP6MYCA8Z-17" value="NUCLEO-H753ZI" style="swimlane;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;swimlaneFillColor=default;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="802.5" y="1090" width="255" height="280" as="geometry" />
@@ -693,7 +693,7 @@
         </mxCell>
         <mxCell id="QfWjgyetVY8WSt9RR6fC-13" value="UART2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=none;fontStyle=1" parent="QfWjgyetVY8WSt9RR6fC-12" vertex="1" connectable="0">
           <mxGeometry x="0.5792" y="-2" relative="1" as="geometry">
-            <mxPoint x="4" y="-10" as="offset" />
+            <mxPoint x="3" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="y_a_9eLIx64UZbRKkLCx-1" value="&lt;div&gt;&lt;span style=&quot;font-size: 14px; font-weight: 700; font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; text-align: left;&quot;&gt;Service server&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;b&gt;&lt;i&gt;/control/control_mode_request&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;strokeWidth=2;arcSize=40;" parent="1" vertex="1">
