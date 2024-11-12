@@ -254,7 +254,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\movie[width=\textwidth,height=0.422\textwidth,poster,autostart]{\includegraphics[width=\linewidth]{joyadc}}{TestJoyADC.mp4}
+		\movie[width=\textwidth,height=0.422\textwidth,poster,autostart,loop]{\includegraphics[width=\linewidth]{joyadc}}{TestJoyADC.mp4}
 		\caption{Leitura do Joystick pelo \textit{node} \texttt{CarlaSerialBridge}.}
 		\label{fig:TestJoyADC}
 	\end{figure}
@@ -265,7 +265,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\movie[width=\textwidth,height=0.422\textwidth,poster,autostart]{\includegraphics[width=\linewidth]{joysw}}{TestJoySW.mp4}
+		\movie[width=\textwidth,height=0.422\textwidth,poster,autostart,loop]{\includegraphics[width=\linewidth]{joysw}}{TestJoySW.mp4}
 		\caption{Troca de modo de condução pela interrupção EXTI JoySW.}
 		\label{fig:TestJoySW}
 	\end{figure}
@@ -279,7 +279,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\movie[width=0.85\textwidth,height=0.478\textwidth,poster,autostart]{\includegraphics[width=0.85\linewidth]{controle_manual}}{controle_manual.mp4}
+		\movie[width=0.85\textwidth,height=0.478\textwidth,poster,autostart,loop]{\includegraphics[width=0.85\linewidth]{controle_manual}}{controle_manual.mp4}
 		\caption{Validação da comunicação serial com o simulador e controle manual.}
 		\label{fig:controle_manual}
 	\end{figure}
@@ -363,10 +363,23 @@
 
 \begin{figure}[H]
 	\centering
-	\movie[width=\textwidth,height=0.422\textwidth,poster,autostart]{\includegraphics[width=\linewidth]{teste_micro-ros}}{teste_micro-ros.mp4}
+	\movie[width=\textwidth,height=0.422\textwidth,poster,autostart,loop]{\includegraphics[width=\linewidth]{teste_micro-ros}}{teste_micro-ros.mp4}
 	\caption{Validação da comunicação dos tópicos e serviços no micro-ROS.}
 	\label{fig:teste_micro}
 \end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Teste \texttt{Carla-Autoware-Bridge}}
+
+\begin{figure}[H]
+	\centering
+	\movie[width=0.85\textwidth,height=0.478\textwidth,poster,autostart,loop]{\includegraphics[width=0.85\linewidth]{teste0_autoware}}{teste0_autoware.mp4}
+	\caption{Validação do Autoware em modo autônomo.}
+	\label{fig:teste0autoware}
+\end{figure}
+
 
 \end{frame}
 
