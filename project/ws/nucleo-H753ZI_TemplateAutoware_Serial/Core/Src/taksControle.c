@@ -89,7 +89,7 @@ void StartTaskControle(void * argument)
   {
 
     // Looking fot operation mode change by Autoware -- START
-	  uiFlags = osThreadFlagsGet();
+	uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
 
     if(CHECK_FLAG(TO_AUTOWARE_MODE_FLAG, uiFlags))
@@ -138,8 +138,8 @@ void StartTaskControle(void * argument)
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)
       {
-        ucControlMode = MANUAL;
-        osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
+        //ucControlMode = MANUAL;
+        //osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
       }
       else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
       {
@@ -157,7 +157,7 @@ void StartTaskControle(void * argument)
         // Timeout error
         if(osFlagsErrorTimeout == uiFlags)
         {
-          ucControlMode = EMERGENCY;
+         // ucControlMode = EMERGENCY;
         }
 
         osMutexAcquire(MutexControlSignalHandle, osWaitForever);
@@ -207,7 +207,7 @@ void StartTaskControle(void * argument)
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)
       {
-        ucControlMode = EMERGENCY;
+        //ucControlMode = EMERGENCY;
       }
 
       // Assembling xControlSignal

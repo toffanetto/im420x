@@ -240,7 +240,7 @@ void StartMicroAutoware(void * argument)
 
   // creating servers
   rclc_service_init(
-		    &control_mode_server_,
+		&control_mode_server_,
         &VehicleInterfaceNode,
         ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_auto_vehicle_msgs, srv, ControlModeCommand),
         "/control/control_mode_request", qos_autoware);

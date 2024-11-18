@@ -136,14 +136,18 @@ void control_mode_cmd_callback(const void * xRequestMsg, autoware_auto_vehicle_m
 
   if(AUTOWARE == control_mode_request_msg_->mode)
   {
+    xResponseMsg->success = true;
     osThreadFlagsSet(TaskControleHandle, TO_AUTOWARE_MODE_FLAG);
     osThreadFlagsSet(TaskMicroAutowaHandle, TO_AUTOWARE_MODE_FLAG);
   }
   else if(MANUAL == control_mode_request_msg_->mode)
   {
+    xResponseMsg->success = true;
     osThreadFlagsSet(TaskControleHandle, TO_MANUAL_MODE_FLAG);
     osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
   }
-
-  xResponseMsg->success = true;
+  else
+  {
+    xResponseMsg->success = false;
+  }
 }
