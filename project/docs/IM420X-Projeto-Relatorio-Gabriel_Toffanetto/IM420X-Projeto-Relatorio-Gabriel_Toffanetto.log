@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  28 OCT 2024 10:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  18 NOV 2024 15:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -916,23 +916,23 @@ Package pdftex.def Info: img/architecture_HIL.pdf  used on input line 45.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/vehicle_interface-topics.pdf): PD
 F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/vehicle_interface-topics.pdf, id=134, 599.35919pt x 355.3275pt>
+<img/vehicle_interface-topics.pdf, id=134, 599.35919pt x 326.17859pt>
 File: img/vehicle_interface-topics.pdf Graphic file (type pdf)
 <use img/vehicle_interface-topics.pdf>
 Package pdftex.def Info: img/vehicle_interface-topics.pdf  used on input line 5
 2.
-(pdftex.def)             Requested size: 362.77264pt x 215.06866pt.
+(pdftex.def)             Requested size: 362.77264pt x 197.42575pt.
 [5
 
  <./img/architecture.png> <./img/architecture_hil.pdf>] [6 <./img/vehicle_inter
 face-topics.pdf>]
-<img/nucleo.png, id=188, 81.6651pt x 161.6439pt>
+<img/nucleo.png, id=192, 81.6651pt x 161.6439pt>
 File: img/nucleo.png Graphic file (type png)
 <use img/nucleo.png>
 Package pdftex.def Info: img/nucleo.png  used on input line 103.
 (pdftex.def)             Requested size: 120.92421pt x 239.35255pt.
  [7 <./img/nucleo.png>]
-<img/joystick.png, id=199, 122.6181pt x 108.405pt>
+<img/joystick.png, id=203, 122.6181pt x 108.405pt>
 File: img/joystick.png Graphic file (type png)
 <use img/joystick.png>
 Package pdftex.def Info: img/joystick.png  used on input line 120.
@@ -941,7 +941,7 @@ Package pdftex.def Info: img/joystick.png  used on input line 120.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/highLevelblock_diagram.pdf): PDF 
 inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/highLevelblock_diagram.pdf, id=200, 610.19968pt x 320.1561pt>
+<img/highLevelblock_diagram.pdf, id=204, 610.19968pt x 320.1561pt>
 File: img/highLevelblock_diagram.pdf Graphic file (type pdf)
 <use img/highLevelblock_diagram.pdf>
 Package pdftex.def Info: img/highLevelblock_diagram.pdf  used on input line 129
@@ -951,7 +951,7 @@ Package pdftex.def Info: img/highLevelblock_diagram.pdf  used on input line 129
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/block_diagram.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<img/block_diagram.pdf, id=201, 605.3817pt x 298.23419pt>
+<img/block_diagram.pdf, id=205, 605.3817pt x 298.23419pt>
 File: img/block_diagram.pdf Graphic file (type pdf)
 <use img/block_diagram.pdf>
 Package pdftex.def Info: img/block_diagram.pdf  used on input line 136.
@@ -960,7 +960,7 @@ Package pdftex.def Info: img/block_diagram.pdf  used on input line 136.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/esquematico.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<img/esquematico.pdf, id=228, 355.3275pt x 225.7233pt>
+<img/esquematico.pdf, id=232, 355.3275pt x 225.7233pt>
 File: img/esquematico.pdf Graphic file (type pdf)
 <use img/esquematico.pdf>
 Package pdftex.def Info: img/esquematico.pdf  used on input line 143.
@@ -969,7 +969,7 @@ Package pdftex.def Info: img/esquematico.pdf  used on input line 143.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/modelo-v.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<img/modelo-v.pdf, id=229, 515.04419pt x 308.11108pt>
+<img/modelo-v.pdf, id=233, 515.04419pt x 308.11108pt>
 File: img/modelo-v.pdf Graphic file (type pdf)
 <use img/modelo-v.pdf>
 Package pdftex.def Info: img/modelo-v.pdf  used on input line 180.
@@ -978,7 +978,7 @@ Package pdftex.def Info: img/modelo-v.pdf  used on input line 180.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/maquinadeestados.pdf): PDF inclus
 ion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/maquinadeestados.pdf, id=276, 555.99718pt x 244.9953pt>
+<img/maquinadeestados.pdf, id=280, 555.99718pt x 244.9953pt>
 File: img/maquinadeestados.pdf Graphic file (type pdf)
 <use img/maquinadeestados.pdf>
 Package pdftex.def Info: img/maquinadeestados.pdf  used on input line 229.
@@ -993,7 +993,7 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/sm_uc_carla.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<img/sm_uc_carla.pdf, id=296, 902.41138pt x 602.25pt>
+<img/sm_uc_carla.pdf, id=300, 902.41138pt x 602.25pt>
 File: img/sm_uc_carla.pdf Graphic file (type pdf)
 <use img/sm_uc_carla.pdf>
 Package pdftex.def Info: img/sm_uc_carla.pdf  used on input line 271.
@@ -1002,7 +1002,7 @@ Package pdftex.def Info: img/sm_uc_carla.pdf  used on input line 271.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/sm_carla_uc.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<img/sm_carla_uc.pdf, id=325, 889.40276pt x 367.3725pt>
+<img/sm_carla_uc.pdf, id=329, 889.40276pt x 367.3725pt>
 File: img/sm_carla_uc.pdf Graphic file (type pdf)
 <use img/sm_carla_uc.pdf>
 Package pdftex.def Info: img/sm_carla_uc.pdf  used on input line 280.
@@ -1011,16 +1011,16 @@ Package pdftex.def Info: img/sm_carla_uc.pdf  used on input line 280.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/system_diagram.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<img/system_diagram.pdf, id=326, 572.1375pt x 355.3275pt>
+<img/system_diagram.pdf, id=330, 572.1375pt x 377.49028pt>
 File: img/system_diagram.pdf Graphic file (type pdf)
 <use img/system_diagram.pdf>
 Package pdftex.def Info: img/system_diagram.pdf  used on input line 291.
-(pdftex.def)             Requested size: 483.69687pt x 300.40323pt.
+(pdftex.def)             Requested size: 483.69687pt x 319.14023pt.
 [12 <./img/sm_uc_carla.pdf> <./img/sm_carla_uc.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_microautoware.pdf): PD
 F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/fluxograma_microautoware.pdf, id=371, 849.1725pt x 382.5492pt>
+<img/fluxograma_microautoware.pdf, id=375, 849.1725pt x 382.5492pt>
 File: img/fluxograma_microautoware.pdf Graphic file (type pdf)
 <use img/fluxograma_microautoware.pdf>
 Package pdftex.def Info: img/fluxograma_microautoware.pdf  used on input line 3
@@ -1030,7 +1030,7 @@ Package pdftex.def Info: img/fluxograma_microautoware.pdf  used on input line 3
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_taskcontrole.pdf): PDF
  inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/fluxograma_taskcontrole.pdf, id=403, 707.76419pt x 918.3108pt>
+<img/fluxograma_taskcontrole.pdf, id=407, 707.76419pt x 918.3108pt>
 File: img/fluxograma_taskcontrole.pdf Graphic file (type pdf)
 <use img/fluxograma_taskcontrole.pdf>
 Package pdftex.def Info: img/fluxograma_taskcontrole.pdf  used on input line 33
@@ -1040,7 +1040,7 @@ Package pdftex.def Info: img/fluxograma_taskcontrole.pdf  used on input line 33
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_joysw.pdf): PDF inclus
 ion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/fluxograma_joysw.pdf, id=424, 187.66109pt x 319.1925pt>
+<img/fluxograma_joysw.pdf, id=428, 187.66109pt x 319.1925pt>
 File: img/fluxograma_joysw.pdf Graphic file (type pdf)
 <use img/fluxograma_joysw.pdf>
 Package pdftex.def Info: img/fluxograma_joysw.pdf  used on input line 343.
@@ -1095,10 +1095,10 @@ exmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/pub
 lic/cm-super/sfti2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt120
 0.pfb>
 Output written on IM420X-Projeto-Relatorio-Gabriel_Toffanetto.pdf (23 pages, 22
-76362 bytes).
+84971 bytes).
 PDF statistics:
- 596 PDF objects out of 1000 (max. 8388607)
- 437 compressed objects within 5 object streams
+ 600 PDF objects out of 1000 (max. 8388607)
+ 439 compressed objects within 5 object streams
  79 named destinations out of 1000 (max. 500000)
  217 words of extra memory for PDF output out of 10000 (max. 10000000)
 
