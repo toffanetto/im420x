@@ -32,6 +32,8 @@ void timer_watchdog_agent_callback(rcl_timer_t * timer, int64_t last_call_time)
     osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
   } 
 
+  // Try to reconnect
+
 }
 
 // Subscriptors callbacks
