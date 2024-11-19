@@ -21,7 +21,7 @@
 #include "microAutoware.h"
 
 // Timeout to wait control action
-#define TIMEOUT_GET_CONTROL_ACTION 66
+#define TIMEOUT_GET_CONTROL_ACTION 110
 
 // Timeout to wait CARLA data
 #define TIMEOUT_GET_CARLA_RX 100

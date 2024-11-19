@@ -152,6 +152,7 @@ void StartTaskControle(void * argument)
     	{
 		  ucControlMode = MANUAL;
 		  osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
+		  ucNumberOfLostMessageCtlCmd = 0;
     	}
     	else // If not, sends the same command again
     	{
@@ -185,6 +186,7 @@ void StartTaskControle(void * argument)
           {
     		ucControlMode = EMERGENCY;
     		osThreadFlagsSet(TaskMicroAutowaHandle, TO_EMERGENCY_MODE_FLAG);
+      	    ucNumberOfLostMessageStatus = 0;
           }
           else // If not, sends the same command again
           {
@@ -249,8 +251,9 @@ void StartTaskControle(void * argument)
 		// Check if the max of data lost was got
 		if(ucNumberOfLostMessageStatus >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
 		{
-		ucControlMode = EMERGENCY;
-		osThreadFlagsSet(TaskMicroAutowaHandle, TO_EMERGENCY_MODE_FLAG);
+		  ucControlMode = EMERGENCY;
+		  osThreadFlagsSet(TaskMicroAutowaHandle, TO_EMERGENCY_MODE_FLAG);
+  	      ucNumberOfLostMessageStatus = 0;
 		}
 		else // If not, sends the same command again
 		{
