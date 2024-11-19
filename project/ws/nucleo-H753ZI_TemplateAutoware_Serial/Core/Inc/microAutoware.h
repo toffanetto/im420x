@@ -57,7 +57,7 @@
   #define TRANSPORT UART
 
   // Timeout to wait control signal
-  #define TIMEOUT_GET_CONTROL_SIGNAL 60
+  #define TIMEOUT_GET_CONTROL_SIGNAL 110
 
   // Timeout for sync timestamp with ROS
   #define TIMEOUT_TS_SYNC 60

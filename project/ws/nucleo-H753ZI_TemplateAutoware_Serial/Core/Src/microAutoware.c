@@ -287,6 +287,11 @@ void StartMicroAutoware(void * argument)
     {
       ucControlMode = MANUAL;
     }
+    else if(CHECK_FLAG(TO_EMERGENCY_MODE_FLAG, uiFlags))
+    {
+      ucControlMode = MANUAL;
+      // do some of emergency thing in autoware way.
+    }
     else if(CHECK_FLAG((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG), uiFlags))
     {
       ucControlMode = MANUAL;

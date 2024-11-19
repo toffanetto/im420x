@@ -21,10 +21,10 @@
 #include "microAutoware.h"
 
 // Timeout to wait control action
-#define TIMEOUT_GET_CONTROL_ACTION 60
+#define TIMEOUT_GET_CONTROL_ACTION 66
 
 // Timeout to wait CARLA data
-#define TIMEOUT_GET_CARLA_RX 60
+#define TIMEOUT_GET_CARLA_RX 100
 
 // UART RX DMA BUFFER SIZE = MSG_RX_SIZE = 22 bytes
 #define UART2_DMA_BUFFER_SIZE 22 

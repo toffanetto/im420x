@@ -73,7 +73,11 @@ typedef struct{
   float fSteeringStatus;
 } control_signal;
 
+// Dead-band for joystick zero
 #define JOY_DEAD_BAND 500
+
+// Max of lost messages acceptable
+#define MAX_OF_LOST_MESSAGES 3
 
 // Driving mode
 #define EMERGENCY 0
@@ -83,6 +87,7 @@ typedef struct{
 // ThreadFlags
 #define TO_AUTOWARE_MODE_FLAG 0x01
 #define TO_MANUAL_MODE_FLAG 0x10
+#define TO_EMERGENCY_MODE_FLAG 0x1000000
 #define DATA_UPDATED_FLAG 0x100
 #define JOYSW_FLAG 0x1000
 #define UART_NEW_DATA_FLAG 0x10000
