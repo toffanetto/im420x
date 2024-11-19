@@ -152,4 +152,5 @@ void control_mode_cmd_callback(const void * xRequestMsg, autoware_auto_vehicle_m
   {
     xResponseMsg->success = false;
   }
+
 }

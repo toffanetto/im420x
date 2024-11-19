@@ -73,6 +73,8 @@ typedef struct{
   float fSteeringStatus;
 } control_signal;
 
+#define JOY_DEAD_BAND 500
+
 // Driving mode
 #define EMERGENCY 0
 #define AUTOWARE 1
