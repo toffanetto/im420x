@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Page-1" id="Dqvt2uRBSsBD4MVUOECL">
-    <mxGraphModel dx="163" dy="69" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="882" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -111,7 +111,7 @@
             <mxRectangle x="495" y="120" width="150" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DLu0dR6_hnOtP6MYCA8Z-20" value="&lt;b&gt;micro-ROS&lt;/b&gt;&lt;div&gt;&lt;i&gt;&lt;font color=&quot;#004c99&quot; style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Vehicle Interface&lt;/b&gt;&lt;/font&gt;&lt;/i&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#23445d;fillColor=#D1E1ED;strokeWidth=2;" parent="DLu0dR6_hnOtP6MYCA8Z-18" vertex="1">
+        <mxCell id="DLu0dR6_hnOtP6MYCA8Z-20" value="&lt;b&gt;microAutoware&lt;/b&gt;&lt;div&gt;&lt;i&gt;&lt;font color=&quot;#004c99&quot; style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Vehicle Interface&lt;/b&gt;&lt;/font&gt;&lt;/i&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#23445d;fillColor=#D1E1ED;strokeWidth=2;" parent="DLu0dR6_hnOtP6MYCA8Z-18" vertex="1">
           <mxGeometry x="45" y="40" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DLu0dR6_hnOtP6MYCA8Z-44" value="ADC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="DLu0dR6_hnOtP6MYCA8Z-17" vertex="1">
@@ -544,7 +544,7 @@
             <mxPoint x="-1" y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-1" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;micro-ROS&lt;/font&gt;&lt;/b&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;i style=&quot;font-size: 14px;&quot;&gt;&lt;font color=&quot;#004c99&quot; style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Vehicle Interface&lt;/b&gt;&lt;/font&gt;&lt;/i&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#23445d;fillColor=#D1E1ED;fontSize=14;strokeWidth=2;" parent="1" vertex="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-1" value="&lt;b&gt;microAutoware&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;i style=&quot;font-size: 14px;&quot;&gt;&lt;font color=&quot;#004c99&quot; style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Vehicle Interface&lt;/b&gt;&lt;/font&gt;&lt;/i&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#23445d;fillColor=#D1E1ED;fontSize=14;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="1622.25" y="1470" width="230" height="320" as="geometry" />
         </mxCell>
         <mxCell id="DgSRfWrRvpDGbcAEBHVI-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
@@ -558,79 +558,79 @@
             <mxPoint x="-7" y="-13" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="2142.25" y="1610" as="sourcePoint" />
             <mxPoint x="1852.25" y="1610" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="2142.25" y="1650" as="sourcePoint" />
             <mxPoint x="1852.25" y="1650" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="2142.25" y="1690" as="sourcePoint" />
             <mxPoint x="1852.25" y="1690" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="2142.25" y="1730" as="sourcePoint" />
             <mxPoint x="1852.25" y="1730" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="2142.25" y="1569" as="sourcePoint" />
             <mxPoint x="1852.25" y="1568.6" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-22" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/gear_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-22" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/gear_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2012.2513793103453" y="1559" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-24" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/emergency_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-24" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/emergency_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2012.2513793103453" y="1600" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-25" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/turn_indicators_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-25" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/turn_indicators_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2012.2513793103453" y="1640" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-26" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/hazard_lights_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-26" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/hazard_lights_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2012.2513793103453" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-27" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/actuation_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-27" value="&lt;span style=&quot;font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-size: 14px; text-align: left; text-wrap: wrap;&quot;&gt;/&lt;/span&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;span style=&quot;text-wrap: wrap;&quot;&gt;control/command/actuation_cmd&lt;/span&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2012.2513793103453" y="1720" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1622.25" y="1570" as="sourcePoint" />
-            <mxPoint x="1332.25" y="1570" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1622.25" y="1610" as="sourcePoint" />
-            <mxPoint x="1332.25" y="1610" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1622.25" y="1650" as="sourcePoint" />
             <mxPoint x="1332.25" y="1650" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1622.25" y="1690" as="sourcePoint" />
             <mxPoint x="1332.25" y="1690" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;fontColor=#666666;dashed=1;dashPattern=1 1;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1622.25" y="1730" as="sourcePoint" />
             <mxPoint x="1332.25" y="1730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1622.25" y="1570" as="sourcePoint" />
+            <mxPoint x="1332.25" y="1570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1622.25" y="1610" as="sourcePoint" />
+            <mxPoint x="1332.25" y="1610" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="DgSRfWrRvpDGbcAEBHVI-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;" parent="1" edge="1">
@@ -642,20 +642,20 @@
         <mxCell id="DgSRfWrRvpDGbcAEBHVI-36" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/control_mode&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1492.2513793103453" y="1520" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-37" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/gear_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="1492.2513793103453" y="1560" as="geometry" />
-        </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-38" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/hazard_lights_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="1492.2513793103453" y="1600" as="geometry" />
-        </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-39" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/turn_indicators_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-37" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/gear_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1492.2513793103453" y="1640" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-40" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/steering_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-38" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/hazard_lights_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1492.2513793103453" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="DgSRfWrRvpDGbcAEBHVI-41" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/velocity_Status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-39" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/turn_indicators_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;fontColor=#666666;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1492.2513793103453" y="1720" as="geometry" />
+        </mxCell>
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-40" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/steering_status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="1492.2513793103453" y="1560" as="geometry" />
+        </mxCell>
+        <mxCell id="DgSRfWrRvpDGbcAEBHVI-41" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; text-wrap: wrap;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;/vehicle/status/velocity_Status&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=3;fontSize=14;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="1492.2513793103453" y="1600" as="geometry" />
         </mxCell>
         <mxCell id="DgSRfWrRvpDGbcAEBHVI-42" value="Publishers" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="1447.25" y="1460" width="90" height="30" as="geometry" />
@@ -696,8 +696,20 @@
             <mxPoint x="2" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="y_a_9eLIx64UZbRKkLCx-1" value="&lt;div&gt;&lt;span style=&quot;font-size: 14px; font-weight: 700; font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; text-align: left;&quot;&gt;Service server&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;b&gt;&lt;i&gt;/control/control_mode_request&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;strokeWidth=2;arcSize=40;" parent="1" vertex="1">
+        <mxCell id="y_a_9eLIx64UZbRKkLCx-1" value="&lt;div&gt;&lt;span style=&quot;font-size: 14px; font-weight: 700; font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; text-align: left;&quot;&gt;Service server&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;&lt;font face=&quot;Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif&quot;&gt;&lt;b&gt;&lt;i&gt;/control/control_mode_request&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;strokeWidth=2;arcSize=25;" parent="1" vertex="1">
           <mxGeometry x="1632.25" y="1490" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fAJm15_siyyi5xv_8c2_-3" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1491" y="1770" as="sourcePoint" />
+            <mxPoint x="1491.25" y="1750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fAJm15_siyyi5xv_8c2_-5" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2011.78" y="1770" as="sourcePoint" />
+            <mxPoint x="2012.03" y="1750" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
