@@ -289,13 +289,15 @@ void StartTaskControle(void * argument)
     
       osMutexAcquire(MutexControlActionHandle, osWaitForever);
 
-      xControlAction.xSteeringAngle.fFloat = 0;
-      xControlAction.xSteeringVelocity.fFloat = 0;
-      xControlAction.xSpeed.fFloat = 0;
-      xControlAction.xAcceleration.fFloat = 0;
-      xControlAction.xJerk.fFloat = 0;
+      xControlAction.xSteeringAngle.fFloat = 0.0;
+      xControlAction.xSteeringVelocity.fFloat = 0.0;
+      xControlAction.xSpeed.fFloat = 0.0;
+      xControlAction.xAcceleration.fFloat = 0.0;
+      xControlAction.xJerk.fFloat = 0.0;
       xControlAction.ucControlMode = EMERGENCY;
       vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
+
+	  osMutexRelease(MutexControlActionHandle);
 
       // Try to stop the car whatever it takes
 
@@ -307,8 +309,10 @@ void StartTaskControle(void * argument)
 
       if(CHECK_FLAG(UART_NEW_DATA_FLAG, uiFlags))
       {
-		  ucControlMode = MANUAL;
-		  osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
+    	ucNumberOfLostMessageCtlCmd = 0;
+    	ucNumberOfLostMessageStatus = 0;
+		ucControlMode = MANUAL;
+		osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
       }
       
     }
