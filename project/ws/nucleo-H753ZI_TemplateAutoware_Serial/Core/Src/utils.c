@@ -25,7 +25,7 @@ float fGetJoyPostition(unsigned int uiValue, unsigned int uiRef0, unsigned int u
 {
   if((uiValue > (uiRef0 + JOY_DEAD_BAND)) || (uiValue < (uiRef0 - JOY_DEAD_BAND)))
   {
-    return ((int)(uiValue - uiRef0) > 0) ? ((int)(uiValue - uiRef0 - JOY_DEAD_BAND))/((float)(uiRefMax - uiRef0 - JOY_DEAD_BAND)) : ((int)(uiValue - uiRef0 - JOY_DEAD_BAND))/((float)(uiRef0 + JOY_DEAD_BAND - uiRefMin));
+    return ((int)(uiValue - uiRef0) > 0) ? ((int)(uiValue - uiRef0 - JOY_DEAD_BAND))/((float)(uiRefMax - uiRef0 - JOY_DEAD_BAND)) : ((int)(uiValue - uiRef0 + JOY_DEAD_BAND))/((float)(uiRef0 - JOY_DEAD_BAND - uiRefMin));
   }
   else
   {
