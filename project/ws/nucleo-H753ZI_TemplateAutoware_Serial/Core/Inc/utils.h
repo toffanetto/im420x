@@ -76,9 +76,6 @@ typedef struct{
 // Dead-band for joystick zero
 #define JOY_DEAD_BAND 500
 
-// Max of lost messages acceptable
-#define MAX_OF_LOST_MESSAGES 3
-
 // Driving mode
 #define EMERGENCY 0
 #define AUTOWARE 1

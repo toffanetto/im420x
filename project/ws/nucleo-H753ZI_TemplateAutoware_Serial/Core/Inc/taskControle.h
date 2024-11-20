@@ -26,6 +26,9 @@
 // Timeout to wait CARLA data
 #define TIMEOUT_GET_CARLA_RX 100
 
+// Max of lost messages acceptable
+#define MAX_OF_LOST_MESSAGES 10
+
 // UART RX DMA BUFFER SIZE = MSG_RX_SIZE = 22 bytes
 #define UART2_DMA_BUFFER_SIZE 22 
 

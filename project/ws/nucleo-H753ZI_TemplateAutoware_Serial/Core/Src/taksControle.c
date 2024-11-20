@@ -144,26 +144,26 @@ void StartTaskControle(void * argument)
       // Timeout error
       if(osFlagsErrorTimeout == uiFlags)
       {
-    	// Increment the lost data counter
-    	ucNumberOfLostMessageCtlCmd++;
+        // Increment the lost data counter
+        ucNumberOfLostMessageCtlCmd++;
 
-    	// Check if the max of data lost was got
-    	if(ucNumberOfLostMessageCtlCmd >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
-    	{
-		  ucControlMode = MANUAL;
-		  osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
-		  ucNumberOfLostMessageCtlCmd = 0;
-    	}
-    	else // If not, sends the same command again
-    	{
+        // Check if the max of data lost was got
+        if(ucNumberOfLostMessageCtlCmd >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
+        {
+          ucControlMode = MANUAL;
+          osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
+          ucNumberOfLostMessageCtlCmd = 0;
+        }
+        else // If not, sends the same command again
+        {
           HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
-    	}
+        }
       }
       else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
       {
-	    ucNumberOfLostMessageCtlCmd = 0;
+	      ucNumberOfLostMessageCtlCmd = 0;
 
-    	// Convering control command to array of bytes
+    	  // Convering control command to array of bytes
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
         vGetStringFromControlAction(xControlAction, ucTxMsgToCarla);
         osMutexRelease(MutexControlActionHandle);
@@ -184,8 +184,8 @@ void StartTaskControle(void * argument)
           // Check if the max of data lost was got
           if(ucNumberOfLostMessageStatus >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
           {
-    		ucControlMode = EMERGENCY;
-    		osThreadFlagsSet(TaskMicroAutowaHandle, TO_EMERGENCY_MODE_FLAG);
+    		    ucControlMode = EMERGENCY;
+    		    osThreadFlagsSet(TaskMicroAutowaHandle, TO_EMERGENCY_MODE_FLAG);
       	    ucNumberOfLostMessageStatus = 0;
           }
           else // If not, sends the same command again
@@ -195,9 +195,9 @@ void StartTaskControle(void * argument)
         }
         else if(CHECK_FLAG(UART_NEW_DATA_FLAG, uiFlags))
         {
-    	  ucNumberOfLostMessageStatus = 0;
+          ucNumberOfLostMessageStatus = 0;
 
-    	  osMutexAcquire(MutexControlSignalHandle, osWaitForever);
+          osMutexAcquire(MutexControlSignalHandle, osWaitForever);
 
           xControlSignal.fLongSpeed = xVehicleStatus.xLongSpeed.fFloat;
           xControlSignal.fLatSpeed = xVehicleStatus.xLatSpeed.fFloat;

@@ -31,17 +31,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  13 .debug_rnglists 00001884  00000000  00000000  0005faa0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_macro  000445e4  00000000  00000000  00061324  2**0
+ 14 .debug_macro  000445de  00000000  00000000  00061324  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_line   0003771d  00000000  00000000  000a5908  2**0
+ 15 .debug_line   0003771d  00000000  00000000  000a5902  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_str    001928ea  00000000  00000000  000dd025  2**0
+ 16 .debug_str    001928cc  00000000  00000000  000dd01f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .comment      00000076  00000000  00000000  0026f90f  2**0
+ 17 .comment      00000076  00000000  00000000  0026f8eb  2**0
                   CONTENTS, READONLY
- 18 .debug_frame  00009354  00000000  00000000  0026f988  2**2
+ 18 .debug_frame  00009354  00000000  00000000  0026f964  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line_str 0000007f  00000000  00000000  00278cdc  2**0
+ 19 .debug_line_str 0000007f  00000000  00000000  00278cb8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -4057,6 +4057,7 @@ void StartMicroAutoware(void * argument)
  8001dc8:	4608      	mov	r0, r1
  8001dca:	f013 f9bb 	bl	8015144 <rclc_executor_spin_some>
 
+
     // Checking if control mode has changed by vehicle or Autoware.
     uiFlags = osThreadFlagsGet();
  8001dce:	f00c fa53 	bl	800e278 <osThreadFlagsGet>
@@ -4161,6 +4162,7 @@ void StartMicroAutoware(void * argument)
  8001ede:	f887 332f 	strb.w	r3, [r7, #815]	@ 0x32f
     }
 
+    // Publishing control mode
     control_mode_msg_.stamp = clock_msg_.clock;
  8001ee2:	f507 734c 	add.w	r3, r7, #816	@ 0x330
  8001ee6:	f5a3 7384 	sub.w	r3, r3, #264	@ 0x108
@@ -4179,6 +4181,7 @@ void StartMicroAutoware(void * argument)
  8001f0e:	2200      	movs	r2, #0
  8001f10:	4618      	mov	r0, r3
  8001f12:	f012 fa93 	bl	801443c <rcl_publish>
+
 
     // All topics are recieved (maybe not all...)
     if(0b1 & (ucSubscribersRecieved >> 1)) // Checking if control_cmd_sub_ data arrives (second bit of ucSubscribersRecieved)
@@ -4245,16 +4248,16 @@ void StartMicroAutoware(void * argument)
  8001f9a:	f44f 7180 	mov.w	r1, #256	@ 0x100
  8001f9e:	4618      	mov	r0, r3
  8001fa0:	f00c f91c 	bl	800e1dc <osThreadFlagsSet>
-      }
-
     }
 
-    // WAIT for flag to sync xControlSignal update
+
+    // Check flag to sync xControlSignal update -- Doesn't need to wait becouse taskControle waits for CARLA data and just pack and sent to here,
+    // as microAutoware never blocks taskControle, then we don't need to wait here.
     uiFlags = osThreadFlagsGet();
  8001fa4:	f00c f968 	bl	800e278 <osThreadFlagsGet>
  8001fa8:	f8c7 031c 	str.w	r0, [r7, #796]	@ 0x31c
-    uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
- 8001fac:	226e      	movs	r2, #110	@ 0x6e
+    uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, 0);
+ 8001fac:	2200      	movs	r2, #0
  8001fae:	2101      	movs	r1, #1
  8001fb0:	f44f 7080 	mov.w	r0, #256	@ 0x100
  8001fb4:	f00c f981 	bl	800e2ba <osThreadFlagsWait>
@@ -4268,7 +4271,6 @@ void StartMicroAutoware(void * argument)
     {
 
     }
-
     // xControlSignal updated
     else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
  8001fc6:	f8d7 331c 	ldr.w	r3, [r7, #796]	@ 0x31c
@@ -6021,34 +6023,34 @@ void StartTaskControle(void * argument)
  8002990:	f113 0f02 	cmn.w	r3, #2
  8002994:	d11d      	bne.n	80029d2 <StartTaskControle+0x18e>
       {
-    	// Increment the lost data counter
-    	ucNumberOfLostMessageCtlCmd++;
+        // Increment the lost data counter
+        ucNumberOfLostMessageCtlCmd++;
  8002996:	f897 304e 	ldrb.w	r3, [r7, #78]	@ 0x4e
  800299a:	3301      	adds	r3, #1
  800299c:	f887 304e 	strb.w	r3, [r7, #78]	@ 0x4e
 
-    	// Check if the max of data lost was got
-    	if(ucNumberOfLostMessageCtlCmd >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
+        // Check if the max of data lost was got
+        if(ucNumberOfLostMessageCtlCmd >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
  80029a0:	f897 304e 	ldrb.w	r3, [r7, #78]	@ 0x4e
- 80029a4:	2b02      	cmp	r3, #2
+ 80029a4:	2b09      	cmp	r3, #9
  80029a6:	d90c      	bls.n	80029c2 <StartTaskControle+0x17e>
-    	{
-		  ucControlMode = MANUAL;
+        {
+          ucControlMode = MANUAL;
  80029a8:	2304      	movs	r3, #4
  80029aa:	f887 304f 	strb.w	r3, [r7, #79]	@ 0x4f
-		  osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
+          osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
  80029ae:	4b6a      	ldr	r3, [pc, #424]	@ (8002b58 <StartTaskControle+0x314>)
  80029b0:	681b      	ldr	r3, [r3, #0]
  80029b2:	2110      	movs	r1, #16
  80029b4:	4618      	mov	r0, r3
  80029b6:	f00b fc11 	bl	800e1dc <osThreadFlagsSet>
-		  ucNumberOfLostMessageCtlCmd = 0;
+          ucNumberOfLostMessageCtlCmd = 0;
  80029ba:	2300      	movs	r3, #0
  80029bc:	f887 304e 	strb.w	r3, [r7, #78]	@ 0x4e
  80029c0:	e08f      	b.n	8002ae2 <StartTaskControle+0x29e>
-    	}
-    	else // If not, sends the same command again
-    	{
+        }
+        else // If not, sends the same command again
+        {
           HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
  80029c2:	f107 0308 	add.w	r3, r7, #8
  80029c6:	221e      	movs	r2, #30
@@ -6056,7 +6058,7 @@ void StartTaskControle(void * argument)
  80029ca:	4862      	ldr	r0, [pc, #392]	@ (8002b54 <StartTaskControle+0x310>)
  80029cc:	f009 fa62 	bl	800be94 <HAL_UART_Transmit_DMA>
  80029d0:	e087      	b.n	8002ae2 <StartTaskControle+0x29e>
-    	}
+        }
       }
       else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
  80029d2:	6b3b      	ldr	r3, [r7, #48]	@ 0x30
@@ -6067,11 +6069,11 @@ void StartTaskControle(void * argument)
  80029e0:	2b00      	cmp	r3, #0
  80029e2:	db7e      	blt.n	8002ae2 <StartTaskControle+0x29e>
       {
-	    ucNumberOfLostMessageCtlCmd = 0;
+	      ucNumberOfLostMessageCtlCmd = 0;
  80029e4:	2300      	movs	r3, #0
  80029e6:	f887 304e 	strb.w	r3, [r7, #78]	@ 0x4e
 
-    	// Convering control command to array of bytes
+    	  // Convering control command to array of bytes
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
  80029ea:	4b5c      	ldr	r3, [pc, #368]	@ (8002b5c <StartTaskControle+0x318>)
  80029ec:	681b      	ldr	r3, [r3, #0]
@@ -6128,13 +6130,13 @@ void StartTaskControle(void * argument)
           // Check if the max of data lost was got
           if(ucNumberOfLostMessageStatus >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
  8002a52:	f897 304d 	ldrb.w	r3, [r7, #77]	@ 0x4d
- 8002a56:	2b02      	cmp	r3, #2
+ 8002a56:	2b09      	cmp	r3, #9
  8002a58:	d90d      	bls.n	8002a76 <StartTaskControle+0x232>
           {
-    		ucControlMode = EMERGENCY;
+    		    ucControlMode = EMERGENCY;
  8002a5a:	2300      	movs	r3, #0
  8002a5c:	f887 304f 	strb.w	r3, [r7, #79]	@ 0x4f
-    		osThreadFlagsSet(TaskMicroAutowaHandle, TO_EMERGENCY_MODE_FLAG);
+    		    osThreadFlagsSet(TaskMicroAutowaHandle, TO_EMERGENCY_MODE_FLAG);
  8002a60:	4b3d      	ldr	r3, [pc, #244]	@ (8002b58 <StartTaskControle+0x314>)
  8002a62:	681b      	ldr	r3, [r3, #0]
  8002a64:	f04f 7180 	mov.w	r1, #16777216	@ 0x1000000
@@ -6165,11 +6167,11 @@ void StartTaskControle(void * argument)
  8002a92:	2b00      	cmp	r3, #0
  8002a94:	db25      	blt.n	8002ae2 <StartTaskControle+0x29e>
         {
-    	  ucNumberOfLostMessageStatus = 0;
+          ucNumberOfLostMessageStatus = 0;
  8002a96:	2300      	movs	r3, #0
  8002a98:	f887 304d 	strb.w	r3, [r7, #77]	@ 0x4d
 
-    	  osMutexAcquire(MutexControlSignalHandle, osWaitForever);
+          osMutexAcquire(MutexControlSignalHandle, osWaitForever);
  8002a9c:	4b31      	ldr	r3, [pc, #196]	@ (8002b64 <StartTaskControle+0x320>)
  8002a9e:	681b      	ldr	r3, [r3, #0]
  8002aa0:	f04f 31ff 	mov.w	r1, #4294967295	@ 0xffffffff
@@ -6348,7 +6350,7 @@ void StartTaskControle(void * argument)
 		// Check if the max of data lost was got
 		if(ucNumberOfLostMessageStatus >= MAX_OF_LOST_MESSAGES) // If yes, change to manual
  8002c06:	f897 304d 	ldrb.w	r3, [r7, #77]	@ 0x4d
- 8002c0a:	2b02      	cmp	r3, #2
+ 8002c0a:	2b09      	cmp	r3, #9
  8002c0c:	d90d      	bls.n	8002c2a <StartTaskControle+0x3e6>
 		{
 		  ucControlMode = EMERGENCY;
@@ -6492,7 +6494,7 @@ void StartTaskControle(void * argument)
  8002d02:	cb0f      	ldmia	r3, {r0, r1, r2, r3}
  8002d04:	f000 fae6 	bl	80032d4 <vGetStringFromControlAction>
 
-	    osMutexRelease(MutexControlActionHandle);
+	  osMutexRelease(MutexControlActionHandle);
  8002d08:	4b19      	ldr	r3, [pc, #100]	@ (8002d70 <StartTaskControle+0x52c>)
  8002d0a:	681b      	ldr	r3, [r3, #0]
  8002d0c:	4618      	mov	r0, r3
@@ -6500,7 +6502,7 @@ void StartTaskControle(void * argument)
 
       // Try to stop the car whatever it takes
 
-	    HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
+	  HAL_UART_Transmit_DMA(&huart2, ucTxMsgToCarla, MSG_TO_CARLA_SIZE);
  8002d12:	f107 0308 	add.w	r3, r7, #8
  8002d16:	221e      	movs	r2, #30
  8002d18:	4619      	mov	r1, r3
@@ -6527,16 +6529,16 @@ void StartTaskControle(void * argument)
  8002d42:	2b00      	cmp	r3, #0
  8002d44:	f6ff adb6 	blt.w	80028b4 <StartTaskControle+0x70>
       {
-    	  ucNumberOfLostMessageCtlCmd = 0;
+    	ucNumberOfLostMessageCtlCmd = 0;
  8002d48:	2300      	movs	r3, #0
  8002d4a:	f887 304e 	strb.w	r3, [r7, #78]	@ 0x4e
-    	  ucNumberOfLostMessageStatus = 0;
+    	ucNumberOfLostMessageStatus = 0;
  8002d4e:	2300      	movs	r3, #0
  8002d50:	f887 304d 	strb.w	r3, [r7, #77]	@ 0x4d
-		    ucControlMode = MANUAL;
+		ucControlMode = MANUAL;
  8002d54:	2304      	movs	r3, #4
  8002d56:	f887 304f 	strb.w	r3, [r7, #79]	@ 0x4f
-		    osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
+		osThreadFlagsSet(TaskMicroAutowaHandle, TO_MANUAL_MODE_FLAG);
  8002d5a:	4b07      	ldr	r3, [pc, #28]	@ (8002d78 <StartTaskControle+0x534>)
  8002d5c:	681b      	ldr	r3, [r3, #0]
  8002d5e:	2110      	movs	r1, #16

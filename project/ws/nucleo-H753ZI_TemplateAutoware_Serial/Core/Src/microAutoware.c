@@ -275,6 +275,7 @@ void StartMicroAutoware(void * argument)
 
     rclc_executor_spin_some(&executor, EXECUTOR_SPIN_TIME * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
 
+
     // Checking if control mode has changed by vehicle or Autoware.
     uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG, osFlagsWaitAny, 0);
@@ -297,9 +298,11 @@ void StartMicroAutoware(void * argument)
       ucControlMode = MANUAL;
     }
 
+    // Publishing control mode
     control_mode_msg_.stamp = clock_msg_.clock;
     control_mode_msg_.mode = ucControlMode;
     rcl_publish(&control_mode_pub_, &control_mode_msg_, NULL);
+
 
     // All topics are recieved (maybe not all...)
     if(0b1 & (ucSubscribersRecieved >> 1)) // Checking if control_cmd_sub_ data arrives (second bit of ucSubscribersRecieved)
@@ -321,16 +324,17 @@ void StartMicroAutoware(void * argument)
 
     }
 
-    // WAIT for flag to sync xControlSignal update
+
+    // Check flag to sync xControlSignal update -- Doesn't need to wait becouse taskControle waits for CARLA data and just pack and sent to here,
+    // as microAutoware never blocks taskControle, then we don't need to wait here.
     uiFlags = osThreadFlagsGet();
-    uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, TIMEOUT_GET_CONTROL_SIGNAL);
+    uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, 0);
 
     // Timeout Error
     if(osFlagsErrorTimeout == uiFlags)
     {
 
     }
-
     // xControlSignal updated
     else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
     {
