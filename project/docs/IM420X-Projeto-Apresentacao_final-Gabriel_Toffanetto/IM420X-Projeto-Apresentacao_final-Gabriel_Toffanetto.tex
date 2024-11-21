@@ -216,7 +216,7 @@
 % TODO: \usepackage{graphicx} required
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/vehicle_interface-topics}
+	\includegraphics[width=0.9\linewidth]{img/vehicle_interface-topics}
 	\caption{Diagrama de tópicos da \textit{vehicle interface}.}
 	\label{fig:vehicleinterface-topics}
 \end{figure}
@@ -242,7 +242,7 @@
 					\item \color<2->{FlagGreen}{Teleoperação do veículo por um \textit{joystick} em  \textit{hardware};}
 					\item \color<2->{FlagGreen}{Troca do modo de operação por meio da \textit{switch} do \textit{joystick};}
 					\item \color<2->{FlagGreen}{Subscrição por meio do micro-ROS em todos os tópicos necessários do Autoware;}
-					\item \color<2->{FlagGreen}{Publicação a partir micro-ROS em todos os tópicos necessários do Autoware.}
+					\item \color<2->{FlagGreen}{Publicação a partir micro-ROS em todos os tópicos necessários do Autoware;}
 					\item \color<2->{uscgold}{Comunicação a partir micro-ROS em todos os serviços necessários do Autoware.}
 					
 				\end{itemize}
@@ -685,12 +685,26 @@
 
 \subsection*{Modo de emergência}
 
-\begin{frame}{Modo de emergência}
+\begin{frame}{\textit{Fail-safe}: perda comunicação com Autoware}
 	
-	Perder autoware
+%	\begin{figure}[H]
+%		\centering
+%		\movie[width=0.85\textwidth,height=0.478\textwidth,poster,autostart,loop]{\includegraphics[width=0.85\linewidth]{microautoware_testing_autonomous_w_manual_mode_take_up}}{microautoware_testing_autonomous_w_manual_mode_take_up.mp4}
+%		\caption{Tomada de condução para modo manual e troca de modo de operação pelo Autoware.}
+%		\label{fig:microautoware_testing_autonomous_w_manual_mode_take_up}
+%	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Modo de emergência: Perda de sinais do veículo}
 	
-	Perder carla (RX)
-	
+%	\begin{figure}[H]
+%		\centering
+%		\movie[width=0.85\textwidth,height=0.478\textwidth,poster,autostart,loop]{\includegraphics[width=0.85\linewidth]{microautoware_testing_autonomous_w_manual_mode_take_up}}{microautoware_testing_autonomous_w_manual_mode_take_up.mp4}
+%		\caption{Tomada de condução para modo manual e troca de modo de operação pelo Autoware.}
+%		\label{fig:microautoware_testing_autonomous_w_manual_mode_take_up}
+%	\end{figure}
+
 \end{frame}
 
 \subsection*{Repositório}
@@ -704,9 +718,61 @@
 
 \section{Conclusão}
 
-\subsection*{Problemas encontrados}
+\begin{frame}{Conclusão}
+	
+	\begin{columns}
+		
+		\begin{column}{0.435\textwidth}
+			
+			\begin{block}{Problemas encontrados}
+				
+				\begin{itemize}
+					\item Perda de resposta do serviço \texttt{control\_mode\_request};
+					\item Perda de deadline causada pela instabilidade do recebimento de comandos;
+					\begin{itemize}
+						\item Acentuado quando o PC é sobrecarregado.
+					\end{itemize}
+					\item 
+				\end{itemize}
+				
+			\end{block}
+			
+		\end{column}
+	
+\pause
+		
+		\begin{column}{0.435\textwidth}
+			
+			\begin{block}{Trabalhos futuros}
+				
+				\begin{itemize}
+					\item Portabilidade do microAutoware para outros microcontroladores;
+					\item Implementação de bibliotecas auxiliares para controle de acelerador e freio;
+					\item Compatibilidade com diferentes periféricos de comunicação com o agente do micro-ROS;
+					\begin{itemize}
+						\item e.g. Ethernet.						
+					\end{itemize}
+					\item Protocolos de detecção de erros.
+				\end{itemize}
+				
+			\end{block}
+			
+		\end{column}
+		
+	\end{columns}
 
-\subsection*{Trabalhos futuros}
+\pause
+
+	\begin{block}{}
+		
+		\begin{itemize}
+			\item Foi possível integrar ao sistema embarcado a função de \textit{vehicle interface} para o Autoware.
+			
+		\end{itemize}
+		
+	\end{block}
+	
+\end{frame}
 
 
 \begin{frame}{Cronograma}
