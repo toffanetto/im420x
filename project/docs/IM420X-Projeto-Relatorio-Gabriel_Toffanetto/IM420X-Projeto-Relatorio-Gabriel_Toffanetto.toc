@@ -4,12 +4,12 @@
 \contentsline {section}{\numberline {3}Documentação}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Requisitos}{7}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Componentes}{8}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Arquitetura}{9}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Método de desenvolvimento}{11}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Projeto de \textit {software}}{12}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Periféricos}{19}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Manual de utilização}{22}{section.4}%
-\contentsline {section}{\numberline {5}Problemas identificados e não resolvidos}{23}{section.5}%
-\contentsline {section}{\numberline {6}Códigos da comunidade}{24}{section.6}%
-\contentsline {section}{Referências}{25}{section.6}%
-\contentsline {section}{Apêndices}{26}{section*.45}%
+\contentsline {subsection}{\numberline {3.3}Arquitetura}{10}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Método de desenvolvimento}{12}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Projeto de \textit {software}}{13}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Periféricos}{21}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Manual de utilização}{24}{section.4}%
+\contentsline {section}{\numberline {5}Problemas identificados e não resolvidos}{25}{section.5}%
+\contentsline {section}{\numberline {6}Códigos da comunidade}{26}{section.6}%
+\contentsline {section}{Referências}{27}{section.6}%
+\contentsline {section}{Apêndices}{28}{section*.47}%

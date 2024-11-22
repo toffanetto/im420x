@@ -53,7 +53,7 @@ Para realização dos testes e validação do microAutoware, foi considerada a u
 	\label{fig:architecture_HIL}
 \end{figure}
 
-Com isso, a \autoref{fig:logos} ilustra as principais ferramentas que serão somadas ao sistema embarcado baseado em STM32 para viabilização do projeto: Autoware, ROS e micro-ROS são aliados ao CARLA para permitir a implementação e validação do microAutoware.
+Com isso, a \autoref{fig:logos} ilustra as principais ferramentas que serão somadas ao sistema embarcado baseado em STM32 para viabilização do projeto: Autoware, ROS e micro-ROS são aliados ao CARLA para permitir a implementação e validação do microAutoware. Para integração do CARLA junto ao Autoware foi utilizada a \textit{bridge} produzida por \citeonline{kaljavesiCARLAAutowareBridgeFacilitatingAutonomous2024b}, realizando algumas modificações para integração com o microAutoware.
 
 \begin{figure}[H]
 	\centering
@@ -62,7 +62,7 @@ Com isso, a \autoref{fig:logos} ilustra as principais ferramentas que serão som
 	\label{fig:logos}
 \end{figure}
 
-A \textit{vehicle interface} é um módulo que mesmo não específicado profundamente necessita de atender a alguns requisitos de comunicação, sendo eles os dados que serão recebidos (\textit{subscribers}), os dados que devem ser reportados (\textit{publishers}) e ainda um serviço de troca de modo de controle. A implementação da interface se dá por meio de um nó do ROS, que deve obrigatóriamente receber o \textbf{comando de controle} do veículo, e devolver o \textbf{modo de controle atual}, o \textbf{ângulo de esterçamento atual} e as \textbf{velocidades atuais} do veículo. Ainda, deve prover um serviço que dada uma \textbf{solicitação de troca de modo de controle}, responde se a mesma foi feita com sucesso ou não. A \autoref{fig:vehicleinterface} explicita na forma de um diagrama as entradas e saídas da interface Autoware -- veículo.
+A \textit{vehicle interface} é um módulo que mesmo não específicado profundamente necessita de atender a alguns requisitos de comunicação, sendo eles os dados que serão recebidos (\textit{subscribers}), os dados que devem ser reportados (\textit{publishers}) e ainda um serviço de troca de modo de controle. A implementação da interface se dá por meio de um nó do ROS, que deve obrigatóriamente receber o \textbf{comando de controle} do veículo, e devolver o \textbf{modo de controle atual}, o \textbf{ângulo de esterçamento atual} e as \textbf{velocidades atuais} do veículo. Ainda, deve prover um serviço que dada uma \textbf{solicitação de troca de modo de controle}, responde se a mesma foi feita com sucesso ou não. A \autoref{fig:vehicleinterface-topics} explicita na forma de um diagrama as entradas e saídas da interface Autoware -- veículo.
 
 	\begin{figure}[H]
 	\centering
@@ -152,48 +152,64 @@ A \textit{vehicle interface} é um módulo que mesmo não específicado profunda
 	\item Custo: R\$ 10000,00.
 \end{itemize}
 
+\subsubsection*{Módulo FTDI}
+
+\begin{itemize}
+	\item Tensão de operação: 3V3 -- 5V;
+	\item Circuito integrado: FT232RL;
+	\item \textit{Baudrate} mínima: 183,1 bps;
+	\item \textit{Baudrate} máxima: 3 Mbps;
+	\item Custo: R\$ 20,00.
+\end{itemize}
+
+\clearpage
+
 \subsection{Arquitetura}
+
+A arquitetura HIL é baseada no uso de dois sistemas, um computador, executando o CARLA e o Autoware, e um sistema embarcado executando o FreeRTOS. A \autoref{fig:highLevelblock_diagram} mostra os blocos presentes em cada sistema e como eles se comunicam. Observa-se que o CARLA não recebe dadod diretamente do Autoware, e que existem duas linhas comunicação \textit{full-duplex}, entre o Autoware e a tarefa microAutoware, e entre o simulador e a tarefa TaskControle.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.75\linewidth]{img/highLevelblock_diagram.pdf}
+	\includegraphics[width=0.7\linewidth]{img/highLevelblock_diagram.pdf}
 	\caption{Diagrama de blocos em alto nível da arquitetura HIL.}
 	\label{fig:highLevelblock_diagram}
 \end{figure}
 
+Especificando como a comunicação é feita, cada linha de comunicação é dada por uma porta de comunicação serial assíncrona (UART), sendo uma responsável pela comunicação com o Autoware, utilizando o agente do micro-ROS para o interfaceamento Serial-ROS, enquanto a outra se comunica com o simulador, por meio do pacote Carla-Serial-Bridge\footnote{Disponível em: \href{https://github.com/LMA-FEM-UNICAMP/carla_serial_bridge}{github.com/LMA-FEM-UNICAMP/carla\_serial\_bridge}}. A recepção e transmissão via UART é feita utilizando DMA, de forma a preservar o CPU e reduzir o tempo dentro da rotina de interrupção, sendo utilizado um módulo DMA para cada UART para evitar sobrecarga. Adicionalmente, para leitura do \textit{joystick} são utilizados duas entradas analógicas e uma entrada digital, que é atrelada à um canal de interrupções externas (EXTI).
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.75\linewidth]{img/block_diagram.pdf}
+	\includegraphics[width=0.7\linewidth]{img/block_diagram.pdf}
 	\caption{Diagrama de blocos do sistema embarcado.}
 	\label{fig:blockdiagram}
 \end{figure}
 
+A ligação física se dá como mostrado no esquemático da \autoref{fig:esquematico}, onde a alimentação do circuito é feita por meio da porta USB conectada ao ST-LINK. Um detalhe importante de montagem é que o pino de alimentação 3,3 V do módulo FTDI não foi conectado à placa NUCLEO, com intuito de evitar correntes parasitas no circuito de alimentação devido a desparidade de referência causada pelos conversores da NUCLEO e do FTDI. A montagem física é mostrada na \autoref{fig:montagem}.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{img/esquematico.pdf}
+	\includegraphics[width=0.55\linewidth]{img/esquematico.pdf}
 	\caption{Esquemático de ligações elétricas.}
 	\label{fig:esquematico}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/montagem.pdf}
+	\caption{Montagem do circuito.}
+	\label{fig:montagem}
 \end{figure}
 
 \subsubsection*{Periféricos necessários}
 
 \begin{itemize}
 	\item \textit{Direct Memory Access}
-	\begin{itemize}
-		\item DMA1
-		
-		\item DMA2		
-	\end{itemize}
 	
 	\item UART
-	\begin{itemize}
-		\item USART3
-		
-		\item USART2
-		
-	\end{itemize}
 	
 	\item ADC
+	
+	\item GPIO
 	
 	\item EXTI
 	
@@ -202,8 +218,11 @@ A \textit{vehicle interface} é um módulo que mesmo não específicado profunda
 \end{itemize}
 
 
+\clearpage
+
 \subsection{Método de desenvolvimento}
 
+Para realização das atividades necessárias para o desenvolvimento do projeto, foi selecionado o método V, onde, como mostrado na \autoref{fig:modelo-v}, as tarefas de criação são feitas em paralelo com as de validação, logo, permite a entrega final de forma confiável e sem a necessidad de re-manufaturar grandes módulos.
 
 \begin{figure}[H]
 	\centering
@@ -211,6 +230,8 @@ A \textit{vehicle interface} é um módulo que mesmo não específicado profunda
 	\caption{Modelo de execução das atividades do projeto.}
 	\label{fig:modelo-v}
 \end{figure}
+
+O projeto teve sua realização em um horizonte de 9 semanas, como mostrado na \autoref{tab:crono}, sendo realizadas entregas parciais nas semanas 2, 4, 7 e 9.
 
 \begin{table}[H]
 	\centering
@@ -249,10 +270,13 @@ A \textit{vehicle interface} é um módulo que mesmo não específicado profunda
 	\item \textbf{Semana 9:} Apresentação Final
 \end{itemize}
 
+\clearpage
 
 \subsection{Projeto de \textit{software}}
 
 \subsubsection*{Estados do sistema}
+
+O sistema pode se encontrar em três estados durante seu funcionamento: \texttt{AUTOWARE}, \texttt{MANUAL} ou \texttt{EMERGÊNCIA}, sendo o primeiro escolhido na inicialização. No primeiro, o veículo é conduzido pelos comandos do Autoware, e caso seja solicitado pelo Autoware ou pelo botão do \textit{joystick}, ou ainda se houver perda da \textit{deadline} de recebimento dos comandos do Autoware, o estado do sistema se altera para \texttt{MANUAL}. Neste segundo modo, o veículo é comandado pelo \textit{joystick}, podendo voltar à ser autonomo por comandos do próprio controle ou do Autoware. Para os dois estados iniciais, caso haja a perda da janela de tempo de recebimento dos sinais dosimulador, o sistema entra em modo \texttt{EMERGÊNCIA}, onde o veículo efetua uma parada de emergência. Caso a comunicação com o CARLA seja restaurada, o sistema retorna ao estado \texttt{MANUAL}.
 
 \begin{figure}[H]
 	\centering
@@ -263,6 +287,7 @@ A \textit{vehicle interface} é um módulo que mesmo não específicado profunda
 
 \subsubsection*{Protocolo de comunicação serial}
 
+A comunicação serial entre o sistema embarcado e o simulador é realizada por meio de um protocolo implementado via máquina de estados, onde a \autoref{fig:smuccarla} representa o envio de dados do microcontrolador para o CARLA, enquanto a \autoref{fig:sm_carla_uc} o caminho contrário.
 
 \begin{enumerate}
 	\item CARLA $\longrightarrow$ RTOS (\texttt{USART3})
@@ -275,7 +300,8 @@ A \textit{vehicle interface} é um módulo que mesmo não específicado profunda
 			\item Ângulo de esterçamento da roda virtual -- \texttt{float fSteeringStatus;}		
 		\end{itemize}
 		\item Padrão da mensagem: \textbf{\#A}\texttt{\%c\%c\%c\%c}\textbf{B}\texttt{\%c\%c\%c\%c}\textbf{C}\texttt{\%c\%c\%c\%c}\textbf{D}\texttt{\%c\%c\%c\%c}\textbf{\$}
-		\item Tamanho da mensagem: 22 bytes.
+		\item Tamanho da mensagem: 22 bytes;
+		\item Envia uma \textit{ThreadFlag} ao receber a mensagem inteira.
 		
 	\end{itemize}
 	\item RTOS $\longrightarrow$ CARLA (\texttt{USART2})
@@ -487,7 +513,13 @@ A \textit{vehicle interface} é um módulo que mesmo não específicado profunda
 	\item Eixos $x$ e $y$
 	\begin{itemize}
 		\item ADC de 16 bits \textit{multi-channel};
-		\item Leitura contínua por DMA.					
+		\begin{itemize}
+			\item Leitura contínua por DMA;
+			\item Modo de \textit{clock} assíncrono dividido por 256;
+			\item Tempo de amostragem 387,5 ciclos;
+			\item Interrupções desativadas para preservar a CPU.
+			
+		\end{itemize}				
 	\end{itemize}
 	
 	\item Botão

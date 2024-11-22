@@ -21,6 +21,15 @@ Dispon{\'\i}vel em:
   research}. 2024.
 Dispon{\'\i}vel em: \url{https://carla.org}.}
 
+\bibitem[Kaljavesi et al.
+  2024]{kaljavesiCARLAAutowareBridgeFacilitatingAutonomous2024b}
+\abntrefinfo{Kaljavesi et al.}{KALJAVESI et al.}{2024}
+{KALJAVESI, G. et al. {{CARLA-Autoware-Bridge}}: {{Facilitating Autonomous
+  Driving Research}} with a {{Unified Framework}} for {{Simulation}} and
+  {{Module Development}}. In:  \emph{2024 {{IEEE Intelligent Vehicles
+  Symposium}} ({{IV}})}. [S.l.: s.n.], 2024. p. 224--229.
+ISSN 2642-7214.}
+
 \bibitem[{micro-ROS} 2024]{microros_main}
 \abntrefinfo{{micro-ROS}}{{micro-ROS}}{2024}
 {{micro-ROS}. \emph{micro-ROS puts ROS 2 onto microcontrollers}. 2024.

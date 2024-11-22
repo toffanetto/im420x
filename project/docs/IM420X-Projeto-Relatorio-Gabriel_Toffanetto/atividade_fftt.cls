@@ -42,6 +42,8 @@
 \usepackage{tabto}
 \usepackage{color,soul}
 \usepackage[table]{xcolor}
+\usepackage{fixltx2e}
+\usepackage[bottom]{footmisc}
 \usepackage{mathrsfs} % letras matematicas especiais
 \usepackage[linktoc=all]{hyperref} % link de pagina no sumário
 \usepackage{amsmath} % recursos matemáticos
@@ -215,7 +217,7 @@
 \newcommand{\cabecalhoalone}{ 
     \thispagestyle{empty}
     \header
-    \footerauthor
+    \footer
     
     \begin{picture}(50,50)      %logo UNICAMP
         \put(200,-30){
@@ -228,7 +230,7 @@
     \center{\large{Universidade Estadual de Campinas}}
     \center{\Faculdade}
     \justify
-     \noindent \textbf{\DisciplinaCOD \space -- \Disciplina}    \hfill \today \\    %disciplina \\ data
+     \noindent \textbf{\DisciplinaCOD \space -- \Disciplina}    \hfill Novembro de 2024 \\    %disciplina \\ data
     
     \noindent Docente: \Professor \\  %professor
     

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  22 NOV 2024 15:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  22 NOV 2024 16:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -158,6 +158,30 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 (/usr/share/texlive/texmf-dist/tex/latex/xcolor/svgnam.def
 File: svgnam.def 2021/10/31 v2.13 Predefined colors according to SVG 1.1 (UK)
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fixltx2e.sty
+Package: fixltx2e 2016/12/29 v2.1a fixes to LaTeX (obsolete)
+Applying: [2015/01/01] Old fixltx2e package on input line 46.
+
+
+Package fixltx2e Warning: fixltx2e is not required with releases after 2015
+(fixltx2e)                All fixes are now in the LaTeX kernel.
+(fixltx2e)                See the latexrelease package for details.
+
+Already applied: [0000/00/00] Old fixltx2e package on input line 53.
+) (/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks27
+\footnotemargin=\dimen157
+\c@pp@next@reset=\count199
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
+.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup4
@@ -200,9 +224,9 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
-\@linkdim=\dimen157
-\Hy@linkcounter=\count199
-\Hy@pagecounter=\count266
+\@linkdim=\dimen158
+\Hy@linkcounter=\count266
+\Hy@pagecounter=\count267
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
@@ -219,7 +243,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count267
+\Hy@SavedSpaceFactor=\count268
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
@@ -233,14 +257,14 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count268
+\c@Hy@tempcnt=\count269
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4804.
-\XeTeXLinkMargin=\dimen158
+\XeTeXLinkMargin=\dimen159
 
 (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -249,9 +273,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count269
-\Field@Width=\dimen159
-\Fld@charsize=\dimen160
+\Fld@menulength=\count270
+\Field@Width=\dimen160
+\Fld@charsize=\dimen161
 Package hyperref Info: Hyper figures OFF on input line 6076.
 Package hyperref Info: Link nesting OFF on input line 6081.
 Package hyperref Info: Hyper index ON on input line 6084.
@@ -266,9 +290,9 @@ LaTeX Info: Redefining \pageref on input line 6150.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count270
-\c@Item=\count271
-\c@Hfootnote=\count272
+\Hy@abspage=\count271
+\c@Item=\count272
+\c@Hfootnote=\count273
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
@@ -280,8 +304,8 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count273
-\c@bookmark@seq@number=\count274
+\Fld@listcount=\count274
+\c@bookmark@seq@number=\count275
 
 (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
@@ -304,51 +328,51 @@ Package: amstext 2021/08/26 v2.01 AMS text
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks27
-\ex@=\dimen161
+\@emptytoks=\toks28
+\ex@=\dimen162
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen162
+\pmbraise@=\dimen163
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2021/08/26 v2.02 operator names
 )
-\inf@bad=\count275
+\inf@bad=\count276
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count276
-\leftroot@=\count277
+\uproot@=\count277
+\leftroot@=\count278
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count278
-\DOTSCASE@=\count279
+\classnum@=\count279
+\DOTSCASE@=\count280
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
 \Mathstrutbox@=\box52
 \strutbox@=\box53
-\big@size=\dimen163
+\big@size=\dimen164
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count280
-\c@MaxMatrixCols=\count281
+\macc@depth=\count281
+\c@MaxMatrixCols=\count282
 \dotsspace@=\muskip17
-\c@parentequation=\count282
-\dspbrk@lvl=\count283
-\tag@help=\toks28
-\row@=\count284
-\column@=\count285
-\maxfields@=\count286
-\andhelp@=\toks29
-\eqnshift@=\dimen164
-\alignsep@=\dimen165
-\tagshift@=\dimen166
-\tagwidth@=\dimen167
-\totwidth@=\dimen168
-\lineht@=\dimen169
-\@envbody=\toks30
+\c@parentequation=\count283
+\dspbrk@lvl=\count284
+\tag@help=\toks29
+\row@=\count285
+\column@=\count286
+\maxfields@=\count287
+\andhelp@=\toks30
+\eqnshift@=\dimen165
+\alignsep@=\dimen166
+\tagshift@=\dimen167
+\tagwidth@=\dimen168
+\totwidth@=\dimen169
+\lineht@=\dimen170
+\@envbody=\toks31
 \multlinegap=\skip55
 \multlinetaggap=\skip56
-\mathdisplay@stack=\toks31
+\mathdisplay@stack=\toks32
 LaTeX Info: Redefining \[ on input line 2938.
 LaTeX Info: Redefining \] on input line 2939.
 )
@@ -374,15 +398,15 @@ Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count287
-\calc@Bcount=\count288
-\calc@Adimen=\dimen170
-\calc@Bdimen=\dimen171
+\calc@Acount=\count288
+\calc@Bcount=\count289
+\calc@Adimen=\dimen171
+\calc@Bdimen=\dimen172
 \calc@Askip=\skip57
 \calc@Bskip=\skip58
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count289
+\calc@Ccount=\count290
 \calc@Cskip=\skip59
 )
 (/usr/share/texlive/texmf-dist/tex/latex/abntex2/abntex2abrev.sty)
@@ -391,8 +415,8 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 )
 \minimumbiblabelwidth=\skip60
 \ABCIauxlen=\skip61
-\c@ABCIaux=\count290
-\c@ABCImax=\count291
+\c@ABCIaux=\count291
+\c@ABCImax=\count292
 
 (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
@@ -406,7 +430,7 @@ Package: relsize 2013/03/29 ver 4.1
 \biblabelsep=\skip62
 LaTeX Info: Redefining \newblock on input line 591.
 LaTeX Info: Redefining \cite on input line 618.
-\ABCItoken=\toks32
+\ABCItoken=\toks33
 )
 (/usr/share/texlive/texmf-dist/tex/latex/ragged2e/ragged2e.sty
 Package: ragged2e 2021/12/15 v3.1 ragged2e Package
@@ -415,20 +439,6 @@ Package: ragged2e 2021/12/15 v3.1 ragged2e Package
 LaTeX Warning: Command \@arrayparboxrestore  has changed.
                Check if current package is valid.
 
-(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
-Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
-\FN@temptoken=\toks33
-\footnotemargin=\dimen172
-\c@pp@next@reset=\count292
-Package footmisc Info: Declaring symbol style bringhurst on input line 855.
-Package footmisc Info: Declaring symbol style chicago on input line 863.
-Package footmisc Info: Declaring symbol style wiley on input line 872.
-Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
-
-Package footmisc Info: Declaring symbol style lamport* on input line 903.
-Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
-.
-)
 \CenteringLeftskip=\skip63
 \RaggedLeftLeftskip=\skip64
 \RaggedRightLeftskip=\skip65
@@ -443,8 +453,7 @@ Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 \RaggedLeftParindent=\skip74
 \RaggedRightParindent=\skip75
 \JustifyingParindent=\skip76
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count293
 \lst@gtempboxa=\box54
 \lst@token=\toks34
@@ -855,15 +864,15 @@ Package caption Info: End \AtBeginDocument code.
 <img/core/logo_unicamp.pdf, id=62, 302.71455pt x 339.65479pt>
 File: img/core/logo_unicamp.pdf Graphic file (type pdf)
 <use img/core/logo_unicamp.pdf>
-Package pdftex.def Info: img/core/logo_unicamp.pdf  used on input line 44.
+Package pdftex.def Info: img/core/logo_unicamp.pdf  used on input line 47.
 (pdftex.def)             Requested size: 75.67845pt x 84.91348pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--44
+Underfull \hbox (badness 10000) in paragraph at lines 47--47
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--44
+Underfull \hbox (badness 10000) in paragraph at lines 47--47
 
  []
 
@@ -935,20 +944,16 @@ Package pdftex.def Info: img/architecture_HIL.pdf  used on input line 51.
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/logos.pdf): PDF inclusion: found 
 PDF version <1.7>, but at most version <1.5> allowed
-<img/logos.pdf, id=156, 499.8675pt x 304.2567pt>
+<img/logos.pdf, id=158, 499.8675pt x 304.2567pt>
 File: img/logos.pdf Graphic file (type pdf)
 <use img/logos.pdf>
 Package pdftex.def Info: img/logos.pdf  used on input line 60.
 (pdftex.def)             Requested size: 362.77264pt x 220.81955pt.
 
-LaTeX Warning: Reference `fig:vehicleinterface' on page 6 undefined on input li
-ne 65.
-
-
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/vehicle_interface-topics.pdf): PD
 F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/vehicle_interface-topics.pdf, id=157, 599.35919pt x 326.17859pt>
+<img/vehicle_interface-topics.pdf, id=160, 599.35919pt x 326.17859pt>
 File: img/vehicle_interface-topics.pdf Graphic file (type pdf)
 <use img/vehicle_interface-topics.pdf>
 Package pdftex.def Info: img/vehicle_interface-topics.pdf  used on input line 6
@@ -956,77 +961,92 @@ Package pdftex.def Info: img/vehicle_interface-topics.pdf  used on input line 6
 (pdftex.def)             Requested size: 362.77264pt x 197.42575pt.
 [6 <./img/architecture_hil.pdf> <./img/logos.pdf>] [7 <./img/vehicle_interface-
 topics.pdf>]
-<img/nucleo.png, id=231, 81.6651pt x 161.6439pt>
+<img/nucleo.png, id=235, 81.6651pt x 161.6439pt>
 File: img/nucleo.png Graphic file (type png)
 <use img/nucleo.png>
 Package pdftex.def Info: img/nucleo.png  used on input line 121.
 (pdftex.def)             Requested size: 120.92421pt x 239.35255pt.
  [8 <./img/nucleo.png>]
-<img/joystick.png, id=241, 122.6181pt x 108.405pt>
+<img/joystick.png, id=245, 122.6181pt x 108.405pt>
 File: img/joystick.png Graphic file (type png)
 <use img/joystick.png>
 Package pdftex.def Info: img/joystick.png  used on input line 140.
 (pdftex.def)             Requested size: 145.11053pt x 128.29887pt.
-
+ [9 <./img/joystick.png>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/highLevelblock_diagram.pdf): PDF 
 inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/highLevelblock_diagram.pdf, id=242, 610.19968pt x 320.1561pt>
+<img/highLevelblock_diagram.pdf, id=255, 610.19968pt x 320.1561pt>
 File: img/highLevelblock_diagram.pdf Graphic file (type pdf)
 <use img/highLevelblock_diagram.pdf>
-Package pdftex.def Info: img/highLevelblock_diagram.pdf  used on input line 159
+Package pdftex.def Info: img/highLevelblock_diagram.pdf  used on input line 173
 .
-(pdftex.def)             Requested size: 362.77264pt x 190.33646pt.
+(pdftex.def)             Requested size: 338.58632pt x 177.64964pt.
 
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/block_diagram.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<img/block_diagram.pdf, id=243, 605.3817pt x 298.23419pt>
+<img/block_diagram.pdf, id=258, 605.3817pt x 298.23419pt>
 File: img/block_diagram.pdf Graphic file (type pdf)
 <use img/block_diagram.pdf>
-Package pdftex.def Info: img/block_diagram.pdf  used on input line 166.
-(pdftex.def)             Requested size: 362.77264pt x 178.71436pt.
-[9 <./img/joystick.png> <./img/highLevelblock_diagram.pdf>]
+Package pdftex.def Info: img/block_diagram.pdf  used on input line 182.
+(pdftex.def)             Requested size: 338.58632pt x 166.80067pt.
+[10
+
+ <./img/highLevelblock_diagram.pdf> <./img/block_diagram.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/esquematico.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<img/esquematico.pdf, id=271, 355.3275pt x 225.7233pt>
+<img/esquematico.pdf, id=309, 355.3275pt x 225.7233pt>
 File: img/esquematico.pdf Graphic file (type pdf)
 <use img/esquematico.pdf>
-Package pdftex.def Info: img/esquematico.pdf  used on input line 173.
-(pdftex.def)             Requested size: 290.22107pt x 184.37099pt.
+Package pdftex.def Info: img/esquematico.pdf  used on input line 191.
+(pdftex.def)             Requested size: 266.03474pt x 169.00616pt.
 
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/montagem.pdf): PDF inclusion: fou
+nd PDF version <1.7>, but at most version <1.5> allowed
+<img/montagem.pdf, id=310, 868.20357pt x 509.0217pt>
+File: img/montagem.pdf Graphic file (type pdf)
+<use img/montagem.pdf>
+Package pdftex.def Info: img/montagem.pdf  used on input line 198.
+(pdftex.def)             Requested size: 338.58632pt x 198.50989pt.
+[11 <./img/esquematico.pdf> <./img/montagem.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/modelo-v.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<img/modelo-v.pdf, id=272, 515.04419pt x 308.11108pt>
+<img/modelo-v.pdf, id=349, 515.04419pt x 308.11108pt>
 File: img/modelo-v.pdf Graphic file (type pdf)
 <use img/modelo-v.pdf>
-Package pdftex.def Info: img/modelo-v.pdf  used on input line 210.
+Package pdftex.def Info: img/modelo-v.pdf  used on input line 229.
 (pdftex.def)             Requested size: 362.77264pt x 217.02087pt.
-[10 <./img/block_diagram.pdf> <./img/esquematico.pdf>]
+[12
 
-pdfTeX warning: /usr/bin/pdflatex (file ./img/maquinadeestados.pdf): PDF inclus
-ion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/maquinadeestados.pdf, id=320, 569.24669pt x 277.9986pt>
-File: img/maquinadeestados.pdf Graphic file (type pdf)
-<use img/maquinadeestados.pdf>
-Package pdftex.def Info: img/maquinadeestados.pdf  used on input line 259.
-(pdftex.def)             Requested size: 362.77264pt x 177.1719pt.
-[11 <./img/modelo-v.pdf>]
+ <./img/modelo-v.pdf>]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
-68.
+79.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-Overfull \hbox (10.46739pt too wide) in paragraph at lines 274--275
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/maquinadeestados.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<img/maquinadeestados.pdf, id=370, 569.24669pt x 277.9986pt>
+File: img/maquinadeestados.pdf Graphic file (type pdf)
+<use img/maquinadeestados.pdf>
+Package pdftex.def Info: img/maquinadeestados.pdf  used on input line 283.
+(pdftex.def)             Requested size: 362.77264pt x 177.1719pt.
+
+Overfull \hbox (10.46739pt too wide) in paragraph at lines 299--300
 []\T1/cmr/m/n/12 Taxa de gui-nada do veí-culo (ve-lo-ci-dade an-gu-lar no eixo 
 $\OML/cmm/m/it/12 z$\T1/cmr/m/n/12 ) -- \T1/cmtt/m/n/12 float fHeadingRate; 
  []
 
+[13
 
-Overfull \hbox (25.54164pt too wide) in paragraph at lines 292--293
+ <./img/maquinadeestados.pdf>]
+Overfull \hbox (25.54164pt too wide) in paragraph at lines 318--319
 []\T1/cmr/m/n/12 Padrão da men-sa-gem: \T1/cmr/bx/n/12 #S\T1/cmtt/m/n/12 %c%c%c
 %c\T1/cmr/bx/n/12 W\T1/cmtt/m/n/12 %c%c%c%c\T1/cmr/bx/n/12 V\T1/cmtt/m/n/12 %c%
 c%c%c\T1/cmr/bx/n/12 A\T1/cmtt/m/n/12 %c%c%c%c\T1/cmr/bx/n/12 J\T1/cmtt/m/n/12 
@@ -1037,81 +1057,81 @@ c%c%c\T1/cmr/bx/n/12 A\T1/cmtt/m/n/12 %c%c%c%c\T1/cmr/bx/n/12 J\T1/cmtt/m/n/12
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/sm_uc_2_carla.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<img/sm_uc_2_carla.pdf, id=340, 852.06331pt x 522.03032pt>
+<img/sm_uc_2_carla.pdf, id=402, 852.06331pt x 522.03032pt>
 File: img/sm_uc_2_carla.pdf Graphic file (type pdf)
 <use img/sm_uc_2_carla.pdf>
-Package pdftex.def Info: img/sm_uc_2_carla.pdf  used on input line 302.
+Package pdftex.def Info: img/sm_uc_2_carla.pdf  used on input line 328.
 (pdftex.def)             Requested size: 483.69687pt x 296.34961pt.
-[12 <./img/maquinadeestados.pdf>]
+
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/sm_carla_2_uc.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<img/sm_carla_2_uc.pdf, id=368, 879.285pt x 349.305pt>
+<img/sm_carla_2_uc.pdf, id=403, 879.285pt x 349.305pt>
 File: img/sm_carla_2_uc.pdf Graphic file (type pdf)
 <use img/sm_carla_2_uc.pdf>
-Package pdftex.def Info: img/sm_carla_2_uc.pdf  used on input line 311.
+Package pdftex.def Info: img/sm_carla_2_uc.pdf  used on input line 337.
 (pdftex.def)             Requested size: 483.69687pt x 192.15031pt.
-
+[14 <./img/sm_uc_2_carla.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/system_diagram.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<img/system_diagram.pdf, id=369, 572.1375pt x 377.49028pt>
+<img/system_diagram.pdf, id=428, 572.1375pt x 377.49028pt>
 File: img/system_diagram.pdf Graphic file (type pdf)
 <use img/system_diagram.pdf>
-Package pdftex.def Info: img/system_diagram.pdf  used on input line 322.
+Package pdftex.def Info: img/system_diagram.pdf  used on input line 348.
 (pdftex.def)             Requested size: 483.69687pt x 319.14023pt.
-[13 <./img/sm_uc_2_carla.pdf> <./img/sm_carla_2_uc.pdf>]
+[15 <./img/sm_carla_2_uc.pdf> <./img/system_diagram.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_microautoware.pdf): PD
 F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/fluxograma_microautoware.pdf, id=417, 849.1725pt x 382.5492pt>
+<img/fluxograma_microautoware.pdf, id=480, 849.1725pt x 382.5492pt>
 File: img/fluxograma_microautoware.pdf Graphic file (type pdf)
 <use img/fluxograma_microautoware.pdf>
 Package pdftex.def Info: img/fluxograma_microautoware.pdf  used on input line 3
-44.
+70.
 (pdftex.def)             Requested size: 483.69687pt x 217.90353pt.
-[14 <./img/system_diagram.pdf>]
+[16 <./img/fluxograma_microautoware.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_taskcontrole.pdf): PDF
  inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/fluxograma_taskcontrole.pdf, id=448, 707.76419pt x 918.3108pt>
+<img/fluxograma_taskcontrole.pdf, id=501, 707.76419pt x 918.3108pt>
 File: img/fluxograma_taskcontrole.pdf Graphic file (type pdf)
 <use img/fluxograma_taskcontrole.pdf>
-Package pdftex.def Info: img/fluxograma_taskcontrole.pdf  used on input line 36
-6.
+Package pdftex.def Info: img/fluxograma_taskcontrole.pdf  used on input line 39
+2.
 (pdftex.def)             Requested size: 450.89401pt x 584.99089pt.
-[15 <./img/fluxograma_microautoware.pdf>]
+[17]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_joysw.pdf): PDF inclus
 ion: found PDF version <1.7>, but at most version <1.5> allowed
-<img/fluxograma_joysw.pdf, id=469, 187.66109pt x 319.1925pt>
+<img/fluxograma_joysw.pdf, id=507, 187.66109pt x 319.1925pt>
 File: img/fluxograma_joysw.pdf Graphic file (type pdf)
 <use img/fluxograma_joysw.pdf>
-Package pdftex.def Info: img/fluxograma_joysw.pdf  used on input line 374.
+Package pdftex.def Info: img/fluxograma_joysw.pdf  used on input line 400.
 (pdftex.def)             Requested size: 128.97372pt x 219.37297pt.
-[16 <./img/fluxograma_taskcontrole.pdf>]
+[18 <./img/fluxograma_taskcontrole.pdf>]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 379.
- [17 <./img/fluxograma_joysw.pdf>]
-[18]
-<img/plot_joy_x_axis.pdf, id=523, 458.71375pt x 304.13625pt>
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 405.
+ [19 <./img/fluxograma_joysw.pdf>]
+[20]
+<img/plot_joy_x_axis.pdf, id=561, 458.71375pt x 304.13625pt>
 File: img/plot_joy_x_axis.pdf Graphic file (type pdf)
 <use img/plot_joy_x_axis.pdf>
-Package pdftex.def Info: img/plot_joy_x_axis.pdf  used on input line 512.
+Package pdftex.def Info: img/plot_joy_x_axis.pdf  used on input line 544.
 (pdftex.def)             Requested size: 362.77264pt x 240.53415pt.
-<img/plot_joy_y_axis.pdf, id=524, 458.71375pt x 304.13625pt>
+<img/plot_joy_y_axis.pdf, id=562, 458.71375pt x 304.13625pt>
 File: img/plot_joy_y_axis.pdf Graphic file (type pdf)
 <use img/plot_joy_y_axis.pdf>
-Package pdftex.def Info: img/plot_joy_y_axis.pdf  used on input line 519.
+Package pdftex.def Info: img/plot_joy_y_axis.pdf  used on input line 551.
 (pdftex.def)             Requested size: 362.77264pt x 240.53415pt.
- [19] [20 <./img/plot_joy_x_axis.pdf> <./img/plot_joy_y_axis.pdf>] [21]
-[22
+ [21] [22 <./img/plot_joy_x_axis.pdf> <./img/plot_joy_y_axis.pdf>] [23]
+[24
 
-] [23
+] [25
 
-]) [24
+]) [26
 
-] (./IM420X-Projeto-Relatorio-Gabriel_Toffanetto.bbl) [25
+] (./IM420X-Projeto-Relatorio-Gabriel_Toffanetto.bbl) [27
 
 
 
@@ -1119,49 +1139,50 @@ Package pdftex.def Info: img/plot_joy_y_axis.pdf  used on input line 519.
 \openout2 = `apendices.aux'.
 
 
-(./apendices.tex) [26
+(./apendices.tex) [28
 
 
 ] (./IM420X-Projeto-Relatorio-Gabriel_Toffanetto.aux
 (./corpo.aux) (./apendices.aux))
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `IM420X-Projeto-Relatorio-Gabriel_Toffanetto.
 out' has not changed.
-(rerunfilecheck)             Checksum: E1AF20B8CD67D41CC6B1A783CF034620;1840.
+(rerunfilecheck)             Checksum: 06D71D0E378EFD7933C1579818916031;1840.
  ) 
 Here is how much of TeX's memory you used:
- 19640 strings out of 478287
- 333205 string characters out of 5849289
- 677255 words of memory out of 5000000
- 37329 multiletter control sequences out of 15000+600000
- 489442 words of font info for 75 fonts, out of 8000000 for 9000
+ 19695 strings out of 478287
+ 334543 string characters out of 5849289
+ 678756 words of memory out of 5000000
+ 37370 multiletter control sequences out of 15000+600000
+ 492404 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 109i,11n,106p,1130b,502s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb
-></usr/share/texmf/fonts/type1/public/cm-super/sfbi1440.pfb></usr/share/texmf/f
-onts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm
--super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb>
-</usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fo
-nts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-
-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb><
-/usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fon
-ts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf/fonts/type1/public/cm-s
-uper/sfti1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></
-usr/share/texmf/fonts/type1/public/cm-super/sfti2488.pfb></usr/share/texmf/font
-s/type1/public/cm-super/sftt1200.pfb>
-Output written on IM420X-Projeto-Relatorio-Gabriel_Toffanetto.pdf (26 pages, 26
-26191 bytes).
+ 109i,12n,106p,1130b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
+st, replaced by a fixed one
+
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb><
+/usr/share/texmf/fonts/type1/public/cm-super/sfbi1440.pfb></usr/share/texmf/fon
+ts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-s
+uper/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></
+usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/font
+s/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-su
+per/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></u
+sr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts
+/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-sup
+er/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb></us
+r/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf/fonts/
+type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-supe
+r/sfti2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on IM420X-Projeto-Relatorio-Gabriel_Toffanetto.pdf (28 pages, 43
+32140 bytes).
 PDF statistics:
- 780 PDF objects out of 1000 (max. 8388607)
- 582 compressed objects within 6 object streams
- 98 named destinations out of 1000 (max. 500000)
- 240 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 827 PDF objects out of 1000 (max. 8388607)
+ 617 compressed objects within 7 object streams
+ 104 named destinations out of 1000 (max. 500000)
+ 245 words of extra memory for PDF output out of 10000 (max. 10000000)
 
