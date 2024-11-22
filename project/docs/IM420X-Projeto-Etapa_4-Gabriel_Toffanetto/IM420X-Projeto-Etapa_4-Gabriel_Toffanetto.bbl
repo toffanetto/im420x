@@ -1,0 +1,29 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[Bedoya 2016]{bedoya_alise_2016}
+\abntrefinfo{Bedoya}{BEDOYA}{2016}
+{BEDOYA, O.~G.
+\emph{Análise de risco para a cooperação entre o condutor e sistema de
+  controle de veículos autônomos}.
+Tese (Doutor em {Engenharia} {Mecânica}) --- Universidade Estadual de
+  Campinas, Campinas, SP, fev. 2016.
+Dispon{\'\i}vel em:
+  \url{https://repositorio.unicamp.br/Busca/Download?codigoArquivo=471471}.}
+
+\bibitem[{The Autoware Fundation} 2023]{autowareArchitecture}
+\abntrefinfo{{The Autoware Fundation}}{{The Autoware Fundation}}{2023}
+{{The Autoware Fundation}. \emph{Architecture overview}. 2023.
+Dispon{\'\i}vel em:
+  \url{https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-architecture/}.}
+
+\bibitem[{The Autoware Fundation} 2024]{gitautoware}
+\abntrefinfo{{The Autoware Fundation}}{{The Autoware Fundation}}{2024}
+{{The Autoware Fundation}. \emph{Github: Autoware Repository}. 2024.
+Dispon{\'\i}vel em: \url{github.com/autowarefoundation/autoware}.}
+
+\end{thebibliography}

@@ -15,6 +15,17 @@ Tese (Doutor em {Engenharia} {Mecânica}) --- Universidade Estadual de
 Dispon{\'\i}vel em:
   \url{https://repositorio.unicamp.br/Busca/Download?codigoArquivo=471471}.}
 
+\bibitem[{CARLA Team} 2024]{carla}
+\abntrefinfo{{CARLA Team}}{{CARLA Team}}{2024}
+{{CARLA Team}. \emph{CARLA: Open-source simulator for autonomous driving
+  research}. 2024.
+Dispon{\'\i}vel em: \url{https://carla.org}.}
+
+\bibitem[{micro-ROS} 2024]{microros_main}
+\abntrefinfo{{micro-ROS}}{{micro-ROS}}{2024}
+{{micro-ROS}. \emph{micro-ROS puts ROS 2 onto microcontrollers}. 2024.
+Dispon{\'\i}vel em: \url{https://micro.ros.org}.}
+
 \bibitem[{The Autoware Fundation} 2023]{autowareArchitecture}
 \abntrefinfo{{The Autoware Fundation}}{{The Autoware Fundation}}{2023}
 {{The Autoware Fundation}. \emph{Architecture overview}. 2023.

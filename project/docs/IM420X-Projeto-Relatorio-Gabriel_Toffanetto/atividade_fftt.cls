@@ -62,6 +62,7 @@
 \usepackage{nameref}
 \usepackage{algorithm}
 \usepackage{algpseudocode} 
+\usepackage{mathtools}
 %\usepackage{refcheck} % Verify about not used labels
 
 

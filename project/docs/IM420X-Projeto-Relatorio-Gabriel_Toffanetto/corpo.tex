@@ -33,6 +33,10 @@
 
 \section{Documentação}
 
+A partir da problemática de integrar por meio do Autoware todos os módulos de um veículo autônomo, se mantém em aberto como será realizada a integração do sistema de alto nível do veículo com o baixo nível, que é realizado pelo módulo \textit{vehicle interface}, mas que não é especificado no \textit{framework}. Dessa forma, o escopo do projeto se define na implementação de uma interface Autoware -- veículo autônomo, como mostrado na \autoref{fig:architecture}.
+
+Para fazer tal integração, parte-se da premissa de uma plataforma de baixo nível baseada em microcontroladores STM32, executando um sistema operacional de tempo real. A partir dessa base, propõem-se o uso do \textit{framework} micro-ROS\cite{microros_main}, para implementação do módulo \textit{vehicle interface} dentro do sistema embarcado, permitindo a presença direta do Autoware desde o alto-nível até o baixo-nível. A implementação do Autoware no microcontrolador foi batizada microAutoware.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/architecture.png}
@@ -40,12 +44,25 @@
 	\label{fig:architecture}
 \end{figure}
 
+Para realização dos testes e validação do microAutoware, foi considerada a utilização do simulador de última geração CARLA\cite{carla}, que permite que o \textit{hardware} possa ser testado sem a necessidade de um protótipo real do veículo autônomo, poupando assim: custo, risco dos equipamento e principalmente humano, e encurtando o tempo de pesquisa. Dessa forma, a validação do projeto é realizada por meio de uma arquitetura \textit{Hardware-In-the-Loop} (HIL), conforme diagrama da \autoref{fig:architecture_HIL}. Nesse cenário, o simulador representa o veículo, que alimenta o Autoware com dados de sensores de alto nível utilizados para obtenção do comando de controle que o veículo deve realizar, que é enviado para o sistema embarcado (em \textit{hardware}). Esse por sua vez, é responsável por realizar o controle do veículo no simulador, e realizar a leitura dos sensores de baixo nível do mesmo. Com isso, pode-se realizar o teste do sistema embarcado em uma estrutura que aproxima a aplicação real.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.55\linewidth]{img/architecture_HIL}
 	\caption{Arquitetura de teste do \textit{hardware}.}
 	\label{fig:architecture_HIL}
 \end{figure}
+
+Com isso, a \autoref{fig:logos} ilustra as principais ferramentas que serão somadas ao sistema embarcado baseado em STM32 para viabilização do projeto: Autoware, ROS e micro-ROS são aliados ao CARLA para permitir a implementação e validação do microAutoware.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{img/logos}
+	\caption{Ferramentas para viabilização do projeto.}
+	\label{fig:logos}
+\end{figure}
+
+A \textit{vehicle interface} é um módulo que mesmo não específicado profundamente necessita de atender a alguns requisitos de comunicação, sendo eles os dados que serão recebidos (\textit{subscribers}), os dados que devem ser reportados (\textit{publishers}) e ainda um serviço de troca de modo de controle. A implementação da interface se dá por meio de um nó do ROS, que deve obrigatóriamente receber o \textbf{comando de controle} do veículo, e devolver o \textbf{modo de controle atual}, o \textbf{ângulo de esterçamento atual} e as \textbf{velocidades atuais} do veículo. Ainda, deve prover um serviço que dada uma \textbf{solicitação de troca de modo de controle}, responde se a mesma foi feita com sucesso ou não. A \autoref{fig:vehicleinterface} explicita na forma de um diagrama as entradas e saídas da interface Autoware -- veículo.
 
 	\begin{figure}[H]
 	\centering
@@ -65,7 +82,8 @@
 		\item Teleoperação do veículo por um \textit{joystick} em  \textit{hardware};
 		\item Troca do modo de operação por meio da \textit{switch} do \textit{joystick};
 		\item Subscrição por meio do micro-ROS em todos os tópicos necessários do Autoware;
-		\item Publicação a partir micro-ROS em todos os tópicos necessários do Autoware.
+		\item Publicação a partir micro-ROS em todos os tópicos necessários do Autoware;
+		\item Comunicação a partir micro-ROS em todos os serviços necessários do Autoware.
 		
 	\end{itemize}
 
@@ -98,7 +116,7 @@
 		\item Custo: US\$ 27,00.
 	\end{itemize}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.25\linewidth]{img/nucleo}
 	\caption{NUCLEO-753ZI.}
@@ -115,12 +133,24 @@
 		\item Custo: R\$ 10,00.
 	\end{itemize}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\linewidth]{img/joystick}
-	\caption{Joystick 2 eixos.}
-	\label{fig:joystick}
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.3\linewidth]{img/joystick}
+\caption{Joystick 2 eixos.}
+\label{fig:joystick}
 \end{figure}
+
+\subsubsection*{Estação de trabalho}
+
+\begin{itemize}
+	\item Ubuntu 22.04 LTS;
+	\item CPU Intel Core I7 5960X;
+	\item 4x Memória RAM DDR4 8 GB;
+	\item 2x GPU NVIDIA GEFORCE GTX TITAN X 12 GB;
+	\item Custo: R\$ 10000,00.
+\end{itemize}
 
 \subsection{Arquitetura}
 
@@ -145,7 +175,7 @@
 	\label{fig:esquematico}
 \end{figure}
 
-\subsubsection*{Periféricos}
+\subsubsection*{Periféricos necessários}
 
 \begin{itemize}
 	\item \textit{Direct Memory Access}
@@ -239,27 +269,28 @@
 	\begin{itemize}
 		\item Informações:
 		\begin{itemize}
-			\item Acelerador, \texttt{float}.
-			\item Freio, \texttt{float}.
-			\item Esterçamento, \texttt{float}.
-			\item Freio de mão, \texttt{unsigned char}.	
-			\item Troca de marcha manual, \texttt{unsigned char}.	
-			\item Modo reverter, \texttt{unsigned char}.	
-			\item Marcha, \texttt{unsigned char}.			
+			\item Velocidade longitudinal do veículo -- \texttt{float fLongSpeed;}
+			\item Velocidade lateral do veículo -- \texttt{float fLatSpeed;}
+			\item Taxa de guinada do veículo (velocidade angular no eixo $z$) -- \texttt{float fHeadingRate;}
+			\item Ângulo de esterçamento da roda virtual -- \texttt{float fSteeringStatus;}		
 		\end{itemize}
-		\item Padrão da mensagem: \texttt{\#T\%c\%c\%c\%cS\%c\%c\%c\%cB\%c\%c\%c\%cH\%cR\%cG\%cM\%c\$}
+		\item Padrão da mensagem: \textbf{\#A}\texttt{\%c\%c\%c\%c}\textbf{B}\texttt{\%c\%c\%c\%c}\textbf{C}\texttt{\%c\%c\%c\%c}\textbf{D}\texttt{\%c\%c\%c\%c}\textbf{\$}
+		\item Tamanho da mensagem: 22 bytes.
 		
 	\end{itemize}
 	\item RTOS $\longrightarrow$ CARLA (\texttt{USART2})
 	\begin{itemize}
 		\item Informações:
 		\begin{itemize}
-			\item Velocidade longitudinal, \texttt{float}.
-			\item Velocidade lateral, \texttt{float}.
-			\item Velocidade de guinada, \texttt{float}.
-			\item Marcha atual, \texttt{unsigned char}.			
+			\item Ângulo de esterçamento desejado do volante -- \texttt{float fSteeringAngle;}
+			\item Velocidade de esterçamento do volante -- \texttt{float fSteeringVelocity;}
+			\item Velocidade linear desejada para o veículo -- \texttt{float fSpeed;}
+			\item Aceleração linear desejada para o veículo -- \texttt{float fAcceleration;}
+			\item \textit{Jerk} linear desejada para o veículo -- \texttt{float fJerk;}	
+			\item \texttt{unsigned char ucControlMode;}		
 		\end{itemize}
-		\item Padrão da mensagem: \texttt{\#A\%c\%c\%c\%cB\%c\%c\%c\%cC\%c\%c\%c\%cD\%c\$}
+		\item Padrão da mensagem: \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}\textbf{J}\texttt{\%c\%c\%c\%c}\textbf{M}\texttt{\%c}\textbf{\$}
+		\item Tamanho da mensagem: 30 bytes.
 		
 	\end{itemize}
 \end{enumerate}
@@ -268,7 +299,7 @@
 % TODO: \usepackage{graphicx} required
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\linewidth]{img/sm_uc_carla}
+	\includegraphics[width=1\linewidth]{img/sm_uc_2_carla}
 	\caption{Máquina de estados da comunicação serial do RTOS para o CARLA.}
 	\label{fig:smuccarla}
 \end{figure}
@@ -277,7 +308,7 @@
 % TODO: \usepackage{graphicx} required
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\linewidth]{img/sm_carla_uc}
+\includegraphics[width=1\linewidth]{img/sm_carla_2_uc}
 \caption{Máquina de estados da comunicação serial do CARLA para o RTOS.}
 \label{fig:sm_carla_uc}
 \end{figure}
@@ -436,11 +467,7 @@
 		
 	\end{itemize}
 
-\subsubsection*{Padronização de código}
-
-
-
-\noindent {Padronização de código ROS}
+\subsubsection*{Padronização de código ROS}
 	
 	\begin{itemize}
 		\item Subscriber: \texttt{nome\_subscriber\_sub\_}
@@ -451,6 +478,77 @@
 		\item Callback: \texttt{nome\_do\_topico\_callback}
 		
 	\end{itemize}
+
+\subsection{Periféricos}
+
+\subsubsection*{Joystick}
+
+\begin{enumerate}
+	\item Eixos $x$ e $y$
+	\begin{itemize}
+		\item ADC de 16 bits \textit{multi-channel};
+		\item Leitura contínua por DMA.					
+	\end{itemize}
+	
+	\item Botão
+	\begin{itemize}
+		\item GPIO em modo \textit{pull-up};
+		\item Interrupção EXTI.
+		
+	\end{itemize}
+
+\end{enumerate}
+
+\noindent \textit{Processamento de sinais}
+
+Para conversão do valor discreto de leitura analógica obtido por meio do conversor analógico-digital (\textit{analog-digital converter -- ADC}), foi realizada uma etapa de calibração, onde foram tomadas as medidas dos valores máximos, mínimos e de zero para os dois eixos do \textit{joystick}. Tomado esses valores, foi realizado o processo de linearização por partes, onde o valor discreto obtido, é mapeado no intervalo $(-1, 1)$, considerando uma banda morta $B$ ao redor do zero para evitar flutuação de zero e melhorar a usabilidade dos eixos de forma independente.
+
+O a interpolação é realizada por meio de \eqref{eq:joy}, resultando nos gráficos mostrados nas Figuras~\ref{fig:plotjoyxaxis}~e~\ref{fig:plotjoyyaxis}, para o mapeamento nos eixos $x$ e $y$, respectivamente.
+
+O eixo $x$ é alocado como a variável de esterçamento do volante, enquanto o eixo $y$ representa os sinais de acelerador e freio. Para valores positivos do eixo $y$, obtém-se a medida do acelerador no intervalo $(0,1)$, enquanto para valores negativos o freio é mapeado entre 0 e 1.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\linewidth]{img/plot_joy_x_axis.pdf}
+	\caption{Mapeamento da posição no eixo $x$ normalizada do \textit{joystick} de acordo com a leitura analógia do ADC.}
+	\label{fig:plotjoyxaxis}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\linewidth]{img/plot_joy_y_axis.pdf}
+\caption{Mapeamento da posição no eixo $y$ normalizada do \textit{joystick} de acordo com a leitura analógia do ADC.}
+\label{fig:plotjoyyaxis}
+\end{figure}
+
+\begin{equation}\label{eq:joy}
+	p(v) = \begin{dcases}
+		0\vphantom{\frac{0}{0}}, &\text{se } - B \le v - V_0 \le B \\
+		\frac{v - V_0 - B}{V_{max} - V_0 - B}, &\text{se } v > V_0 + B \\
+		\frac{v - V_0 + B}{V_0 - V_{min} - B}, &\text{se } v < V_0 - B 
+	\end{dcases}
+\end{equation}
+
+\subsubsection*{Comunicação serial -- UART}
+
+	\begin{enumerate}
+		\item UART2 -- Comunicação com o simulador.
+		\begin{itemize}
+			\item \textbf{\textit{Baudrate}:} 921600 bps
+			\item \textbf{Modo de leitura:} DMA única;
+			\item \textbf{Modo de escrita:} DMA única;
+			\item \textbf{Interface física:} Módulo FTDI.	
+		\end{itemize}
+	
+		\item UART3 -- Comunicação com o Autoware.
+		\begin{itemize}
+			\item \textbf{\textit{Baudrate}:} 921600 bps
+			\item \textbf{Modo de leitura:} DMA circular;
+			\item \textbf{Modo de escrita:} DMA única;
+			\item \textbf{Interface física:} ST-LINK.		
+		\end{itemize}	
+	
+	\end{enumerate}
 
 \clearpage
 

@@ -2,13 +2,14 @@
 \contentsline {section}{\numberline {1}Resumo}{2}{section.1}%
 \contentsline {section}{\numberline {2}Motivação}{3}{section.2}%
 \contentsline {section}{\numberline {3}Documentação}{5}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Requisitos}{6}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Componentes}{7}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Arquitetura}{8}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Método de desenvolvimento}{10}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Projeto de \textit {software}}{11}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Manual de utilização}{19}{section.4}%
-\contentsline {section}{\numberline {5}Problemas identificados e não resolvidos}{20}{section.5}%
-\contentsline {section}{\numberline {6}Códigos da comunidade}{21}{section.6}%
-\contentsline {section}{Referências}{22}{section.6}%
-\contentsline {section}{Apêndices}{23}{section*.39}%
+\contentsline {subsection}{\numberline {3.1}Requisitos}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Componentes}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Arquitetura}{9}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Método de desenvolvimento}{11}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Projeto de \textit {software}}{12}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Periféricos}{19}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Manual de utilização}{22}{section.4}%
+\contentsline {section}{\numberline {5}Problemas identificados e não resolvidos}{23}{section.5}%
+\contentsline {section}{\numberline {6}Códigos da comunidade}{24}{section.6}%
+\contentsline {section}{Referências}{25}{section.6}%
+\contentsline {section}{Apêndices}{26}{section*.45}%

@@ -15,8 +15,16 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Database file #1: abntex2-options.bib
 Database file #2: references.bib
-Warning--entry type for "autowareArchitecture" isn't style-file defined
+Warning--entry type for "microros_main" isn't style-file defined
+--line 7 of file references.bib
+Warning--entry type for "carla" isn't style-file defined
 --line 13 of file references.bib
+Warning--entry type for "autowareArchitecture" isn't style-file defined
+--line 25 of file references.bib
+Illegal end of database file---line 52 of file references.bib
+ : }
+ :  
+I'm skipping whatever remains of this entry
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
@@ -26,45 +34,45 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 | Em caso de dúvidas ou problemas com este estilo procure |
 | http://www.abntex.net.br/                               |
 +---------------------------------------------------------+
-You've used 3 entries,
+You've used 5 entries,
             6714 wiz_defined-function locations,
-            1213 strings with 9895 characters,
-and the built_in function-call counts, 5069 in all, are:
-= -- 759
-> -- 30
-< -- 162
-+ -- 218
-- -- 10
-* -- 270
-:= -- 672
-add.period$ -- 8
-call.type$ -- 3
-change.case$ -- 15
-chr.to.int$ -- 3
-cite$ -- 2
-duplicate$ -- 539
-empty$ -- 137
-format.name$ -- 46
-if$ -- 949
+            1222 strings with 10080 characters,
+and the built_in function-call counts, 6991 in all, are:
+= -- 965
+> -- 60
+< -- 202
++ -- 268
+- -- 20
+* -- 380
+:= -- 928
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 27
+chr.to.int$ -- 5
+cite$ -- 4
+duplicate$ -- 707
+empty$ -- 251
+format.name$ -- 92
+if$ -- 1353
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 42
-newline$ -- 20
-num.names$ -- 10
-pop$ -- 62
+missing$ -- 74
+newline$ -- 30
+num.names$ -- 20
+pop$ -- 104
 preamble$ -- 1
-purify$ -- 9
+purify$ -- 15
 quote$ -- 0
-skip$ -- 625
+skip$ -- 809
 stack$ -- 1
-substring$ -- 235
-swap$ -- 183
-text.length$ -- 2
+substring$ -- 311
+swap$ -- 241
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 2
 warning$ -- 0
-while$ -- 15
+while$ -- 29
 width$ -- 0
-write$ -- 39
-(There was 1 warning)
+write$ -- 67
+(There was 1 error message)
