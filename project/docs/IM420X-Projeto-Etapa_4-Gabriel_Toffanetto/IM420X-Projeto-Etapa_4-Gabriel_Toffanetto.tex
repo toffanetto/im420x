@@ -6,7 +6,7 @@
 %                  Presentation info	              %
 % --------------------------------------------------- %
 \title[microAutoware: Autoware para microcontroladores]{Arquitetura HIL para teste de sistemas embarcados como \textit{vehicle interface} de veículos autônomos baseados no Autoware}
-\subtitle{Projeto -- Apresentação final}
+\subtitle{Projeto -- Etapa 4}
 
 \author[Gabriel Toffanetto]{\texorpdfstring
 	{Gabriel Toffanetto França da Rocha 
@@ -277,44 +277,6 @@
 	
 \end{frame}
 
-\subsection*{Metodologia}
-
-\begin{frame}{Modelo de desenvolvimento}
-	
-	\begin{columns}
-		
-		\begin{column}{0.4\textwidth}
-			
-			\begin{block}{Modelo V}
-				
-				\begin{itemize}
-					\item Realização e validação de cada etapa do projeto em paralelo.
-					
-				\end{itemize}
-				
-			\end{block}
-			
-		\end{column}
-		
-		\begin{column}{0.7\textwidth}
-			
-			
-			% TODO: \usepackage{graphicx} required
-			\begin{figure}
-				\centering
-				\includegraphics[width=\linewidth]{img/modelo-v}
-				\caption{Modelo de execução das atividades do projeto.}
-				\label{fig:modelo-v}
-			\end{figure}
-			
-		\end{column}
-		
-	\end{columns}
-	
-\end{frame}
-
-\section{Desenvolvimento}
-
 \subsection*{Diagrama de blocos}
 
 \begin{frame}{Diagrama de blocos}
@@ -328,293 +290,7 @@
 	
 \end{frame}
 
-\subsection*{Esquemático}
 
-\begin{frame}{Esquemático}
-	
-	
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.75\linewidth]{img/esquematico.pdf}
-		\caption{Esquemático de ligações elétricas.}
-		\label{fig:esquematico}
-	\end{figure}
-	
-\end{frame}
-
-\subsection*{\textit{Joystick}}
-
-\begin{frame}{\textit{Joystick}}
-	
-	\begin{columns}
-		
-		\begin{column}{0.5\textwidth}
-			
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=0.75\linewidth]{joystick}
-				\caption{caption}
-				\label{fig:label}
-			\end{figure}
-			
-		\end{column}
-		
-		\begin{column}{0.5\textwidth}
-			
-			\begin{block}{}
-				
-				\textbf{Eixos $x$ e $y$}
-				\begin{itemize}
-					\item ADC de 16 bits \textit{multi-channel};
-					\item Leitura contínua por DMA.					
-				\end{itemize}
-			
-				\textbf{Botão}
-				\begin{itemize}
-					\item GPIO em modo \textit{pull-up};
-					\item Interrupção EXTI.
-					
-				\end{itemize}
-			
-				
-			\end{block}
-			
-		\end{column}
-		
-	\end{columns}
-	
-\end{frame}
-
-\begin{frame}{Processamento de sinais}
-	
-	\begin{columns}
-		
-		\begin{column}{0.5\textwidth}
-			
-			
-			% TODO: \usepackage{graphicx} required
-			\begin{figure}
-				\centering
-				\includegraphics[width=1.1\linewidth]{plot_joy_x_axis.pdf}
-				\caption{Mapeamento da posição normalizada do \textit{joystick} de acordo com a leitura analógia do ADC.}
-				\label{fig:plotjoyxaxis}
-			\end{figure}
-			
-		\end{column}
-	
-\pause
-		
-		\begin{column}{0.6\textwidth}
-			
-			\begin{equation}\label{eq:joy}
-				p(v) = \begin{dcases}
-					0\vphantom{\frac{0}{0}}, &\text{se } - B \le v - V_0 \le B \\
-					\frac{v - V_0 - B}{V_{max} - V_0 - B}, &\text{se } v > V_0 + B \\
-					\frac{v - V_0 + B}{V_0 - V_{min} - B}, &\text{se } v < V_0 - B 
-				\end{dcases}
-			\end{equation}
-			
-		\end{column}
-		
-	\end{columns}
-	
-\end{frame}
-
-\begin{frame}{Estados do sistema}
-	
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width = \textwidth]{img/maquinadeestados}
-		\caption{Máquina de estados do sistema.}
-		\label{fig:maquinadeestados}
-	\end{figure}
-	
-	
-\end{frame}
-
-\subsection*{Tarefas}
-
-\begin{frame}{Diagrama de tarefas}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.75\linewidth]{system_diagram}
-		\caption{Diagrama de tarefas atualizado.}
-		\label{fig:system_diagram}
-	\end{figure}
-	
-\end{frame}
-
-\begin{frame}{Comunicação e sincronização de tarefas}
-	
-	\begin{columns}
-		
-		\begin{column}{0.5\textwidth}
-			
-			\begin{block}{Comunicação}
-				
-				\begin{itemize}
-					\item Variáveis globais protegidas por mutex;
-					\item \textit{ThreadFlags}.					
-				\end{itemize}
-				
-			\end{block}
-			
-		\end{column}
-		
-		\begin{column}{0.5\textwidth}
-			
-			\begin{block}{Sincronização}
-				
-				\begin{itemize}
-					\item \textit{ThreadFlags}.	
-					
-				\end{itemize}		
-				
-			\end{block}
-			
-		\end{column}
-		
-	\end{columns}
-	
-\end{frame}
-
-
-\subsection*{Comunicação}
-
-\begin{frame}{Configuração dos módulos UART}
-	
-	\begin{columns}
-		
-		\begin{column}{0.5\textwidth}
-			
-			\begin{block}{UART2}
-				
-				Comunicação com o simulador.
-				\begin{itemize}
-					\item \textbf{\textit{Baudrate}:} 921600 bps
-					\item \textbf{Modo de leitura:} DMA circular;
-					\item \textbf{Modo de escrita:} DMA única;
-					\item \textbf{Interface física:} ST-LINK.
-				\end{itemize}
-				
-			\end{block}
-			
-		\end{column}
-	
-\pause
-		
-		\begin{column}{0.5\textwidth}
-			
-			\begin{block}{UART3}
-				
-				Comunicação com o Autoware.
-				\begin{itemize}
-					\item \textbf{\textit{Baudrate}:} 921600 bps
-					\item \textbf{Modo de leitura:} DMA única;
-					\item \textbf{Modo de escrita:} DMA única;
-					\item \textbf{Interface física:} Módulo FTDI			
-				\end{itemize}
-				
-			\end{block}
-			
-		\end{column}
-		
-	\end{columns}
-	
-\end{frame}
-
-\begin{frame}{Comunicação com o simulador}
-	
-	\begin{columns}
-		
-		\begin{column}{0.435\textwidth}
-			
-			\begin{block}{Sistema embarcado $\longrightarrow$ CARLA}
-				
-				\begin{itemize}
-					\item \texttt{float fSteeringAngle;}
-					\item \texttt{float fSteeringVelocity;}
-					\item \texttt{float fSpeed;}
-					\item \texttt{float fAcceleration;}
-					\item \texttt{float fJerk;}	
-					\item \texttt{unsigned char ucControlMode;}					
-				\end{itemize}
-				
-			\end{block}
-			
-		\end{column}
-	
-\pause
-		
-		\begin{column}{0.435\textwidth}
-			
-			\begin{block}{CARLA $\longrightarrow$ Sistema embarcado }
-				
-				\begin{itemize}
-					\item \texttt{float fLongSpeed;}
-					\item \texttt{float fLatSpeed;}
-					\item \texttt{float fHeadingRate;}
-					\item \texttt{float fSteeringStatus;}
-					
-				\end{itemize}
-				
-				
-				
-			\end{block}
-			
-		\end{column}
-		
-	\end{columns}
-
-\pause
-	
-	\begin{block}{}
-		
-		\textbf{Padrão de Mensagem:} Sistema embarcado $\longrightarrow$ CARLA
-		
-		\begin{itemize}
-			\item \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}\textbf{J}\texttt{\%c\%c\%c\%c}\textbf{M}\texttt{\%c}\textbf{\$}
-			\item 30 bytes
-			
-		\end{itemize}
-		
-		\textbf{Padro de Mensagem:} CARLA $\longrightarrow$ Sistema embarcado
-		\begin{itemize}
-			\item \textbf{\#A}\texttt{\%c\%c\%c\%c}\textbf{B}\texttt{\%c\%c\%c\%c}\textbf{C}\texttt{\%c\%c\%c\%c}\textbf{D}\texttt{\%c\%c\%c\%c}\textbf{\$}
-			\item 22 bytes
-			
-		\end{itemize}
-		
-	\end{block}
-	
-\end{frame}
-
-\begin{frame}{Máquinas de estados de comunicação}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.8\linewidth]{sm_uc_2_carla}
-		\caption{Maquina de estados da comunicação sistema embarcado $\longrightarrow$ CARLA (\texttt{CarlaSerialBridgeNode}).}
-		\label{fig:sm_uc_2_carla}
-	\end{figure}
-	
-\end{frame}
-
-\begin{frame}{Máquinas de estados de comunicação}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=\linewidth]{sm_carla_2_uc}
-		\caption{Maquina de estados da comunicação CARLA $\longrightarrow$ sistema embarcado (\texttt{HAL\_UART\_RxCpltCallback()}).}
-		\label{fig:sm_carla_2_uc}
-	\end{figure}
-	
-\end{frame}
-
-
-\subsection*{Diagrama de nós e tópicos}
 
 
 
@@ -727,11 +403,14 @@
 			\begin{block}{Problemas encontrados}
 				
 				\begin{itemize}
-					\item Perda de resposta do serviço \texttt{control\_mode\_request};
-					\item Perda de deadline causada pela instabilidade do recebimento de comandos;
+					\item Perda de resposta do serviço \texttt{control\_mode\_request};	
+					\pause
+					\item Perda de deadline causada pela instabilidade do recebimento de comandos;	
+					\pause
 					\begin{itemize}
 						\item Acentuado quando o PC é sobrecarregado.
-					\end{itemize}
+					\end{itemize}	
+					\pause
 					\item 
 				\end{itemize}
 				
@@ -746,12 +425,15 @@
 			\begin{block}{Trabalhos futuros}
 				
 				\begin{itemize}
-					\item Portabilidade do microAutoware para outros microcontroladores;
-					\item Implementação de bibliotecas auxiliares para controle de acelerador e freio;
+					\item Portabilidade do microAutoware para outros microcontroladores;	
+					\pause
+					\item Implementação de bibliotecas auxiliares para controle de acelerador e freio;	
+					\pause
 					\item Compatibilidade com diferentes periféricos de comunicação com o agente do micro-ROS;
 					\begin{itemize}
 						\item e.g. Ethernet.						
-					\end{itemize}
+					\end{itemize}	
+					\pause
 					\item Protocolos de detecção de erros.
 				\end{itemize}
 				
