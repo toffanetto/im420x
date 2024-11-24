@@ -5,7 +5,7 @@
 % --------------------------------------------------- %
 %                  Presentation info	              %
 % --------------------------------------------------- %
-\title[microAutoware: Autoware para microcontroladores]{Arquitetura HIL para teste de sistemas embarcados como \textit{vehicle interface} de veículos autônomos baseados no Autoware}
+\title[microAutoware: Autoware para microcontroladores]{microAutoware: Arquitetura HIL para teste de sistemas embarcados como \textit{vehicle interface} de veículos autônomos baseados no Autoware}
 \subtitle{Projeto -- Etapa 4}
 
 \author[Gabriel Toffanetto]{\texorpdfstring
@@ -120,7 +120,7 @@
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=0.9\linewidth]{autoware}
-				\caption{Visualização do Autoware em operação \cite{gitautoware}}
+				\caption{Visualização do Autoware em operação \cite{gitautoware}.}
 				\label{fig:autoware}
 			\end{figure}
 			
@@ -387,8 +387,24 @@
 
 \begin{frame}{Repositório no GitHub}
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{repo}
+		\caption{Repositório microAutoware -- Derivado de \href{https://github.com/micro-ROS/micro_ros_stm32cubemx_utils}{github.com/micro-ROS/micro\_ros\_stm32cubemx\_utils}}
+		\label{fig:repo}
+	\end{figure}
 	
-	
+\end{frame}
+
+\begin{frame}{Repositório no GitHub}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8 \linewidth]{repo_readme}
+	\caption{Repositório microAutoware -- README.}
+	\label{fig:repo_readme}
+\end{figure}
+
 \end{frame}
 
 
@@ -400,17 +416,17 @@
 		
 		\begin{column}{0.435\textwidth}
 			
-			\begin{block}{Problemas encontrados}
+			\begin{block}{Problemas pendentes de resolução}
 				
 				\begin{itemize}
 					\item Perda de resposta do serviço \texttt{control\_mode\_request};	
-					\pause
+\pause
 					\item Perda de deadline causada pela instabilidade do recebimento de comandos;	
-					\pause
+\pause
 					\begin{itemize}
 						\item Acentuado quando o PC é sobrecarregado.
 					\end{itemize}	
-					\pause
+\pause
 					\item Reconexão automática com o micro-ROS \textit{agent}.
 				\end{itemize}
 				
@@ -531,7 +547,7 @@
 			
 			\begin{figure}[H]
 				\centering
-				\href{https://youtu.be/7OOIyOqvU_o}{\includegraphics[width=0.8\linewidth]{qr_code_youtube}}
+				\href{https://github.com/LMA-FEM-UNICAMP/microautoware_vehicle_inferface_stm32/tree/humble}{\includegraphics[width=0.8\linewidth]{qr_code_github}}
 				\caption{Repositório do microAutoware no GitHub.}
 				\label{fig:qr_code_github}
 			\end{figure}

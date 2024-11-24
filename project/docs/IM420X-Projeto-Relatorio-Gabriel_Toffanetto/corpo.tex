@@ -1,10 +1,18 @@
 \section{Resumo}
 
+A arquitetura hierárquica de veículos autônomos é comumente dividida em duas partes: alto e baixo nível. O primeiro composto principalmente por um ou mais computadores de propósito geral, que executam algoritmos que exigem alto poder computacional, e é alimentado diretamente por sensores de alto nível como câmeras, LiDARs e radares, além de receber sinais da camada de baixo nível. Esse por sua vez, é normalmente concentrado por um ou mais sistemas embarcados, que realizam a leitura de sensores de baixo nível como encoder, IMU, GPS, e fazem a atuação em motores, realizando o controle dos mesmos conforme o sinal recebido do alto nível. O Autoware é um \textit{framework} baseado em ROS que vem sendo amplamente utilizado como base do alto nível de veículos autônomos, onde por meio de um módulo de interface com o veículo, nomeado \textit{vehicle interface}, realiza a troca de dados com o baixo nível de forma transparente à natureza do mesmo. 
 
+Porém, por meio do micro-ROS, é possível trazer o ROS para dentro do microcontrolador, dessa forma, integrando alto e baixo nível de forma implícita dentro do ecossistema ROS. Tal capacidade, permite então que a \textit{vehicle interface} do Autoware possa estar posicionada dentro do sistema embarcado, fazendo com que o \textit{framework} esteja em ambas as camadas da hierarquia de automação, e dessa forma, possa ser executado em um sistema operacional de tempo real. Dessa forma, o microAutoware é enunciado como a possibilidade de, com o apoio do micro-ROS, levar o Autoware para dentro do sistema embarcado, se comunicando com os demais nós por meio dos tópicos e serviços do ROS, sem necessidade de interromper sua arquitetura original.
+
+Para validação da utilização da interface com o veículo dentro do sistema embarcado, foram realizadas simulações \textit{Hardware-In-the-Loop}, onde o sistema embarcado, conectado ao Autoware, foi utilizado para controlar um veículo autônomo virtual, simulado no CARLA \textit{Simulator}. Com isso, foi possível realizar os testes do \textit{hardware} sem a necessidade de um protótipo real, o que principalmente no ramo de veículos autônomos, traz além de redução de custos e tempo de testes, mais segurança para todas as pessoas envolvidas.
+
+Dentre os recursos implementados, além de receber e enviar os dados necessários para o funcionamento do Autoware, o sistema engloba também um modo de controle manual em \textit{hardware}, utilizando um \textit{joystick}, de forma a representar por exemplo os pedais e o volante do veículo, realizando um comando indireto do carro a partir do sistema de automação. Também foram modelados protocolos de segurança para no caso de perda de \textit{deadlines} de recebimentos das mensagens do alto nível, ou do veículo (simulador), o sistema embarcado possa de forma independente passar o controle do carro para o motorista, ou entrar em modo de emergência, efetuando uma parada autônoma. Com isso, o microAutoware provou cumprir todos os requisitos de uma \textit{vehicle interface}, apresentando resultados promissores para utilização do mesmo como tal em sistemas reais.
 
 \clearpage
 
 \section{Motivação}
+
+Veículos autônomos estão cada vez mais presentes nas cidades, trazendo a premissa de torná-las mais seguras, inteligentes e sustentáveis, além de trazer mais conforto aos passageiros, onde não é necessário que um deles venha a ser o motorista. A \autoref{fig:vilma} apresenta o VILMA, Veículo Autônomo do Laboratório de Mobilidade Autônoma, que por meio de uma gama de sensores e atuadores, consegue conduzir de forma 100\% autônoma.
 
 
 \begin{figure}[H]
@@ -14,6 +22,8 @@
 	\label{fig:vilma}
 \end{figure}
 
+Parte desses sensores e atuadores são apresentados no diagrama da \autoref{fig:diagrama_vilma}, onde, os sensores de alto nível como câmera são conectados à um computador de propósito geral, e os sensores de baixo nível e atuadores são lidos e comandados por um sistema embarcado de tempo real presente no dSpace MicroAutobox. Tal sistema embarcado é uma solução comercial, de \textit{software} proprietário, ou seja, havendo necessidade da posse de licenças e personalização limitada. Por outro lado, tal sistema embarcado pode ser substituído por sistemas embarcados baseados na arquitetura ARM-Cortex, onde podem ser implementados diferentes sistemas operacionais de tempo real, dando mais liberdade e versatilidade para o desenvolvimento do baixo-nível de veículos autônomos.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/diagrama_vilma}
@@ -21,12 +31,16 @@
 	\label{fig:diagrama_vilma}
 \end{figure}
 
+Todavia, para possibilitar a condução autônoma do veículo, os itens mostrados na \autoref{fig:diagrama_vilma} e muitos outros que podem ser integrados devem ser interligados à arquitetura de automação do veículo, que normalmente é composta por módulos como percepção, planejamento, controle, localização e mapeamento. Nesse âmbito, o Autoware é um \textit{software open-source} que traz a arquitetura completa e todas as funcionalidades básicas para o guiamento de um veículo autônomo. Sua arquitetura é mostrada na \autoref{fig:hlarchitecture}, onde se percebe que a partir das entrada fornecidas pelos sensores e pelo mapa, o mesmo realiza o comando do carro a partir da \textit{vehicle interface}, que pode ser implementada de diversas formas, como por exemplo, protocolo serial ou rede CAN.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/HL_architecture}
 	\caption{Arquitetura de alto nível \cite{autowareArchitecture}.}
 	\label{fig:hlarchitecture}
 \end{figure}
+
+Dessa forma, o presente trabalho busca explorar a comunicação do Autoware com o veículo, por meio da utilização de sistemas embarcados de tempo real baseados na arquitetura ARM-Cortex, visando a presença do \textit{framework} em alto e baixo nível na hierarquia do veículo autônomo.
 
 
 \clearpage
@@ -313,7 +327,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 			\item Velocidade linear desejada para o veículo -- \texttt{float fSpeed;}
 			\item Aceleração linear desejada para o veículo -- \texttt{float fAcceleration;}
 			\item \textit{Jerk} linear desejada para o veículo -- \texttt{float fJerk;}	
-			\item \texttt{unsigned char ucControlMode;}		
+			\item Modo de controle -- \texttt{unsigned char ucControlMode;}		
 		\end{itemize}
 		\item Padrão da mensagem: \textbf{\#S}\texttt{\%c\%c\%c\%c}\textbf{W}\texttt{\%c\%c\%c\%c}\textbf{V}\texttt{\%c\%c\%c\%c}\textbf{A}\texttt{\%c\%c\%c\%c}\textbf{J}\texttt{\%c\%c\%c\%c}\textbf{M}\texttt{\%c}\textbf{\$}
 		\item Tamanho da mensagem: 30 bytes.
@@ -359,7 +373,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 		\hline
 		\textbf{Tamanho da stack} & 3500 kB \\
 		\hline
-		\textbf{Detalhes} & Leitura dos \textit{subscribers} Autoware, leitura dos \textit{subscribers} CARLA, envio das informações de controle e modo de operação para a TaskControle, recebimentos das informações de controle da TaskControle, escrita dos \textit{publishers} Autoware, escrita dos \textit{publishers} CARLA.\\
+		\textbf{Detalhes} & Realiza a leitura dos \textit{subscribers} do Autoware executando o executor por um certo tempo, envia das informações de controle e modo de operação para a TaskControle, e ao receber as informações de controle da TaskControle, às escreve nos \textit{publishers} do Autoware.\\
 	\end{tabular}
 	\caption{Especificaçõe da tarefa MicroAutoware.}
 	\label{tab:microautoware}
@@ -381,7 +395,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 	\hline
 	\textbf{Tamanho da stack} & 500 kB \\
 	\hline
-	\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de 30 ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, aguardando 20 ms antes de cada leitura,  convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o MicroAutoware por uma variável global e sincronizado por \textit{ThreadFlag}. 
+	\textbf{Detalhes} & Realiza o controle do veículo utilizando a referência dada pelo \textit{joystick} ou pelo Autoware, dado o modo de operação, podendo ser MANUAL ou AUTOWARE, respectivamente. A alteração do modo é feita por \textit{ThreadFlag}, gerada por ISR ou pelo Autoware. Em caso do modo de operação AUTOWARE, os sinais de controle são recebidos por variável global e sincronizados por \textit{ThreadFlag}, com tempo de 30 ms, onde caso não receba, entra em algum modo de segurança. Em caso de operação MANUAL,  o \textit{joystick} é lido por DMA, aguardando 60 ms antes de cada leitura,  convertendo os valores analógicos em sinais de controle, onde também caso haja algum erro, o modo de emergência é acionado. O sinal de controle é enviado para o MicroAutoware por uma variável global e sincronizado por \textit{ThreadFlag}. 
 	\end{tabular}
 	\caption{Especificaçõe da tarefa TaskControle.}
 	\label{tab:taskcontrole}
@@ -418,7 +432,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 	\begin{itemize}
 		\item \textbf{Objeto:} \textit{ThreadFlag}
 		\item \textbf{Flag:} 0x0100
-		\item \textbf{Modo:} \textit{Timeout} 30 ms
+		\item \textbf{Modo:} \textit{Timeout} 110 ms
 		\item \textbf{Descrição:} Sinaliza o recebimento de dados pela variável global \texttt{xControlAction}.
 		
 	\end{itemize}	
@@ -428,7 +442,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 	\begin{itemize}
 		\item \textbf{Objeto:} \textit{ThreadFlag}
 		\item \textbf{Flag:} 0x0100
-		\item \textbf{Modo:} \textit{Timeout} 30 ms
+		\item \textbf{Modo:} \textit{No wait}
 		\item \textbf{Descrição:} Sinaliza o recebimento de dados pela variável global \texttt{xControlSignal}.
 		
 	\end{itemize}	
@@ -516,7 +530,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 		\begin{itemize}
 			\item Leitura contínua por DMA;
 			\item Modo de \textit{clock} assíncrono dividido por 256;
-			\item Tempo de amostragem 387,5 ciclos;
+			\item Tempo de amostragem de 387,5 ciclos;
 			\item Interrupções desativadas para preservar a CPU.
 			
 		\end{itemize}				
@@ -533,7 +547,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 
 \noindent \textit{Processamento de sinais}
 
-Para conversão do valor discreto de leitura analógica obtido por meio do conversor analógico-digital (\textit{analog-digital converter -- ADC}), foi realizada uma etapa de calibração, onde foram tomadas as medidas dos valores máximos, mínimos e de zero para os dois eixos do \textit{joystick}. Tomado esses valores, foi realizado o processo de linearização por partes, onde o valor discreto obtido, é mapeado no intervalo $(-1, 1)$, considerando uma banda morta $B$ ao redor do zero para evitar flutuação de zero e melhorar a usabilidade dos eixos de forma independente.
+Para conversão do valor discreto de leitura analógica obtido por meio do conversor analógico-digital (\textit{analogue-digital converter -- ADC}), foi realizada uma etapa de calibração, onde foram tomadas as medidas dos valores máximos, mínimos e de zero para os dois eixos do \textit{joystick}. Tomado esses valores, foi realizado o processo de linearização por partes, onde o valor discreto obtido, é mapeado no intervalo $(-1, 1)$, considerando uma banda morta $B$ ao redor do zero para evitar flutuação de zero e melhorar a usabilidade dos eixos de forma independente.
 
 O a interpolação é realizada por meio de \eqref{eq:joy}, resultando nos gráficos mostrados nas Figuras~\ref{fig:plotjoyxaxis}~e~\ref{fig:plotjoyyaxis}, para o mapeamento nos eixos $x$ e $y$, respectivamente.
 
@@ -586,16 +600,57 @@ O eixo $x$ é alocado como a variável de esterçamento do volante, enquanto o e
 
 \section{Manual de utilização}
 
+\subsection{Inicialização}
 
+\begin{enumerate}
+	\item Conectar a placa ao computador;
+	\item Conectar o módulo FTDI ao computador;
+	\item Iniciar o agente micro-ROS;
+	\item Iniciar o nó do ROS \texttt{carla\_serial\_bridge\_node};
+	\item Iniciar o CARLA Simulator;
+	\item Lançar o Carla-Autoware-Bridge no ROS;
+	\item Lançar o Autoware em modo simulação.
+\end{enumerate}
+
+\subsection{Modo \texttt{AUTOWARE}}
+
+\begin{enumerate}
+	\item Passar uma velocidade limite pela interface do Autoware;
+	\item Definir o ponto de objetivo no Autoware;
+	\item Selecionar o modo de controle \texttt{AUTO};
+	\item Caso o sistema esteja em modo \texttt{MANUAL}, pressionar o botão do \textit{joystick};
+	\item Aguardar o veículo chegar ao destino.
+\end{enumerate}
+
+\subsection{Modo \texttt{MANUAL}}
+
+\begin{enumerate}
+	\item Caso o sistema esteja em modo \texttt{AUTOWARE}, pressionar o botão do \texttt{joystick};
+	\item Mover o analógico do \textit{joystick} para frente para acelerar;
+	\item Mover o analógico do \textit{joystick} para esquerda e direita para virar o volante;
+	\item Mover o analógico do \textit{joystick} para trás para freiar.
+\end{enumerate}
 
 \clearpage
 
 
 \section{Problemas identificados e não resolvidos}
 
+\subsection*{Perda de resposta do serviço de troca de modo de controle}
+
+
+
+
+\subsection*{Perda de \textit{deadline} causada pela sobrecarga da estação de trabalho}
+
+
+
+
+\subsection*{Reconexão ao micro-ROS \textit{agent}}
+
+
+
+
 
 
 \clearpage
-
-
-\section{Códigos da comunidade}
