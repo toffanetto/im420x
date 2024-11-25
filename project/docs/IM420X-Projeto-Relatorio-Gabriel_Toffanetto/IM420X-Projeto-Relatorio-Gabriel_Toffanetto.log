@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  25 NOV 2024 14:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.6.17)  25 NOV 2024 15:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -974,19 +974,21 @@ File: img/nucleo.png Graphic file (type png)
 Package pdftex.def Info: img/nucleo.png  used on input line 135.
 (pdftex.def)             Requested size: 120.92421pt x 239.35255pt.
  [8 <./img/nucleo.png>]
-<img/joystick.png, id=263, 122.6181pt x 108.405pt>
+<img/joystick.png, id=261, 122.6181pt x 108.405pt>
 File: img/joystick.png Graphic file (type png)
 <use img/joystick.png>
-Package pdftex.def Info: img/joystick.png  used on input line 154.
+Package pdftex.def Info: img/joystick.png  used on input line 156.
 (pdftex.def)             Requested size: 145.11053pt x 128.29887pt.
- [9 <./img/joystick.png>]
+ [9
+
+ <./img/joystick.png>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/highLevelblock_diagram.pdf): PDF 
 inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 <img/highLevelblock_diagram.pdf, id=273, 610.19968pt x 320.1561pt>
 File: img/highLevelblock_diagram.pdf Graphic file (type pdf)
 <use img/highLevelblock_diagram.pdf>
-Package pdftex.def Info: img/highLevelblock_diagram.pdf  used on input line 187
+Package pdftex.def Info: img/highLevelblock_diagram.pdf  used on input line 189
 .
 (pdftex.def)             Requested size: 338.58632pt x 177.64964pt.
 
@@ -996,7 +998,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./img/block_diagram.pdf): PDF inclusion
 <img/block_diagram.pdf, id=276, 605.3817pt x 298.23419pt>
 File: img/block_diagram.pdf Graphic file (type pdf)
 <use img/block_diagram.pdf>
-Package pdftex.def Info: img/block_diagram.pdf  used on input line 196.
+Package pdftex.def Info: img/block_diagram.pdf  used on input line 198.
 (pdftex.def)             Requested size: 338.58632pt x 166.80067pt.
 [10
 
@@ -1007,7 +1009,7 @@ found PDF version <1.7>, but at most version <1.5> allowed
 <img/esquematico.pdf, id=328, 355.3275pt x 225.7233pt>
 File: img/esquematico.pdf Graphic file (type pdf)
 <use img/esquematico.pdf>
-Package pdftex.def Info: img/esquematico.pdf  used on input line 205.
+Package pdftex.def Info: img/esquematico.pdf  used on input line 207.
 (pdftex.def)             Requested size: 266.03474pt x 169.00616pt.
 
 
@@ -1016,7 +1018,7 @@ nd PDF version <1.7>, but at most version <1.5> allowed
 <img/montagem.pdf, id=329, 868.20357pt x 509.0217pt>
 File: img/montagem.pdf Graphic file (type pdf)
 <use img/montagem.pdf>
-Package pdftex.def Info: img/montagem.pdf  used on input line 212.
+Package pdftex.def Info: img/montagem.pdf  used on input line 214.
 (pdftex.def)             Requested size: 338.58632pt x 198.50989pt.
 [11 <./img/esquematico.pdf> <./img/montagem.pdf>]
 
@@ -1025,7 +1027,7 @@ nd PDF version <1.7>, but at most version <1.5> allowed
 <img/modelo-v.pdf, id=367, 515.04419pt x 308.11108pt>
 File: img/modelo-v.pdf Graphic file (type pdf)
 <use img/modelo-v.pdf>
-Package pdftex.def Info: img/modelo-v.pdf  used on input line 243.
+Package pdftex.def Info: img/modelo-v.pdf  used on input line 245.
 (pdftex.def)             Requested size: 362.77264pt x 217.02087pt.
 [12
 
@@ -1036,10 +1038,10 @@ ion: found PDF version <1.7>, but at most version <1.5> allowed
 <img/maquinadeestados.pdf, id=388, 569.24669pt x 277.9986pt>
 File: img/maquinadeestados.pdf Graphic file (type pdf)
 <use img/maquinadeestados.pdf>
-Package pdftex.def Info: img/maquinadeestados.pdf  used on input line 297.
+Package pdftex.def Info: img/maquinadeestados.pdf  used on input line 299.
 (pdftex.def)             Requested size: 362.77264pt x 177.1719pt.
 
-Overfull \hbox (10.46739pt too wide) in paragraph at lines 313--314
+Overfull \hbox (10.46739pt too wide) in paragraph at lines 315--316
 []\T1/cmr/m/n/12 Taxa de gui-nada do veí-culo (ve-lo-ci-dade an-gu-lar no eixo 
 $\OML/cmm/m/it/12 z$\T1/cmr/m/n/12 ) -- \T1/cmtt/m/n/12 float fHeadingRate; 
  []
@@ -1047,7 +1049,7 @@ $\OML/cmm/m/it/12 z$\T1/cmr/m/n/12 ) -- \T1/cmtt/m/n/12 float fHeadingRate;
 [13
 
  <./img/maquinadeestados.pdf>]
-Overfull \hbox (25.54164pt too wide) in paragraph at lines 332--333
+Overfull \hbox (25.54164pt too wide) in paragraph at lines 334--335
 []\T1/cmr/m/n/12 Padrão da men-sa-gem: \T1/cmr/bx/n/12 #S\T1/cmtt/m/n/12 %c%c%c
 %c\T1/cmr/bx/n/12 W\T1/cmtt/m/n/12 %c%c%c%c\T1/cmr/bx/n/12 V\T1/cmtt/m/n/12 %c%
 c%c%c\T1/cmr/bx/n/12 A\T1/cmtt/m/n/12 %c%c%c%c\T1/cmr/bx/n/12 J\T1/cmtt/m/n/12 
@@ -1061,7 +1063,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./img/sm_uc_2_carla.pdf): PDF inclusion
 <img/sm_uc_2_carla.pdf, id=419, 852.06331pt x 522.03032pt>
 File: img/sm_uc_2_carla.pdf Graphic file (type pdf)
 <use img/sm_uc_2_carla.pdf>
-Package pdftex.def Info: img/sm_uc_2_carla.pdf  used on input line 342.
+Package pdftex.def Info: img/sm_uc_2_carla.pdf  used on input line 344.
 (pdftex.def)             Requested size: 386.95897pt x 237.0781pt.
 
 
@@ -1070,7 +1072,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./img/sm_carla_2_uc.pdf): PDF inclusion
 <img/sm_carla_2_uc.pdf, id=420, 879.285pt x 349.305pt>
 File: img/sm_carla_2_uc.pdf Graphic file (type pdf)
 <use img/sm_carla_2_uc.pdf>
-Package pdftex.def Info: img/sm_carla_2_uc.pdf  used on input line 351.
+Package pdftex.def Info: img/sm_carla_2_uc.pdf  used on input line 353.
 (pdftex.def)             Requested size: 386.95897pt x 153.72131pt.
 [14 <./img/sm_uc_2_carla.pdf> <./img/sm_carla_2_uc.pdf>]
 
@@ -1079,7 +1081,7 @@ n: found PDF version <1.7>, but at most version <1.5> allowed
 <img/system_diagram.pdf, id=468, 572.1375pt x 377.49028pt>
 File: img/system_diagram.pdf Graphic file (type pdf)
 <use img/system_diagram.pdf>
-Package pdftex.def Info: img/system_diagram.pdf  used on input line 364.
+Package pdftex.def Info: img/system_diagram.pdf  used on input line 366.
 (pdftex.def)             Requested size: 483.69687pt x 319.14023pt.
 
 
@@ -1089,7 +1091,7 @@ F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: img/fluxograma_microautoware.pdf Graphic file (type pdf)
 <use img/fluxograma_microautoware.pdf>
 Package pdftex.def Info: img/fluxograma_microautoware.pdf  used on input line 3
-88.
+90.
 (pdftex.def)             Requested size: 483.69687pt x 251.95784pt.
 [15 <./img/system_diagram.pdf>]
 
@@ -1099,7 +1101,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./img/fluxograma_taskcontrole.pdf): PDF
 File: img/fluxograma_taskcontrole.pdf Graphic file (type pdf)
 <use img/fluxograma_taskcontrole.pdf>
 Package pdftex.def Info: img/fluxograma_taskcontrole.pdf  used on input line 41
-2.
+4.
 (pdftex.def)             Requested size: 414.78929pt x 731.23584pt.
 [16 <./img/fluxograma_microautoware.pdf>]
 Overfull \vbox (24.49998pt too high) has occurred while \output is active []
@@ -1112,7 +1114,7 @@ ion: found PDF version <1.7>, but at most version <1.5> allowed
 <img/fluxograma_joysw.pdf, id=540, 187.66109pt x 319.1925pt>
 File: img/fluxograma_joysw.pdf Graphic file (type pdf)
 <use img/fluxograma_joysw.pdf>
-Package pdftex.def Info: img/fluxograma_joysw.pdf  used on input line 421.
+Package pdftex.def Info: img/fluxograma_joysw.pdf  used on input line 423.
 (pdftex.def)             Requested size: 150.47269pt x 255.937pt.
 
 
@@ -1121,28 +1123,28 @@ ion: found PDF version <1.7>, but at most version <1.5> allowed
 <img/fluxograma_uart2.pdf, id=541, 222.8325pt x 450.72388pt>
 File: img/fluxograma_uart2.pdf Graphic file (type pdf)
 <use img/fluxograma_uart2.pdf>
-Package pdftex.def Info: img/fluxograma_uart2.pdf  used on input line 429.
+Package pdftex.def Info: img/fluxograma_uart2.pdf  used on input line 431.
 (pdftex.def)             Requested size: 180.75854pt x 365.61792pt.
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 434.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 436.
 [18 <./img/fluxograma_joysw.pdf> <./img/fluxograma_uart2.pdf>] [19] [20]
 <img/plot_joy_x_axis.pdf, id=597, 458.71375pt x 304.13625pt>
 File: img/plot_joy_x_axis.pdf Graphic file (type pdf)
 <use img/plot_joy_x_axis.pdf>
-Package pdftex.def Info: img/plot_joy_x_axis.pdf  used on input line 583.
+Package pdftex.def Info: img/plot_joy_x_axis.pdf  used on input line 585.
 (pdftex.def)             Requested size: 362.77264pt x 240.53415pt.
 
 [21]
 <img/plot_joy_y_axis.pdf, id=613, 458.71375pt x 304.13625pt>
 File: img/plot_joy_y_axis.pdf Graphic file (type pdf)
 <use img/plot_joy_y_axis.pdf>
-Package pdftex.def Info: img/plot_joy_y_axis.pdf  used on input line 591.
+Package pdftex.def Info: img/plot_joy_y_axis.pdf  used on input line 593.
 (pdftex.def)             Requested size: 362.77264pt x 240.53415pt.
  [22 <./img/plot_joy_x_axis.pdf> <./img/plot_joy_y_axis.pdf>] [23
 
 ]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 635.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 637.
  [24
 
 ]
@@ -1203,7 +1205,7 @@ type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-supe
 r/sfti2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr
 /share/texmf/fonts/type1/public/cm-super/sftt1440.pfb>
 Output written on IM420X-Projeto-Relatorio-Gabriel_Toffanetto.pdf (27 pages, 43
-72385 bytes).
+72352 bytes).
 PDF statistics:
  893 PDF objects out of 1000 (max. 8388607)
  677 compressed objects within 7 object streams
