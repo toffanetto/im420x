@@ -22,7 +22,13 @@ extern osThreadId_t TaskControleHandle;
 extern osThreadId_t TaskMicroAutowaHandle;
 
 // Timer callbacks
-
+/**
+  * @name   timer_watchdog_agent_callback
+  * @brief  ROS timer callback to test if agent is still connected.
+  * @param  timer: timer handler
+  * @param  last_call_time: last timestamp the timer was called
+  * @retval None
+  */
 void timer_watchdog_agent_callback(rcl_timer_t * timer, int64_t last_call_time)
 {
 	
