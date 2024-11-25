@@ -339,7 +339,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 % TODO: \usepackage{graphicx} required
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\linewidth]{img/sm_uc_2_carla}
+	\includegraphics[width=0.8\linewidth]{img/sm_uc_2_carla}
 	\caption{Máquina de estados da comunicação serial do RTOS para o CARLA.}
 	\label{fig:smuccarla}
 \end{figure}
@@ -348,7 +348,7 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 % TODO: \usepackage{graphicx} required
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\linewidth]{img/sm_carla_2_uc}
+\includegraphics[width=0.8\linewidth]{img/sm_carla_2_uc}
 \caption{Máquina de estados da comunicação serial do CARLA para o RTOS.}
 \label{fig:sm_carla_uc}
 \end{figure}
@@ -357,12 +357,16 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 
 \subsubsection*{Tarefas}
 
+O sistema embarcado de tempo real foi estruturado por meio de duas tarefas: microAutoware, responsável pela comunicação com o Autoware e TaskControle, incubida pelo controle do veículo. Essas tarefas se comunicam por meio de variáveis globais protegidas por MUTEX e são sincronizadas por \textit{ThreadFlags}. São empregadas também interrupções para comunicação serial e leitura do botão do \textit{joystick}, como representado no diagrama da \autoref{fig:systemdiagram}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \textwidth]{img/system_diagram}
 	\caption{Diagrama do sistema embarcado.}
 	\label{fig:systemdiagram}
 \end{figure}
+
+\noindent MicroAutoware
 
 \begin{table}[H]
 	\centering
@@ -386,6 +390,8 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 	\label{fig:fluxograma_microautoware}
 \end{figure}
 
+\noindent TaskControle
+
 \begin{table}[H]
 	\centering
 	\begin{tabular}{c|p{11.5cm}}
@@ -403,17 +409,26 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[height= 0.8\textheight]{img/fluxograma_taskcontrole}
+	\includegraphics[height= 1\textheight]{img/fluxograma_taskcontrole}
 	\caption{Fluxograma da tarefa TaskControle.}
 	\label{fig:fluxograma_taskcontrole}
 \end{figure}
 
+\noindent Interrupções
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[height= 0.3\textheight]{img/fluxograma_joysw}
+	\includegraphics[height= 0.35\textheight]{img/fluxograma_joysw}
 	\caption{Fluxograma da ISR JoySW.}
 	\label{fig:fluxograma_joysw}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[height= 0.5\textheight]{img/fluxograma_uart2}
+\caption{Fluxograma da ISR UART\_RxCpltCallback.}
+\label{fig:fluxograma_uart2}
 \end{figure}
 
 \subsubsection*{Sinalização \texttt{xButtonState}}
@@ -508,6 +523,8 @@ A comunicação serial entre o sistema embarcado e o simulador é realizada por 
 	\end{itemize}
 
 \subsubsection*{Padronização de código ROS}
+
+O ecossistema ROS possuí uma padronização de código própria, para identificação das suas entidades, como tópicos, nós e serviços. Dessa forma, essa padronização será adotada de forma excepcional para os atributos do micro-ROS, de acordo com o mostrado abaixo.
 	
 	\begin{itemize}
 		\item Subscriber: \texttt{nome\_subscriber\_sub\_}
@@ -553,20 +570,6 @@ O a interpolação é realizada por meio de \eqref{eq:joy}, resultando nos gráf
 
 O eixo $x$ é alocado como a variável de esterçamento do volante, enquanto o eixo $y$ representa os sinais de acelerador e freio. Para valores positivos do eixo $y$, obtém-se a medida do acelerador no intervalo $(0,1)$, enquanto para valores negativos o freio é mapeado entre 0 e 1.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.75\linewidth]{img/plot_joy_x_axis.pdf}
-	\caption{Mapeamento da posição no eixo $x$ normalizada do \textit{joystick} de acordo com a leitura analógia do ADC.}
-	\label{fig:plotjoyxaxis}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=0.75\linewidth]{img/plot_joy_y_axis.pdf}
-\caption{Mapeamento da posição no eixo $y$ normalizada do \textit{joystick} de acordo com a leitura analógia do ADC.}
-\label{fig:plotjoyyaxis}
-\end{figure}
-
 \begin{equation}\label{eq:joy}
 	p(v) = \begin{dcases}
 		0\vphantom{\frac{0}{0}}, &\text{se } - B \le v - V_0 \le B \\
@@ -574,6 +577,23 @@ O eixo $x$ é alocado como a variável de esterçamento do volante, enquanto o e
 		\frac{v - V_0 + B}{V_0 - V_{min} - B}, &\text{se } v < V_0 - B 
 	\end{dcases}
 \end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{img/plot_joy_x_axis.pdf}
+	\caption{Mapeamento da posição no eixo $x$ normalizada do \textit{joystick} de acordo com a leitura analógia do ADC.}
+	\label{fig:plotjoyxaxis}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\linewidth]{img/plot_joy_y_axis.pdf}
+\caption{Mapeamento da posição no eixo $y$ normalizada do \textit{joystick} de acordo com a leitura analógia do ADC.}
+\label{fig:plotjoyyaxis}
+\end{figure}
+
+\clearpage
 
 \subsubsection*{Comunicação serial -- UART}
 
@@ -638,17 +658,21 @@ O eixo $x$ é alocado como a variável de esterçamento do volante, enquanto o e
 
 \subsection*{Perda de resposta do serviço de troca de modo de controle}
 
+O Autoware faz a utilização do serviço \texttt{/control/control\_mode\_request} para solicitar a \textit{vehicle interface} que faça a troca do modo de controle, realizando o engate do controle via Autoware ou remoção do mesmo. Esse tipo de comunicação ocorre da forma requisição--resposta, onde é feita a requisição de troca para o modo desejado e é respondido o resultado dessa troca (sucesso ou falha). 
 
+Porém, constantemente ocorre a falha da resposta desse serviço, ocasionando o travamento do processo de transição de modo de controle. Após testes em diferentes máquinas e pesquisas em fóruns da comunidade, o problema ocorre provavelmente por alguma incompatibilidade do micro-ROS com a CycloneDDS, utilizada pelo Autoware, onde a resposta do servidor é perdida.
 
 
 \subsection*{Perda de \textit{deadline} causada pela sobrecarga da estação de trabalho}
 
+O sistema embarcado faz uso de um sistema operacional de tempo real, que entre suas premissas, trás o determinismo, onde seu comportamento é conhecido e constante. Já a estação de trabalho utilizada, faz uso de um sistema operacional de propósito geral, que não possuí garantias de determinismo. Dessa forma, quando ocorre a execução de algum processo que demanda alto poder computacional, outros processos acabam sendo interferidos, o que resulta no escopo do projeto, principalmente no aumento do período de envio de dados por parte do CARLA e Autoware.
 
+Com isso, o aumento do tempo entre o recebimento de dados, em situações críticas faz com que ocorra a perda de \textit{deadlines} e o sistema embarcado execute alguma rotina de falha, como a mudança para direção manual ou modo de emergência. Para evitar a ocorrência de falsas falhas, a janela de tempo de recebimento de dados foi aumentada, e também foi realizada a prática de somente inicar o baixo nível uma vez que o alto nível já está funcional.
 
 
 \subsection*{Reconexão ao micro-ROS \textit{agent}}
 
-
+Foram implementados procedimentos de verificação de comunicação com o agente do micro-ROS, evitando que o sistema inicie até que o mesmo esteja conectado, porém no caso de desconexão ainda estão ocorrendo falhas para que o sistema embarcado se conecte novamente ao agente sem necessidade de reiniciar a placa.
 
 
 
