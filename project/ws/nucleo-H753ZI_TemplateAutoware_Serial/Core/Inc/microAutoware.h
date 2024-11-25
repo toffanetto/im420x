@@ -53,6 +53,21 @@
   #define USB 3
   #define OTHER 0
 
+  // // Driving mode
+  // #define EMERGENCY 0
+  // #define AUTOWARE 1
+  // #define MANUAL 4
+
+  // // ThreadFlags
+  // #define TO_AUTOWARE_MODE_FLAG 0x01
+  // #define TO_MANUAL_MODE_FLAG 0x10
+  // #define TO_EMERGENCY_MODE_FLAG 0x1000000
+  // #define DATA_UPDATED_FLAG 0x100
+  // #define MICRO_ROS_AGENT_ONLINE_FLAG 0x100000 
+
+  // // Check flag macro for bitwise comparison of ThreadFlags
+  // #define CHECK_FLAG(flag, input) ((flag & input) == flag && !(input >> 31))
+
   #define NODE_NAME "vehicle_interface"
   #define TRANSPORT UART
 
@@ -69,6 +84,62 @@
     #include "usart.h"
     #include "dma.h"
   #endif  /* TRANSPORT == UART */
+
+  // /**
+  // * @name   float_bytes
+  // * @brief  Union to send float through UART.
+  // */
+  // typedef union{
+  //   float fFloat;
+  //   unsigned char ucBytes[4];
+  // } float_bytes;
+
+  // /**
+  //   * @name   control_action
+  //   * @brief  Struct with Autoware recieved data compressed for TaskControle.
+  //   */
+  // typedef struct{
+  //   float_bytes xSteeringAngle;
+  //   float_bytes xSteeringVelocity;
+  //   float_bytes xSpeed;
+  //   float_bytes xAcceleration;
+  //   float_bytes xJerk;
+  //   unsigned char ucControlMode;
+  // } control_action;
+
+
+  // /**
+  //   * @name   vehicle_status
+  //   * @brief  Struct with vehicle status information recieved from CARLA.
+  //   */
+  // typedef struct{
+  //   float_bytes xLongSpeed;
+  //   float_bytes xLatSpeed;
+  //   float_bytes xHeadingRate;
+  //   float_bytes xSteeringStatus;
+  // } vehicle_status;
+
+
+  // /**
+  //   * @name   control_signal
+  //   * @brief  Struct with vehicle control data compressed for CARLA.
+  //   */
+  // typedef struct{
+  //   float fThrottle;
+  //   float fBrake;
+  //   float fSteeringAngle;
+  //   unsigned char ucHandBrake;
+  //   unsigned char ucReverse;
+  //   unsigned char ucManualGearShift;
+  //   unsigned char ucGear;
+  //   unsigned char ucControlMode;
+  //   float fLongSpeed;
+  //   float fLatSpeed;
+  //   float fHeadingRate;
+  //   float fSteeringStatus;
+  // } control_signal;
+
+
 
   // Autoware Quality of Service
   static const rmw_qos_profile_t rmw_qos_profile_autoware =

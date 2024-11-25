@@ -39,7 +39,7 @@
 #define MANUAL_CONTROL_TIME_COMMAND 60
 
 // Vehicle limits to manual control
-#define MAX_TROTTLE 1
+#define MAX_THROTTLE 1
 #define MAX_BRAKE 1
 #define MAX_STEERING_ANGLE 1 
 

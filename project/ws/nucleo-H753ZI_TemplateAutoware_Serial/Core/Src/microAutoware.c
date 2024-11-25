@@ -24,9 +24,23 @@ extern osMutexId_t MutexControlActionHandle;
 extern osMutexId_t MutexControlSignalHandle;
 extern osThreadId_t TaskControleHandle;
 
-// From main.c
-extern control_action xControlAction;
-extern control_signal xControlSignal;
+// microAutoware Global Variables -- START
+
+/**
+  * @name   xControlAction
+  * @brief  Control action struct with high level control action from MicroAutoware to TaskControle,
+  *         for compute the vehicle control action.
+  */
+control_action xControlAction;
+
+/**
+  * @name   xControlSignal
+  * @brief  Control signal struct with low level control signal from TaskControle to MicroAutoware,
+  *         for publish in simulator topics by micro-ros.
+  */
+control_signal xControlSignal;
+
+// microAutoware Global Variables -- END
 
 /**
   * @name   StartMicroAutoware
@@ -39,8 +53,17 @@ void StartMicroAutoware(void * argument)
 
   // Variables -- START
 
+  /**
+  * @name   uiFlags
+  * @brief  Auxiliary variable to read ThreadFlags
+  */
   unsigned int uiFlags;
-  unsigned char ucControlMode = MANUAL;
+
+  /**
+  * @name   ucControlMode
+  * @brief  Keeps the current control mode
+  */
+  unsigned char ucControlMode = AUTOWARE;
 
   // micro-ros QoS
   const rmw_qos_profile_t * qos_autoware = &rmw_qos_profile_autoware;
@@ -105,7 +128,11 @@ void StartMicroAutoware(void * argument)
 
   rclc_executor_t executor;
 
-  // Number of subscribers + number of timers + number of services OR Number total of callbacks
+  /**
+  * @name   ucNumberOfHandles
+  * @brief  Number of subscribers + number of timers + number of services 
+  *         OR Number total of callbacks
+  */
   unsigned char ucNumberOfHandles = 3;
 
   // Variables -- END
@@ -145,7 +172,6 @@ void StartMicroAutoware(void * argument)
 
   // create timers
   rclc_timer_init_default(&timer_watchdog_agent, &support, WATCHDOG_AGENT_TIMEOUT, timer_watchdog_agent_callback);
-
   // create subscribers
   rclc_subscription_init(
     		&clock_sub_,
@@ -240,29 +266,32 @@ void StartMicroAutoware(void * argument)
 
   // creating servers
   rclc_service_init(
-		&control_mode_server_,
+		    &control_mode_server_,
         &VehicleInterfaceNode,
         ROSIDL_GET_SRV_TYPE_SUPPORT(autoware_auto_vehicle_msgs, srv, ControlModeCommand),
         "/control/control_mode_request", qos_autoware);
 
 
-  // adding callbacks to executor
+  // Adding callbacks to executor -- START
   rclc_executor_add_subscription(&executor, &clock_sub_, &clock_msg_, &clock_callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &control_cmd_sub_, &control_cmd_msg_, &control_cmd_callback, ON_NEW_DATA);
 
   rclc_executor_add_service(&executor, &control_mode_server_, &control_mode_request_msg_, &control_mode_response_msg_, control_mode_cmd_callback);
 
-//  rclc_executor_add_subscription(&executor, &gear_cmd_sub_, &gear_cmd_msg_, &gear_cmd_callback, ON_NEW_DATA);
-//  rclc_executor_add_subscription(&executor, &turn_indicators_cmd_sub_, &turn_indicators_cmd_msg_, &turn_indicators_cmd_callback, ON_NEW_DATA);
-//  rclc_executor_add_subscription(&executor, &hazard_lights_cmd_sub_, &hazard_lights_cmd_msg_, &hazard_lights_cmd_callback, ON_NEW_DATA);
-//  rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
-//  rclc_executor_add_subscription(&executor, &emergency_sub_, &emergency_msg_, &emergency_callback, ON_NEW_DATA);
+  //  Future implementation subscribers -- Created but not in use
+  // rclc_executor_add_timer(&executor, &timer_watchdog_agent);
+  // rclc_executor_add_subscription(&executor, &gear_cmd_sub_, &gear_cmd_msg_, &gear_cmd_callback, ON_NEW_DATA);
+  // rclc_executor_add_subscription(&executor, &turn_indicators_cmd_sub_, &turn_indicators_cmd_msg_, &turn_indicators_cmd_callback, ON_NEW_DATA);
+  // rclc_executor_add_subscription(&executor, &hazard_lights_cmd_sub_, &hazard_lights_cmd_msg_, &hazard_lights_cmd_callback, ON_NEW_DATA);
+  // rclc_executor_add_subscription(&executor, &actuation_cmd_sub_, &actuation_cmd_msg_, &actuation_cmd_callback, ON_NEW_DATA);
+  // rclc_executor_add_subscription(&executor, &emergency_sub_, &emergency_msg_, &emergency_callback, ON_NEW_DATA);
 
+  // Adding callbacks to executor -- END
 
   // pinging micro-ros agent
   rmw_ret_t xPingResult = rmw_uros_ping_agent(1000, 20);
 
-  // Setting flag on TaskControle to enable autonomus mode
+  // Setting flag on TaskControle to enable autonomous mode
   osThreadFlagsSet(TaskControleHandle, MICRO_ROS_AGENT_ONLINE_FLAG);
 
 
@@ -273,6 +302,7 @@ void StartMicroAutoware(void * argument)
     // Sync time with ROS
     rmw_uros_sync_session(TIMEOUT_TS_SYNC);
 
+    // Run executor for EXECUTOR_SPIN_TIME ms
     rclc_executor_spin_some(&executor, EXECUTOR_SPIN_TIME * (1000 * 1000)); // Spinning executor for EXECUTOR_SPIN_PERIOD * (1000 * 1000) ns.
 
 
@@ -291,7 +321,7 @@ void StartMicroAutoware(void * argument)
     else if(CHECK_FLAG(TO_EMERGENCY_MODE_FLAG, uiFlags))
     {
       ucControlMode = MANUAL;
-      // do some of emergency thing in autoware way.
+      // do some of emergency thing in Autoware way.
     }
     else if(CHECK_FLAG((TO_AUTOWARE_MODE_FLAG | TO_MANUAL_MODE_FLAG), uiFlags))
     {
@@ -304,21 +334,25 @@ void StartMicroAutoware(void * argument)
     rcl_publish(&control_mode_pub_, &control_mode_msg_, NULL);
 
 
-    // All topics are recieved (maybe not all...)
+    // Checking what data was recieved
     if(0b1 & (ucSubscribersRecieved >> 1)) // Checking if control_cmd_sub_ data arrives (second bit of ucSubscribersRecieved)
     {
       // Autonomous mode: Gather all subs data, then compact and send to TaskControle.
       if(AUTOWARE == ucControlMode)
       {
+        // Assembling xControlAction with Autoware data
         osMutexAcquire(MutexControlActionHandle, osWaitForever);
+
         xControlAction.xSteeringAngle.fFloat = control_cmd_msg_.lateral.steering_tire_angle * 1.2;
         xControlAction.xSteeringVelocity.fFloat = control_cmd_msg_.lateral.steering_tire_rotation_rate * 1.2;
         xControlAction.xSpeed.fFloat = control_cmd_msg_.longitudinal.speed;
         xControlAction.xAcceleration.fFloat = control_cmd_msg_.longitudinal.acceleration;
         xControlAction.xJerk.fFloat = control_cmd_msg_.longitudinal.jerk;
         xControlAction.ucControlMode = AUTOWARE;
+
         osMutexRelease(MutexControlActionHandle);
 
+        // Sync new Autoware command data to TaskControle
         osThreadFlagsSet(TaskControleHandle, DATA_UPDATED_FLAG);
       }
 
@@ -330,19 +364,15 @@ void StartMicroAutoware(void * argument)
     uiFlags = osThreadFlagsGet();
     uiFlags = osThreadFlagsWait(DATA_UPDATED_FLAG, osFlagsWaitAll, 0);
 
-    // Timeout Error
-    if(osFlagsErrorTimeout == uiFlags)
-    {
-
-    }
     // xControlSignal updated
-    else if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
+    if(CHECK_FLAG(DATA_UPDATED_FLAG, uiFlags))
     {
-      // Assembling microAutoware msgs
+      // Assembling microAutoware msgs 
       osMutexAcquire(MutexControlSignalHandle, osWaitForever);
 
-      // vehicle_twist_msg_ data
+      // Assembling vehicle_twist_msg_ data | <autoware_auto_vehicle_msgs/msg/velocity_report.h>
 
+      // Frame ID atribute
       rosidl_runtime_c__String xFrameId;
       char cFrame[10] = "base_link";
       xFrameId.data = cFrame;
@@ -355,7 +385,7 @@ void StartMicroAutoware(void * argument)
       vehicle_twist_msg_.lateral_velocity = xControlSignal.fLatSpeed;
       vehicle_twist_msg_.longitudinal_velocity = xControlSignal.fLongSpeed;
 
-      // steering_status_msg_ data
+      // Assembling steering_status_msg_ data | <autoware_auto_vehicle_msgs/msg/steering_report.h>
       steering_status_msg_.stamp = clock_msg_.clock;
       steering_status_msg_.steering_tire_angle = xControlSignal.fSteeringStatus;
 
@@ -370,5 +400,24 @@ void StartMicroAutoware(void * argument)
     ucSubscribersRecieved = 0;
 
   }
+
+  // Destroying created objects -- Clean up
+  rcl_timer_fini(&timer_watchdog_agent);
+  rcl_publisher_fini(&control_mode_pub_, &VehicleInterfaceNode);
+  rcl_publisher_fini(&vehicle_twist_pub_, &VehicleInterfaceNode);
+  rcl_publisher_fini(&steering_status_pub_, &VehicleInterfaceNode);
+  rcl_publisher_fini(&gear_status_pub_, &VehicleInterfaceNode);
+  rcl_publisher_fini(&turn_indicators_status_pub_, &VehicleInterfaceNode);
+  rcl_publisher_fini(&hazard_lights_status_pub_, &VehicleInterfaceNode);
+  rcl_publisher_fini(&actuation_status_pub_, &VehicleInterfaceNode);
+  rcl_publisher_fini(&steering_wheel_status_pub_, &VehicleInterfaceNode);
+  rcl_subscription_fini(&clock_sub_, &VehicleInterfaceNode);
+  rcl_subscription_fini(&control_cmd_sub_, &VehicleInterfaceNode);
+  rcl_subscription_fini(&gear_cmd_sub_, &VehicleInterfaceNode);
+  rcl_subscription_fini(&turn_indicators_cmd_sub_, &VehicleInterfaceNode);
+  rcl_subscription_fini(&hazard_lights_cmd_sub_, &VehicleInterfaceNode);
+  rcl_subscription_fini(&actuation_cmd_sub_, &VehicleInterfaceNode);
+  rcl_subscription_fini(&emergency_sub_, &VehicleInterfaceNode);
+  rcl_service_fini(&control_mode_server_, &VehicleInterfaceNode);
 
 }

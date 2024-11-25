@@ -63,11 +63,11 @@ unsigned int uiJoySWTickOnPress = 0;
 
 // Control action struct with high level control action from MicroAutoware to TaskControle,
 // for compute the vehicle control action.
-control_action xControlAction;
+extern control_action xControlAction;
 
 // Control signal struct with low level control signal from TaskControle to MicroAutoware,
 // for publish in simulator topics by micro-ros.
-control_signal xControlSignal;
+extern control_signal xControlSignal;
 
 // Data structure for data received from CARLA by UART2
 vehicle_status xVehicleStatus;
@@ -290,10 +290,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
 
             case '$':
               ucSmState = 0;
-
               // Message fully received, setting TaskControle ThreadFlag for sync.
               osThreadFlagsSet(TaskControleHandle, UART_NEW_DATA_FLAG);
-              //HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
               break;
 
             default:
